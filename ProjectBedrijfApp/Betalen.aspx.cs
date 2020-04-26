@@ -20,6 +20,7 @@ namespace ProjectBedrijfApp
             double aantalPersonen = double.Parse(TextBox3.Text);
             double TotaalEten = aantalPersonen * prijs;
             BerekenTotaalBedrag(TotaalEten);
+
         }
         private void BerekenTotaalBedrag(double totalEten) 
         {
