@@ -18,7 +18,6 @@ namespace ProjectBedrijfApp
         protected void ListView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             SqlConnection sqlConnection = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
-            sqlConnection.
         }
     }
 }

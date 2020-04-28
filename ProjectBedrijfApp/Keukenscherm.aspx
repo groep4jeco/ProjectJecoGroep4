@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Keukenscherm.aspx.cs" Inherits="ProjectBedrijfApp.Keukenscherm" %>
 
+<%@ Register assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" namespace="System.Web.UI.DataVisualization.Charting" tagprefix="asp" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -10,10 +12,25 @@
     <form id="form1" runat="server">
         <div>
         </div>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT tafeltafelnummer, Hoeveelheid, Omschrijving from bestelregel
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT tafeltafelnummer, Hoeveelheid, Omschrijving
+ 
+FROM bestelregel
 
 INNER JOIN gerecht 
-ON bestelregel.menugerechtnummer = gerecht.gerechtnummer;"></asp:SqlDataSource>
+ON bestelregel.menugerechtnummer = gerecht.gerechtnummer
+
+INNER JOIN reservering
+ON bestelregel.reserveringsnummer = reservering.reserveringsnummer
+
+INNER JOIN in_restaurant
+ON reservering.reserveringsnummer = in_restaurant.reserveringsnummer
+
+INNER JOIN Tafel_Reservering 
+ON in_restaurant.reserveringsnummer = Tafel_Reservering.reserveringsnummer
+
+GROUP BY tafeltafelnummer, hoeveelheid, omschrijving, besteltijd 
+ORDER BY besteltijd ASC
+"></asp:SqlDataSource>
         <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="ListView1_SelectedIndexChanged">
             <AlternatingItemTemplate>
                 <tr style="">
@@ -98,7 +115,8 @@ ON bestelregel.menugerechtnummer = gerecht.gerechtnummer;"></asp:SqlDataSource>
                         </td>
                     </tr>
                     <tr runat="server">
-                        <td runat="server" style=""></td>
+                        <td runat="server" style="">
+                        </td>
                     </tr>
                 </table>
             </LayoutTemplate>
