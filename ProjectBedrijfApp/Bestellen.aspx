@@ -4,78 +4,179 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Bestellen</title>
+<style>
+    #container{
+        height: 550px;
+        width: 900px;
+    }
+
+
+    /* topbalk */
+    #topbalk {
+        height: 25px;
+        width: 900px;
+    }
+    #datum {
+        height: 25px;
+        width: 300px;
+        float: left;
+    }
+    #ronde {
+        height: 25px;
+        width: 300px;
+        float: left;
+    }
+    #tijd {
+        height: 25px;
+        width: 300px;
+        float: left;
+    }
+    
+
+    /* menuselectie */
+    #infotekst {
+        width: 600px;
+        height: 25px;
+        float: left;
+    }
+    #menulijst {
+        height: 25px;
+        width: 300px;
+        float: left;
+    }    
+    #menuselectie {
+        height: 25px;
+    }
+
+    /* menu's */
+    .gerechtimg{
+        height: 150px;
+        width: 150px;
+        margin: 10px 10px 0px 10px;
+        border: 2px;
+        border-style: solid;        
+    }
+    .gerechtlbl{
+        
+    }
+    .gerecht {
+        width: 175px;
+        height: 200px;
+        float: left;
+        margin: 0px 5px 5px 5px
+    }
+
+
+    .menus {
+        height: 475px;
+        width: 740px;
+        float: left;
+    }
+    
+
+    /* bestelvenster */
+    #bestelvenster{
+        float: left;
+        width: 160px; 
+        height: 475px;
+    }
+    
+</style>
 </head>
 <body>
-  <div style="height: 628px; width: 1040px">
     <form id="form1" runat="server">
-    <div style="height: 21px; width: 1040px;">
-        <asp:Label ID="lblDatum" runat="server" Text="DD/MM/JJJJ"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Label ID="lblRonde" runat="server" Text="Ronde"></asp:Label>
-    </div>
-        <div style="width: 1040px; height: 29px; margin-bottom: 0px;">
-            <asp:DropDownList ID="ddlMenus" runat="server" Height="16px" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" Width="328px">
-                <asp:ListItem Selected="True">Menu Overzicht</asp:ListItem>
-                <asp:ListItem>Soepen</asp:ListItem>
-                <asp:ListItem>Sushi</asp:ListItem>
-                <asp:ListItem>Vlees</asp:ListItem>
-                <asp:ListItem>Vis</asp:ListItem>
-                <asp:ListItem>Kip</asp:ListItem>
-                <asp:ListItem>Bij gerechten</asp:ListItem>
-            </asp:DropDownList>
-            &nbsp;&nbsp;&nbsp; Vragen stellen of drinken bestellen? Daar is het personeel voor!<div style="height: 543px; width: 1003px">
-                <asp:CheckBox ID="ckbGerecht1" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image1" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
-                <asp:CheckBox ID="ckbGerecht2" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image2" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
-                <asp:CheckBox ID="ckbGerecht3" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image3" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
-                <asp:CheckBox ID="ckbGerecht4" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image4" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
-                <asp:CheckBox ID="ckbGerecht5" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image5" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
-                <asp:CheckBox ID="ckbGerecht6" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image6" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
-                <asp:CheckBox ID="ckbGerecht7" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image7" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
-                <asp:CheckBox ID="ckbGerecht8" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image8" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
-                <asp:CheckBox ID="ckbGerecht9" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image9" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
-                <asp:CheckBox ID="ckbGerecht10" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image10" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
-                <asp:CheckBox ID="ckbGerecht11" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image11" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
-                <asp:CheckBox ID="ckbGerecht12" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image12" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
-                <asp:CheckBox ID="ckbGerecht13" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image13" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
-                <asp:CheckBox ID="ckbGerecht14" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image14" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
-                <asp:CheckBox ID="ckbGerecht15" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image15" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
-                <asp:CheckBox ID="ckbGerecht16" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image16" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
-                <asp:CheckBox ID="ckbGerecht17" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image17" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
-                <asp:CheckBox ID="ckbGerecht18" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image18" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
-                <asp:CheckBox ID="ckbGerecht19" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image19" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
-                <asp:CheckBox ID="ckbGerecht20" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image20" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
-                <asp:CheckBox ID="ckbGerecht21" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image21" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
-                <asp:CheckBox ID="ckbGerecht22" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image22" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
-                <asp:CheckBox ID="ckbGerecht23" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image23" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
-                <asp:CheckBox ID="ckbGerecht24" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="shushi" />
-                <asp:Image ID="Image24" runat="server" BorderStyle="Double" Height="53px" ImageUrl="https://www.lekkervanbijons.be/sites/default/files/styles/recipe_detail/public/recipe_image/sushi-rijst_sushi-azijn?itok=R0iedE24" Width="60px" />
+        <div>
+            <div id="container">
+
+                <!-- topbalk -->
+                <div id="topbalk">
+                    <div id="datum">
+                        datum</div>
+                     <div id="ronde">
+                        ronde</div>
+                     <div id="tijd">
+                        tijd</div>
+                </div>
+
+                <!-- menuselectie -->
+                <div id="menuselectie">
+                    <div id="menulijst">
+                        <asp:DropDownList ID="ddlMenulijst" runat="server" Height="25px" Width="300px">
+                            <asp:ListItem>Soepen</asp:ListItem>
+                            <asp:ListItem>Sushi</asp:ListItem>
+                            <asp:ListItem>Vlees</asp:ListItem>
+                            <asp:ListItem>Vis</asp:ListItem>
+                            <asp:ListItem>Kip</asp:ListItem>
+                            <asp:ListItem>Bijgerechten</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                    <div id="infotekst">
+                        Vragen stellen of drinken bestellen? Daar is het personeel voor!</div>
+                </div>
+
+                <!-- Alle menu's -->
+                <div class="menus" id="soepen">
+                    <div class="gerecht" id="soepgerecht1">
+                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht1" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
+                        <br/>
+                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht1" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
+                    </div>
+                    <div class="gerecht" id="soepgerecht2">
+                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht2" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
+                        <br/>
+                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht2" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
+                    </div>
+                    <div class="gerecht" id="soepgerecht3">
+                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht3" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
+                        <br/>
+                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht3" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
+                    </div>
+                    <div class="gerecht" id="soepgerecht4">
+                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht4" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
+                        <br/>
+                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht4" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
+                    </div>
+                    <div class="gerecht" id="soepgerecht5">
+                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht5" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
+                        <br/>
+                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht5" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
+                    </div>
+                    <div class="gerecht" id="soepgerecht6">
+                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht6" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
+                        <br/>
+                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht6" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
+                    </div>
+                    <div class="gerecht" id="soepgerecht7">
+                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht7" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
+                        <br/>
+                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht7" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
+                    </div>
+                    <div class="gerecht" id="soepgerecht8">
+                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht8" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
+                        <br/>
+                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht8" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
+                    </div>
+                </div>
+                <!-- Tijdelijk uitgeschakeld
+                <div id="sushi">
+                </div>
+                <div id="vlees">
+                </div>
+                <div id="vis">
+                </div>
+                <div id="kip">
+                </div>
+                <div id="bijgerechten">
+                </div>
+                -->
+
+                <!-- bestelvenster -->
+                <div id="bestelvenster">
+                    <asp:Button ID="btnBestel" runat="server" Text="BESTEL" Height="50px" Width="160px" />
+                </div>
             </div>
         </div>
     </form>
-  </div>
 </body>
 </html>
