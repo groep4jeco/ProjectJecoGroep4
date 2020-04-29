@@ -60,43 +60,158 @@ SET bestelstatusid=2;
 
 UPDATE factuur
 SET 
-factuurnummer = (select COUNT( ISNULL(factuurnummer,0) +1) ),
+factuurnummer = (select COUNT( ISNULL(factuurnummer,0))+1 from Factuur),
+factuurdatum = (SELECT CONVERT (date, GETDATE())),
 Klantenpasemail = (select DISTINCT klant.email from bestelregel
 
 INNER JOIN reservering
 ON bestelregel.reserveringsnummer = reservering.reserveringsnummer
 
+INNER JOIN in_restaurant
+ON reservering.reserveringsnummer = in_restaurant.reserveringsnummer
+
+INNER JOIN Tafel_Reservering 
+ON in_restaurant.reserveringsnummer = Tafel_Reservering.reserveringsnummer
+
 INNER JOIN klant
 ON klant.klantid = reservering.klantklantid
 
-where klant.klantID = reservering.klantklantid),
+WHERE tafeltafelnummer = (SELECT tafeltafelnummer
 
-factuurdatum = (SELECT CONVERT (date, GETDATE()),
+from bestelregel
+
+INNER JOIN gerecht 
+ON bestelregel.menugerechtnummer = gerecht.gerechtnummer
+
+INNER JOIN reservering
+ON bestelregel.reserveringsnummer = reservering.reserveringsnummer
+
+INNER JOIN in_restaurant
+ON reservering.reserveringsnummer = in_restaurant.reserveringsnummer
+
+INNER JOIN Tafel_Reservering 
+ON in_restaurant.reserveringsnummer = Tafel_Reservering.reserveringsnummer
+
+GROUP BY tafeltafelnummer, besteltijd, rondenummer
+ORDER BY besteltijd ASC
+
+OFFSET 0 ROWS
+FETCH NEXT 1 ROWS ONLY)
+
+AND klant.klantID = reservering.klantklantid),
+
 totaalbedrag = (select SUM(menugerechtnummer * hoeveelheid) from bestelregel 
 
 INNER JOIN gerecht 
 ON bestelregel.menugerechtnummer = gerecht.gerechtnummer
 
-where menugerechtnummer = gerechtnummer),
+INNER JOIN reservering
+ON bestelregel.reserveringsnummer = reservering.reserveringsnummer
 
-reserveringsnummer = (select DISTINCT bestelregel.reserveringsnummer from bestelregel
+INNER JOIN in_restaurant
+ON reservering.reserveringsnummer = in_restaurant.reserveringsnummer
+
+INNER JOIN Tafel_Reservering 
+ON in_restaurant.reserveringsnummer = Tafel_Reservering.reserveringsnummer
+
+where tafeltafelnummer =  (SELECT tafeltafelnummer
+
+from bestelregel
+
+INNER JOIN gerecht 
+ON bestelregel.menugerechtnummer = gerecht.gerechtnummer
 
 INNER JOIN reservering
 ON bestelregel.reserveringsnummer = reservering.reserveringsnummer
 
-where bestelregel.reserveringsnummer = reservering.reserveringsnummer),
+INNER JOIN in_restaurant
+ON reservering.reserveringsnummer = in_restaurant.reserveringsnummer
+
+INNER JOIN Tafel_Reservering 
+ON in_restaurant.reserveringsnummer = Tafel_Reservering.reserveringsnummer
+
+GROUP BY tafeltafelnummer, besteltijd, rondenummer
+ORDER BY besteltijd ASC
+
+OFFSET 0 ROWS
+FETCH NEXT 1 ROWS ONLY)
+and menugerechtnummer = gerechtnummer),
+
+reserveringsnummer = (select bestelregel.reserveringsnummer from bestelregel
+
+INNER JOIN reservering
+ON bestelregel.reserveringsnummer = reservering.reserveringsnummer
+
+INNER JOIN in_restaurant
+ON reservering.reserveringsnummer = in_restaurant.reserveringsnummer
+
+INNER JOIN Tafel_Reservering 
+ON in_restaurant.reserveringsnummer = Tafel_Reservering.reserveringsnummer
+
+where tafeltafelnummer = (SELECT tafeltafelnummer
+
+from bestelregel
+
+INNER JOIN gerecht 
+ON bestelregel.menugerechtnummer = gerecht.gerechtnummer
+
+INNER JOIN reservering
+ON bestelregel.reserveringsnummer = reservering.reserveringsnummer
+
+INNER JOIN in_restaurant
+ON reservering.reserveringsnummer = in_restaurant.reserveringsnummer
+
+INNER JOIN Tafel_Reservering 
+ON in_restaurant.reserveringsnummer = Tafel_Reservering.reserveringsnummer
+
+GROUP BY tafeltafelnummer, besteltijd, rondenummer
+ORDER BY besteltijd ASC
+
+OFFSET 0 ROWS
+FETCH NEXT 1 ROWS ONLY)
+and bestelregel.reserveringsnummer = reservering.reserveringsnummer),
+
+actieactienummer = (SELECT ACTIENUMMER from actie where actienummer =1),
 
 klantklantid =  (select klant.klantid from bestelregel
 
 INNER JOIN reservering
 ON bestelregel.reserveringsnummer = reservering.reserveringsnummer
 
+INNER JOIN in_restaurant
+ON reservering.reserveringsnummer = in_restaurant.reserveringsnummer
+
+INNER JOIN Tafel_Reservering 
+ON in_restaurant.reserveringsnummer = Tafel_Reservering.reserveringsnummer
+
 INNER JOIN klant
-ON klant.klantid = reservering.KlantklantID)
+ON klant.klantid = reservering.KlantklantID
 
-where klant.klantID = reservering.klantklantid)
+where reservering.klantklantid= (SELECT klant.klantid
 
+from bestelregel
 
+INNER JOIN gerecht 
+ON bestelregel.menugerechtnummer = gerecht.gerechtnummer
+
+INNER JOIN reservering
+ON bestelregel.reserveringsnummer = reservering.reserveringsnummer
+
+INNER JOIN in_restaurant
+ON reservering.reserveringsnummer = in_restaurant.reserveringsnummer
+
+INNER JOIN Tafel_Reservering 
+ON in_restaurant.reserveringsnummer = Tafel_Reservering.reserveringsnummer
+
+INNER JOIN klant
+ON klant.klantid = reservering.klantklantid
+
+GROUP BY tafeltafelnummer, besteltijd, rondenummer, klantid
+ORDER BY besteltijd ASC
+
+OFFSET 0 ROWS
+FETCH NEXT 1 ROWS ONLY)
+AND klant.klantID = reservering.klantklantid)
 
 "></asp:SqlDataSource>
         <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="ListView1_SelectedIndexChanged">
