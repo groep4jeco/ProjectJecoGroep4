@@ -16,16 +16,33 @@
  
 FROM Listview11
 
+Where tafeltafelnummer=
+
+ (select tafeltafelnummer from Listview4
+ group by tafeltafelnummer, bestelstatusid, besteltijd
+ORDER BY besteltijd asc
+OFFSET 0 ROWS
+FETCH NEXT 1 ROWS ONLY)
+
+AND besteltijd = (select besteltijd from Listview4
+ group by tafeltafelnummer, bestelstatusid, besteltijd
+ORDER BY besteltijd asc
+OFFSET 0 ROWS
+FETCH NEXT 1 ROWS ONLY)" DeleteCommand="BEGIN TRANSACTION;
+
+
+IF (select DISTINCT Reserveringsnummer from listview111
+
 Where tafeltafelnummer =
 
  (select tafeltafelnummer from Listview4
  group by tafeltafelnummer, besteltijd, bestelstatusid
  ORDER BY besteltijd asc
 OFFSET 0 ROWS
-FETCH NEXT 1 ROWS ONLY)" DeleteCommand="BEGIN TRANSACTION;
-INSERT INTO factuur (klantenpasemail, factuurdatum, totaalbedrag, reserveringsnummer, klantklantid, actieactienummer)
+FETCH NEXT 1 ROWS ONLY)) not in (select factuur.reserveringsnummer from Factuur)
 
- 
+BEGIN 
+INSERT INTO factuur (klantenpasemail, factuurdatum, totaalbedrag, reserveringsnummer, klantklantid, actieactienummer) 
 
 values( (select DISTINCT email from listview111
 
@@ -85,6 +102,23 @@ FETCH NEXT 1 ROWS ONLY)),
 
 (select actienummer from actie where actienummer =1))
 
+END 
+
+ELSE
+begin
+UPDATE Factuur
+set Totaalbedrag = Totaalbedrag + (select CAST(SUM(regelprijs)AS decimal (10,2)) 
+from listview111
+Where tafeltafelnummer =
+
+ (select tafeltafelnummer from Listview4
+ group by tafeltafelnummer, besteltijd, bestelstatusid
+ ORDER BY besteltijd asc
+OFFSET 0 ROWS
+FETCH NEXT 1 ROWS ONLY))
+end
+
+
 UPDATE bestelregel
 SET bestelstatusid = 2
 from bestelregel
@@ -95,6 +129,12 @@ Where tafeltafelnummer =
  (select tafeltafelnummer from Listview4
  group by tafeltafelnummer, besteltijd, bestelstatusid
  ORDER BY besteltijd asc
+OFFSET 0 ROWS
+FETCH NEXT 1 ROWS ONLY)
+
+AND besteltijd = (select besteltijd from Listview4
+ group by tafeltafelnummer, bestelstatusid, besteltijd
+ORDER BY besteltijd asc
 OFFSET 0 ROWS
 FETCH NEXT 1 ROWS ONLY);
 
