@@ -28,5 +28,15 @@ namespace ProjectBedrijfApp
 
 
         }
+
+        protected void ListView1_ItemDeleted(object sender, ListViewDeletedEventArgs e)
+        {
+            Page.Response.Redirect(Page.Request.Url.ToString(), true);
+        }
+
+        protected void ListView2_ItemDeleted(object sender, ListViewDeletedEventArgs e)
+        {
+            Page.Response.Redirect(Page.Request.Url.ToString(), true);
+        }
     }
 }
