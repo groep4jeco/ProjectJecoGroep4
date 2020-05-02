@@ -21,6 +21,11 @@ namespace ProjectBedrijfApp
             double TotaalEten = aantalPersonen * prijs;
             BerekenTotaalBedrag(TotaalEten);
 
+
+
+
+
+
         }
         private void BerekenTotaalBedrag(double totalEten) 
         {
