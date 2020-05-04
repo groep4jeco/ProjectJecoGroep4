@@ -70,6 +70,9 @@
   <ItemGroup>
     <Content Include="Betalen.aspx" />
     <Content Include="Keukenscherm.aspx" />
+    <Content Include="managementallefacturen.aspx" />
+    <Content Include="Managementfacturen.aspx" />
+    <Content Include="Managementinformatiehome.aspx" />
     <Content Include="Reserveren.aspx" />
     <Content Include="ReserveringPagina.aspx" />
     <Content Include="Web.config" />
@@ -88,6 +91,27 @@
     </Compile>
     <Compile Include="Keukenscherm.aspx.designer.cs">
       <DependentUpon>Keukenscherm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="managementallefacturen.aspx.cs">
+      <DependentUpon>managementallefacturen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="managementallefacturen.aspx.designer.cs">
+      <DependentUpon>managementallefacturen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Managementfacturen.aspx.cs">
+      <DependentUpon>Managementfacturen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Managementfacturen.aspx.designer.cs">
+      <DependentUpon>Managementfacturen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Managementinformatiehome.aspx.cs">
+      <DependentUpon>Managementinformatiehome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Managementinformatiehome.aspx.designer.cs">
+      <DependentUpon>Managementinformatiehome.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reserveren.aspx.cs">
