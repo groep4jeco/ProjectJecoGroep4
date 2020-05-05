@@ -13,6 +13,7 @@ namespace ProjectBedrijfApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Panel2.Visible = false;
         }
 
         protected void DataList1_SelectedIndexChanged(object sender, EventArgs e)
@@ -41,6 +42,11 @@ namespace ProjectBedrijfApp
         protected void Button1_Click(object sender, EventArgs e)
         {
             GridView1.SelectedIndex =-1;
+        }
+
+        protected void GridView1_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
+        {
+            Panel2.Visible = true;
         }
     }
 }
