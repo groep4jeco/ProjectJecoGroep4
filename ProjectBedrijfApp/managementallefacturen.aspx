@@ -49,7 +49,15 @@
                     <br />
                     <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
                     <br />
-                    <asp:SqlDataSource ID="SqlDataSource3" runat="server"></asp:SqlDataSource>
+                    <asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
+                    <br />
+                    <asp:Label ID="Label5" runat="server" Text="Label"></asp:Label>
+                    <br />
+                    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" OnSelecting="SqlDataSource3_Selecting" SelectCommand="SELECT [Naam], [Adres], [Plaats] FROM [Restaurant] WHERE ([Restaurant ID] = @Restaurant_ID)">
+                        <SelectParameters>
+                            <asp:ControlParameter ControlID="GridView1" Name="Restaurant_ID" PropertyName="SelectedValue" Type="Int32" />
+                        </SelectParameters>
+                    </asp:SqlDataSource>
                     <br />
                     <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource2">
                         <Columns>

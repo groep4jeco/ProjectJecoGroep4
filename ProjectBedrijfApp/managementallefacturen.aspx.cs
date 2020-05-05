@@ -47,6 +47,20 @@ namespace ProjectBedrijfApp
         protected void GridView1_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
         {
             Panel2.Visible = true;
+            SqlConnection con = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
+            con.Open();
+            string querie = "SELECT[Naam], [Adres], [Plaats] FROM[Restaurant] WHERE([Restaurant ID] = '1'";
+            SqlCommand cmd = new SqlCommand(querie, con);
+            SqlDataReader dr = cmd.ExecuteReader();
+            string resultaat = dr.Read().ToString();
+            Label3.Text = dr["Naam"].ToString();
+            con.Close();
+
+        }
+
+        protected void SqlDataSource3_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
+        {
+
         }
     }
 }
