@@ -23,5 +23,10 @@ namespace ProjectBedrijfApp
         {
 
         }
+
+        protected void btnOmzet_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

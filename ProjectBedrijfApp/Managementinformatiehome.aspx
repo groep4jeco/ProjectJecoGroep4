@@ -13,7 +13,7 @@
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [Voornaam] FROM [Personeel]"></asp:SqlDataSource>
             <br />
             <br />
-            <asp:Button ID="btnOmzet" runat="server" Text="Omzet" />
+            <asp:Button ID="btnOmzet" runat="server" Text="Omzet" OnClick="btnOmzet_Click" />
             <br />
             <asp:Button ID="BtnLoonkosten" runat="server" OnClick="Button1_Click" Text="Loonkosten" />
             <br />
