@@ -70,8 +70,10 @@
     <Content Include="Betalen.aspx" />
     <Content Include="images\loginlogo 2.png" />
     <Content Include="login.aspx" />
+    <Content Include="overview.aspx" />
     <Content Include="Reserveren.aspx" />
     <Content Include="ReserveringPagina.aspx" />
+    <Content Include="tabletkeuze.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +91,13 @@
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="overview.aspx.cs">
+      <DependentUpon>overview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="overview.aspx.designer.cs">
+      <DependentUpon>overview.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reserveren.aspx.cs">
       <DependentUpon>Reserveren.aspx</DependentUpon>
@@ -103,6 +112,13 @@
     </Compile>
     <Compile Include="ReserveringPagina.aspx.designer.cs">
       <DependentUpon>ReserveringPagina.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="tabletkeuze.aspx.cs">
+      <DependentUpon>tabletkeuze.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="tabletkeuze.aspx.designer.cs">
+      <DependentUpon>tabletkeuze.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
