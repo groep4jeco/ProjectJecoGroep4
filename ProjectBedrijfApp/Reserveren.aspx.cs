@@ -5,13 +5,14 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Drawing;
 
 namespace ProjectBedrijfApp
 {
     public partial class Reserveren : System.Web.UI.Page
     {
-        public string SelectedTafelID;
-        int index = 0;
+        public int SelectedTafelID;
+        public bool ReserveerStatus;
         public List<string> tafelID = new List<string>();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,14 +27,16 @@ namespace ProjectBedrijfApp
 
         public void Button1_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/ReserveringPagina.aspx?TafelID=" + SelectedTafelID);
+            SettingReserverData();
         }
 
-        private void SettingReserverData(string TafelNummer)
+        private void SettingReserverData()
         {
             Tafel Tafel = new Tafel();
             Tafel.Reserveringsnummer++;
-            SelectedTafelID = TafelNummer;
+            SelectedTafelID = Tafel.Reserveringsnummer;
+            Session["Reserveringsnummer"] = SelectedTafelID;
+            Response.Redirect("~/ReserveringPagina.aspx?TafelID=");
         }
 
         public void SetReserverData(object sender, EventArgs e)
@@ -42,15 +45,24 @@ namespace ProjectBedrijfApp
             string buttonId = button.ID;
 
             tafelID = (List<string>)Session["TafelId"];
-            
-                tafelID.Add(buttonId);
-                Session["TafelId"] = tafelID;
-                Label1.Text = tafelID.Count.ToString();
-            
-               
+            tafelID.Add(buttonId);
+            Session["TafelId"] = tafelID;
+
+            Label1.Text = tafelID.Count.ToString();
+
+            ReserveerStatus = true;
+
             foreach (var item in tafelID) 
             {
-                System.Diagnostics.Debug.WriteLine(item);
+                if (tafelID.Contains(buttonId) && ReserveerStatus)
+                {
+                    button.BackColor = Color.Green;
+                }
+                else
+                {
+                    button.BackColor = Color.Red;
+                    ReserveerStatus = false;
+                }
             }
         }
     }

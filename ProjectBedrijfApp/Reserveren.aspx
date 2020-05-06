@@ -18,7 +18,7 @@
     <form id="form1" runat="server">
         <div id ="Reserveren">
         <asp:Button ID="Tafel1" runat="server" OnClick="SetReserverData" Text="Tafel 1"  />
-        <asp:Button ID="Button2" runat="server" OnClick="SetReserverData" Text="Button" />
+        <asp:Button ID="Tafel2" runat="server" OnClick="SetReserverData" Text="Tafel2" />
         <asp:Button ID="Button4" runat="server" OnClick="SetReserverData" Text="Button" />
         <asp:Button ID="Button3" runat="server" OnClick="SetReserverData" Text="Button" />
         <br />
