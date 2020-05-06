@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Data;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ProjectBedrijfApp
 {
@@ -15,7 +16,7 @@ namespace ProjectBedrijfApp
         {
             Panel2.Visible = false;
         }
-
+        [System.ComponentModel.Browsable(false)]
         protected void DataList1_SelectedIndexChanged(object sender, EventArgs e)
         {
         }
@@ -49,7 +50,7 @@ namespace ProjectBedrijfApp
             Panel2.Visible = true;
             SqlConnection con = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
             con.Open();
-            string querie = "SELECT[Naam], [Adres], [Plaats] FROM[Restaurant] WHERE([Restaurant ID] = '1'";
+        string querie = "SELECT[Naam], [Adres], [Plaats] FROM[Restaurant] WHERE [Restaurant ID] = 1";
             SqlCommand cmd = new SqlCommand(querie, con);
             SqlDataReader dr = cmd.ExecuteReader();
             string resultaat = dr.Read().ToString();
