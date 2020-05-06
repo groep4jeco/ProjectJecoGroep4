@@ -9,6 +9,12 @@
         .auto-style1 {
             margin-bottom: 304px;
         }
+        .auto-style2 {
+            width: 100%;
+        }
+        .auto-style3 {
+            height: 31px;
+        }
     </style>
 </head>
 <body style="height: 567px">
@@ -86,6 +92,27 @@
                             <asp:BoundField DataField="rondenummer" HeaderText="rondenummer" ReadOnly="True" SortExpression="rondenummer" />
                         </Columns>
                     </asp:GridView>
+                    <br />
+                    <table class="auto-style2">
+                        <tr>
+                            <td class="auto-style3">Factuurtotaal exclusief btw</td>
+                            <td class="auto-style3">
+                                <asp:Label ID="Label12" runat="server" Text="Label"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Btw bedrag</td>
+                            <td>
+                                <asp:Label ID="Label13" runat="server" Text="Label"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Factuurtotaal inclusief btw</td>
+                            <td>
+                                <asp:Label ID="Label14" runat="server" Text="Label"></asp:Label>
+                            </td>
+                        </tr>
+                    </table>
                     <br />
                     <br />
                 </asp:Panel>

@@ -79,6 +79,7 @@ namespace ProjectBedrijfApp
                 Label9.Text = dradres["AdresHuisnummer"].ToString();
                 Label10.Text = dradres["AdresPostcode"].ToString();
                 Label11.Text = dradres["Straatnaam"].ToString();
+                dradres.Close();
             }
             catch
             {
@@ -88,9 +89,18 @@ namespace ProjectBedrijfApp
             }
             finally
             {
-                con.Close();
+                
             }
-
+            //int resultaattotaal = (int)GridView1.DataKeys[GridView1.SelectedIndex]["Restaurant ID"];
+            //string queriefactuur = "SELECT [Totaalbedrag] FROM [Factuur] WHERE [Factuurnummer] = @Factuurnummer";
+            //SqlCommand cmdfactuur = new SqlCommand(queriefactuur, con);
+            //cmd.Parameters.AddWithValue("@Factuurnummer", resultaattotaal);
+            //SqlDataReader drfactuur = cmdfactuur.ExecuteReader();
+            //string resultaatfactuur = drfactuur.Read().ToString();
+            //Label2.Text = drfactuur["Totaalbedrag"].ToString();
+            //Label3.Text = drfactuur["Adres"].ToString();
+            //dr.Close();
+            con.Close();
 
         }
 
