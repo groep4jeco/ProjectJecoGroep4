@@ -86,21 +86,23 @@ namespace ProjectBedrijfApp
                 Label9.Visible = false;
                 Label10.Visible = false;
                 Label11.Visible = false;
+               
             }
             finally
             {
-                
             }
-            //int resultaattotaal = (int)GridView1.DataKeys[GridView1.SelectedIndex]["Restaurant ID"];
+            
+           // int resultaattotaal = (int)GridView1.DataKeys[GridView1.SelectedIndex]["Factuurnummer"];
             //string queriefactuur = "SELECT [Totaalbedrag] FROM [Factuur] WHERE [Factuurnummer] = @Factuurnummer";
             //SqlCommand cmdfactuur = new SqlCommand(queriefactuur, con);
-            //cmd.Parameters.AddWithValue("@Factuurnummer", resultaattotaal);
+            //cmdfactuur.Parameters.AddWithValue("@Factuurnummer", resultaattotaal);
             //SqlDataReader drfactuur = cmdfactuur.ExecuteReader();
             //string resultaatfactuur = drfactuur.Read().ToString();
             //Label2.Text = drfactuur["Totaalbedrag"].ToString();
             //Label3.Text = drfactuur["Adres"].ToString();
-            //dr.Close();
+            //drfactuur.Close();
             con.Close();
+
 
         }
 
