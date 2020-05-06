@@ -15,7 +15,7 @@ namespace ProjectBedrijfApp
         DateTime kalender = DateTime.Today;
         protected void Page_Load(object sender, EventArgs e)
         {
-            calendarTest.SelectedDate = kalender;
+            kalender = calendarTest.SelectedDate;
             Panel2.Visible = false;
         }
         [System.ComponentModel.Browsable(false)]
