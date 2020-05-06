@@ -15,7 +15,7 @@
     <form id="form1" runat="server">
         <div>
             <asp:Label ID="lblkalender" runat="server" Text="Selecteer een dag"></asp:Label>
-            <asp:Calendar ID="calendarTest" runat="server" SelectedDate="05/05/2020 14:40:41"></asp:Calendar>
+            <asp:Calendar ID="calendarTest" runat="server" OnSelectionChanged="calendarTest_SelectionChanged"></asp:Calendar>
             <br />
             <asp:Button ID="BtnZoek" runat="server" OnClick="BtnZoek_Click" Text="Zoek" />
             <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>

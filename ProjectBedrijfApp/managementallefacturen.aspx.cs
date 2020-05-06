@@ -12,8 +12,10 @@ namespace ProjectBedrijfApp
 {
     public partial class managementallefacturen : System.Web.UI.Page
     {
+        DateTime kalender = DateTime.Today;
         protected void Page_Load(object sender, EventArgs e)
         {
+            calendarTest.SelectedDate = kalender;
             Panel2.Visible = false;
         }
         [System.ComponentModel.Browsable(false)]
@@ -34,9 +36,9 @@ namespace ProjectBedrijfApp
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
 
-        { 
-
-         Panel2.Visible = true;
+        {
+            kalender = calendarTest.SelectedDate;
+            Panel2.Visible = true;
          int resultaat = (int)GridView1.DataKeys[GridView1.SelectedIndex]["Restaurant ID"];
             SqlConnection con = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
         con.Open();
@@ -109,6 +111,10 @@ namespace ProjectBedrijfApp
         protected void SqlDataSource3_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
         {
 
+        }
+
+        protected void calendarTest_SelectionChanged(object sender, EventArgs e)
+        {
         }
     }
 }
