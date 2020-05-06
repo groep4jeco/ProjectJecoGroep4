@@ -744,6 +744,15 @@ namespace ProjectBedrijfApp
         protected global::System.Web.UI.WebControls.Button Button46;
 
         /// <summary>
+        /// Button83 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button83;
+
+        /// <summary>
         /// Button68 control.
         /// </summary>
         /// <remarks>

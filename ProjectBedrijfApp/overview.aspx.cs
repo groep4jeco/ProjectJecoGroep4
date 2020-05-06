@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -9,129 +10,63 @@ namespace ProjectBedrijfApp
 {
     public partial class overview1 : System.Web.UI.Page
     {
+        public int SelectedTafelID;
+        public bool ReserveerStatus;
+        public List<string> tafelID = new List<string>();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                Session["TafelId"] = tafelID;
+            }
+            //SqlConnection connnection = new SqlConnection("Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;Persist Security Info=True;User ID=BIM01A2019;Password=BIM01A2019");
+            //connnection.Open();
 
         }
 
-        protected void t1_Click(object sender, EventArgs e)
+        public void Button1_Click(object sender, EventArgs e)
         {
-
+            SettingReserverData();
         }
 
-        protected void t2_Click(object sender, EventArgs e)
+        private void SettingReserverData()
         {
-
+            Tafel Tafel2 = new Tafel();
+            Tafel.Reserveringsnummer1++;
+            SelectedTafelID = Tafel.Reserveringsnummer1;
+            Session["Reserveringsnummer"] = SelectedTafelID;
+            Response.Redirect("~/ReserveringPagina.aspx?TafelID=");
         }
 
-        protected void t3_Click(object sender, EventArgs e)
+        public void SetReserverData(object sender, EventArgs e)
         {
+            Button button = (Button)sender;
+            string buttonId = button.ID;
 
+            tafelID = (List<string>)Session["TafelId"];
+            tafelID.Add(buttonId);
+            Session["TafelId"] = tafelID;
+
+            ReserveerStatus = true;
+
+            foreach (var item in tafelID)
+            {
+                if (tafelID.Contains(buttonId) && ReserveerStatus)
+                {
+                    button.BackColor = Color.Green;
+                }
+                else
+                {
+                    button.BackColor = Color.Red;
+                    ReserveerStatus = false;
+                }
+            }
         }
+    }
 
-        protected void t5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void t6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void t7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void t8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Button9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Button10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Button11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Button12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Button13_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Button14_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Button15_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Button16_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Button17_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Button18_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Button19_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Button20_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Button21_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Button22_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Button23_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Button24_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void t4_Click(object sender, EventArgs e)
-        {
-
-        }
+    class Tafel2
+    {
+        public string[] tafelnummer = new string[80];
+        public int Reserveringsnummer1;
     }
 }

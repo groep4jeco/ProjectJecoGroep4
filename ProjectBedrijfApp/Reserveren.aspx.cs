@@ -71,5 +71,7 @@ namespace ProjectBedrijfApp
     {
         public string[] tafelnummer = new string[80]; 
         public int Reserveringsnummer;
+
+        public static int Reserveringsnummer1 { get; internal set; }
     }
 }
