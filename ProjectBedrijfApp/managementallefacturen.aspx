@@ -5,24 +5,32 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <style type="text/css">
-        .auto-style1 {
-            margin-bottom: 304px;
+    <style>
+        .kalender{
+            margin-top: 20px;
+            margin-left: 700px;
+            margin-right: 700px;
+           
+
         }
-        .auto-style2 {
-            width: 100%;
+        .container1{
         }
-        .auto-style3 {
-            height: 31px;
+        #form1{
+            background-color: #7cc5f6;
+        }
+        .bon{
+            
         }
     </style>
 </head>
 <body style="height: 567px">
     <form id="form1" runat="server">
-        <div>
+        <div class ="kalender">
             <asp:Label ID="lblkalender" runat="server" Text="Selecteer een dag"></asp:Label>
             <asp:Calendar ID="calendarTest" runat="server" OnSelectionChanged="calendarTest_SelectionChanged"></asp:Calendar>
+            </div> 
             <br />
+        <div class ="container1">
             <asp:Button ID="BtnZoek" runat="server" OnClick="BtnZoek_Click" Text="Zoek" />
             <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT * FROM [listviewGeenidee] WHERE ([Factuurdatum] = @Factuurdatum)">
@@ -43,12 +51,16 @@
                         <asp:BoundField DataField="Restaurant ID" HeaderText="Restaurant ID" SortExpression="Restaurant ID" />
                     </Columns>
                 </asp:GridView>
+                
                 <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [omschrijving], [prijs], [hoeveelheid], [besteltijd], [rondenummer] FROM [listviewfactuur] WHERE ([Factuurnummer] = @Factuurnummer)">
                     <SelectParameters>
                         <asp:ControlParameter ControlID="GridView1" Name="Factuurnummer" PropertyName="SelectedValue" Type="Int32" />
                     </SelectParameters>
                 </asp:SqlDataSource>
+                </asp:Panel>
+                </div>
                 <br />
+        <div class ="bon">
                 <asp:Panel ID="Panel2" runat="server" Height="546px" Visible="False">
                     <asp:Label ID="Label2" runat="server" Text="Bedankt dat u heeft gekozen om bij ons te komen eten."></asp:Label>
                     <br />
@@ -113,13 +125,16 @@
                             </td>
                         </tr>
                     </table>
+                    </asp:Panel>
+                    </div>
                     <br />
+                    <asp:Button ID="btnPrint" runat="server" Text="Print factuur" OnClick="btnPrint_Click" />
                     <br />
-                </asp:Panel>
+                
                 <asp:Button ID="btnSluit" runat="server" OnClick="Button1_Click" Text="Sluiten" />
                 <br />
-            </asp:Panel>
-        </div>
+            
+        
     </form>
 </body>
 </html>

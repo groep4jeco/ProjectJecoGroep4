@@ -7,6 +7,9 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Data;
 using System.Security.Cryptography.X509Certificates;
+using System.Xml.Schema;
+using System.Security.Principal;
+using System.Drawing.Printing;
 
 namespace ProjectBedrijfApp
 {
@@ -27,6 +30,7 @@ namespace ProjectBedrijfApp
         {
             string datum = calendarTest.SelectedDate.ToString("yyyy-MM-dd");
             DateTime test = DateTime.Parse(datum);
+            
         }
 
         protected void DataList1_Load(object sender, EventArgs e)
@@ -63,6 +67,12 @@ namespace ProjectBedrijfApp
 
             drklant.Close();
 
+            int resultaatadres = (int)GridView1.DataKeys[GridView1.SelectedIndex]["KlantKlantID"];
+            string querieadres = "SELECT Online_bestellen.AdresHuisnummer, Online_bestellen.AdresPostcode, adres.Straatnaam, adres.Plaats FROM [Klant] INNER JOIN Adres on adres.KlantKlantID = klant.KlantID inner join Online_bestellen on Adres.Postcode = Online_bestellen.AdresPostcode  WHERE [KlantKlantID] = @IDKLANT";
+            SqlCommand cmdadres = new SqlCommand(querieadres, con);
+            cmdadres.Parameters.AddWithValue("@IDKLANT", resultaatadres);
+            SqlDataReader dradres = cmdadres.ExecuteReader();
+
             try
             {
 
@@ -70,16 +80,11 @@ namespace ProjectBedrijfApp
                 Label10.Visible = true;
                 Label11.Visible = true;
 
-                int resultaatadres = (int)GridView1.DataKeys[GridView1.SelectedIndex]["KlantKlantID"];
-                string querieadres = "SELECT Online_bestellen.AdresHuisnummer, Online_bestellen.AdresPostcode, adres.Straatnaam FROM [Klant] INNER JOIN Adres on adres.KlantKlantID = klant.KlantID inner join Online_bestellen on Adres.Postcode = Online_bestellen.AdresPostcode  WHERE [KlantKlantID] = @IDKLANT";
-                SqlCommand cmdadres = new SqlCommand(querieadres, con);
-                cmdadres.Parameters.AddWithValue("@IDKLANT", resultaatadres);
-                SqlDataReader dradres = cmdadres.ExecuteReader();
                 string resultaatadres2 = dradres.Read().ToString();
-                Label9.Text = dradres["AdresHuisnummer"].ToString();
-                Label10.Text = dradres["AdresPostcode"].ToString();
+                Label9.Text = dradres["Straatnaam"].ToString() + ' ' + dradres["AdresHuisnummer"].ToString();
+                Label10.Text = dradres["AdresPostcode"].ToString() + ' ' + dradres["Plaats"].ToString();
                 Label11.Text = dradres["Straatnaam"].ToString();
-                dradres.Close();
+                
             }
             catch
             {
@@ -90,17 +95,24 @@ namespace ProjectBedrijfApp
             }
             finally
             {
+                
             }
-            
-           // int resultaattotaal = (int)GridView1.DataKeys[GridView1.SelectedIndex]["Factuurnummer"];
-            //string queriefactuur = "SELECT [Totaalbedrag] FROM [Factuur] WHERE [Factuurnummer] = @Factuurnummer";
-            //SqlCommand cmdfactuur = new SqlCommand(queriefactuur, con);
-            //cmdfactuur.Parameters.AddWithValue("@Factuurnummer", resultaattotaal);
-            //SqlDataReader drfactuur = cmdfactuur.ExecuteReader();
-            //string resultaatfactuur = drfactuur.Read().ToString();
-            //Label2.Text = drfactuur["Totaalbedrag"].ToString();
-            //Label3.Text = drfactuur["Adres"].ToString();
-            //drfactuur.Close();
+            dradres.Close();
+            int resultaattotaal = (int)GridView1.DataKeys[GridView1.SelectedIndex]["Factuurnummer"];
+            string queriefactuur = "SELECT [Totaalbedrag] FROM [Factuur] WHERE [Factuurnummer] = @Factuurnummer";
+            SqlCommand cmdfactuur = new SqlCommand(queriefactuur, con);
+            cmdfactuur.Parameters.AddWithValue("@Factuurnummer", resultaattotaal);
+            SqlDataReader drfactuur = cmdfactuur.ExecuteReader();
+            string resultaatfactuur = drfactuur.Read().ToString();
+            string factuurtotaal = drfactuur["Totaalbedrag"].ToString();
+            double probeer = double.Parse(factuurtotaal);
+            double label12 = probeer / 1.09;
+            double label13 = probeer / 109 * 9;
+            Label14.Text = drfactuur["Totaalbedrag"].ToString();
+            Label12.Text = label12.ToString("0.00");
+            Label13.Text = label13.ToString("0.00");
+             
+            drfactuur.Close();
             con.Close();
 
 
@@ -127,6 +139,11 @@ namespace ProjectBedrijfApp
 
         protected void calendarTest_SelectionChanged(object sender, EventArgs e)
         {
+        }
+
+        protected void btnPrint_Click(object sender, EventArgs e)
+        {
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "key", "panel2.print()", true);
         }
     }
 }
