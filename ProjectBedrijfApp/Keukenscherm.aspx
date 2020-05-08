@@ -60,8 +60,14 @@ FETCH NEXT 1 ROWS ONLY)),
 
  
 
-(select CAST(SUM(regelprijs)AS decimal (10,2)) from listview111
-
+(select 
+CASE 
+WHEN [All you can eat] = 0x0001
+then CAST(SUM([Prijs volwassenen] * [Aantal personen] + [Aantal personen] * EXTRARONDES * 5)AS decimal (10,2))
+ELSE
+CAST(SUM(regelprijs)AS decimal (10,2))
+end as Totaalbedrag
+from listview111
 Where tafeltafelnummer =
 
  
@@ -70,7 +76,9 @@ Where tafeltafelnummer =
  group by tafeltafelnummer, besteltijd, bestelstatusid
  ORDER BY besteltijd asc
 OFFSET 0 ROWS
-FETCH NEXT 1 ROWS ONLY)),
+FETCH NEXT 1 ROWS ONLY)
+
+group by [All you can eat]),
 
  
 
