@@ -6,7 +6,15 @@
 <head runat="server">
     <title></title>
     <style>
-        .kalender {
+
+        .calendarTest {
+            position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: url("https://images.unsplash.com/photo-1516912481808-3406841bd33c?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=183f2924ba5a8429441804609b2d4f61") no-repeat center / cover;
         }
         .dagenvandeweek{
             
@@ -15,8 +23,66 @@
 
         }
         .Bovenkant {
+             position: relative;
+  height: 200px;
+  padding: 20px;
+  color: #fff;
+  background: #262626 url("https://images.unsplash.com/photo-1516912481808-3406841bd33c?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=183f2924ba5a8429441804609b2d4f61") no-repeat center / cover;
+  text-shadow: 0 2px 2px rgba(#000, 0.2);
+  box-sizing: border-box;
 
+  &::before {
+    content: "";
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    background: linear-gradient(to top, rgba(#000, 0.25), rgba(#000, 0.1));
+  }
+  
+  h2 {
+    margin: 0;
+  }
+  
+  h3 {
+    margin: 0;
+    font-weight: 500;
+  }
         }
+
+..dagen, .Weekend{
+ display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  color: #262626;
+
+  &:nth-child(7n) {
+    color: #ff685d;
+    font-weight: 700;
+  }
+  
+  &--current,
+  &:hover {
+    background-color: #009688;
+    color: #fff !important;
+    font-weight: 700;
+    cursor: pointer;
+  }
+}
+  }
+}
+
+.dagenvandeweek{
+     padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
+  grid-gap: 10px;
+  box-sizing: border-box;
+
+}
+
 
 
 
@@ -67,7 +133,13 @@
                     </Columns>
                 </asp:GridView>
 
-                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [omschrijving], [prijs], [hoeveelheid], [besteltijd], [rondenummer] FROM [listviewfactuur] WHERE ([Factuurnummer] = @Factuurnummer)">
+                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="BEGIN TRANSACTION;
+
+SELECT [omschrijving], [prijs], [hoeveelheid], [besteltijd], [rondenummer] FROM [listviewfactuur] WHERE ([Factuurnummer] = @Factuurnummer);
+
+
+
+COMMIT;">
                     <SelectParameters>
                         <asp:ControlParameter ControlID="GridView1" Name="Factuurnummer" PropertyName="SelectedValue" Type="Int32" />
                     </SelectParameters>
