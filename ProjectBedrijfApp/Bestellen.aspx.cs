@@ -13,5 +13,20 @@ namespace ProjectBedrijfApp
         {
 
         }
+
+        protected void btnBestel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void imgbtnSoepgerecht1_Click(object sender, ImageClickEventArgs e)
+        {
+            lblToegevoegd1.Text = "tomatensoep";
+        }
+
+        protected void ddlMenulijst_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

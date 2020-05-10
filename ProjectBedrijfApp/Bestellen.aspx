@@ -140,17 +140,20 @@
                 <!-- topbalk -->
                 <div id="topbalk">
                     <div id="datum">
-                        datum</div>
-                     <div id="ronde">
+                        <asp:Label ID="lblDatum" runat="server" 
+                            Text='<%# Eval("Date", "{0:d MMM yyyy HH:mm}") %>'>
+                        </asp:Label>
+                    </div>
+                    <div id="ronde">
                         ronde</div>
-                     <div id="tijd">
+                    <div id="tijd">
                         tijd</div>
                 </div>
 
                 <!-- menuselectie -->
                 <div id="menuselectie">
                     <div id="menulijst">
-                        <asp:DropDownList ID="ddlMenulijst" runat="server" Height="23px" Width="298px">
+                        <asp:DropDownList ID="ddlMenulijst" runat="server" Height="23px" Width="298px" OnSelectedIndexChanged="ddlMenulijst_SelectedIndexChanged">
                             <asp:ListItem>Soepen</asp:ListItem>
                             <asp:ListItem>Sushi</asp:ListItem>
                             <asp:ListItem>Vlees</asp:ListItem>
@@ -166,45 +169,17 @@
                 <!-- Alle menu's -->
                 <div class="menus" id="soepen">
                     <div class="gerecht" id="soepgerecht1">
-                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht1" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
+                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht1" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" OnClick="imgbtnSoepgerecht1_Click" />
                         <br/>
-                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht1" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
+                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht1" runat="server" Text="Overheerlijke tomatensoep vers gemaakt in de keuken."></asp:Label>
                     </div>
+                   
                     <div class="gerecht" id="soepgerecht2">
-                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht2" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
+                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht2" runat="server" ImageUrl="https://i1.wp.com/nadiashealthyworld.com/wp-content/uploads/2019/06/groentensoep-1-2-1.jpg?fit=528%2C357&amp;ssl=1" OnClick="imgbtnSoepgerecht1_Click" />
                         <br/>
-                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht2" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
+                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht2" runat="server" Text="Lekkere traditionele groentensoep"></asp:Label>
                     </div>
-                    <div class="gerecht" id="soepgerecht3">
-                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht3" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
-                        <br/>
-                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht3" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
-                    </div>
-                    <div class="gerecht" id="soepgerecht4">
-                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht4" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
-                        <br/>
-                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht4" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
-                    </div>
-                    <div class="gerecht" id="soepgerecht5">
-                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht5" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
-                        <br/>
-                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht5" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
-                    </div>
-                    <div class="gerecht" id="soepgerecht6">
-                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht6" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
-                        <br/>
-                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht6" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
-                    </div>
-                    <div class="gerecht" id="soepgerecht7">
-                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht7" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
-                        <br/>
-                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht7" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
-                    </div>
-                    <div class="gerecht" id="soepgerecht8">
-                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht8" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
-                        <br/>
-                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht8" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
-                    </div>
+                   
                 </div>
                 <!-- Tijdelijk uitgeschakeld
                 <div id="sushi">
@@ -222,7 +197,7 @@
                 <!-- bestelvenster -->
                 <div id="bestelvenster">
                     <div id="bestelvenster2">
-                        <asp:Button ID="btnBestel" runat="server" Text="BESTEL" Height="50px" Width="150px" />                      
+                        <asp:Button ID="btnBestel" runat="server" Text="BESTEL" Height="50px" Width="150px" OnClick="btnBestel_Click" />                      
                         <br/>
                         <br/>
                         <asp:Label class="toegevoegd" ID="lblToegevoegd1" runat="server" Text="Gerecht1"></asp:Label>                        
