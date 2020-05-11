@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,19 +12,36 @@ namespace ProjectBedrijfApp
     {
         private int SelectedTafelID;
         private string tijdvak;
+        private int Reserveringsnummer;
+        public List<string> tafelID = new List<string>();
+
+        SqlCommand command;
+        SqlDataAdapter adapter = new SqlDataAdapter();
+        String sql = "";
+
+        SqlConnection connnection = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["TafelID"] != null)
-            {
-                string TafelIDString = Request.QueryString["TafelID"];
-                SelectedTafelID = int.Parse(TafelIDString);
-                Label3.Text = SelectedTafelID.ToString();
-            }
+            Reserveringsnummer = (int)Session["Reserveringsnummer"];
+            tafelID = (List<string>)Session["TafelId"];
+
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            Label3.Text = SelectedTafelID.ToString() + "\r\n" + "gekozen tijdvak: " + tijdvak + "\r\n" + "het aantal personen: " + TextBox1.Text;
+            string combindedString = string.Join(",", tafelID);
+            Label3.Text = "Gekozen tafels: " + combindedString + "   Reservering nummmer: "+ Reserveringsnummer.ToString() + "\r\n" + "  gekozen tijdvak: " + tijdvak + "\r\n" + "  het aantal personen: " + TextBox1.Text;
+
+            connnection.Open();
+            sql = "Insert into Tafel_Reservering(combindedString,Reserveringsnummer,tijdvak, TextBox1.Text)";
+            command = new SqlCommand(sql, connnection);
+            adapter.InsertCommand = new SqlCommand(sql, connnection);
+            adapter.InsertCommand.ExecuteNonQuery();
+
+            command.Dispose();
+            connnection.Close();
         }
 
         

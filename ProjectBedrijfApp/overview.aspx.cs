@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data.SqlClient;
-using System.Drawing;
 
 namespace ProjectBedrijfApp
 {
-    public partial class Reserveren : System.Web.UI.Page
+    public partial class overview1 : System.Web.UI.Page
     {
         public int SelectedTafelID;
         public bool ReserveerStatus;
@@ -22,7 +21,7 @@ namespace ProjectBedrijfApp
             }
             //SqlConnection connnection = new SqlConnection("Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;Persist Security Info=True;User ID=BIM01A2019;Password=BIM01A2019");
             //connnection.Open();
-           
+
         }
 
         public void Button1_Click(object sender, EventArgs e)
@@ -32,9 +31,9 @@ namespace ProjectBedrijfApp
 
         private void SettingReserverData()
         {
-            Tafel Tafel = new Tafel();
-            Tafel.Reserveringsnummer++;
-            SelectedTafelID = Tafel.Reserveringsnummer;
+            Tafel Tafel2 = new Tafel();
+            Tafel.Reserveringsnummer1++;
+            SelectedTafelID = Tafel.Reserveringsnummer1;
             Session["Reserveringsnummer"] = SelectedTafelID;
             Response.Redirect("~/ReserveringPagina.aspx?TafelID=");
         }
@@ -48,11 +47,9 @@ namespace ProjectBedrijfApp
             tafelID.Add(buttonId);
             Session["TafelId"] = tafelID;
 
-            Label1.Text = tafelID.Count.ToString();
-
             ReserveerStatus = true;
 
-            foreach (var item in tafelID) 
+            foreach (var item in tafelID)
             {
                 if (tafelID.Contains(buttonId) && ReserveerStatus)
                 {
@@ -67,11 +64,9 @@ namespace ProjectBedrijfApp
         }
     }
 
-    class Tafel 
+    class Tafel2
     {
-        public string[] tafelnummer = new string[80]; 
-        public int Reserveringsnummer;
-
-        public static int Reserveringsnummer1 { get; internal set; }
+        public string[] tafelnummer = new string[80];
+        public int Reserveringsnummer1;
     }
 }
