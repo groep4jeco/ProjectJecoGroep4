@@ -42,6 +42,15 @@ namespace ProjectBedrijfApp
         protected global::System.Web.UI.WebControls.DropDownList ddlMenulijst;
 
         /// <summary>
+        /// soepen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl soepen;
+
+        /// <summary>
         /// imgbtnSoepgerecht1 control.
         /// </summary>
         /// <remarks>
@@ -76,6 +85,15 @@ namespace ProjectBedrijfApp
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSoepgerecht2;
+
+        /// <summary>
+        /// imgbtnSoepgerecht3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgbtnSoepgerecht3;
 
         /// <summary>
         /// btnBestel control.
@@ -409,5 +427,50 @@ namespace ProjectBedrijfApp
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblAantal9;
+
+        /// <summary>
+        /// lblToegevoegd10 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblToegevoegd10;
+
+        /// <summary>
+        /// btnPlus10 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPlus10;
+
+        /// <summary>
+        /// btnMinus10 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnMinus10;
+
+        /// <summary>
+        /// lblAantal10 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAantal10;
+
+        /// <summary>
+        /// btnVerwijderLaatste control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVerwijderLaatste;
     }
 }
