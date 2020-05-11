@@ -73,6 +73,7 @@
     <Content Include="managementallefacturen.aspx" />
     <Content Include="Managementfacturen.aspx" />
     <Content Include="Managementinformatiehome.aspx" />
+    <Content Include="overview.aspx" />
     <Content Include="Reserveren.aspx" />
     <Content Include="ReserveringPagina.aspx" />
     <Content Include="Web.config" />
@@ -112,6 +113,13 @@
     </Compile>
     <Compile Include="Managementinformatiehome.aspx.designer.cs">
       <DependentUpon>Managementinformatiehome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="overview.aspx.cs">
+      <DependentUpon>overview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="overview.aspx.designer.cs">
+      <DependentUpon>overview.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reserveren.aspx.cs">

@@ -41,7 +41,7 @@ namespace ProjectBedrijfApp
         public void SetReserverData(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-            string buttonId = button.ID;
+            string buttonId = button.Text;
 
             tafelID = (List<string>)Session["TafelId"];
             tafelID.Add(buttonId);

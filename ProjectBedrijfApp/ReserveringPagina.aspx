@@ -22,6 +22,10 @@
             <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
         </div>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
+        <br />
+        <asp:CheckBox ID="cbAlles" runat="server" Text="All you can Eat" />
+        <br />
+        <asp:TextBox ID="txtRondes" runat="server">Aantal rondes</asp:TextBox>
     </form>
 </body>
 </html>
