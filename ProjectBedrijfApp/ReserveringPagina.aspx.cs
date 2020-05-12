@@ -72,13 +72,17 @@ namespace ProjectBedrijfApp
             int aantalrondes = aantalrondes2;
 
             CultureInfo dutch = new CultureInfo("nl-NL");
-           DateTime dagvandaag = DateTime.Now;
+            DateTime dagvandaag = DateTime.Now;
             string dagen = dutch.DateTimeFormat.GetDayName(dagvandaag.DayOfWeek).ToString();
             string dagen2 = dagen.ToString();
-            lbldatum.Text = dagen2;
-            
-            string invoegen = "Begin transaction; Insert into in_restaurant([All you can eat], [ReserveringsstatusStatus ID], TijdvakNummer, [Aantal kinderen], [Aantal Volwassenen])  values(CAST( 'allin' AS BINARY(2) ),  2, (select Tijdvak.Nummer from Tijdvak where Begintijd = CAST('5pm' AS time) AND Dag = CAST('dagen' AS varchar(255))), 2, 2); commit;";
+            Label1.Text = dagen2;
+
+            string invoegen = "Begin transaction; Insert into in_restaurant([All you can eat], [ReserveringsstatusStatus ID], TijdvakNummer, [Aantal kinderen], [Aantal Volwassenen])  values(CAST( 'allin' AS BINARY(2) ),  2, (select Tijdvak.Nummer from Tijdvak where Begintijd = CAST('5pm' AS time) AND Dag = @dagprobeer), 2, 2); commit;";
             command = new SqlCommand(invoegen, connnection);
+            command.Parameters.AddWithValue("@dagprobeer", dagen2);
+            
+            
+
             //command.CommandType = CommandType.StoredProcedure;
             adapter.InsertCommand = new SqlCommand(invoegen, connnection);
             int probeer = adapter.InsertCommand.ExecuteNonQuery();
