@@ -26,6 +26,7 @@
         <asp:CheckBox ID="cbAlles" runat="server" Text="All you can Eat" />
         <br />
         <asp:TextBox ID="txtRondes" runat="server">Aantal rondes</asp:TextBox>
+        <asp:Label ID="lbldatum" runat="server" Text="Label"></asp:Label>
     </form>
 </body>
 </html>

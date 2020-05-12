@@ -7,6 +7,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using System.Security.Cryptography.X509Certificates;
+using System.Xml.Schema;
+using System.Security.Principal;
+using System.Drawing.Printing;
+using System.Collections;
+using System.Globalization;
+
 
 
 namespace ProjectBedrijfApp
@@ -23,7 +30,7 @@ namespace ProjectBedrijfApp
         String sql = "";
 
         int allin;
-        string tijdvakdata;
+        string  tijdvakdata;
 
         SqlConnection connnection = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
 
@@ -37,9 +44,10 @@ namespace ProjectBedrijfApp
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            connnection.Open();
             string combindedString = string.Join(",", tafelID);
             Label3.Text = "Gekozen tafels: " + combindedString + "   Reservering nummmer: "+ Reserveringsnummer.ToString() + "\r\n" + "  gekozen tijdvak: " + tijdvak + "\r\n" + "  het aantal personen: " + TextBox1.Text;
-            if (cbAlles.Checked = true)
+            if (cbAlles.Checked == true)
             {
                 allin = 1;
             }
@@ -49,24 +57,27 @@ namespace ProjectBedrijfApp
                 allin = 0;
                 
             }
-            int aantalrondes = int.Parse(txtRondes.Text);
 
-            if (RadioButton1.Checked = true)
+            if (RadioButton1.Checked == true)
             {
                 tijdvakdata = "17:00:00.0000000";
             }
 
-            else if (RadioButton2.Checked = true)
+            else if (RadioButton2.Checked == true)
             {
                 tijdvakdata = "19:30:00.0000000";
             }
 
-            DateTime dagvandaag = DateTime.Now;
-            string dag = dagvandaag.DayOfWeek.ToString();
+            int aantalrondes2 = int.Parse(txtRondes.Text);
+            int aantalrondes = aantalrondes2;
+
+            CultureInfo dutch = new CultureInfo("nl-NL");
+           DateTime dagvandaag = DateTime.Now;
+            string dagen = dutch.DateTimeFormat.GetDayName(dagvandaag.DayOfWeek).ToString();
+            string dagen2 = dagen.ToString();
+            lbldatum.Text = dagen2;
             
-            connnection.Open();
-            string invoegen = "Begin transaction; Insert into in_restaurant([All you can eat], [Aantal rondes], [ReserveringsstatusStatus ID], TijdvakNummer, [Aantal kinderen], [Aantal Volwassenen]) " +
-                "values('allin', 'aantalrondes', 2, (select Tijdvak.Nummer from Tijdvak where Begintijd = 'tijdvakdata' AND Dag = dag), 2, 2); commit;";
+            string invoegen = "Begin transaction; Insert into in_restaurant([All you can eat], [ReserveringsstatusStatus ID], TijdvakNummer, [Aantal kinderen], [Aantal Volwassenen])  values(CAST( 'allin' AS BINARY(2) ),  2, (select Tijdvak.Nummer from Tijdvak where Begintijd = CAST('5pm' AS time) AND Dag = CAST('dagen' AS varchar(255))), 2, 2); commit;";
             command = new SqlCommand(invoegen, connnection);
             //command.CommandType = CommandType.StoredProcedure;
             adapter.InsertCommand = new SqlCommand(invoegen, connnection);
