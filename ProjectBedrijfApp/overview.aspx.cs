@@ -31,9 +31,9 @@ namespace ProjectBedrijfApp
 
         private void SettingReserverData()
         {
-            Tafel Tafel2 = new Tafel();
-            Tafel.Reserveringsnummer1++;
-            SelectedTafelID = Tafel.Reserveringsnummer1;
+          //  Tafel Tafel2 = new Tafel();
+           // Tafel.Reserveringsnummer1++;
+            //SelectedTafelID = Tafel.Reserveringsnummer1;
             Session["Reserveringsnummer"] = SelectedTafelID;
             Response.Redirect("~/ReserveringPagina.aspx?TafelID=");
         }
