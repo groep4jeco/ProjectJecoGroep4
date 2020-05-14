@@ -99,7 +99,7 @@ namespace ProjectBedrijfApp
             con.Open();
             SqlCommand cmdklant = new SqlCommand(reserveringsnummer, con);
             cmdklant.Parameters.AddWithValue("@datum", test);
-            cmdklant.Parameters.AddWithValue("@klant", klantid);
+            cmdklant.Parameters.AddWithValue("@klant", 1);
             cmdklant.Parameters.AddWithValue("@restaurant", 1);
             SqlDataReader drklant = cmdklant.ExecuteReader();
              string resultaatklant2 = drklant.Read().ToString();
