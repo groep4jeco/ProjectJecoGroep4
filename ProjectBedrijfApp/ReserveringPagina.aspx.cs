@@ -11,19 +11,21 @@ namespace ProjectBedrijfApp
     {
         private int SelectedTafelID;
         private string tijdvak;
+        private int Reserveringsnummer;
+        public List<string> tafelID = new List<string>();
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["TafelID"] != null)
-            {
-                string TafelIDString = Request.QueryString["TafelID"];
-                SelectedTafelID = int.Parse(TafelIDString);
-                Label3.Text = SelectedTafelID.ToString();
-            }
+            Reserveringsnummer = (int)Session["Reserveringsnummer"];
+            tafelID = (List<string>)Session["TafelId"];
+           
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            Label3.Text = SelectedTafelID.ToString() + "\r\n" + "gekozen tijdvak: " + tijdvak + "\r\n" + "het aantal personen: " + TextBox1.Text;
+            string combindedString = string.Join(",", tafelID);
+        
+        Label3.Text = "Gekozen tafels: " + combindedString + "   Reservering nummmer: "+ Reserveringsnummer.ToString() + "\r\n" + "  gekozen tijdvak: " + tijdvak + "\r\n" + "  het aantal personen: " + TextBox1.Text;
         }
 
         
