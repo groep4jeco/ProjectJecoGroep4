@@ -15,6 +15,7 @@ namespace ProjectBedrijfApp
     {
         string connetionString;
         SqlConnection cnn;
+        private bool IsManager;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -35,27 +36,40 @@ namespace ProjectBedrijfApp
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            cnn.Open();
-
-            string query = "SELECT [Personeelsnummer], [Wachtwoord] FROM [Personeel]";
-            string Id = TextBox1.Text;
-            string password = TextBox2.Text;
-
-            SqlCommand cmdSchedule = new SqlCommand(query, cnn);
-
-            //cmdSchedule.Parameters.AddWithValue("@Personeelsnummer", Id);
-            //cmdSchedule.Parameters.AddWithValue("@Wachtwoord", password);
-
-            SqlDataReader dr = cmdSchedule.ExecuteReader();
-
-            if (dr["Personeelsnummer"].ToString() == Id && dr["Wachtwoord"].ToString() == password)
+            try
             {
-                Response.Redirect("tabletkeuze.aspx");
+                cnn.Open();
+
+                string query = "SELECT [Personeelsnummer], [Wachtwoord], [Voornaam] FROM [Personeel] WHERE (([Personeelsnummer] = @Personeelsnummer) AND ([Wachtwoord] = @Wachtwoord))";
+
+                string Id = TextBox1.Text;
+                string password = TextBox2.Text;
+
+                SqlCommand cmdSchedule = new SqlCommand(query, cnn);
+
+                cmdSchedule.Parameters.AddWithValue("@Personeelsnummer", Id);
+                cmdSchedule.Parameters.AddWithValue("@Wachtwoord", password);
+
+                SqlDataReader dr = cmdSchedule.ExecuteReader();
+                string resulaat = dr.Read().ToString();
+
+                if (dr["Personeelsnummer"].ToString() == Id && dr["Wachtwoord"].ToString() == password)
+                {
+                    Session["Id"] = dr["Personeelsnummer"];
+                    Session["Naam"] = dr["Voornaam"];
+                    Response.Redirect("tabletkeuze.aspx");
+                }
+                dr.Close();
             }
-            else
+
+            catch
             {
                 Label3.Text = "inloggen mislukt";
             }
+            finally
+            {
+                cnn.Close();
+            }
+        }
         }
     }
-}

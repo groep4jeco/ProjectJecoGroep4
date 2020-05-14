@@ -49,6 +49,12 @@
         <div class="bedieningbutton">
             <asp:Button ID="Button2" runat="server" Text="BEDIENING" Font-Bold="True" Font-Size="XX-Large" Height="186px" Width="924px" OnClick="Button2_Click" />
         
+            <br />
+            <br />
+            <br />
+            <asp:Label ID="IdLabel" runat="server" Text="Label"></asp:Label>
+            <asp:Label ID="VrmNaam" runat="server" Text="Label"></asp:Label>
+        
        </div>
 
     </form>
