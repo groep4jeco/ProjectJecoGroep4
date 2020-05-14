@@ -11,7 +11,7 @@ namespace ProjectBedrijfApp
 {
 
 
-    public partial class tabletkeuze
+    public partial class Managementfacturen
     {
 
         /// <summary>
@@ -33,30 +33,30 @@ namespace ProjectBedrijfApp
         protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
-        /// Button2 control.
+        /// lbltest control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Label lbltest;
 
         /// <summary>
-        /// IdLabel control.
+        /// SqlDataSourcefactuur control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label IdLabel;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourcefactuur;
 
         /// <summary>
-        /// VrmNaam control.
+        /// Panel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label VrmNaam;
+        protected global::System.Web.UI.WebControls.Panel Panel1;
     }
 }
