@@ -573,28 +573,28 @@ FETCH NEXT 1 ROWS ONLY)"></asp:SqlDataSource>
             </SelectedItemTemplate>
         </asp:ListView>
         <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" DeleteCommand="BEGIN TRANSACTION;
-use [2020-BIM01A-P4-Sushi]
 
 INSERT inTO factuur (klantenpasemail, factuurdatum, totaalbedrag, reserveringsnummer,klantklantid)
-values ((select DISTINCT email from listviewonline where reserveringsnumer = (select reserveringsnumer from listviewonline 
+values ((select DISTINCT email from listviewonline where Reserveringsnummer = (select Reserveringsnummer from listviewonline 
 group by reserveringsnummer, tijd order by tijd asc OFFSET 1 ROWS
 FETCH NEXT 1 ROWS ONLY)),
 
 (SELECT CONVERT (date, GETDATE())),
 
-(select CAST(SUM(regelprijs)AS decimal (10,2)) from listviewonline where reserveringnummer = (select Reserveringsnummer from listviewonline 
+(select CAST(SUM(regelprijs)AS decimal (10,2)) from listviewonline where Reserveringsnummer = (select Reserveringsnummer from listviewonline 
+group by Reserveringsnummer, tijd order by tijd asc OFFSET 1 ROWS
+FETCH NEXT 1 ROWS ONLY)),
+
+(select distinct Reserveringsnummer from listviewonline where Reserveringsnummer = (select Reserveringsnummer from listviewonline 
 group by reserveringsnummer, tijd order by tijd asc OFFSET 1 ROWS
 FETCH NEXT 1 ROWS ONLY)),
 
-(select distinct reserveringnummer from listviewonline where reserveringnummer = (select Reserveringsnummer from listviewonline 
-group by reserveringsnummer, tijd order by tijd asc OFFSET 1 ROWS
-FETCH NEXT 1 ROWS ONLY)),
-
-(select distinct klantklantid from listviewonline where reserveringnummer = (select Reserveringsnummer from listviewonline 
+(select distinct klantklantid from listviewonline where Reserveringsnummer = (select Reserveringsnummer from listviewonline 
 group by reserveringsnummer, tijd order by tijd asc OFFSET 1 ROWS
 FETCH NEXT 1 ROWS ONLY)))
 
-commit;" SelectCommand="select * from listviewonline"></asp:SqlDataSource>
+commit;
+" SelectCommand="select * from listviewonline"></asp:SqlDataSource>
         <asp:ListView ID="ListView3" runat="server" DataSourceID="SqlDataSource3">
             <AlternatingItemTemplate>
                 <tr style="">
