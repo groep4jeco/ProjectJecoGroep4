@@ -10,6 +10,8 @@ using System.Security.Cryptography.X509Certificates;
 using System.Xml.Schema;
 using System.Security.Principal;
 using System.Drawing.Printing;
+using System.Collections;
+using System.Globalization;
 
 namespace ProjectBedrijfApp
 {
@@ -30,7 +32,12 @@ namespace ProjectBedrijfApp
         {
             string datum = calendarTest.SelectedDate.ToString("yyyy-MM-dd");
             DateTime test = DateTime.Parse(datum);
-            
+
+            CultureInfo dutch = new CultureInfo("nl-NL");
+            DateTime dagvandaag = DateTime.Now;
+            string dagen = dutch.DateTimeFormat.GetDayName(dagvandaag.DayOfWeek).ToString();
+            string dagen2 = dagen.ToString();
+            Label1.Text = dagen2;
         }
 
         protected void DataList1_Load(object sender, EventArgs e)

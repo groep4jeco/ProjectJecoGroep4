@@ -6,7 +6,15 @@
 <head runat="server">
     <title></title>
     <style>
-        .kalender {
+
+        .calendarTest {
+            position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: url("https://cdn.discordapp.com/attachments/684406382845362212/709334204642492506/Logo1.png") no-repeat center / cover;
         }
         .dagenvandeweek{
             
@@ -15,8 +23,67 @@
 
         }
         .Bovenkant {
+             position: relative;
+  height: 200px;
+  padding: 20px;
+  width: 200px;
+  color: #fff;
+  background: #262626 url("https://cdn.discordapp.com/attachments/684406382845362212/709334204642492506/Logo1.png") no-repeat center / cover;
+  text-shadow: 0 2px 2px rgba(#000, 0.2);
+  box-sizing: border-box;
 
+  &::before {
+    content: "";
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    background: linear-gradient(to top, rgba(#000, 0.25), rgba(#000, 0.1));
+  }
+  
+  h2 {
+    margin: 0;
+  }
+  
+  h3 {
+    margin: 0;
+    font-weight: 500;
+  }
         }
+
+..dagen, .Weekend{
+ display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  color: #262626;
+
+  &:nth-child(7n) {
+    color: #ff685d;
+    font-weight: 700;
+  }
+  
+  &--current,
+  &:hover {
+    background-color: #009688;
+    color: #fff !important;
+    font-weight: 700;
+    cursor: pointer;
+  }
+}
+  }
+}
+
+.dagenvandeweek{
+     padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
+  grid-gap: 10px;
+  box-sizing: border-box;
+
+}
+
 
 
 
@@ -34,7 +101,7 @@
 <body style="height: 567px">
     <form id="form1" runat="server">
         <div class="kalender">
-            <asp:Calendar ID="calendarTest" runat="server" OnSelectionChanged="calendarTest_SelectionChanged">
+            <asp:Calendar ID="calendarTest" runat="server" OnSelectionChanged="calendarTest_SelectionChanged" Width="400px">
                 <DayHeaderStyle CssClass="dagenvandeweek" />
                 <DayStyle CssClass="dagen" />
                 <NextPrevStyle CssClass="Pijltjesmaand" />
@@ -54,20 +121,26 @@
                 </SelectParameters>
             </asp:SqlDataSource>
             <asp:Panel ID="Panel1" runat="server" CssClass="auto-style1">
-                <asp:GridView ID="GridView1" runat="server" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="Factuurnummer,Restaurant ID,KlantKlantID" DataSourceID="SqlDataSource1" OnLoad="GridView1_Load" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnSelectedIndexChanging="GridView1_SelectedIndexChanging">
+                <asp:GridView ID="GridView1" runat="server" AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="Factuurnummer,Restaurant ID,KlantKlantID" DataSourceID="SqlDataSource1" OnLoad="GridView1_Load" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnSelectedIndexChanging="GridView1_SelectedIndexChanging" >
                     <Columns>
                         <asp:CommandField ShowSelectButton="True" />
                         <asp:BoundField DataField="Factuurnummer" HeaderText="Factuurnummer" SortExpression="Factuurnummer" />
-                        <asp:BoundField DataField="KlantenpasEmail" HeaderText="KlantenpasEmail" SortExpression="KlantenpasEmail" />
+                        <asp:BoundField DataField="KlantenpasEmail" HeaderText="KlantenpasEmail" ItemStyle-Width="25%" SortExpression="KlantenpasEmail"/>
                         <asp:BoundField DataField="Factuurdatum" HeaderText="Factuurdatum" SortExpression="Factuurdatum" />
                         <asp:BoundField DataField="Totaalbedrag" HeaderText="Totaalbedrag" SortExpression="Totaalbedrag" />
                         <asp:BoundField DataField="Reserveringsnummer" HeaderText="Reserveringsnummer" SortExpression="Reserveringsnummer" />
-                        <asp:BoundField DataField="KlantKlantID" HeaderText="KlantKlantID" SortExpression="KlantKlantID" />
+                        <asp:BoundField DataField="KlantKlantID" HeaderText="KlantKlantID" SortExpression="KlantKlantID"/>
                         <asp:BoundField DataField="Restaurant ID" HeaderText="Restaurant ID" SortExpression="Restaurant ID" />
                     </Columns>
                 </asp:GridView>
 
-                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [omschrijving], [prijs], [hoeveelheid], [besteltijd], [rondenummer] FROM [listviewfactuur] WHERE ([Factuurnummer] = @Factuurnummer)">
+                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="BEGIN TRANSACTION;
+
+SELECT [omschrijving], [prijs], [hoeveelheid], [besteltijd], [rondenummer] FROM [listviewfactuur] WHERE ([Factuurnummer] = @Factuurnummer);
+
+
+
+COMMIT;">
                     <SelectParameters>
                         <asp:ControlParameter ControlID="GridView1" Name="Factuurnummer" PropertyName="SelectedValue" Type="Int32" />
                     </SelectParameters>

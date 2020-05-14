@@ -22,6 +22,42 @@
             <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
         </div>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
+        <br />
+        <asp:CheckBox ID="cbAlles" runat="server" Text="All you can Eat" />
+        <br />
+        <asp:TextBox ID="txtRondes" runat="server">Aantal rondes</asp:TextBox>
+        <asp:Label ID="lbldatum" runat="server" Text="Label"></asp:Label>
+        <br />
+        <br />
+        <asp:Label ID="lblVoornaam" runat="server" Text="Voornaam"></asp:Label>
+        <br />
+        <asp:TextBox ID="txtVoornaam" runat="server"></asp:TextBox>
+        <br />
+        <br />
+        <asp:Label ID="lblAchternaam" runat="server" Text="Achternaam"></asp:Label>
+        <br />
+        <asp:TextBox ID="txtAchternaam" runat="server"></asp:TextBox>
+        <br />
+        <br />
+        <asp:Button ID="BtnZoek" runat="server" OnClick="BtnZoek_Click" Text="Zoek klant" />
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="KlantID" DataSourceID="sqlKlant" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+            <Columns>
+                <asp:CommandField ShowSelectButton="True" />
+                <asp:BoundField DataField="KlantID" HeaderText="KlantID" InsertVisible="False" ReadOnly="True" SortExpression="KlantID" />
+                <asp:BoundField DataField="Voornaam" HeaderText="Voornaam" SortExpression="Voornaam" />
+                <asp:BoundField DataField="Achternaam" HeaderText="Achternaam" SortExpression="Achternaam" />
+                <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
+                <asp:BoundField DataField="Telefoonnummer" HeaderText="Telefoonnummer" SortExpression="Telefoonnummer" />
+            </Columns>
+        </asp:GridView>
+        <br />
+        <asp:SqlDataSource ID="sqlKlant" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [KlantID], [Voornaam], [Achternaam], [Email], [Telefoonnummer] FROM [Klant] WHERE (([Voornaam] = @Voornaam) AND ([Achternaam] = @Achternaam))">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="txtVoornaam" Name="Voornaam" PropertyName="Text" Type="String" />
+                <asp:ControlParameter ControlID="txtAchternaam" Name="Achternaam" PropertyName="Text" Type="String" />
+            </SelectParameters>
+        </asp:SqlDataSource>
+        <br />
     </form>
 </body>
 </html>
