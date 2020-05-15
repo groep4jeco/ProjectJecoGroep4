@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Bestellen.aspx" />
+    <Content Include="besteloverzicht.aspx" />
     <Content Include="Betalen.aspx" />
     <Content Include="Reserveren.aspx" />
     <Content Include="ReserveringPagina.aspx" />
@@ -80,6 +81,13 @@
     </Compile>
     <Compile Include="Bestellen.aspx.designer.cs">
       <DependentUpon>Bestellen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="besteloverzicht.aspx.cs">
+      <DependentUpon>besteloverzicht.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="besteloverzicht.aspx.designer.cs">
+      <DependentUpon>besteloverzicht.aspx</DependentUpon>
     </Compile>
     <Compile Include="Betalen.aspx.cs">
       <DependentUpon>Betalen.aspx</DependentUpon>

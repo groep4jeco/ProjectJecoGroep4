@@ -17,7 +17,8 @@ namespace ProjectBedrijfApp
 
         protected void btnBestel_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("besteloverzicht.aspx");
+            Server.Transfer("besteloverzicht.aspx");
         }
 
         protected void ddlMenulijst_SelectedIndexChanged(object sender, EventArgs e)
