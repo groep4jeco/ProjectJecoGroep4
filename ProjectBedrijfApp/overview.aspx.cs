@@ -62,6 +62,11 @@ namespace ProjectBedrijfApp
                 }
             }
         }
+
+        protected void btn_keuken_Click(object sender, EventArgs e)
+        {
+            Response.Redirect ("Keukenscherm.aspx");
+        }
     }
 
     class Tafel2
