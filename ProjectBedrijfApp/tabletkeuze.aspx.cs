@@ -36,5 +36,10 @@ namespace ProjectBedrijfApp
         {
             Response.Redirect("overview.aspx");
         }
+
+        protected void ManagerButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Managementallefacturen.aspx");
+        }
     }
 }
