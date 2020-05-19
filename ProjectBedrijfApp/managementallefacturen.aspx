@@ -11,11 +11,17 @@
   body  { margin: 1.6cm;
           height: auto;
           overflow: hidden;
+          position: fixed;
+ 
   }
 
             bon {
+                margin-left: 0;
+                margin-right: 0;
+                margin-bottom: 0;
                 display:block;
                 text-align: center;
+                height: auto;
             }
             .container1, .kalender, .knoppen {display:none;}
             
@@ -119,10 +125,13 @@
             margin-left: 300px;
             margin-right: 100 px; 
         }
+        @media screen {
 
-        .bon {
-             margin-left: 300px;
-            margin-right: 100 px; 
+
+            .bon {
+                margin-left: 300px;
+                margin-right: 100 px;
+            }
         }
     </style>
 </head>
