@@ -34,6 +34,12 @@
     <form id="form1" runat="server">
         <div class="logo">
             <img src="images/loginlogo%202.png" style="height: 156px" />
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [Personeelsnummer], [Wachtwoord], [Voornaam], [Is manager] AS Is_manager FROM [Personeel] WHERE (([Personeelsnummer] = @Personeelsnummer) AND ([Wachtwoord] = @Wachtwoord))">
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="TextBox1" Name="Personeelsnummer" PropertyName="Text" Type="Int32" />
+                    <asp:ControlParameter ControlID="TextBox2" Name="Wachtwoord" PropertyName="Text" Type="String" />
+                </SelectParameters>
+            </asp:SqlDataSource>
         </div>
         <div class="container">
             <div style="text-align: center;">
@@ -55,6 +61,7 @@
              <asp:Button ID="Button1" runat="server" Text="INLOGGEN" Width="397px" BackColor="#669999" BorderColor="#003366" BorderStyle="Outset" Font-Bold="True" Font-Size="Larger" Height="35px" OnClick="Button1_Click" />
 
             <br />
+            <asp:Label ID="Label3" runat="server" Text=" "></asp:Label>
             <br />
         </div>
     </form>
