@@ -15,7 +15,7 @@ namespace ProjectBedrijfApp
     {
         string connetionString;
         SqlConnection cnn;
-        private bool IsManager;
+        private int IsManager;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -40,7 +40,9 @@ namespace ProjectBedrijfApp
             {
                 cnn.Open();
 
-                string query = "SELECT [Personeelsnummer], [Wachtwoord], [Voornaam] FROM [Personeel] WHERE (([Personeelsnummer] = @Personeelsnummer) AND ([Wachtwoord] = @Wachtwoord))";
+                string query = "SELECT[Personeelsnummer], [Wachtwoord], [Voornaam], [Is manager] FROM[Personeel] WHERE(([Personeelsnummer] = @Personeelsnummer) AND([Wachtwoord] = @Wachtwoord))";
+
+
 
                 string Id = TextBox1.Text;
                 string password = TextBox2.Text;
@@ -55,9 +57,23 @@ namespace ProjectBedrijfApp
 
                 if (dr["Personeelsnummer"].ToString() == Id && dr["Wachtwoord"].ToString() == password)
                 {
-                    Session["Id"] = dr["Personeelsnummer"];
-                    Session["Naam"] = dr["Voornaam"];
-                    Response.Redirect("tabletkeuze.aspx");
+
+                    string ismanager = dr["Is manager"].ToString();
+                    System.Diagnostics.Debug.WriteLine(ismanager);
+                    if (ismanager == "True")
+                    {
+                        Session["Id"] = dr["Personeelsnummer"];
+                        Session["Naam"] = dr["Voornaam"];
+                        Session["IsManager"] = ismanager;
+                        Response.Redirect("tabletkeuze.aspx");
+                    }
+                    else
+                    {
+                        Session["Id"] = dr["Personeelsnummer"];
+                        Session["Naam"] = dr["Voornaam"];
+                        Response.Redirect("tabletkeuze.aspx");
+                    }
+                        
                 }
                 dr.Close();
             }
