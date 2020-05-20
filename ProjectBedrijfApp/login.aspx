@@ -26,7 +26,7 @@
         }
 
         .logo {
-            margin-left: 170px;<
+            margin-left: 170px;
         }
     </style>
 </head>
