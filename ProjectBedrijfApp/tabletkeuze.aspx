@@ -44,6 +44,7 @@
     
        <form id="form1" runat="server">
          <div class="tafelbutton">
+             <asp:Button ID="ManagerButton" runat="server" Text="Button" Visible="False" />
              <asp:Button ID="Button1" runat="server" Text="TAFEL" Font-Bold="True" Font-Size="XX-Large" Height="190px" Width="924px" style="margin-right: 0px" OnClick="Button1_Click" />
              </div>
         <div class="bedieningbutton">
