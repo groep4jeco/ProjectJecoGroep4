@@ -4,24 +4,23 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title> Managers Overzicht</title>
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Label ID="lblwelkom" runat="server" Text="Welkom "></asp:Label>
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [Voornaam] FROM [Personeel]"></asp:SqlDataSource>
             <br />
+&nbsp;<br />
             <br />
-            <asp:Button ID="btnOmzet" runat="server" Text="Omzet" OnClick="btnOmzet_Click" />
+            <asp:Button ID="btnOmzet" runat="server" Text="Omzet" OnClick="btnOmzet_Click" Width="150px" />
             <br />
-            <asp:Button ID="BtnLoonkosten" runat="server" OnClick="Button1_Click" Text="Loonkosten" />
+            <asp:Button ID="BtnLoonkosten" runat="server" OnClick="Button1_Click" Text="Loonkosten" Width="150px" />
             <br />
-            <asp:Button ID="btnInkoop" runat="server" Text="Inkoop" />
+            <asp:Button ID="btnInkoop" runat="server" Text="Inkoop" Width="150px" />
             <br />
-            <asp:Button ID="btnVoorraad" runat="server" Text="Voorraad" />
+            <asp:Button ID="btnVoorraad" runat="server" Text="Voorraad" Width="150px" />
             <br />
-            <asp:Button ID="btnFacturen" runat="server" Text="Overzicht facturen" />
+            <asp:Button ID="btnFacturen" runat="server" Text="Overzicht facturen" Width="150px" />
         </div>
     </form>
 </body>
