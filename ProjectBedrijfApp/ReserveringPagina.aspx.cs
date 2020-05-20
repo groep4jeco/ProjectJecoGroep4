@@ -43,7 +43,7 @@ namespace ProjectBedrijfApp
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Reserveringsnummer = (int)Session["Reserveringsnummer"];
+           // Reserveringsnummer = (int)Session["Reserveringsnummer"];
             tafelID = (List<string>)Session["TafelId"];
 
         }
