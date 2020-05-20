@@ -12,6 +12,19 @@
             <br />
 &nbsp;<br />
             <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             <asp:Button ID="btnOmzet" runat="server" Text="Omzet" OnClick="btnOmzet_Click" Width="150px" />
             <br />
             <asp:Button ID="BtnLoonkosten" runat="server" OnClick="Button1_Click" Text="Loonkosten" Width="150px" />
