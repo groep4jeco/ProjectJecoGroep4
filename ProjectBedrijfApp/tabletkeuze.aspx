@@ -9,11 +9,11 @@
   
     <style>
         body {
-            background-color: #a1f2f7;
+            background-color: seashell;
         }
         
         #form1 {
-            background-color: #7cc5f6;
+            background-color: lightslategray;
             width: 1050px;
             height: 448px;
             margin-top: 120px;
@@ -27,13 +27,18 @@
             margin-top: 35px;
             display: inline-block; 
             margin-left: 62px;
+            background-color:seashell;
         }
         
         .bedieningbutton
         {
             text-align: center;
-
+            background-color:seashell;
+            height: 171px;
+            width: 926px;
+            margin-left: 60px;
         }
+        .
       
 
     </style>
@@ -44,13 +49,13 @@
     
        <form id="form1" runat="server">
          <div class="tafelbutton">
-             <asp:Button ID="ManagerButton" runat="server" Text="Button" Visible="False" OnClick="ManagerButton_Click" />
-             <asp:Button ID="Button1" runat="server" Text="TAFEL" Font-Bold="True" Font-Size="XX-Large" Height="190px" Width="924px" style="margin-right: 0px" OnClick="Button1_Click" />
+             <asp:Button ID="Button1" runat="server" Text="TAFEL" Font-Bold="True" Font-Size="XX-Large" Height="190px" Width="924px" style="margin-right: 0px" OnClick="Button1_Click" BackColor="#CCCCCC" />
              </div>
         <div class="bedieningbutton">
-            <asp:Button ID="Button2" runat="server" Text="BEDIENING" Font-Bold="True" Font-Size="XX-Large" Height="186px" Width="924px" OnClick="Button2_Click" />
+            <asp:Button ID="Button2" runat="server" Text="BEDIENING" Font-Bold="True" Font-Size="XX-Large" Height="170px" Width="924px" OnClick="Button2_Click" BackColor="#CCCCCC" />
         
             <br />
+             <asp:Button ID="ManagerButton" runat="server" Text="Button" Visible="False" OnClick="ManagerButton_Click" />
             <br />
             <br />
             <asp:Label ID="IdLabel" runat="server" Text="Label"></asp:Label>

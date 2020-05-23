@@ -7,9 +7,14 @@
     <title>           </title>
 
     <style>
+
+        body
+        {
+            background-color:slategrey;
+        }
         #form1
         {
-            background-color:burlywood;
+            background-color:seashell;
             width: 1750px;
             height: 748px;
             margin-top: 120px;

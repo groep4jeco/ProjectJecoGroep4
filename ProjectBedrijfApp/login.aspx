@@ -7,11 +7,11 @@
     <title></title>
     <style>
           body {
-            background-color: #a1f2f7;
+            background-color:lightslategray;
         }
 
         #form1 {
-            background-color: #7cc5f6;
+            background-color: seashell;
             width: 500px;
             height: 448px;
             margin-top: 120px;
@@ -26,7 +26,7 @@
         }
 
         .logo {
-            margin-left: 170px;<
+            margin-left: 170px;
         }
     </style>
 </head>

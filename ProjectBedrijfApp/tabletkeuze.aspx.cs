@@ -14,7 +14,7 @@ namespace ProjectBedrijfApp
         private string isManager;
         protected void Page_Load(object sender, EventArgs e)
         {
-            Id = Session["Id"].ToString();
+            //Id = Session["Id"].ToString();
             voornaam = (string)Session["Naam"];
             isManager = (string)Session["IsManager"];
 
