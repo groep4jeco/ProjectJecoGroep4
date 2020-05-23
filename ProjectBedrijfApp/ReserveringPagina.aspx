@@ -1,4 +1,4 @@
-﻿ <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ReserveringPagina.aspx.cs" Inherits="ProjectBedrijfApp.ReserveringPagina" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ReserveringPagina.aspx.cs" Inherits="ProjectBedrijfApp.ReserveringPagina" %>
 
 <!DOCTYPE html>
 
@@ -7,36 +7,43 @@
     <title></title>
     <style>
         .container1 {
-            background-color: #009688;
+            background-color: seashell;
             text-align: center;
             display: inline-block;
             border-left-width: 900px;
             float: left;
             border-top: thick;
+            margin-left:300px;
+            height:660px;
         }
 
-        #form1
-        {
-            background-color:lightslategray;
-            height: 640px;
+        #form1 {
+            background-color: lightslategray;
+            height: 940px;
         }
 
-        .container2
-        {
-            float: right; 
-
+        .container2 {
+            float: unset;
+            background-color: seashell;
+            margin-left: 1100px;
+            height:638px;
+            margin-right: 300px;
+            width: 550px;
+            text-align:center;
         }
 
-        .knop1
-        {
-            position:center;
+        .knop1 {
+            position: center;
         }
-          
+
+       
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-       <div class="container1" style="align-self:center; height: 638px; width: 295px;">
+        <div class="container1" style="align-self: center; height: 638px; width: 550px;">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           
             <br />
             <br />
             <br />
@@ -55,16 +62,18 @@
             <br />
             <br />
             <br />
+            <asp:CheckBox ID="cbAlles" runat="server" Text="All you can Eat" />
             <br />
             <br />
             <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br />
             <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            <div class="knop1">
-            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Reserveer Tafel" Height="47px" Width="117px" Font-Bold="True" Font-Italic="True" />
-               </div> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Reserveer Tafel" Height="47px" Width="117px" Font-Bold="True" Font-Italic="True" />
+           </div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br />
             <br />
             <br />
@@ -76,44 +85,46 @@
             <asp:Label ID="Label3" runat="server" Text="Label" Visible="False"></asp:Label>
         </div>
         <div class="container2">
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
-        <br />
-        <asp:CheckBox ID="cbAlles" runat="server" Text="All you can Eat" />
-        <br />
-        <asp:TextBox ID="txtRondes" runat="server" Visible="False">Aantal rondes</asp:TextBox>
-        <asp:RangeValidator ID="RvRondes" runat="server" ControlToValidate="txtRondes" ErrorMessage="RangeValidator" MaximumValue="10" MinimumValue="0" Type="Integer"></asp:RangeValidator>
-        <asp:Label ID="lbldatum" runat="server" Text="Label"></asp:Label>
-        <br />
-        <br />
-        <asp:Label ID="lblVoornaam" runat="server" Text="Voornaam"></asp:Label>
-        <br />
-        <asp:TextBox ID="txtVoornaam" runat="server"></asp:TextBox>
-        <br />
-        <br />
-        <asp:Label ID="lblAchternaam" runat="server" Text="Achternaam"></asp:Label>
-        <br />
-        <asp:TextBox ID="txtAchternaam" runat="server"></asp:TextBox>
-        <br />
-        <br />
-        <asp:Button ID="BtnZoek" runat="server" OnClick="BtnZoek_Click" Text="Zoek klant" />
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="KlantID" DataSourceID="sqlKlant" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
-            <Columns>
-                <asp:CommandField ShowSelectButton="True" />
-                <asp:BoundField DataField="KlantID" HeaderText="KlantID" InsertVisible="False" ReadOnly="True" SortExpression="KlantID" />
-                <asp:BoundField DataField="Voornaam" HeaderText="Voornaam" SortExpression="Voornaam" />
-                <asp:BoundField DataField="Achternaam" HeaderText="Achternaam" SortExpression="Achternaam" />
-                <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
-                <asp:BoundField DataField="Telefoonnummer" HeaderText="Telefoonnummer" SortExpression="Telefoonnummer" />
-            </Columns>
-        </asp:GridView>
-        <br />
-        <asp:SqlDataSource ID="sqlKlant" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [KlantID], [Voornaam], [Achternaam], [Email], [Telefoonnummer] FROM [Klant] WHERE (([Voornaam] = @Voornaam) AND ([Achternaam] = @Achternaam))">
-            <SelectParameters>
-                <asp:ControlParameter ControlID="txtVoornaam" Name="Voornaam" PropertyName="Text" Type="String" />
-                <asp:ControlParameter ControlID="txtAchternaam" Name="Achternaam" PropertyName="Text" Type="String" />
-            </SelectParameters>
-        </asp:SqlDataSource>
-            </div> 
+            &nbsp;<asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
+            <div class="img1">
+                &nbsp;</div>
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <br />
+            <asp:TextBox ID="txtRondes" runat="server" Visible="False">Aantal rondes</asp:TextBox>
+            <asp:RangeValidator ID="RvRondes" runat="server" ControlToValidate="txtRondes" ErrorMessage="RangeValidator" MaximumValue="10" MinimumValue="0" Type="Integer"></asp:RangeValidator>
+            <asp:Label ID="lbldatum" runat="server" Text="Label" Visible="False"></asp:Label>
+            <br />
+            <br />
+            <asp:Label ID="lblVoornaam" runat="server" Text="Voornaam"></asp:Label>
+            <br />
+            <asp:TextBox ID="txtVoornaam" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            <asp:Label ID="lblAchternaam" runat="server" Text="Achternaam"></asp:Label>
+            <br />
+            <asp:TextBox ID="txtAchternaam" runat="server"></asp:TextBox>
+            <br />
+            <br />
+            <asp:Button ID="BtnZoek" runat="server" OnClick="BtnZoek_Click" Text="Zoek klant" />
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="KlantID" DataSourceID="sqlKlant" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+                <Columns>
+                    <asp:CommandField ShowSelectButton="True" />
+                    <asp:BoundField DataField="KlantID" HeaderText="KlantID" InsertVisible="False" ReadOnly="True" SortExpression="KlantID" />
+                    <asp:BoundField DataField="Voornaam" HeaderText="Voornaam" SortExpression="Voornaam" />
+                    <asp:BoundField DataField="Achternaam" HeaderText="Achternaam" SortExpression="Achternaam" />
+                    <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
+                    <asp:BoundField DataField="Telefoonnummer" HeaderText="Telefoonnummer" SortExpression="Telefoonnummer" />
+                </Columns>
+            </asp:GridView>
+                <br />
+            <asp:SqlDataSource ID="sqlKlant" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [KlantID], [Voornaam], [Achternaam], [Email], [Telefoonnummer] FROM [Klant] WHERE (([Voornaam] = @Voornaam) AND ([Achternaam] = @Achternaam))">
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="txtVoornaam" Name="Voornaam" PropertyName="Text" Type="String" />
+                    <asp:ControlParameter ControlID="txtAchternaam" Name="Achternaam" PropertyName="Text" Type="String" />
+                </SelectParameters>
+            </asp:SqlDataSource>
+        </div>
         <br />
     </form>
 </body>
