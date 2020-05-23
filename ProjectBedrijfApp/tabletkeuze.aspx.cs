@@ -14,13 +14,14 @@ namespace ProjectBedrijfApp
         private string isManager;
         protected void Page_Load(object sender, EventArgs e)
         {
-            Id = Session["Id"].ToString();
+            //Id = Session["Id"].ToString();
             voornaam = (string)Session["Naam"];
             isManager = (string)Session["Functie"];
 
             VrmNaam.Text = voornaam;
             IdLabel.Text = Id;
 
+            System.Diagnostics.Debug.WriteLine(isManager);
             if (isManager == "Manager")
             {
                 ManagerButton.Visible = true;

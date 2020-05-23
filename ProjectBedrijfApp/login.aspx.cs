@@ -60,12 +60,12 @@ namespace ProjectBedrijfApp
                 {
 
                     string ismanager = dr["Functie"].ToString();
-                    System.Diagnostics.Debug.WriteLine(ismanager);
-                    if (ismanager == "True")
+                    //System.Diagnostics.Debug.WriteLine(ismanager);
+                    if (ismanager == "Manager")
                     {
                         Session["Id"] = dr["Personeelsnummer"];
                         Session["Naam"] = dr["Voornaam"];
-                        Session["Functie"] = ismanager;
+                        Session["Functie"] = dr["Functie"];
                         Response.Redirect("tabletkeuze.aspx");
                     }
                     else
