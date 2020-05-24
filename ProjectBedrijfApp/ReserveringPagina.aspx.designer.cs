@@ -78,6 +78,15 @@ namespace ProjectBedrijfApp
         protected global::System.Web.UI.WebControls.CheckBox cbAlles;
 
         /// <summary>
+        /// txtRondes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRondes;
+
+        /// <summary>
         /// Button1 control.
         /// </summary>
         /// <remarks>
@@ -103,15 +112,6 @@ namespace ProjectBedrijfApp
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
-
-        /// <summary>
-        /// txtRondes control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRondes;
 
         /// <summary>
         /// RvRondes control.
@@ -168,6 +168,15 @@ namespace ProjectBedrijfApp
         protected global::System.Web.UI.WebControls.TextBox txtAchternaam;
 
         /// <summary>
+        /// lblSorry control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSorry;
+
+        /// <summary>
         /// BtnZoek control.
         /// </summary>
         /// <remarks>
@@ -186,6 +195,15 @@ namespace ProjectBedrijfApp
         protected global::System.Web.UI.WebControls.GridView GridView1;
 
         /// <summary>
+        /// btnNieuw control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNieuw;
+
+        /// <summary>
         /// sqlKlant control.
         /// </summary>
         /// <remarks>
@@ -193,5 +211,41 @@ namespace ProjectBedrijfApp
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource sqlKlant;
+
+        /// <summary>
+        /// lbltelefoon control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbltelefoon;
+
+        /// <summary>
+        /// Txttelefoon control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Txttelefoon;
+
+        /// <summary>
+        /// lblEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEmail;
+
+        /// <summary>
+        /// TxtEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtEmail;
     }
 }

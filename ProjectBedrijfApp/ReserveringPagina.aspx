@@ -62,10 +62,11 @@
             <br />
             <br />
             <br />
-            <asp:CheckBox ID="cbAlles" runat="server" Text="All you can Eat" />
+            <asp:CheckBox ID="cbAlles" runat="server" Text="All you can Eat" OnCheckedChanged="cbAlles_CheckedChanged" />
             <br />
             <br />
             <br />
+            <asp:TextBox ID="txtRondes" runat="server" Visible="False" Height="30px">Aantal rondes</asp:TextBox>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br />
             <br />
@@ -91,23 +92,23 @@
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br />
-            <asp:TextBox ID="txtRondes" runat="server" Visible="False">Aantal rondes</asp:TextBox>
             <asp:RangeValidator ID="RvRondes" runat="server" ControlToValidate="txtRondes" ErrorMessage="RangeValidator" MaximumValue="10" MinimumValue="0" Type="Integer"></asp:RangeValidator>
             <asp:Label ID="lbldatum" runat="server" Text="Label" Visible="False"></asp:Label>
             <br />
             <br />
-            <asp:Label ID="lblVoornaam" runat="server" Text="Voornaam"></asp:Label>
+            <asp:Label ID="lblVoornaam" runat="server" Text="Voornaam*"></asp:Label>
             <br />
-            <asp:TextBox ID="txtVoornaam" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtVoornaam" runat="server" OnTextChanged="txtVoornaam_TextChanged"></asp:TextBox>
             <br />
             <br />
-            <asp:Label ID="lblAchternaam" runat="server" Text="Achternaam"></asp:Label>
+            <asp:Label ID="lblAchternaam" runat="server" Text="Achternaam*"></asp:Label>
             <br />
             <asp:TextBox ID="txtAchternaam" runat="server"></asp:TextBox>
             <br />
+            <asp:Label ID="lblSorry" runat="server" Text="Klant niet gevonden of de klant is nieuw in het systeem."></asp:Label>
             <br />
             <asp:Button ID="BtnZoek" runat="server" OnClick="BtnZoek_Click" Text="Zoek klant" />
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="KlantID" DataSourceID="sqlKlant" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="KlantID" DataSourceID="sqlKlant" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnDataBound="GridView1_DataBound" OnLoad="GridView1_Load" OnPageIndexChanged="GridView1_PageIndexChanged">
                 <Columns>
                     <asp:CommandField ShowSelectButton="True" />
                     <asp:BoundField DataField="KlantID" HeaderText="KlantID" InsertVisible="False" ReadOnly="True" SortExpression="KlantID" />
@@ -117,8 +118,9 @@
                     <asp:BoundField DataField="Telefoonnummer" HeaderText="Telefoonnummer" SortExpression="Telefoonnummer" />
                 </Columns>
             </asp:GridView>
+                <asp:Button ID="btnNieuw" runat="server" OnClick="btnNieuw_Click" Text="Nieuwe klant" />
                 <br />
-            <asp:SqlDataSource ID="sqlKlant" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [KlantID], [Voornaam], [Achternaam], [Email], [Telefoonnummer] FROM [Klant] WHERE (([Voornaam] = @Voornaam) AND ([Achternaam] = @Achternaam))">
+            <asp:SqlDataSource ID="sqlKlant" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [KlantID], [Voornaam], [Achternaam], [Email], [Telefoonnummer] FROM [Klant] WHERE (([Voornaam] = @Voornaam) OR ([Achternaam] = @Achternaam))">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="txtVoornaam" Name="Voornaam" PropertyName="Text" Type="String" />
                     <asp:ControlParameter ControlID="txtAchternaam" Name="Achternaam" PropertyName="Text" Type="String" />
@@ -126,6 +128,15 @@
             </asp:SqlDataSource>
         </div>
         <br />
+        <asp:Label ID="lbltelefoon" runat="server" Text="Telefoonnummer" Visible="False"></asp:Label>
+        <br />
+        <asp:TextBox ID="Txttelefoon" runat="server" Visible="False"></asp:TextBox>
+        <br />
+        <br />
+        <br />
+        <asp:Label ID="lblEmail" runat="server" Text="Emailadres" Visible="False"></asp:Label>
+        <br />
+        <asp:TextBox ID="TxtEmail" runat="server" Visible="False"></asp:TextBox>
     </form>
 </body>
 </html>
