@@ -39,7 +39,7 @@ namespace ProjectBedrijfApp
 
         string telefoonnummer;
         string email;
-        int klikkenteller;
+        bool clicked;
 
         SqlConnection con = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
 
@@ -91,10 +91,13 @@ namespace ProjectBedrijfApp
             {
                 aantalrondes = int.Parse(txtRondes.Text);
             }
-
-            finally
+            catch
             {
                 aantalrondes = 0;
+            }
+            finally
+            {
+                
             }
 
             CultureInfo dutch = new CultureInfo("nl-NL");
@@ -199,24 +202,11 @@ namespace ProjectBedrijfApp
         {
             int count = GridView1.Rows.Count;
             TextBox1.Text = count.ToString();
-
-            if (count == 0)
-            {
-                lblEmail.Visible = true;
-                TxtEmail.Visible = true;
-                lbltelefoon.Visible = true;
-                Txttelefoon.Visible = true;
-                lblSorry.Visible = true;
-            }
-
-            else
-            {
-                lblEmail.Visible = false;
-                TxtEmail.Visible = false;
-                lbltelefoon.Visible = false;
-                Txttelefoon.Visible = false;
-                lblSorry.Visible = true;
-            }
+            btnNieuw.Visible = true;
+            TxtEmail.Visible = true;
+            lblEmail.Visible = true;
+            lbltelefoon.Visible = true;
+            Txttelefoon.Visible = true;
             return count;
         }
 
@@ -237,16 +227,11 @@ namespace ProjectBedrijfApp
         protected void btnNieuw_Click(object sender, EventArgs e)
         {
 
+            
             if (txtVoornaam.Text != "" || txtAchternaam.Text != "")
             {
-                klikkenteller = klikkenteller + 1;
-                txtAchternaam.Text = klikkenteller.ToString();
-                if (klikkenteller == 1)
-                {
-                    lblSorry.Text = "Welkom bij Jeco, u kunt hier ook uw telefoon en email invullen.";
-                }
-                if (klikkenteller > 1)
-                {
+                
+                    System.Diagnostics.Debug.WriteLine(clicked);
                     string nieuwe_klant = "Insert into Klant (Voornaam, Achternaam, Email, Telefoonnummer) VALUES (@voornaam, @achternaam, @email, @telefoon)";
                     con.Open();
                     adapter.InsertCommand = new SqlCommand(nieuwe_klant, con);
@@ -256,7 +241,9 @@ namespace ProjectBedrijfApp
                     adapter.InsertCommand.Parameters.AddWithValue("@telefoon", Txttelefoon.Text);
                     int probeer = adapter.InsertCommand.ExecuteNonQuery();
                     con.Close();
-                }
+                GridView1.DataBind();
+
+
 
 
             }
@@ -265,7 +252,6 @@ namespace ProjectBedrijfApp
             {
                 lblSorry.Text = "De voor en achternaam zijn niet ingevuld.";
             }
-
 
         }
     }

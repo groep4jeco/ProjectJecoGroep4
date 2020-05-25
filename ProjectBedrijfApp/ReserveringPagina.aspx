@@ -62,7 +62,7 @@
             <br />
             <br />
             <br />
-            <asp:CheckBox ID="cbAlles" runat="server" Text="All you can Eat" OnCheckedChanged="cbAlles_CheckedChanged" />
+            <asp:CheckBox ID="cbAlles" runat="server" Text="All you can Eat" OnCheckedChanged="cbAlles_CheckedChanged" AutoPostBack="True" />
             <br />
             <br />
             <br />
@@ -118,7 +118,7 @@
                     <asp:BoundField DataField="Telefoonnummer" HeaderText="Telefoonnummer" SortExpression="Telefoonnummer" />
                 </Columns>
             </asp:GridView>
-                <asp:Button ID="btnNieuw" runat="server" OnClick="btnNieuw_Click" Text="Nieuwe klant" />
+                <asp:Button ID="btnNieuw" runat="server" OnClick="btnNieuw_Click" Text="Nieuwe klant" Visible="False" />
                 <br />
             <asp:SqlDataSource ID="sqlKlant" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [KlantID], [Voornaam], [Achternaam], [Email], [Telefoonnummer] FROM [Klant] WHERE (([Voornaam] = @Voornaam) OR ([Achternaam] = @Achternaam))">
                 <SelectParameters>
