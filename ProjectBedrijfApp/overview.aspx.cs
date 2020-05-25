@@ -15,8 +15,7 @@ namespace ProjectBedrijfApp
         public bool ReserveerStatus;
         public List<string> tafelID = new List<string>();
 
-        string connetionString;
-        SqlConnection cnn;
+        string connectionString = "Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019";
 
         int v;
         protected void Page_Load(object sender, EventArgs e)
@@ -24,44 +23,45 @@ namespace ProjectBedrijfApp
             if (!IsPostBack)
             {
                 Session["TafelId"] = tafelID;
-            }
-            connetionString = "Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019";
-            cnn = new SqlConnection(connetionString);
-            cnn.Open();
-            cnn.Close();
+            }      
         }
 
         private void LoopButtons(ControlCollection controlCollection)
         {
-           cnn.Open();
-           string query = "SELECT[TafelTafelnummer] FROM[Tafel_Reservering]";
-           SqlCommand cmd = new SqlCommand(query, cnn);
-           SqlDataReader drTafel = cmd.ExecuteReader();
-           string resulaat = drTafel.Read().ToString();
-
-            foreach (Control control in controlCollection)
+            using (SqlConnection con = new SqlConnection(connectionString))
             {
-                v++;
-                System.Diagnostics.Debug.WriteLine(v);
-                
-                    System.Diagnostics.Debug.WriteLine("SomeText");
-                    if (control is Button)
-                    {
-                        if (control.ID.Contains(drTafel["TafelTafelnummer"].ToString()) && control.ID.Contains("t"))
-                        {
-                            System.Diagnostics.Debug.WriteLine("SomeText");
-                            ((Button)control).BackColor = Color.Red;
-                        }
-                    }
+                con.Open();
 
-                    if (control.Controls != null)
+                string query = "SELECT[TafelTafelnummer] FROM[Tafel_Reservering]";
+                SqlCommand cmd = new SqlCommand(query, con);
+                SqlDataReader drTafel = cmd.ExecuteReader();
+                //string resulaat = drTafel.Read().ToString();
+                while (drTafel.Read())
+                {
+                    foreach (Control control in controlCollection)
                     {
-                        LoopButtons(control.Controls);
+                        if (control is Button)
+                        {
+                            string id = control.ID;
+                            string y = id.Trim('t');
+                            System.Diagnostics.Debug.WriteLine(y);
+                            if (y == drTafel["TafelTafelnummer"].ToString())
+                            {
+                                //System.Diagnostics.Debug.WriteLine("SomeText");
+                                ((Button)control).BackColor = Color.Red;
+                            }
+                        }
+
+                        if (control.Controls != null)
+                        {
+                            LoopButtons(control.Controls);
+                        }
+
                     }
-                
+                }
+                drTafel.Close();
+                con.Close();
             }
-            drTafel.Close();
-            cnn.Close();
         }
 
         public void Button1_Click(object sender, EventArgs e)
