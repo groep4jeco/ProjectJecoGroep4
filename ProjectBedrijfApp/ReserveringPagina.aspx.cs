@@ -65,17 +65,7 @@ namespace ProjectBedrijfApp
         protected void Button1_Click(object sender, EventArgs e)
         {
             string combindedString = string.Join(",", tafelID);
-            Label3.Text = "Gekozen tafels: " + combindedString + "   Reservering nummmer: "+ Reserveringsnummer.ToString() + "\r\n" + "  gekozen tijdvak: " + tijdvak + "\r\n" + "  het aantal personen: " + TextBox1.Text;
-            if (cbAlles.Checked == true)
-            {
-                allin = 1;
-            }
-
-            else
-            {
-                allin = 0;
-                
-            }
+            Label3.Text = "Gekozen tafels: " + combindedString + "   Reservering nummmer: "+ Reserveringsnummer.ToString() + "\r\n" + "  gekozen tijdvak: " + tijdvak + "\r\n" + "  het aantal personen: " + TxtVolw.Text;
 
             if (RadioButton1.Checked == true)
             {
@@ -110,7 +100,7 @@ namespace ProjectBedrijfApp
 
             string reservering = "Insert into reservering(datum, klantklantID, [RestaurantRestaurant ID]) values (@datum, @klant, @restaurant)";
             string reserveringsnummer = "select reserveringsnummer from reservering where klantklantid = @klant AND datum = @datum AND [RestaurantRestaurant ID] = @restaurant";
-            string invoegen = "Begin transaction; Insert into in_restaurant([All you can eat], [Aantal rondes], [ReserveringsstatusStatus ID], TijdvakNummer, [Aantal kinderen], [Aantal Volwassenen], Reserveringsnummer)  values(CAST( 'allin' AS BINARY(2) ), @aantalrondes, 2, (select Tijdvak.Nummer from Tijdvak where Begintijd = CAST('5pm' AS time) AND Dag = @dagprobeer), 2, 2, @reserveringsnummers); commit;";
+            string invoegen = "Begin transaction; Insert into in_restaurant([All you can eat], [Aantal rondes], [ReserveringsstatusStatus ID], TijdvakNummer, [Aantal kinderen], [Aantal Volwassenen], Reserveringsnummer)  values(@allin, @aantalrondes, 2, (select Tijdvak.Nummer from Tijdvak where Begintijd = CAST('5pm' AS time) AND Dag = @dagprobeer), @volw, @kind, @reserveringsnummers); commit;";
             //command = new SqlCommand(invoegen, connnection);
             con.Open();
             adapter2.InsertCommand = new SqlCommand(reservering, con);
@@ -137,8 +127,20 @@ namespace ProjectBedrijfApp
             adapter.InsertCommand = new SqlCommand(invoegen, con);
             adapter.InsertCommand.Parameters.AddWithValue("@reserveringsnummers", Session["Reserveringsnummer"]);
             adapter.InsertCommand.Parameters.AddWithValue("@dagprobeer", dagen2);
+            adapter.InsertCommand.Parameters.AddWithValue("@allin", allin);
+            adapter.InsertCommand.Parameters.AddWithValue("@volw", TxtVolw.Text); 
+            adapter.InsertCommand.Parameters.AddWithValue("@kind", TxtKind.Text);
             adapter.InsertCommand.Parameters.AddWithValue("@aantalrondes", aantalrondes);
             int probeer = adapter.InsertCommand.ExecuteNonQuery();
+            con.Close();
+
+            con.Open();
+            string tafelreservering = "INSERT INTO Tafel_Reservering (TafelTafelnummer, [TafelRestaurantRestaurant ID], [Reserveringsnummer]) VALUES (@tafelnummer, @restaurant, @reservering)";
+            adapter.InsertCommand = new SqlCommand(tafelreservering, con);
+            adapter.InsertCommand.Parameters.AddWithValue("@reservering", Session["Reserveringsnummer"]);
+            adapter.InsertCommand.Parameters.AddWithValue("@tafelnummer", Session["TafelId"]);
+            adapter.InsertCommand.Parameters.AddWithValue("@restaurant", 1);
+            int tafeltjes = adapter.InsertCommand.ExecuteNonQuery();
             con.Close();
 
             //command.Dispose();
@@ -146,7 +148,7 @@ namespace ProjectBedrijfApp
 
             //int resultaatklant = (int)GridView1.DataKeys[GridView1.SelectedIndex]["KlantKlantID"];
             //string querieklant = "SELECT [Voornaam], [Achternaam], [Email], [Telefoonnummer] FROM [Klant] WHERE [Klantid] = @IDKLANT";
-           
+
         }
 
         
@@ -191,10 +193,12 @@ namespace ProjectBedrijfApp
             if(cbAlles.Checked == true)
             {
                 txtRondes.Visible = true;
+                allin = 1;
             }
             if (cbAlles.Checked == false)
             {
                 txtRondes.Visible = false;
+                allin = 0;
             }
         }
 
@@ -211,7 +215,7 @@ namespace ProjectBedrijfApp
         private int telrijen()
         {
             int count = GridView1.Rows.Count;
-            TextBox1.Text = count.ToString();
+            TxtVolw.Text = count.ToString();
             btnNieuw.Visible = true;
             TxtEmail.Visible = true;
             lblEmail.Visible = true;

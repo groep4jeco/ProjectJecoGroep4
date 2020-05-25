@@ -54,10 +54,12 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br />
             <br />
-            <asp:Label ID="Label2" runat="server" Text="Aantal Personen"></asp:Label>
+            <asp:Label ID="lblVolwassenen" runat="server" Text="Aantal volwassenen"></asp:Label>
             &nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TxtVolw" runat="server"></asp:TextBox>
             <br />
+            <asp:Label ID="lblKind" runat="server" Text="Aantal kinderen"></asp:Label>
+            <asp:TextBox ID="TxtKind" runat="server"></asp:TextBox>
             <br />
             <br />
             <br />
