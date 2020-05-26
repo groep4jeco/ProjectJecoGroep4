@@ -15,6 +15,7 @@ namespace ProjectBedrijfApp
     {
         string connetionString;
         SqlConnection cnn;
+        SqlDataReader dr;
         private int IsManager;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -40,7 +41,7 @@ namespace ProjectBedrijfApp
             {
                 cnn.Open();
 
-                string query = "SELECT[Personeelsnummer], [Wachtwoord], [Voornaam], [Is manager] FROM[Personeel] WHERE(([Personeelsnummer] = @Personeelsnummer) AND([Wachtwoord] = @Wachtwoord))";
+                string query = "SELECT[Personeelsnummer], [Wachtwoord], [Voornaam], [Functie] FROM[Personeel] WHERE(([Personeelsnummer] = @Personeelsnummer) AND([Wachtwoord] = @Wachtwoord))";
 
 
 
@@ -52,19 +53,19 @@ namespace ProjectBedrijfApp
                 cmdSchedule.Parameters.AddWithValue("@Personeelsnummer", Id);
                 cmdSchedule.Parameters.AddWithValue("@Wachtwoord", password);
 
-                SqlDataReader dr = cmdSchedule.ExecuteReader();
+                dr = cmdSchedule.ExecuteReader();
                 string resulaat = dr.Read().ToString();
 
                 if (dr["Personeelsnummer"].ToString() == Id && dr["Wachtwoord"].ToString() == password)
                 {
 
-                    string ismanager = dr["Is manager"].ToString();
-                    System.Diagnostics.Debug.WriteLine(ismanager);
-                    if (ismanager == "True")
+                    string ismanager = dr["Functie"].ToString();
+                    //System.Diagnostics.Debug.WriteLine(ismanager);
+                    if (ismanager == "Manager")
                     {
                         Session["Id"] = dr["Personeelsnummer"];
                         Session["Naam"] = dr["Voornaam"];
-                        Session["IsManager"] = ismanager;
+                        Session["Functie"] = dr["Functie"];
                         Response.Redirect("tabletkeuze.aspx");
                     }
                     else
@@ -74,8 +75,7 @@ namespace ProjectBedrijfApp
                         Response.Redirect("tabletkeuze.aspx");
                     }
                         
-                }
-                dr.Close();
+                } 
             }
 
             catch
@@ -84,8 +84,9 @@ namespace ProjectBedrijfApp
             }
             finally
             {
+                dr.Close();
                 cnn.Close();
             }
         }
-        }
     }
+}

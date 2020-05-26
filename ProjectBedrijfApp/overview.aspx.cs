@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Web;
@@ -13,15 +14,54 @@ namespace ProjectBedrijfApp
         public int SelectedTafelID;
         public bool ReserveerStatus;
         public List<string> tafelID = new List<string>();
+
+        string connectionString = "Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019";
+
+        int v;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 Session["TafelId"] = tafelID;
-            }
-            //SqlConnection connnection = new SqlConnection("Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;Persist Security Info=True;User ID=BIM01A2019;Password=BIM01A2019");
-            //connnection.Open();
+            }      
+        }
 
+        private void LoopButtons(ControlCollection controlCollection)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+
+                string query = "SELECT[TafelTafelnummer] FROM[Tafel_Reservering]";
+                SqlCommand cmd = new SqlCommand(query, con);
+                SqlDataReader drTafel = cmd.ExecuteReader();
+                //string resulaat = drTafel.Read().ToString();
+                while (drTafel.Read())
+                {
+                    foreach (Control control in controlCollection)
+                    {
+                        if (control is Button)
+                        {
+                            string id = control.ID;
+                            string y = id.Trim('t');
+                            System.Diagnostics.Debug.WriteLine(y);
+                            if (y == drTafel["TafelTafelnummer"].ToString())
+                            {
+                                //System.Diagnostics.Debug.WriteLine("SomeText");
+                                ((Button)control).BackColor = Color.Red;
+                            }
+                        }
+
+                        if (control.Controls != null)
+                        {
+                            LoopButtons(control.Controls);
+                        }
+
+                    }
+                }
+                drTafel.Close();
+                con.Close();
+            }
         }
 
         public void Button1_Click(object sender, EventArgs e)
@@ -66,6 +106,11 @@ namespace ProjectBedrijfApp
         protected void btn_keuken_Click(object sender, EventArgs e)
         {
             Response.Redirect ("Keukenscherm.aspx");
+        }
+
+        protected void Button1_Click1(object sender, EventArgs e)
+        {
+            LoopButtons(Page.Controls);
         }
     }
 
