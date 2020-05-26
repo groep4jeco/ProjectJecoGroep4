@@ -56,7 +56,10 @@
             <br />
             <asp:Label ID="lblVolwassenen" runat="server" Text="Aantal volwassenen"></asp:Label>
             &nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TxtVolw" runat="server"></asp:TextBox>
+            
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TxtVolw" ErrorMessage="Dit is een verplicht veld."></asp:RequiredFieldValidator>
+            
+            <asp:TextBox ID="TxtVolw" runat="server" OnTextChanged="TxtVolw_TextChanged"></asp:TextBox>
             <br />
             <asp:Label ID="lblKind" runat="server" Text="Aantal kinderen"></asp:Label>
             <asp:TextBox ID="TxtKind" runat="server"></asp:TextBox>
@@ -66,6 +69,7 @@
             <br />
             <asp:CheckBox ID="cbAlles" runat="server" Text="All you can Eat" OnCheckedChanged="cbAlles_CheckedChanged" AutoPostBack="True" />
             <br />
+            <asp:Image ID="Image1" runat="server" Height="125px" Width="156px" />
             <br />
             <br />
             <asp:TextBox ID="txtRondes" runat="server" Visible="False" Height="30px">Aantal rondes</asp:TextBox>
@@ -74,7 +78,7 @@
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            <div class="knop1">
-               <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Reserveer Tafel" Height="47px" Width="117px" Font-Bold="True" Font-Italic="True" />
+               <asp:Button ID="BtnClick" runat="server" OnClick="Button1_Click" Text="Reserveer Tafel" Height="47px" Width="117px" Font-Bold="True" Font-Italic="True" />
            </div>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br />
@@ -94,14 +98,15 @@
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br />
-            <asp:RangeValidator ID="RvRondes" runat="server" ControlToValidate="txtRondes" ErrorMessage="RangeValidator" MaximumValue="10" MinimumValue="0" Type="Integer"></asp:RangeValidator>
             <asp:Label ID="lbldatum" runat="server" Text="Label" Visible="False"></asp:Label>
             <br />
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtVoornaam" ErrorMessage="Dit is een verplicht veld."></asp:RequiredFieldValidator>
             <br />
             <asp:Label ID="lblVoornaam" runat="server" Text="Voornaam*"></asp:Label>
             <br />
             <asp:TextBox ID="txtVoornaam" runat="server" OnTextChanged="txtVoornaam_TextChanged"></asp:TextBox>
             <br />
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtAchternaam" ErrorMessage="Dit is een verplicht veld."></asp:RequiredFieldValidator>
             <br />
             <asp:Label ID="lblAchternaam" runat="server" Text="Achternaam*"></asp:Label>
             <br />
@@ -139,6 +144,7 @@
         <asp:Label ID="lblEmail" runat="server" Text="Emailadres" Visible="False"></asp:Label>
         <br />
         <asp:TextBox ID="TxtEmail" runat="server" Visible="False"></asp:TextBox>
+
     </form>
 </body>
 </html>
