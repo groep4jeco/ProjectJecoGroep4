@@ -24,7 +24,10 @@
             <br />
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" ForeColor="Black" Height="363px" OnRowDeleting="GridView1_RowDeleting" ShowFooter="True" Width="700px">
                 <Columns>
-                    <asp:BoundField DataField="sno" HeaderText="S.No" />
+                    <asp:BoundField DataField="sno" />
+                    <asp:ImageField DataImageUrlField="afb_pad">
+                        <ControlStyle Height="50px" Width="50px" />
+                    </asp:ImageField>
                     <asp:BoundField DataField="Gerechtnummer" HeaderText="Nummer">
                     <ItemStyle HorizontalAlign="Center" />
                     </asp:BoundField>
@@ -42,7 +45,7 @@
                     </asp:BoundField>
                     <asp:CommandField DeleteText="Verwijder" ShowDeleteButton="True" />
                 </Columns>
-                <FooterStyle BackColor="#CCCCCC" />
+                <FooterStyle BackColor="#CCCCCC" HorizontalAlign="Center" />
                 <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" Height="50px" />
                 <PagerStyle BackColor="#CCCCCC" ForeColor="Black" HorizontalAlign="Left" />
                 <RowStyle BackColor="White" />
@@ -53,7 +56,7 @@
                 <SortedDescendingHeaderStyle BackColor="#383838" />
             </asp:GridView>
             <asp:Button ID="btnTerug" runat="server" Font-Size="Large" Height="50px" Text="Terug" Width="200px" OnClick="btnTerug_Click" />
-            <asp:Button ID="btnBevestig" runat="server" Font-Bold="True" Font-Size="Large" Height="50px" Text="Bevestig" Width="350px" OnClick="btnBevestig_Click" />
+            <asp:Button ID="btnBevestig" runat="server" Font-Bold="True" Font-Size="Large" Height="50px" Text="Bevestig" Width="349px" OnClick="btnBevestig_Click" />
         </div>
     </form>
 </body>

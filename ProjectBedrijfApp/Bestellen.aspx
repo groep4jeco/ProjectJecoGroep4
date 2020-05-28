@@ -120,13 +120,16 @@
         </div>
         <div id="ronde">         
             <asp:Label ID="Label8" runat="server" Font-Size="X-Large" Text="Ronde"></asp:Label>
-&nbsp;<asp:Label ID="lblRonde" runat="server" Font-Size="X-Large" Text="1"></asp:Label>
+            &nbsp;<asp:Label ID="lblRonde" runat="server" Font-Size="X-Large" Text="1"></asp:Label>
+            &nbsp;<asp:Label ID="Label9" runat="server" Font-Size="X-Large" Text="/"></asp:Label>
+            &nbsp;<asp:Label ID="lblMaxRondes" runat="server" Font-Size="X-Large" Text=""></asp:Label>
         </div>
         <div id="tijd" class="auto-style3">
             <asp:Label ID="lblAantalpersonen" runat="server" Font-Size="X-Large" Text="0"></asp:Label>
             &nbsp
             <asp:Label ID="Label1" runat="server" Font-Size="X-Large" Text="personen"></asp:Label>
 
+            <!--
             <asp:ScriptManager ID="ScriptManager1" runat="server">
             </asp:ScriptManager>
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -137,6 +140,8 @@
                 </ContentTemplate>
             </asp:UpdatePanel>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            -->
+
         </div>
         
         <!--Info-->
@@ -169,7 +174,7 @@
                         </tr>
                         <tr>
                             <td class="auto-style3">
-                                <asp:ImageButton ID="ImageButton1" runat="server" CommandArgument='<%# Eval("Gerechtnummer")%>' CommandName="addtocard" Height="200px" ImageUrl="~/Afbeeldingen/Gunkan/Ebiko-Gunkan.png" Width="222px" />
+                                <asp:ImageButton ID="ImageButton1" runat="server" CommandArgument='<%# Eval("Gerechtnummer") %>' CommandName="addtocard" Height="200px" ImageUrl='<%# Eval("afb_pad") %>' Width="222px" />
                             </td>
                         </tr>
                         <tr>
@@ -204,11 +209,15 @@
                 <asp:Label ID="Label2" runat="server" Text="Aantal gekozen gerechten:" Font-Size="Large"></asp:Label>
                 &nbsp;<asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="X-Large"></asp:Label>
                 <br />
+                <asp:Label ID="lblWaarschuwing" runat="server" Font-Bold="True" Font-Size="X-Large" ForeColor="Red"></asp:Label>
                 <br />
                 <br />
-                <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" Height="200px" OnRowDeleting="GridView2_RowDeleting" Width="279px" OnRowCommand="GridView2_RowCommand">
+                <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" Height="200px" OnRowDeleting="GridView2_RowDeleting" Width="279px" OnRowCommand="GridView2_RowCommand" ShowFooter="True">
                     <Columns>
                         <asp:BoundField DataField="sno" />
+                        <asp:ImageField DataImageUrlField="afb_pad">
+                            <ControlStyle Height="30px" Width="30px" />
+                        </asp:ImageField>
                         <asp:BoundField DataField="Omschrijving" HeaderText="Gerecht">
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
@@ -221,7 +230,7 @@
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:CommandField>
                     </Columns>
-                    <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
+                    <FooterStyle BackColor="#CCCCCC" ForeColor="Black" HorizontalAlign="Center" />
                     <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
                     <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
                     <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />

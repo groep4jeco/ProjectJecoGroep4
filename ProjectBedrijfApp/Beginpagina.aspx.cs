@@ -15,17 +15,21 @@ namespace Bestellen
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Session["ronde"] = "1";
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            int reserveringsnummer = int.Parse(TextBox1.Text);
+            if (TextBox1.Text != "")
+            {
+                int reserveringsnummer = int.Parse(TextBox1.Text);
 
-            Session["reservering"] = reserveringsnummer;
-            
+                Session["reservering"] = reserveringsnummer;
+                
 
-            Response.Redirect("~/Bestellen.aspx");
+                Response.Redirect("~/Bestellen.aspx");
+            }
+
         }
     }
 }

@@ -13,12 +13,52 @@ namespace Bestellen
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblDatum.Text = DateTime.Now.ToString("D");
+
+
+            string queriepersonen = ("select SUM([Aantal Volwassenen] + [Aantal kinderen]) from in_restaurant where Reserveringsnummer = @reservering");
+            SqlConnection con = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
+            con.Open();
+            SqlCommand cmdklant = new SqlCommand(queriepersonen, con);
+            cmdklant.Parameters.AddWithValue("@reservering", Session["reservering"]);
+            object drpersonen = cmdklant.ExecuteScalar();
+            string aantalpersonen = drpersonen.ToString();
+            con.Close();
+
+            lblAantalpersonen.Text = aantalpersonen;
+            int maxbestelbaar = int.Parse(aantalpersonen) * 5;
+
+
+            lblRonde.Text = Session["ronde"].ToString();
+            Session["ronde"] = lblRonde.Text;
+            int ronde = int.Parse(lblRonde.Text);
+            Session["ronde"] = ronde;
+
+            con.Open();
+            string maxrondes = ("select [Aantal rondes] from in_restaurant where Reserveringsnummer = @reservering");
+            SqlCommand rondesaanvraag = new SqlCommand(maxrondes, con);
+            rondesaanvraag.Parameters.AddWithValue("@reservering", Session["reservering"]);
+            object test = rondesaanvraag.ExecuteScalar();
+            string aantalrondes = test.ToString();
+            con.Close();
+
+            lblMaxRondes.Text = aantalrondes;
+
+            if (int.Parse(lblRonde.Text) > int.Parse(aantalrondes))
+            {
+                Response.Redirect("Beginpagina.aspx");
+            }
+
+
+
             DataTable dt = new DataTable();
             dt = (DataTable)Session["buyitems"];
+
             if (dt != null)
             {
 
                 Label3.Text = dt.Rows.Count.ToString();
+                
             }
             else
             {
@@ -37,14 +77,14 @@ namespace Bestellen
                 dt2.Columns.Add("Hoeveelheid");
                 dt2.Columns.Add("Prijs");
                 dt2.Columns.Add("totalprice");
-                
+                dt2.Columns.Add("afb_pad");
+
 
 
                 if (Request.QueryString["id"] != null)
                 {
                     if (Session["Buyitems"] == null)
                     {
-
                         dr = dt2.NewRow();
                         String mycon = "Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;Persist Security Info=True;User ID=BIM01A2019;Password=BIM01A2019";
                         SqlConnection scon = new SqlConnection(mycon);
@@ -57,6 +97,7 @@ namespace Bestellen
                         DataSet ds = new DataSet();
                         da.Fill(ds);
                         dr["sno"] = 1;
+                        dr["afb_pad"] = ds.Tables[0].Rows[0]["afb_pad"].ToString();
                         dr["Gerechtnummer"] = ds.Tables[0].Rows[0]["Gerechtnummer"].ToString();
                         dr["Omschrijving"] = ds.Tables[0].Rows[0]["Omschrijving"].ToString();
                         dr["Hoeveelheid"] = Request.QueryString["Hoeveelheid"];
@@ -71,9 +112,9 @@ namespace Bestellen
                         GridView2.DataBind();
 
                         Session["buyitems"] = dt2;
-                        
 
 
+                        Response.Redirect("Bestellen.aspx");
                     }
                     else
                     {
@@ -94,6 +135,7 @@ namespace Bestellen
                         DataSet ds = new DataSet();
                         da.Fill(ds);
                         dr["sno"] = sr + 1;
+                        dr["afb_pad"] = ds.Tables[0].Rows[0]["afb_pad"].ToString();
                         dr["Gerechtnummer"] = ds.Tables[0].Rows[0]["Gerechtnummer"].ToString();
                         dr["Omschrijving"] = ds.Tables[0].Rows[0]["Omschrijving"].ToString();
                         dr["Hoeveelheid"] = Request.QueryString["Hoeveelheid"];
@@ -108,10 +150,9 @@ namespace Bestellen
                         GridView2.DataBind();
 
                         Session["buyitems"] = dt2;
-                        
 
 
-
+                        Response.Redirect("Bestellen.aspx");
                     }
                 }
                 else
@@ -119,29 +160,45 @@ namespace Bestellen
                     dt2 = (DataTable)Session["buyitems"];
                     GridView2.DataSource = dt2;
                     GridView2.DataBind();
+                    if (GridView2.Rows.Count > 0)
+                    {
+                        GridView2.FooterRow.Cells[2].Text = "Totaal:";
+                        GridView2.FooterRow.Cells[3].Text = totalehoeveelheid().ToString() + " / " + maxbestelbaar.ToString();
+                        
+                    }
 
                 }
 
             }
 
-            lblDatum.Text = DateTime.Now.ToString("D");
+            /*
+            if (totalehoeveelheid() >= maxbestelbaar)
+            {
+                lblWaarschuwing.Text = "JE HEBT TE VEEL GERECHTEN!";
+            }
+            */
 
-
-            string queriepersonen = ("select SUM([Aantal Volwassenen] + [Aantal kinderen]) from in_restaurant where Reserveringsnummer = @reservering");
-            SqlConnection con = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
-            con.Open();
-            SqlCommand cmdklant = new SqlCommand(queriepersonen, con);
-            cmdklant.Parameters.AddWithValue("@reservering", Session["reservering"]);
-            object drpersonen = cmdklant.ExecuteScalar();
-            string aantalpersonen = drpersonen.ToString();
-            con.Close();
-          
-            lblAantalpersonen.Text = aantalpersonen;
-
-
-            int Ronde = int.Parse(lblRonde.Text);
-            Session["Ronde"] = Ronde;
         }
+
+        public int totalehoeveelheid()
+        {
+            DataTable dt = new DataTable();
+            dt = (DataTable)Session["buyitems"];
+            int nrow = dt.Rows.Count;
+            int i = 0;
+            int htotaal = 0;
+            while (i < nrow)
+            {
+                htotaal = htotaal + Convert.ToInt32(dt.Rows[i]["Hoeveelheid"].ToString());
+
+                i = i + 1;
+            }
+            return htotaal;
+
+
+
+        }
+
 
         protected void DataList1_ItemCommand(object source, DataListCommandEventArgs e)
         {
@@ -198,6 +255,7 @@ namespace Bestellen
 
         protected void Timer1_Tick1(object sender, EventArgs e)
         {
+            /*
             int minuten = int.Parse(lblTimer.Text);
 
             if (minuten > 0)
@@ -208,34 +266,35 @@ namespace Bestellen
             else
             {
                 Timer1.Enabled = false;
-            }
+            }*/
         }
 
  
 
         protected void GridView2_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            
+            /*
             int index = Convert.ToInt32(e.CommandArgument);
             GridViewRow row = GridView2.Rows[index];
-            int aantal = Convert.ToInt32(row.Cells[2].Text);
+            int aantal = Convert.ToInt32(row.Cells[3].Text);
 
             if (e.CommandName == "btnPlus")
             {
-                row.Cells[2].Text = (aantal + 1).ToString();
+                row.Cells[3].Text = (aantal + 1).ToString();
             }
 
             if (e.CommandName == "btnMinus")
             {
-                if (int.Parse(row.Cells[2].Text) > 1)
+                if (int.Parse(row.Cells[3].Text) > 1)
                 {
-                    row.Cells[2].Text = (aantal - 1).ToString();
+                    row.Cells[3].Text = (aantal - 1).ToString();
                 }
 
             }
 
-            Session["aantal"] = Convert.ToInt32(row.Cells[2].Text);
+            Session["aantal"] = Convert.ToInt32(row.Cells[3].Text);
+            */
         }
-
-
     }
 }

@@ -23,7 +23,7 @@ namespace Bestellen
                 dt.Columns.Add("Hoeveelheid");
                 dt.Columns.Add("Prijs");
                 dt.Columns.Add("totalprice");
-                dt.Columns.Add("productimage");
+                dt.Columns.Add("afb_pad");
 
 
                 if (Request.QueryString["id"] != null)
@@ -43,6 +43,7 @@ namespace Bestellen
                         DataSet ds = new DataSet();
                         da.Fill(ds);
                         dr["sno"] = 1;
+                        dr["afb_pad"] = ds.Tables[0].Rows[0]["afb_pad"].ToString();
                         dr["Gerechtnummer"] = ds.Tables[0].Rows[0]["Gerechtnummer"].ToString();
                         dr["Omschrijving"] = ds.Tables[0].Rows[0]["Omschrijving"].ToString();                       
                         dr["Hoeveelheid"] = Request.QueryString["Hoeveelheid"];
@@ -81,6 +82,7 @@ namespace Bestellen
                         DataSet ds = new DataSet();
                         da.Fill(ds);
                         dr["sno"] = sr + 1;
+                        dr["afb_pad"] = ds.Tables[0].Rows[0]["afb_pad"].ToString();
                         dr["Gerechtnummer"] = ds.Tables[0].Rows[0]["Gerechtnummer"].ToString();
                         dr["Omschrijving"] = ds.Tables[0].Rows[0]["Omschrijving"].ToString();
                         dr["Hoeveelheid"] = Request.QueryString["Hoeveelheid"];
@@ -108,9 +110,11 @@ namespace Bestellen
                     GridView1.DataBind();
                     if (GridView1.Rows.Count > 0)
                     {
-                        GridView1.FooterRow.Cells[5].Text = "Totaal:";
-                        GridView1.FooterRow.Cells[6].Text = grandtotal().ToString();
+                        GridView1.FooterRow.Cells[4].Text = "Totaal:";
+                        GridView1.FooterRow.Cells[5].Text = totalehoeveelheid().ToString();
 
+                        GridView1.FooterRow.Cells[6].Text = "Totaal:";
+                        GridView1.FooterRow.Cells[7].Text = grandtotal().ToString();
                     }
 
 
@@ -118,6 +122,8 @@ namespace Bestellen
                 Label3.Text = GridView1.Rows.Count.ToString();
 
             }
+
+
         }
         public double grandtotal()
         {
@@ -133,6 +139,23 @@ namespace Bestellen
                 i = i + 1;
             }
             return gtotal;
+        }
+
+        public int totalehoeveelheid()
+        {
+            DataTable dt = new DataTable();
+            dt = (DataTable)Session["buyitems"];
+            int nrow = dt.Rows.Count;
+            int i = 0;
+            int htotaal = 0;
+            while (i < nrow)
+            {
+                htotaal = htotaal + Convert.ToInt32(dt.Rows[i]["Hoeveelheid"].ToString());
+
+                i = i + 1;
+            }
+            return htotaal;
+
         }
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -179,9 +202,15 @@ namespace Bestellen
 
         protected void btnBevestig_Click(object sender, EventArgs e)
         {
-            int Ronde = Convert.ToInt16(Session["Ronde"]);
-            Ronde = Ronde + 1;
+            int ronde = (int)Session["ronde"];
+            ronde++;
+            Session["ronde"] = ronde;
 
+
+            DataTable dt = new DataTable();
+            dt = (DataTable)Session["buyitems"];
+
+            dt.Rows.Clear();
             Response.Redirect("~/Bestellen.aspx");
         }
     }    
