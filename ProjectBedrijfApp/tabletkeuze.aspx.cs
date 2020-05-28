@@ -23,13 +23,13 @@ namespace ProjectBedrijfApp
 
             if (isManager == "Manager")
             {
-                ManagerButton.Visible = true;
+                Button3.Visible = true;
             }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("Beginpagina.aspx");
         }
 
         protected void Button2_Click(object sender, EventArgs e)

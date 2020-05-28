@@ -55,7 +55,7 @@
             <asp:Button ID="Button2" runat="server" Text="BEDIENING" Font-Bold="True" Font-Size="XX-Large" Height="170px" Width="924px" OnClick="Button2_Click" BackColor="#CCCCCC" />
         
             <br />
-             <asp:Button ID="ManagerButton" runat="server" Text="Button" Visible="False" OnClick="ManagerButton_Click" />
+             <asp:Button ID="Button3" runat="server" OnClick="ManagerButton_Click" Text="Button" />
             <br />
             <br />
             <asp:Label ID="IdLabel" runat="server" Text="Label"></asp:Label>
