@@ -40,7 +40,7 @@ namespace ProjectBedrijfApp
             {
                 cnn.Open();
 
-                string query = "SELECT[Personeelsnummer], [Wachtwoord], [Voornaam], [Is manager] FROM[Personeel] WHERE(([Personeelsnummer] = @Personeelsnummer) AND([Wachtwoord] = @Wachtwoord))";
+                string query = "SELECT[Personeelsnummer], [Wachtwoord], [Voornaam], [Functie] FROM[Personeel] WHERE(([Personeelsnummer] = @Personeelsnummer) AND([Wachtwoord] = @Wachtwoord))";
 
 
 
@@ -58,13 +58,13 @@ namespace ProjectBedrijfApp
                 if (dr["Personeelsnummer"].ToString() == Id && dr["Wachtwoord"].ToString() == password)
                 {
 
-                    string ismanager = dr["Is manager"].ToString();
+                    string ismanager = dr["Functie"].ToString();
                     System.Diagnostics.Debug.WriteLine(ismanager);
-                    if (ismanager == "True")
+                    if (ismanager == "Manager")
                     {
                         Session["Id"] = dr["Personeelsnummer"];
                         Session["Naam"] = dr["Voornaam"];
-                        Session["IsManager"] = ismanager;
+                        Session["Functie"] = ismanager;
                         Response.Redirect("tabletkeuze.aspx");
                     }
                     else
