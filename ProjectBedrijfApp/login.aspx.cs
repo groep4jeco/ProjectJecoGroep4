@@ -15,7 +15,8 @@ namespace ProjectBedrijfApp
     {
         string connetionString;
         SqlConnection cnn;
-        private bool IsManager;
+        SqlDataReader dr;
+        private int IsManager;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -40,7 +41,9 @@ namespace ProjectBedrijfApp
             {
                 cnn.Open();
 
-                string query = "SELECT [Personeelsnummer], [Wachtwoord], [Voornaam] FROM [Personeel] WHERE (([Personeelsnummer] = @Personeelsnummer) AND ([Wachtwoord] = @Wachtwoord))";
+                string query = "SELECT[Personeelsnummer], [Wachtwoord], [Voornaam], [Functie] FROM[Personeel] WHERE(([Personeelsnummer] = @Personeelsnummer) AND([Wachtwoord] = @Wachtwoord))";
+
+
 
                 string Id = TextBox1.Text;
                 string password = TextBox2.Text;
@@ -50,16 +53,29 @@ namespace ProjectBedrijfApp
                 cmdSchedule.Parameters.AddWithValue("@Personeelsnummer", Id);
                 cmdSchedule.Parameters.AddWithValue("@Wachtwoord", password);
 
-                SqlDataReader dr = cmdSchedule.ExecuteReader();
+                dr = cmdSchedule.ExecuteReader();
                 string resulaat = dr.Read().ToString();
 
                 if (dr["Personeelsnummer"].ToString() == Id && dr["Wachtwoord"].ToString() == password)
                 {
-                    Session["Id"] = dr["Personeelsnummer"];
-                    Session["Naam"] = dr["Voornaam"];
-                    Response.Redirect("tabletkeuze.aspx");
-                }
-                dr.Close();
+
+                    string ismanager = dr["Functie"].ToString();
+                    //System.Diagnostics.Debug.WriteLine(ismanager);
+                    if (ismanager == "Manager")
+                    {
+                        Session["Id"] = dr["Personeelsnummer"];
+                        Session["Naam"] = dr["Voornaam"];
+                        Session["Functie"] = dr["Functie"];
+                        Response.Redirect("tabletkeuze.aspx");
+                    }
+                    else
+                    {
+                        Session["Id"] = dr["Personeelsnummer"];
+                        Session["Naam"] = dr["Voornaam"];
+                        Response.Redirect("tabletkeuze.aspx");
+                    }
+                        
+                } 
             }
 
             catch
@@ -68,8 +84,9 @@ namespace ProjectBedrijfApp
             }
             finally
             {
+                dr.Close();
                 cnn.Close();
             }
         }
-        }
     }
+}

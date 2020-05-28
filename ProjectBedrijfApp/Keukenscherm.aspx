@@ -7,6 +7,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <style> 
+
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -62,8 +65,8 @@ FETCH NEXT 1 ROWS ONLY)),
 
 (select 
 CASE 
-WHEN [All you can eat] = 0x0001
-then CAST(SUM([Prijs volwassenen] * [Aantal personen] + [Aantal personen] * EXTRARONDES * 5)AS decimal (10,2))
+WHEN [All you can eat] = '1'
+then  0.00
 ELSE
 CAST(SUM(regelprijs)AS decimal (10,2))
 end as Totaalbedrag
@@ -132,7 +135,7 @@ FETCH NEXT 1 ROWS ONLY)
 end
 
 UPDATE bestelregel
-SET bestelstatusid = 2
+SET bestelstatusID = 2
 from bestelregel
 INNER JOIN Reservering ON Bestelregel.Reserveringsnummer = Reservering.Reserveringsnummer
 INNER JOIN in_restaurant ON Reservering.Reserveringsnummer = in_restaurant.Reserveringsnummer
@@ -576,24 +579,65 @@ FETCH NEXT 1 ROWS ONLY)"></asp:SqlDataSource>
 
 INSERT inTO factuur (klantenpasemail, factuurdatum, totaalbedrag, reserveringsnummer,klantklantid)
 values ((select DISTINCT email from listviewonline where Reserveringsnummer = (select Reserveringsnummer from listviewonline 
-group by reserveringsnummer, tijd order by tijd asc OFFSET 1 ROWS
+group by reserveringsnummer, tijd order by tijd asc OFFSET 0 ROWS
 FETCH NEXT 1 ROWS ONLY)),
 
 (SELECT CONVERT (date, GETDATE())),
 
 (select CAST(SUM(regelprijs)AS decimal (10,2)) from listviewonline where Reserveringsnummer = (select Reserveringsnummer from listviewonline 
-group by Reserveringsnummer, tijd order by tijd asc OFFSET 1 ROWS
+group by Reserveringsnummer, tijd order by tijd asc OFFSET 0 ROWS
 FETCH NEXT 1 ROWS ONLY)),
 
 (select distinct Reserveringsnummer from listviewonline where Reserveringsnummer = (select Reserveringsnummer from listviewonline 
-group by reserveringsnummer, tijd order by tijd asc OFFSET 1 ROWS
+group by reserveringsnummer, tijd order by tijd asc OFFSET 0 ROWS
 FETCH NEXT 1 ROWS ONLY)),
 
-(select distinct klantklantid from listviewonline where Reserveringsnummer = (select Reserveringsnummer from listviewonline 
-group by reserveringsnummer, tijd order by tijd asc OFFSET 1 ROWS
-FETCH NEXT 1 ROWS ONLY)))
+(select distinct klantklantid from listviewonline where Reserveringsnummer = (select Reservering.Reserveringsnummer
+from Bestelregel
+inner join Reservering on bestelregel.Reserveringsnummer = reservering.Reserveringsnummer
+inner join Gerecht on Gerechtnummer = menugerechtnummer
+inner join Online_bestellen on Online_bestellen.Reserveringsnummer = Reservering.Reserveringsnummer
+inner join OnlineStatus on Online_bestellen.OrderstatusOrderstatusID = OnlineStatus.StatusID
+inner join Klant on klant.KlantID = Reservering.KlantKlantID
+inner join in_restaurant on in_restaurant.Reserveringsnummer = in_restaurant.Reserveringsnummer
+where onlinestatus.statusid = 1 or onlinestatus.statusid = 5
+and Reservering.Datum = (SELECT CONVERT (date, GETDATE()))
+group by Reservering.reserveringsnummer, tijd 
+order by tijd asc OFFSET 0 ROWS
+FETCH NEXT 1 ROWS ONLY)));
+
+update Bestelregel
+set bestelstatusID = 4 where Bestelregel.Reserveringsnummer =  (select Reservering.Reserveringsnummer
+from Bestelregel
+inner join Reservering on bestelregel.Reserveringsnummer = reservering.Reserveringsnummer
+inner join Gerecht on Gerechtnummer = menugerechtnummer
+inner join Online_bestellen on Online_bestellen.Reserveringsnummer = Reservering.Reserveringsnummer
+inner join OnlineStatus on Online_bestellen.OrderstatusOrderstatusID = OnlineStatus.StatusID
+inner join Klant on klant.KlantID = Reservering.KlantKlantID
+inner join in_restaurant on in_restaurant.Reserveringsnummer = in_restaurant.Reserveringsnummer
+where onlinestatus.statusid = 1 or onlinestatus.statusid = 5
+and Reservering.Datum = (SELECT CONVERT (date, GETDATE()))
+group by Reservering.reserveringsnummer, tijd 
+order by tijd asc OFFSET 0 ROWS
+FETCH NEXT 1 ROWS ONLY)
+
+update Online_bestellen
+set OrderstatusOrderstatusID = 3 where Online_bestellen.Reserveringsnummer =(select Reservering.Reserveringsnummer
+from Bestelregel
+inner join Reservering on bestelregel.Reserveringsnummer = reservering.Reserveringsnummer
+inner join Gerecht on Gerechtnummer = menugerechtnummer
+inner join Online_bestellen on Online_bestellen.Reserveringsnummer = Reservering.Reserveringsnummer
+inner join OnlineStatus on Online_bestellen.OrderstatusOrderstatusID = OnlineStatus.StatusID
+inner join Klant on klant.KlantID = Reservering.KlantKlantID
+inner join in_restaurant on in_restaurant.Reserveringsnummer = in_restaurant.Reserveringsnummer
+where onlinestatus.statusid = 1 or onlinestatus.statusid = 5
+and Reservering.Datum = (SELECT CONVERT (date, GETDATE()))
+group by Reservering.reserveringsnummer, tijd 
+order by tijd asc OFFSET 0 ROWS
+FETCH NEXT 1 ROWS ONLY)
 
 commit;
+
 " SelectCommand="select * from listviewonline"></asp:SqlDataSource>
         <asp:ListView ID="ListView3" runat="server" DataSourceID="SqlDataSource3">
             <AlternatingItemTemplate>

@@ -34,18 +34,29 @@ namespace ProjectBedrijfApp
         public int resultaatklant;
 
 
-
         int allin;
         string  tijdvakdata;
+        int aantalrondes;
 
         SqlConnection con = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Reserveringsnummer = (int)Session["Reserveringsnummer"];
+           // Reserveringsnummer = (int)Session["Reserveringsnummer"];
             tafelID = (List<string>)Session["TafelId"];
 
+        }
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((int)GridView1.DataKeys[GridView1.SelectedIndex]["KlantID"] != null)
+            {
+                Session["klantid"] = (int)GridView1.DataKeys[GridView1.SelectedIndex]["KlantID"];
+            }
+            
+            lbldatum.Text = Session["klantid"].ToString();
+           
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -55,6 +66,7 @@ namespace ProjectBedrijfApp
             if (cbAlles.Checked == true)
             {
                 allin = 1;
+                txtRondes.Visible = true;
             }
 
             else
@@ -73,8 +85,15 @@ namespace ProjectBedrijfApp
                 tijdvakdata = "19:30:00.0000000";
             }
 
-            int aantalrondes2 = int.Parse(txtRondes.Text);
-            int aantalrondes = aantalrondes2;
+            if (txtRondes.Visible == false)
+            {
+                 aantalrondes = 0;
+            }
+
+            else
+            {
+                aantalrondes = int.Parse(txtRondes.Text);
+            }
 
             CultureInfo dutch = new CultureInfo("nl-NL");
             DateTime dagvandaag = DateTime.Now;
@@ -91,7 +110,7 @@ namespace ProjectBedrijfApp
             con.Open();
             adapter2.InsertCommand = new SqlCommand(reservering, con);
             adapter2.InsertCommand.Parameters.AddWithValue("@datum", test);
-            adapter2.InsertCommand.Parameters.AddWithValue("@klant", resultaatklant);
+            adapter2.InsertCommand.Parameters.AddWithValue("@klant", Session["klantid"]);
             adapter2.InsertCommand.Parameters.AddWithValue("@restaurant", 1);
             int probeer1 = adapter2.InsertCommand.ExecuteNonQuery();
             con.Close();
@@ -99,7 +118,7 @@ namespace ProjectBedrijfApp
             con.Open();
             SqlCommand cmdklant = new SqlCommand(reserveringsnummer, con);
             cmdklant.Parameters.AddWithValue("@datum", test);
-            cmdklant.Parameters.AddWithValue("@klant", klantid);
+            cmdklant.Parameters.AddWithValue("@klant", Session["klantid"]);
             cmdklant.Parameters.AddWithValue("@restaurant", 1);
             SqlDataReader drklant = cmdklant.ExecuteReader();
              string resultaatklant2 = drklant.Read().ToString();
@@ -113,7 +132,7 @@ namespace ProjectBedrijfApp
             adapter.InsertCommand = new SqlCommand(invoegen, con);
             adapter.InsertCommand.Parameters.AddWithValue("@reserveringsnummers", Session["Reserveringsnummer"]);
             adapter.InsertCommand.Parameters.AddWithValue("@dagprobeer", dagen2);
-            adapter.InsertCommand.Parameters.AddWithValue("@aantalrondes", aantalrondes2);
+            adapter.InsertCommand.Parameters.AddWithValue("@aantalrondes", aantalrondes);
             int probeer = adapter.InsertCommand.ExecuteNonQuery();
             con.Close();
 
@@ -152,12 +171,6 @@ namespace ProjectBedrijfApp
 
         }
 
-        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            resultaatklant = (int)GridView1.DataKeys[GridView1.SelectedIndex]["KlantID"];
-            lbldatum.Text = resultaatklant.ToString();
-            Session["klantid"] = resultaatklant;
-            klantid = (int)Session["klantid"];
-        }
+
     }
 }

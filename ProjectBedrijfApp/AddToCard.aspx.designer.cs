@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ProjectBedrijfApp
+namespace Bestellen
 {
 
 
-    public partial class Managementinformatiehome
+    public partial class AddToCard
     {
 
         /// <summary>
@@ -24,48 +24,48 @@ namespace ProjectBedrijfApp
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// btnOmzet control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnOmzet;
+        protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// BtnLoonkosten control.
+        /// Label3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnLoonkosten;
+        protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
-        /// btnInkoop control.
+        /// GridView1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnInkoop;
+        protected global::System.Web.UI.WebControls.GridView GridView1;
 
         /// <summary>
-        /// btnVoorraad control.
+        /// btnTerug control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnVoorraad;
+        protected global::System.Web.UI.WebControls.Button btnTerug;
 
         /// <summary>
-        /// btnFacturen control.
+        /// btnBevestig control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnFacturen;
+        protected global::System.Web.UI.WebControls.Button btnBevestig;
     }
 }

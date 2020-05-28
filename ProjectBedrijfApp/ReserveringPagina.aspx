@@ -25,7 +25,8 @@
         <br />
         <asp:CheckBox ID="cbAlles" runat="server" Text="All you can Eat" />
         <br />
-        <asp:TextBox ID="txtRondes" runat="server">Aantal rondes</asp:TextBox>
+        <asp:TextBox ID="txtRondes" runat="server" Visible="False">Aantal rondes</asp:TextBox>
+        <!-- <asp:RangeValidator ID="RvRondes" runat="server" ControlToValidate="txtRondes" ErrorMessage="RangeValidator" MaximumValue="10" MinimumValue="0" Type="Integer"></asp:RangeValidator> -->
         <asp:Label ID="lbldatum" runat="server" Text="Label"></asp:Label>
         <br />
         <br />
