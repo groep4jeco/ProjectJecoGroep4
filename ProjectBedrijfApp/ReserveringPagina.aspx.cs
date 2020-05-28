@@ -304,6 +304,16 @@ namespace ProjectBedrijfApp
 
         protected void TxtVolw_TextChanged(object sender, EventArgs e)
         {
+            string queriepersonen =("select SUM([Aantal Volwassenen] + [Aantal kinderen]) from in_restaurant where Reserveringsnummer = @reservering");
+            SqlConnection con = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
+            con.Open();
+            SqlCommand cmdklant = new SqlCommand(queriepersonen, con);
+            cmdklant.Parameters.AddWithValue("@reservering", Session["reserveringsnummer"]);
+            SqlDataReader drpersonen = cmdklant.ExecuteReader();
+            string resultaatklant2 = drpersonen.Read().ToString();
+            int personen = int.Parse(resultaatklant2);
+            drpersonen.Close();
+            con.Close();
         }
     }
 }
