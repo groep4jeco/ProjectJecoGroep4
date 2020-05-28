@@ -123,6 +123,15 @@ namespace ProjectBedrijfApp
         protected global::System.Web.UI.WebControls.RangeValidator RvRondes;
 
         /// <summary>
+        /// RvRondes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator RvRondes;
+
+        /// <summary>
         /// lbldatum control.
         /// </summary>
         /// <remarks>
