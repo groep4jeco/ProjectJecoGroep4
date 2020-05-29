@@ -15,7 +15,6 @@ namespace ProjectBedrijfApp
     {
         string connetionString;
         SqlConnection cnn;
-        SqlDataReader dr;
         private int IsManager;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -53,19 +52,19 @@ namespace ProjectBedrijfApp
                 cmdSchedule.Parameters.AddWithValue("@Personeelsnummer", Id);
                 cmdSchedule.Parameters.AddWithValue("@Wachtwoord", password);
 
-                dr = cmdSchedule.ExecuteReader();
+                SqlDataReader dr = cmdSchedule.ExecuteReader();
                 string resulaat = dr.Read().ToString();
 
                 if (dr["Personeelsnummer"].ToString() == Id && dr["Wachtwoord"].ToString() == password)
                 {
 
                     string ismanager = dr["Functie"].ToString();
-                    //System.Diagnostics.Debug.WriteLine(ismanager);
+                    System.Diagnostics.Debug.WriteLine(ismanager);
                     if (ismanager == "Manager")
                     {
                         Session["Id"] = dr["Personeelsnummer"];
                         Session["Naam"] = dr["Voornaam"];
-                        Session["Functie"] = dr["Functie"];
+                        Session["Functie"] = ismanager;
                         Response.Redirect("tabletkeuze.aspx");
                     }
                     else
@@ -75,7 +74,8 @@ namespace ProjectBedrijfApp
                         Response.Redirect("tabletkeuze.aspx");
                     }
                         
-                } 
+                }
+                dr.Close();
             }
 
             catch
@@ -84,9 +84,8 @@ namespace ProjectBedrijfApp
             }
             finally
             {
-                dr.Close();
                 cnn.Close();
             }
         }
+        }
     }
-}

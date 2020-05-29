@@ -69,6 +69,15 @@ namespace ProjectBedrijfApp
         protected global::System.Web.UI.WebControls.TextBox TextBox1;
 
         /// <summary>
+        /// cbAlles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbAlles;
+
+        /// <summary>
         /// Button1 control.
         /// </summary>
         /// <remarks>
@@ -96,15 +105,6 @@ namespace ProjectBedrijfApp
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
 
         /// <summary>
-        /// cbAlles control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox cbAlles;
-
-        /// <summary>
         /// txtRondes control.
         /// </summary>
         /// <remarks>
@@ -121,6 +121,15 @@ namespace ProjectBedrijfApp
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RangeValidator RvRondes;
+
+        /// <summary>
+        /// RvRondes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        //protected global::System.Web.UI.WebControls.RangeValidator RvRondes;
 
         /// <summary>
         /// lbldatum control.

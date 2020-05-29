@@ -21,16 +21,15 @@ namespace ProjectBedrijfApp
             VrmNaam.Text = voornaam;
             IdLabel.Text = Id;
 
-            System.Diagnostics.Debug.WriteLine(isManager);
             if (isManager == "Manager")
             {
-                ManagerButton.Visible = true;
+                Button3.Visible = true;
             }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("Beginpagina.aspx");
         }
 
         protected void Button2_Click(object sender, EventArgs e)

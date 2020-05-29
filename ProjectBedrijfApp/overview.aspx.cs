@@ -49,6 +49,7 @@ namespace ProjectBedrijfApp
                             {
                                 //System.Diagnostics.Debug.WriteLine("SomeText");
                                 ((Button)control).BackColor = Color.Red;
+                                ((Button)control).Enabled = false;
                             }
                         }
 
@@ -84,21 +85,27 @@ namespace ProjectBedrijfApp
             string buttonId = button.Text;
 
             tafelID = (List<string>)Session["TafelId"];
-            tafelID.Add(buttonId);
             Session["TafelId"] = tafelID;
-
-            ReserveerStatus = true;
 
             foreach (var item in tafelID)
             {
-                if (tafelID.Contains(buttonId) && ReserveerStatus)
+                if (item.Contains(buttonId))
                 {
-                    button.BackColor = Color.Green;
-                }
-                else
-                {
-                    button.BackColor = Color.Red;
-                    ReserveerStatus = false;
+                    ReserveerStatus = !ReserveerStatus;
+                    System.Diagnostics.Debug.WriteLine(ReserveerStatus);
+                    if (ReserveerStatus)
+                    {
+                        tafelID.Add(buttonId);
+                        Session["TafelId"] = tafelID;
+                        button.BackColor = Color.Green;
+                    }
+                    else if (!ReserveerStatus)
+                    {
+                        tafelID.Remove(buttonId);
+                        button.BackColor = default(Color);
+                        System.Diagnostics.Debug.WriteLine(tafelID.Count);
+
+                    }
                 }
             }
         }
