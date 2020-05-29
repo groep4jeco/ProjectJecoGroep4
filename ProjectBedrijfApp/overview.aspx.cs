@@ -23,7 +23,9 @@ namespace ProjectBedrijfApp
             if (!IsPostBack)
             {
                 Session["TafelId"] = tafelID;
+                Session["ReserveerStatus"] = ReserveerStatus;
             }      
+
         }
 
         private void LoopButtons(ControlCollection controlCollection)
@@ -85,29 +87,34 @@ namespace ProjectBedrijfApp
             string buttonId = button.Text;
 
             tafelID = (List<string>)Session["TafelId"];
+            tafelID.Add(buttonId);
             Session["TafelId"] = tafelID;
-
-            foreach (var item in tafelID)
+            ReserveerStatus = !ReserveerStatus;
+            string combindedString = string.Join(",", tafelID);
+            System.Diagnostics.Debug.WriteLine(combindedString);
+ 
+            if (tafelID.Contains(buttonId))
             {
-                if (item.Contains(buttonId))
-                {
-                    ReserveerStatus = !ReserveerStatus;
-                    System.Diagnostics.Debug.WriteLine(ReserveerStatus);
-                    if (ReserveerStatus)
-                    {
-                        tafelID.Add(buttonId);
-                        Session["TafelId"] = tafelID;
-                        button.BackColor = Color.Green;
-                    }
-                    else if (!ReserveerStatus)
-                    {
-                        tafelID.Remove(buttonId);
-                        button.BackColor = default(Color);
-                        System.Diagnostics.Debug.WriteLine(tafelID.Count);
-
-                    }
-                }
+                ReserveerStatus = true;
             }
+            else if(!tafelID.Contains(buttonId))
+            {
+                ReserveerStatus = false;
+            }
+
+            System.Diagnostics.Debug.WriteLine(ReserveerStatus);
+            if (ReserveerStatus)
+            {
+                button.BackColor = Color.Green;
+            }
+            if (!ReserveerStatus)
+            {
+                tafelID.Remove(buttonId);
+                button.BackColor = default(Color);
+                System.Diagnostics.Debug.WriteLine(tafelID.Count);
+
+            }
+
         }
 
         protected void btn_keuken_Click(object sender, EventArgs e)
