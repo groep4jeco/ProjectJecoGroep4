@@ -11,6 +11,13 @@ namespace Bestellen
 {
     public partial class Bestellen : System.Web.UI.Page
     {
+        int maxbestelbaar;
+        int htotaal;
+        int nrow;
+        int i;
+        int toevoegen;
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             lblDatum.Text = DateTime.Now.ToString("D");
@@ -26,7 +33,7 @@ namespace Bestellen
             con.Close();
 
             lblAantalpersonen.Text = aantalpersonen;
-            int maxbestelbaar = int.Parse(aantalpersonen) * 5;
+            maxbestelbaar = int.Parse(aantalpersonen) * 5;
 
 
             lblRonde.Text = Session["ronde"].ToString();
@@ -170,28 +177,44 @@ namespace Bestellen
                 }
 
             }
-
             /*
             if (totalehoeveelheid() >= maxbestelbaar)
             {
                 lblWaarschuwing.Text = "JE HEBT TE VEEL GERECHTEN!";
             }
             */
-
         }
 
         public int totalehoeveelheid()
         {
             DataTable dt = new DataTable();
             dt = (DataTable)Session["buyitems"];
-            int nrow = dt.Rows.Count;
-            int i = 0;
-            int htotaal = 0;
+            nrow = dt.Rows.Count;
+            i = 0;
+            htotaal = 0;
+
+            toevoegen = htotaal + Convert.ToInt32(dt.Rows[i]["Hoeveelheid"].ToString());
+
             while (i < nrow)
             {
-                htotaal = htotaal + Convert.ToInt32(dt.Rows[i]["Hoeveelheid"].ToString());
+                if (htotaal + Convert.ToInt32(dt.Rows[i]["Hoeveelheid"].ToString()) <= maxbestelbaar)
+                {
+                    htotaal = htotaal + Convert.ToInt32(dt.Rows[i]["Hoeveelheid"].ToString());
+                }
+                
 
                 i = i + 1;
+
+                if (htotaal == maxbestelbaar)
+                {
+                    lblWaarschuwing.Text = "Je hebt het maximaal aantal gerechten bereikt!";
+                }
+
+                if (htotaal >= maxbestelbaar)
+                {
+                    DataList1.Enabled = false;
+                }
+
             }
             return htotaal;
 
@@ -206,9 +229,8 @@ namespace Bestellen
             {
 
 
-                DropDownList dlist = (DropDownList)(e.Item.FindControl("DropDownList1"));
-                Response.Redirect("Bestellen.aspx?id=" + e.CommandArgument.ToString() + "&Hoeveelheid=" + dlist.SelectedItem.ToString());
-
+                    DropDownList dlist = (DropDownList)(e.Item.FindControl("DropDownList1"));
+                    Response.Redirect("Bestellen.aspx?id=" + e.CommandArgument.ToString() + "&Hoeveelheid=" + dlist.SelectedItem.ToString());          
             }
         }
 

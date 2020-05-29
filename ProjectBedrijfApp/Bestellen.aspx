@@ -224,8 +224,8 @@
                         <asp:BoundField DataField="Hoeveelheid" HeaderText="Aantal">
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
-                        <asp:ButtonField CommandName="btnPlus" Text="+" />
-                        <asp:ButtonField CommandName="btnMinus" Text="-" />
+                        <asp:ButtonField CommandName="btnPlus" />
+                        <asp:ButtonField CommandName="btnMinus" />
                         <asp:CommandField DeleteText="X" ShowDeleteButton="True">
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:CommandField>
