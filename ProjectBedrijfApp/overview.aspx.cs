@@ -75,7 +75,7 @@ namespace ProjectBedrijfApp
            // Tafel.Reserveringsnummer1++;
             //SelectedTafelID = Tafel.Reserveringsnummer1;
             Session["Reserveringsnummer"] = SelectedTafelID;
-            Response.Redirect("~/ReserveringPagina.aspx?TafelID=");
+            Response.Redirect("~/ReserveringPagina.aspx");
         }
 
         public void SetReserverData(object sender, EventArgs e)
