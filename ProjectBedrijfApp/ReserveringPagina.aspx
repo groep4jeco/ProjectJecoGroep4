@@ -65,9 +65,7 @@
             <asp:TextBox ID="TxtKind" runat="server"></asp:TextBox>
             <br />
             <br />
-            <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="TxtVolw" ErrorMessage="RangeValidator" ValidationGroup="Limietpersonen"></asp:RangeValidator>
             <br />
-            <asp:RangeValidator ID="RangeValidator2" runat="server" ControlToValidate="TxtKind" ErrorMessage="RangeValidator" ValidationGroup="Limietpersonen"></asp:RangeValidator>
             <br />
             <br />
             <asp:CheckBox ID="cbAlles" runat="server" Text="All you can Eat" OnCheckedChanged="cbAlles_CheckedChanged" AutoPostBack="True" />
