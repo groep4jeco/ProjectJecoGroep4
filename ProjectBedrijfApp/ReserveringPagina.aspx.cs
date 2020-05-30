@@ -38,6 +38,7 @@ namespace ProjectBedrijfApp
 
 
         int allin;
+        string time;
         string  tijdvakdata;
         int aantalrondes;
 
@@ -45,6 +46,7 @@ namespace ProjectBedrijfApp
         string email;
         int teller;
         bool clicked;
+        int kinderen;
 
         SqlConnection con = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
 
@@ -69,97 +71,121 @@ namespace ProjectBedrijfApp
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            if (int.Parse(TxtVolw.Text) + int.Parse(TxtKind.Text) > teller * 2)
+            if (TxtKind.Text == "")
             {
-                lblSorry.Text = "Het aantal personen is hoger dan de capiciteit van de tafels ga terug naar het overzicht en selecteer meer tafels";
+                kinderen = 0;
             }
             else
             {
-                lblSorry.Text = "";
-               
-                if (RadioButton1.Checked == true)
+                kinderen = int.Parse(TxtKind.Text);
+            }
+            
+                if (int.Parse(TxtVolw.Text) + kinderen > teller * 2)
                 {
-                    tijdvakdata = "5pm";
+                    lblSorry.Text = "Het aantal personen is hoger dan de capiciteit van de tafels ga terug naar het overzicht en selecteer meer tafels";
                 }
+            
 
-                else if (RadioButton2.Checked == true)
+            else
+            {
+                if (RadioButton1.Checked == false && RadioButton2.Checked == false)
                 {
-                    tijdvakdata = "7.5pm";
+                    lblSorry.Text = "Vink een tijdvak aan";
                 }
-
-                try
+                else
                 {
-                    aantalrondes = int.Parse(txtRondes.Text);
-                }
-                catch
-                {
-                    aantalrondes = 0;
-                }
-                finally
-                {
+                    lblSorry.Text = "";
 
-                }
+                    if (RadioButton1.Checked == true)
+                    {
+                        time = "17:00:00";
+                        var result = Convert.ToDateTime(time);
+                        tijdvakdata = result.ToString("hh:mm:ss tt", CultureInfo.CurrentCulture);
+                    }
 
-                CultureInfo dutch = new CultureInfo("nl-NL");
-                DateTime dagvandaag = DateTime.Now;
-                string dagen = dutch.DateTimeFormat.GetDayName(dagvandaag.DayOfWeek).ToString();
-                string dagen2 = dagen.ToString();
-                Label1.Text = dagen2;
-                string datum = dagvandaag.ToString("yyyy-MM-dd");
-                DateTime test = DateTime.Parse(datum);
+                    else if (RadioButton2.Checked == true)
+                    {
+                        time = "19:30:00";
+                        var result = Convert.ToDateTime(time);
+                        tijdvakdata = result.ToString("hh:mm:ss tt", CultureInfo.CurrentCulture);
+                    }
 
-                string reservering = "Insert into reservering(datum, klantklantID, [RestaurantRestaurant ID]) values (@datum, @klant, @restaurant)";
-                string reserveringsnummer = "select reserveringsnummer from reservering where klantklantid = @klant AND datum = @datum AND [RestaurantRestaurant ID] = @restaurant";
-                string invoegen = "Begin transaction; Insert into in_restaurant([All you can eat], [Aantal rondes], [ReserveringsstatusStatus ID], TijdvakNummer, [Aantal kinderen], [Aantal Volwassenen], Reserveringsnummer)  values(@allin, @aantalrondes, 2, (select Tijdvak.Nummer from Tijdvak where Begintijd = CAST('@tijd' AS time) AND Dag = @dagprobeer), @volw, @kind, @reserveringsnummers); commit;";
-                //command = new SqlCommand(invoegen, connnection);
-                con.Open();
-                adapter2.InsertCommand = new SqlCommand(reservering, con);
-                adapter2.InsertCommand.Parameters.AddWithValue("@datum", test);
-                adapter2.InsertCommand.Parameters.AddWithValue("@tijd", tijdvakdata);
-                adapter2.InsertCommand.Parameters.AddWithValue("@klant", Session["klantid"]);
-                adapter2.InsertCommand.Parameters.AddWithValue("@restaurant", 1);
-                int probeer1 = adapter2.InsertCommand.ExecuteNonQuery();
+                    try
+                    {
+                        aantalrondes = int.Parse(txtRondes.Text);
+                    }
+                    catch
+                    {
+                        aantalrondes = 0;
+                    }
+                    finally
+                    {
 
-                con.Close();
+                    }
 
-                con.Open();
-                SqlCommand cmdklant = new SqlCommand(reserveringsnummer, con);
-                cmdklant.Parameters.AddWithValue("@datum", test);
-                cmdklant.Parameters.AddWithValue("@klant", Session["klantid"]);
-                cmdklant.Parameters.AddWithValue("@restaurant", 1);
-                SqlDataReader drklant = cmdklant.ExecuteReader();
-                string resultaatklant2 = drklant.Read().ToString();
-                Session["Reserveringsnummer"] = drklant["Reserveringsnummer"];
-                drklant.Close();
-                con.Close();
+                    CultureInfo dutch = new CultureInfo("nl-NL");
+                    DateTime dagvandaag = DateTime.Now;
+                    string dagen = dutch.DateTimeFormat.GetDayName(dagvandaag.DayOfWeek).ToString();
+                    string dagen2 = dagen.ToString();
+                    Label1.Text = dagen2;
+                    string datum = dagvandaag.ToString("yyyy-MM-dd");
+                    DateTime test = DateTime.Parse(datum);
 
-
-
-                con.Open();
-                //command.CommandType = CommandType.StoredProcedure;
-                adapter.InsertCommand = new SqlCommand(invoegen, con);
-                adapter.InsertCommand.Parameters.AddWithValue("@reserveringsnummers", Session["Reserveringsnummer"]);
-                adapter.InsertCommand.Parameters.AddWithValue("@dagprobeer", dagen2);
-                adapter.InsertCommand.Parameters.AddWithValue("@allin", allin);
-                adapter.InsertCommand.Parameters.AddWithValue("@volw", TxtVolw.Text);
-                adapter.InsertCommand.Parameters.AddWithValue("@kind", TxtKind.Text);
-                adapter.InsertCommand.Parameters.AddWithValue("@aantalrondes", aantalrondes);
-                int probeer = adapter.InsertCommand.ExecuteNonQuery();
-
-                con.Close();
-
-                foreach (var item in tafelID)
-                {
+                    string reservering = "Insert into reservering(datum, klantklantID, [RestaurantRestaurant ID]) values (@datum, @klant, @restaurant)";
+                    string reserveringsnummer = "select reserveringsnummer from reservering where klantklantid = @klant AND datum = @datum AND [RestaurantRestaurant ID] = @restaurant";
+                    string invoegen = "Begin transaction; Insert into in_restaurant([All you can eat], [Aantal rondes], [ReserveringsstatusStatus ID], TijdvakNummer, [Aantal kinderen], [Aantal Volwassenen], Reserveringsnummer)  values(@allin, @aantalrondes, 2, (select Tijdvak.Nummer from Tijdvak where Begintijd = CAST('tijdvakdata' AS time) AND Dag = @dagprobeer), @volw, @kind, @reserveringsnummers); commit;";
+                    //command = new SqlCommand(invoegen, connnection);
+                    //
                     con.Open();
-                    string tafelreservering = "INSERT INTO Tafel_Reservering (TafelTafelnummer, [TafelRestaurantRestaurant ID], [Reserveringsnummer]) VALUES (@tafelnummer, @restaurant, @reservering)";
-                    adapter.InsertCommand = new SqlCommand(tafelreservering, con);
-                    adapter.InsertCommand.Parameters.AddWithValue("@reservering", Session["Reserveringsnummer"]);
-                    adapter.InsertCommand.Parameters.AddWithValue("@tafelnummer", item);
-                    adapter.InsertCommand.Parameters.AddWithValue("@restaurant", 1);
-                    int tafeltjes = adapter.InsertCommand.ExecuteNonQuery();
+                    adapter2.InsertCommand = new SqlCommand(reservering, con);
+                    adapter2.InsertCommand.Parameters.AddWithValue("@datum", test);
+                    //adapter2.InsertCommand.Parameters.AddWithValue("@tijd", tijdvakdata);
+                    adapter2.InsertCommand.Parameters.AddWithValue("@klant", Session["klantid"]);
+                    adapter2.InsertCommand.Parameters.AddWithValue("@restaurant", 1);
+                    int probeer1 = adapter2.InsertCommand.ExecuteNonQuery();
+
                     con.Close();
+
+                    con.Open();
+                    SqlCommand cmdklant = new SqlCommand(reserveringsnummer, con);
+                    cmdklant.Parameters.AddWithValue("@datum", test);
+                    cmdklant.Parameters.AddWithValue("@klant", Session["klantid"]);
+                    cmdklant.Parameters.AddWithValue("@restaurant", 1);
+                    SqlDataReader drklant = cmdklant.ExecuteReader();
+                    string resultaatklant2 = drklant.Read().ToString();
+                    Session["Reserveringsnummer"] = drklant["Reserveringsnummer"];
+                    drklant.Close();
+                    con.Close();
+
+
+
+                    con.Open();
+                    //command.CommandType = CommandType.StoredProcedure;
+                    adapter.InsertCommand = new SqlCommand(invoegen, con);
+                    adapter.InsertCommand.Parameters.AddWithValue("@reserveringsnummers", Session["Reserveringsnummer"]);
+                    adapter.InsertCommand.Parameters.AddWithValue("@dagprobeer", dagen2);
+                    adapter.InsertCommand.Parameters.AddWithValue("@allin", allin);
+                    adapter.InsertCommand.Parameters.AddWithValue("@volw", TxtVolw.Text);
+                    adapter.InsertCommand.Parameters.AddWithValue("@kind", kinderen);
+                    adapter.InsertCommand.Parameters.AddWithValue("@aantalrondes", aantalrondes);
+                    int probeer = adapter.InsertCommand.ExecuteNonQuery();
+
+                    con.Close();
+
+                    foreach (var item in tafelID)
+                    {
+                        con.Open();
+                        string tafelreservering = "INSERT INTO Tafel_Reservering (TafelTafelnummer, [TafelRestaurantRestaurant ID], [Reserveringsnummer]) VALUES (@tafelnummer, @restaurant, @reservering)";
+                        adapter.InsertCommand = new SqlCommand(tafelreservering, con);
+                        adapter.InsertCommand.Parameters.AddWithValue("@reservering", Session["Reserveringsnummer"]);
+                        adapter.InsertCommand.Parameters.AddWithValue("@tafelnummer", item);
+                        adapter.InsertCommand.Parameters.AddWithValue("@restaurant", 1);
+                        int tafeltjes = adapter.InsertCommand.ExecuteNonQuery();
+                        con.Close();
+                    }
                 }
             }
+
         }
         
 
@@ -279,6 +305,11 @@ namespace ProjectBedrijfApp
         }
 
         protected void TxtVolw_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void txtRondes_TextChanged(object sender, EventArgs e)
         {
 
         }

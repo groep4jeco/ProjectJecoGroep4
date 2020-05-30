@@ -66,13 +66,14 @@
             <br />
             <br />
             <br />
+            <asp:Button ID="BtnTerug" runat="server" Text="Vorige pagina" />
             <br />
             <br />
             <asp:CheckBox ID="cbAlles" runat="server" Text="All you can Eat" OnCheckedChanged="cbAlles_CheckedChanged" AutoPostBack="True" />
             <br />
             <br />
             <br />
-            <asp:TextBox ID="txtRondes" runat="server" Visible="False" Height="30px">Aantal rondes</asp:TextBox>
+            <asp:TextBox ID="txtRondes" runat="server" Visible="False" Height="30px" OnTextChanged="txtRondes_TextChanged" TextMode="Number" ToolTip="Voer hier het aantal rondes in"></asp:TextBox>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br />
             <br />
