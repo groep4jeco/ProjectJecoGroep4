@@ -23,7 +23,7 @@ namespace ProjectBedrijfApp
             if (!IsPostBack)
             {
                 Session["TafelId"] = tafelID;
-                Session["ReserveerStatus"] = ReserveerStatus;
+                //Session["ReserveerStatus"] = ReserveerStatus;
             }      
 
         }
@@ -85,19 +85,21 @@ namespace ProjectBedrijfApp
         {
             Button button = (Button)sender;
             string buttonId = button.Text;
+            System.Diagnostics.Debug.WriteLine(buttonId);
 
-            tafelID = (List<string>)Session["TafelId"];
-            tafelID.Add(buttonId);
-            Session["TafelId"] = tafelID;
-            ReserveerStatus = !ReserveerStatus;
-            string combindedString = string.Join(",", tafelID);
-            System.Diagnostics.Debug.WriteLine(combindedString);
- 
-            if (tafelID.Contains(buttonId))
+            //string combindedString = string.Join(",", tafelID);
+            //System.Diagnostics.Debug.WriteLine(combindedString);
+
+            if (!tafelID.Contains(buttonId))
             {
                 ReserveerStatus = true;
+                tafelID = (List<string>)Session["TafelId"];
+                tafelID.Add(buttonId);
+                Session["TafelId"] = tafelID;
+                string combindedString = string.Join(",", tafelID);
+                System.Diagnostics.Debug.WriteLine(combindedString);
             }
-            else if(!tafelID.Contains(buttonId))
+            else if(tafelID.Contains(buttonId))
             {
                 ReserveerStatus = false;
             }
@@ -110,7 +112,7 @@ namespace ProjectBedrijfApp
             if (!ReserveerStatus)
             {
                 tafelID.Remove(buttonId);
-                button.BackColor = default(Color);
+                button.BackColor = Color.Red;
                 System.Diagnostics.Debug.WriteLine(tafelID.Count);
 
             }
