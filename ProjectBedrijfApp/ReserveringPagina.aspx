@@ -59,12 +59,14 @@
             
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TxtVolw" ErrorMessage="Dit is een verplicht veld."></asp:RequiredFieldValidator>
             
-            <asp:TextBox ID="TxtVolw" runat="server" OnTextChanged="TxtVolw_TextChanged"></asp:TextBox>
+            <asp:TextBox ID="TxtVolw" runat="server" OnTextChanged="TxtVolw_TextChanged" TextMode="Number"></asp:TextBox>
             <br />
             <asp:Label ID="lblKind" runat="server" Text="Aantal kinderen"></asp:Label>
-            <asp:TextBox ID="TxtKind" runat="server"></asp:TextBox>
+            <asp:TextBox ID="TxtKind" runat="server" TextMode="Number"></asp:TextBox>
             <br />
+            <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="TxtVolw" ErrorMessage="Aantal personen mag niet lager zijn dan 0 of hoger dan 160" MaximumValue="160" MinimumValue="0"></asp:RangeValidator>
             <br />
+            <asp:RangeValidator ID="RangeValidator2" runat="server" ControlToValidate="TxtKind" ErrorMessage="Aantal personen mag niet lager zijn dan 0 of hoger dan 160" MaximumValue="159" MinimumValue="0"></asp:RangeValidator>
             <br />
             <asp:Button ID="BtnTerug" runat="server" Text="Vorige pagina" />
             <br />
@@ -72,6 +74,7 @@
             <asp:CheckBox ID="cbAlles" runat="server" Text="All you can Eat" OnCheckedChanged="cbAlles_CheckedChanged" AutoPostBack="True" />
             <br />
             <br />
+            <asp:Label ID="lblRondes" runat="server" Text="Aantal rondes" Visible="False"></asp:Label>
             <br />
             <asp:TextBox ID="txtRondes" runat="server" Visible="False" Height="30px" OnTextChanged="txtRondes_TextChanged" TextMode="Number" ToolTip="Voer hier het aantal rondes in"></asp:TextBox>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
