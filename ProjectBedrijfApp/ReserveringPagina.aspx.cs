@@ -254,8 +254,8 @@ namespace ProjectBedrijfApp
             int count = GridView1.Rows.Count;
             TxtVolw.Text = count.ToString();
             btnNieuw.Visible = true;
-            TxtEmail.Visible = true;
-            lblEmail.Visible = true;
+            txtEmail.Visible = true;
+            txtEmail.Visible = true;
             lbltelefoon.Visible = true;
             Txttelefoon.Visible = true;
             return count;
@@ -288,7 +288,7 @@ namespace ProjectBedrijfApp
                     adapter.InsertCommand = new SqlCommand(nieuwe_klant, con);
                     adapter.InsertCommand.Parameters.AddWithValue("@voornaam", txtVoornaam.Text);
                     adapter.InsertCommand.Parameters.AddWithValue("@achternaam", txtAchternaam.Text);
-                    adapter.InsertCommand.Parameters.AddWithValue("@email", TxtEmail.Text);
+                    adapter.InsertCommand.Parameters.AddWithValue("@email", txtEmail.Text);
                     adapter.InsertCommand.Parameters.AddWithValue("@telefoon", Txttelefoon.Text);
                     int probeer = adapter.InsertCommand.ExecuteNonQuery();
                     con.Close();

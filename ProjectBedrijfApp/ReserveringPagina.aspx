@@ -13,7 +13,7 @@
             border-left-width: 900px;
             float: left;
             border-top: thick;
-            margin-left: 300px;
+            margin-left: 100px;
             height: 660px;
         }
 
@@ -25,9 +25,9 @@
         .container2 {
             float: unset;
             background-color: seashell;
-            margin-left: 1100px;
+            margin-left: 900px;
             height: 638px;
-            margin-right: 300px;
+            margin-right: 100px;
             width: 550px;
             text-align: center;
         }
@@ -54,13 +54,21 @@
             <br />
             <br />
             <asp:Label ID="lblVolwassenen" runat="server" Text="Aantal volwassenen"></asp:Label>
-            &nbsp;&nbsp;&nbsp;
+            <br />
+            <br />
             
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TxtVolw" ErrorMessage="Dit is een verplicht veld."></asp:RequiredFieldValidator>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TxtVolw" ErrorMessage="Dit is een verplicht veld." Visible="False"></asp:RequiredFieldValidator>
+
+            <br />
+            <br />
 
             <asp:TextBox ID="TxtVolw" runat="server" OnTextChanged="TxtVolw_TextChanged" TextMode="Number"></asp:TextBox>
             <br />
+            <br />
+            <br />
             <asp:Label ID="lblKind" runat="server" Text="Aantal kinderen"></asp:Label>
+            <br />
+            <br />
             <asp:TextBox ID="TxtKind" runat="server" TextMode="Number"></asp:TextBox>
             <br />
             <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="TxtVolw" ErrorMessage="Aantal personen mag niet lager zijn dan 0 of hoger dan 160" MaximumValue="160" MinimumValue="0"></asp:RangeValidator>
@@ -128,9 +136,9 @@
             <br />
             &nbsp;<asp:TextBox ID="Txttelefoon" runat="server" Visible="False"></asp:TextBox>
             <br />
-            <asp:Label ID="Label2" runat="server" Text="Emailadres" Visible="False"></asp:Label>
+            <asp:Label ID="lblEmail" runat="server" Text="Emailadres" Visible="False"></asp:Label>
             <br />
-            <asp:TextBox ID="TextBox1" runat="server" Visible="False"></asp:TextBox>
+            <asp:TextBox ID="txtEmail" runat="server" Visible="False"></asp:TextBox>
             <br />
             <asp:Label ID="lblSorry" runat="server"></asp:Label>
             <br />
