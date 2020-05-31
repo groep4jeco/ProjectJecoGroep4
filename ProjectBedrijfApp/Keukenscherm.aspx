@@ -8,7 +8,10 @@
 <head runat="server">
     <title></title>
     <style> 
-
+        .body
+        {
+            background-color:seashell;
+        }
     </style>
 </head>
 <body>

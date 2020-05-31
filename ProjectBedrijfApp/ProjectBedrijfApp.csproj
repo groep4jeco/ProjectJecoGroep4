@@ -70,7 +70,7 @@
   <ItemGroup>
     <Content Include=".vs\ProjectBedrijfApp\versiersel.png" />
     <Content Include="AddToCard.aspx" />
-    <Content Include="Beginpagina.aspx" />
+    <Content Include="regristratiepagina.aspx" />
     <Content Include="Bestellen.aspx" />
     <Content Include="Betalen.aspx" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
@@ -198,12 +198,12 @@
     <Compile Include="AddToCard.aspx.designer.cs">
       <DependentUpon>AddToCard.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Beginpagina.aspx.cs">
-      <DependentUpon>Beginpagina.aspx</DependentUpon>
+    <Compile Include="regristratiepagina.aspx.cs">
+      <DependentUpon>regristratiepagina.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Beginpagina.aspx.designer.cs">
-      <DependentUpon>Beginpagina.aspx</DependentUpon>
+    <Compile Include="regristratiepagina.aspx.designer.cs">
+      <DependentUpon>regristratiepagina.aspx</DependentUpon>
     </Compile>
     <Compile Include="Bestellen.aspx.cs">
       <DependentUpon>Bestellen.aspx</DependentUpon>
