@@ -54,24 +54,35 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br />
             <br />
-            <asp:Label ID="Label2" runat="server" Text="Aantal Personen"></asp:Label>
+            <asp:Label ID="lblVolwassenen" runat="server" Text="Aantal volwassenen"></asp:Label>
             &nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TxtVolw" ErrorMessage="Dit is een verplicht veld."></asp:RequiredFieldValidator>
+            
+            <asp:TextBox ID="TxtVolw" runat="server" OnTextChanged="TxtVolw_TextChanged" TextMode="Number"></asp:TextBox>
+            <br />
+            <asp:Label ID="lblKind" runat="server" Text="Aantal kinderen"></asp:Label>
+            <asp:TextBox ID="TxtKind" runat="server" TextMode="Number"></asp:TextBox>
+            <br />
+            <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="TxtVolw" ErrorMessage="Aantal personen mag niet lager zijn dan 0 of hoger dan 160" MaximumValue="160" MinimumValue="0"></asp:RangeValidator>
+            <br />
+            <asp:RangeValidator ID="RangeValidator2" runat="server" ControlToValidate="TxtKind" ErrorMessage="Aantal personen mag niet lager zijn dan 0 of hoger dan 160" MaximumValue="159" MinimumValue="0"></asp:RangeValidator>
+            <br />
+            <asp:Button ID="BtnTerug" runat="server" Text="Vorige pagina" />
             <br />
             <br />
+            <asp:CheckBox ID="cbAlles" runat="server" Text="All you can Eat" OnCheckedChanged="cbAlles_CheckedChanged" AutoPostBack="True" />
             <br />
             <br />
+            <asp:Label ID="lblRondes" runat="server" Text="Aantal rondes" Visible="False"></asp:Label>
             <br />
-            <asp:CheckBox ID="cbAlles" runat="server" Text="All you can Eat" />
-            <br />
-            <br />
-            <br />
+            <asp:TextBox ID="txtRondes" runat="server" Visible="False" Height="30px" OnTextChanged="txtRondes_TextChanged" TextMode="Number" ToolTip="Voer hier het aantal rondes in"></asp:TextBox>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br />
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            <div class="knop1">
-               <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Reserveer Tafel" Height="47px" Width="117px" Font-Bold="True" Font-Italic="True" />
+               <asp:Button ID="BtnClick" runat="server" OnClick="Button1_Click" Text="Reserveer Tafel" Height="47px" Width="117px" Font-Bold="True" Font-Italic="True" />
            </div>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br />
@@ -91,23 +102,24 @@
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br />
-            <asp:TextBox ID="txtRondes" runat="server" Visible="False">Aantal rondes</asp:TextBox>
-            <asp:RangeValidator ID="RvRondes" runat="server" ControlToValidate="txtRondes" ErrorMessage="RangeValidator" MaximumValue="10" MinimumValue="0" Type="Integer"></asp:RangeValidator>
             <asp:Label ID="lbldatum" runat="server" Text="Label" Visible="False"></asp:Label>
             <br />
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtVoornaam" ErrorMessage="Dit is een verplicht veld."></asp:RequiredFieldValidator>
             <br />
-            <asp:Label ID="lblVoornaam" runat="server" Text="Voornaam"></asp:Label>
+            <asp:Label ID="lblVoornaam" runat="server" Text="Voornaam*"></asp:Label>
             <br />
-            <asp:TextBox ID="txtVoornaam" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtVoornaam" runat="server" OnTextChanged="txtVoornaam_TextChanged"></asp:TextBox>
             <br />
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtAchternaam" ErrorMessage="Dit is een verplicht veld."></asp:RequiredFieldValidator>
             <br />
-            <asp:Label ID="lblAchternaam" runat="server" Text="Achternaam"></asp:Label>
+            <asp:Label ID="lblAchternaam" runat="server" Text="Achternaam*"></asp:Label>
             <br />
             <asp:TextBox ID="txtAchternaam" runat="server"></asp:TextBox>
             <br />
+            <asp:Label ID="lblSorry" runat="server" Text="Klant niet gevonden of de klant is nieuw in het systeem."></asp:Label>
             <br />
             <asp:Button ID="BtnZoek" runat="server" OnClick="BtnZoek_Click" Text="Zoek klant" />
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="KlantID" DataSourceID="sqlKlant" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="KlantID" DataSourceID="sqlKlant" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnDataBound="GridView1_DataBound" OnLoad="GridView1_Load" OnPageIndexChanged="GridView1_PageIndexChanged">
                 <Columns>
                     <asp:CommandField ShowSelectButton="True" />
                     <asp:BoundField DataField="KlantID" HeaderText="KlantID" InsertVisible="False" ReadOnly="True" SortExpression="KlantID" />
@@ -117,8 +129,9 @@
                     <asp:BoundField DataField="Telefoonnummer" HeaderText="Telefoonnummer" SortExpression="Telefoonnummer" />
                 </Columns>
             </asp:GridView>
+                <asp:Button ID="btnNieuw" runat="server" OnClick="btnNieuw_Click" Text="Nieuwe klant" Visible="False" />
                 <br />
-            <asp:SqlDataSource ID="sqlKlant" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [KlantID], [Voornaam], [Achternaam], [Email], [Telefoonnummer] FROM [Klant] WHERE (([Voornaam] = @Voornaam) AND ([Achternaam] = @Achternaam))">
+            <asp:SqlDataSource ID="sqlKlant" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [KlantID], [Voornaam], [Achternaam], [Email], [Telefoonnummer] FROM [Klant] WHERE (([Voornaam] = @Voornaam) OR ([Achternaam] = @Achternaam))">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="txtVoornaam" Name="Voornaam" PropertyName="Text" Type="String" />
                     <asp:ControlParameter ControlID="txtAchternaam" Name="Achternaam" PropertyName="Text" Type="String" />
@@ -126,6 +139,16 @@
             </asp:SqlDataSource>
         </div>
         <br />
+        <asp:Label ID="lbltelefoon" runat="server" Text="Telefoonnummer" Visible="False"></asp:Label>
+        <br />
+        <asp:TextBox ID="Txttelefoon" runat="server" Visible="False"></asp:TextBox>
+        <br />
+        <br />
+        <br />
+        <asp:Label ID="lblEmail" runat="server" Text="Emailadres" Visible="False"></asp:Label>
+        <br />
+        <asp:TextBox ID="TxtEmail" runat="server" Visible="False"></asp:TextBox>
+
     </form>
 </body>
 </html>
