@@ -21,7 +21,6 @@
 
         .container {
             margin-left: 50px;
-            height: 282px;
             width: 402px;
         }
 

@@ -69,6 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".vs\ProjectBedrijfApp\versiersel.png" />
+    <Content Include="AddToCard.aspx" />
+    <Content Include="regristratiepagina.aspx" />
     <Content Include="Bestellen.aspx" />
     <Content Include="Betalen.aspx" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
@@ -189,6 +191,20 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddToCard.aspx.cs">
+      <DependentUpon>AddToCard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddToCard.aspx.designer.cs">
+      <DependentUpon>AddToCard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="regristratiepagina.aspx.cs">
+      <DependentUpon>regristratiepagina.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="regristratiepagina.aspx.designer.cs">
+      <DependentUpon>regristratiepagina.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Bestellen.aspx.cs">
       <DependentUpon>Bestellen.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
