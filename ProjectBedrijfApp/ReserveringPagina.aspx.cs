@@ -315,5 +315,10 @@ namespace ProjectBedrijfApp
         {
 
         }
+
+        protected void Txttelefoon_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
