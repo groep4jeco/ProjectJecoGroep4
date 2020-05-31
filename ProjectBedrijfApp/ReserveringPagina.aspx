@@ -116,7 +116,7 @@
             <br />
             <asp:TextBox ID="txtAchternaam" runat="server"></asp:TextBox>
             <br />
-            <asp:Label ID="lblSorry" runat="server" Text="Klant niet gevonden of de klant is nieuw in het systeem."></asp:Label>
+            <asp:Label ID="lblSorry" runat="server"></asp:Label>
             <br />
             <asp:Button ID="BtnZoek" runat="server" OnClick="BtnZoek_Click" Text="Zoek klant" />
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="KlantID" DataSourceID="sqlKlant" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnDataBound="GridView1_DataBound" OnLoad="GridView1_Load" OnPageIndexChanged="GridView1_PageIndexChanged">
