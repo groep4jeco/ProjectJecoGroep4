@@ -11,12 +11,6 @@ namespace ProjectBedrijfApp
 {
     public partial class Bestellen_drinken : System.Web.UI.Page
     {
-        int maxbestelbaar;
-        int htotaal;
-        int nrow;
-        int i;
-        int toevoegen;
-
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -131,13 +125,7 @@ namespace ProjectBedrijfApp
                 {
                     dt2 = (DataTable)Session["koopdrinken"];
                     GridView2.DataSource = dt2;
-                    GridView2.DataBind();
-                    if (GridView2.Rows.Count > 0)
-                    {
-                        GridView2.FooterRow.Cells[2].Text = "Totaal:";
-                        GridView2.FooterRow.Cells[3].Text = totalehoeveelheid().ToString() + " / " + maxbestelbaar.ToString();
-
-                    }
+                    GridView2.DataBind();                   
 
                 }
 
@@ -145,32 +133,7 @@ namespace ProjectBedrijfApp
 
         }
 
-        public int totalehoeveelheid()
-        {
-            DataTable dt = new DataTable();
-            dt = (DataTable)Session["koopdrinken"];
-            nrow = dt.Rows.Count;
-            i = 0;
-            htotaal = 0;
-
-            toevoegen = htotaal + Convert.ToInt32(dt.Rows[i]["Hoeveelheid"].ToString());
-
-            while (i < nrow)
-            {
-                if (htotaal + Convert.ToInt32(dt.Rows[i]["Hoeveelheid"].ToString()) <= maxbestelbaar)
-                {
-                    htotaal = htotaal + Convert.ToInt32(dt.Rows[i]["Hoeveelheid"].ToString());
-                }
-
-
-                i = i + 1;
-
-            }
-            return htotaal;
-
-
-
-        }
+        
 
 
         protected void DataList1_ItemCommand(object source, DataListCommandEventArgs e)
@@ -186,7 +149,7 @@ namespace ProjectBedrijfApp
 
         protected void btnOverzicht_Click(object sender, EventArgs e)
         {
-            Response.Redirect("AddToCard.aspx");
+            Response.Redirect("Dranken_overzicht.aspx");
         }
 
         protected void GridView2_RowDeleting(object sender, GridViewDeleteEventArgs e)

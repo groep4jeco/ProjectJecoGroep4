@@ -122,10 +122,8 @@
             &nbsp;&nbsp;<asp:Label ID="Label9" runat="server" Font-Size="X-Large" Text="Dranken menu"></asp:Label>
             &nbsp;&nbsp;</div>
         <div id="tijd" class="auto-style3">
-            <asp:Label ID="lblAantalpersonen" runat="server" Font-Size="X-Large" Text="0"></asp:Label>
             &nbsp
-            <asp:Label ID="Label1" runat="server" Font-Size="X-Large" Text="personen"></asp:Label>
-
+            
         </div>
         
         <!--Info-->
@@ -195,7 +193,7 @@
                 <br />
                 <br />
                 <br />
-                <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" Height="200px" OnRowDeleting="GridView2_RowDeleting" Width="279px" OnRowCommand="GridView2_RowCommand" ShowFooter="True">
+                <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" Height="200px" OnRowDeleting="GridView2_RowDeleting" Width="279px" OnRowCommand="GridView2_RowCommand">
                     <Columns>
                         <asp:BoundField DataField="sno" />
                         <asp:ImageField DataImageUrlField="afb_pad">
