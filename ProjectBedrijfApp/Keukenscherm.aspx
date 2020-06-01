@@ -159,6 +159,7 @@ OFFSET 0 ROWS
 FETCH NEXT 1 ROWS ONLY)"></asp:SqlDataSource>
         <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="ListView1_SelectedIndexChanged" OnItemDeleted="ListView1_ItemDeleted" GroupItemCount="3">
             <AlternatingItemTemplate>
+              
                 <td runat="server" style="background-color:#FFF8DC;">tafeltafelnummer:
                     <asp:Label ID="tafeltafelnummerLabel" runat="server" Text='<%# Eval("tafeltafelnummer") %>' />
                     <br />
@@ -203,7 +204,7 @@ FETCH NEXT 1 ROWS ONLY)"></asp:SqlDataSource>
             <EmptyDataTemplate>
                 <table style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;" runat="server">
                     <tr>
-                        <td>No data was returned.</td>
+                        <td>alle bestellingen zijn verwerkt</td>
                     </tr>
                 </table>
             </EmptyDataTemplate>
@@ -472,7 +473,7 @@ FETCH NEXT 1 ROWS ONLY)"></asp:SqlDataSource>
             <EmptyDataTemplate>
                 <table runat="server" style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;">
                     <tr>
-                        <td>No data was returned.</td>
+                        <td></td>
                     </tr>
                 </table>
             </EmptyDataTemplate>
@@ -722,7 +723,7 @@ FETCH NEXT 1 ROWS ONLY)"></asp:SqlDataSource>
             <EmptyDataTemplate>
                 <table runat="server" style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;">
                     <tr>
-                        <td>No data was returned.</td>
+                        <td></td>
                     </tr>
                 </table>
             </EmptyDataTemplate>
@@ -972,7 +973,7 @@ FETCH NEXT 1 ROWS ONLY)"></asp:SqlDataSource>
             <EmptyDataTemplate>
                 <table runat="server" style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;">
                     <tr>
-                        <td>No data was returned.</td>
+                        <td></td>
                     </tr>
                 </table>
             </EmptyDataTemplate>
@@ -1222,7 +1223,7 @@ FETCH NEXT 1 ROWS ONLY)"></asp:SqlDataSource>
             <EmptyDataTemplate>
                 <table runat="server" style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;">
                     <tr>
-                        <td>No data was returned.</td>
+                        <td></td>
                     </tr>
                 </table>
             </EmptyDataTemplate>
@@ -1472,7 +1473,7 @@ FETCH NEXT 1 ROWS ONLY)"></asp:SqlDataSource>
             <EmptyDataTemplate>
                 <table runat="server" style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;">
                     <tr>
-                        <td>No data was returned.</td>
+                        <td></td>
                     </tr>
                 </table>
             </EmptyDataTemplate>
