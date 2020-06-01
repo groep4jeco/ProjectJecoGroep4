@@ -6,12 +6,17 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 
 namespace ProjectBedrijfApp
 {
     public partial class Dranken_overzicht : System.Web.UI.Page
     {
         public List<string> tafelID = new List<string>();
+        string time;
+        string tijdvakdata;
+        int tijdvaknummer;
+        string tijden;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -220,7 +225,6 @@ namespace ProjectBedrijfApp
             {
                 time = "19:30:00";
             }
-            SqlConnection con = new SqlConnection(connectionString);
 
             con.Open();
             string prequerie = "select Tijdvak.Nummer from Tijdvak where Begintijd = @tijd AND Dag = @dag";
@@ -232,26 +236,26 @@ namespace ProjectBedrijfApp
             tijdvaknummer = int.Parse(tijden);
             Session["tijdvaknummer"] = tijdvaknummer;
             con.Close();
-
+            con.Open();
             string tafels = "select Reserveringsnummer from Tafelbezetting where TijdvakNummer = @tijdvak and TafelTafelnummer = @tafel";
             SqlCommand cmdtafel = new SqlCommand(tafels, con);
             cmdtafel.Parameters.AddWithValue("@tijdvak", Session["tijdvaknummer"]);
             cmdtafel.Parameters.AddWithValue("@tafel", tafelID);
-            object tafeltje = cmdtafel.ExecuteScalar();
+            string tafeltje = cmdtafel.ExecuteScalar().ToString();
             tafels = tafeltje.ToString();
             int reserveringnummers = int.Parse(tafels);
             Session["reserveringsnummer"] = reserveringnummers;
 
-
+            con.Close();
 
             DataTable dt = new DataTable();
             dt = (DataTable)Session["koopdrinken"];
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                string prequerie = "select MAX(Bestelregel.Bestelregelcode) from Bestelregel";
+                string querie = "select MAX(Bestelregel.Bestelregelcode) from Bestelregel";
                 con.Open();
-                SqlCommand cmdcode = new SqlCommand(prequerie, con);
+                SqlCommand cmdcode = new SqlCommand(querie, con);
                 object bestelregel = cmdcode.ExecuteScalar();
                 string code = bestelregel.ToString();
                 int bestelregelcode = int.Parse(code);
@@ -260,9 +264,9 @@ namespace ProjectBedrijfApp
                 string artikelnummer = GridView1.DataKeys[i]["artikelnummer"].ToString();
                 string prijs = GridView1.DataKeys[i]["Prijs"].ToString();
 
-                string querie = "SET IDENTITY_INSERT Bestelregel ON Insert into Bestelregel([Bestelregelcode], [Hoeveelheid] ,[Besteltijd] ,[Reserveringsnummer] ,[Drankenartikelnummer],[bestelstatusID]) values(@code, @hoeveelheid, @Tijd, @reservering, @drank, 1); SET IDENTITY_INSERT Bestelregel OFF";
+                string querie2 = "SET IDENTITY_INSERT Bestelregel ON Insert into Bestelregel([Bestelregelcode], [Hoeveelheid] ,[Besteltijd] ,[Reserveringsnummer] ,[Drankenartikelnummer],[bestelstatusID]) values(@code, @hoeveelheid, @Tijd, @reservering, @drank, 1); SET IDENTITY_INSERT Bestelregel OFF";
                 SqlDataAdapter adapter = new SqlDataAdapter();
-                adapter.InsertCommand = new SqlCommand(querie, con);
+                adapter.InsertCommand = new SqlCommand(querie2, con);
                 adapter.InsertCommand.Parameters.AddWithValue("@code", bestelregelcode + 1);
                 adapter.InsertCommand.Parameters.AddWithValue("@hoeveelheid", hoeveelheid);
                 adapter.InsertCommand.Parameters.AddWithValue("@tijd", tijd);
