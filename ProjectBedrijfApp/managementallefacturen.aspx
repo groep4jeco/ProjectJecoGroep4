@@ -173,6 +173,7 @@
                     <asp:ControlParameter ControlID="calendarTest" DbType="Date" Name="Factuurdatum" PropertyName="SelectedDate" />
                 </SelectParameters>
             </asp:SqlDataSource>
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click1" Text="Vorige" />
             <div class="panel"
                 <asp:Panel ID="Panel1" runat="server" CssClass="auto-style1" style="margin:auto " >
                     &nbsp;&nbsp;&nbsp;

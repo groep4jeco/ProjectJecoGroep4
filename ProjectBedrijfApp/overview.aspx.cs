@@ -157,6 +157,11 @@ namespace ProjectBedrijfApp
         {
             Response.Redirect("Keukenscherm.aspx");
         }
+
+        protected void Button1_Click1(object sender, EventArgs e)
+        {
+            Response.Redirect("~/login.aspx");
+        }
     }
 
     class Tafel2

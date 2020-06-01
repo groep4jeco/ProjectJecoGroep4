@@ -97,7 +97,7 @@
             <br />
             <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-             <asp:Button ID="Button1" runat="server" Text="Vorige pagina" BackColor="Gray" />
+             <asp:Button ID="Button1" runat="server" Text="Vorige pagina" BackColor="Gray" OnClick="Button1_Click1" />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <div class="knop1">
                <asp:Button ID="BtnClick" runat="server" OnClick="Button1_Click" Text="Reserveer Tafel" Height="47px" Width="159px" Font-Bold="True" Font-Italic="True" />
