@@ -254,7 +254,7 @@ namespace ProjectBedrijfApp
             int count = GridView1.Rows.Count;
             TxtVolw.Text = count.ToString();
             btnNieuw.Visible = true;
-            txtEmail.Visible = true;
+            lblEmail.Visible = true;
             txtEmail.Visible = true;
             lbltelefoon.Visible = true;
             Txttelefoon.Visible = true;
