@@ -16,6 +16,7 @@ namespace ProjectBedrijfApp
         public int SelectedTafelID;
         public bool ReserveerStatus;
         public List<string> tafelID = new List<string>();
+        public List<string> results = new List<string>();
         string time;
         string tijdvakdata;
         int tijdvaknummer;
@@ -73,9 +74,9 @@ namespace ProjectBedrijfApp
                 string query = "SELECT[TafelTafelnummer] FROM[Tafelbezetting] where TijdvakNummer = @tijdvak";
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@tijdvak", Session["tijdvaknummer"]);
-                SqlDataReader drTafel = cmd.ExecuteReader();
+                //SqlDataReader drTafel = cmd.ExecuteReader();
                 //string resulaat = drTafel.Read().ToString();
-                while (drTafel.Read())
+                using (SqlDataReader drTafel = cmd.ExecuteReader())
                 {
                     foreach (Control control in controlCollection)
                     {
@@ -98,8 +99,9 @@ namespace ProjectBedrijfApp
                         }
 
                     }
+                    drTafel.Close();
                 }
-                drTafel.Close();
+                //drTafel.Close();
                 con.Close();
             }
         }
