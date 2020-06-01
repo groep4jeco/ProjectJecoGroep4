@@ -202,16 +202,26 @@ namespace ProjectBedrijfApp
 
         protected void btnBevestig_Click(object sender, EventArgs e)
         {
-            int ronde = (int)Session["ronde"];
-            ronde++;
-            Session["ronde"] = ronde;
-
-
+            
             DataTable dt = new DataTable();
             dt = (DataTable)Session["buyitems"];
 
             dt.Rows.Clear();
-            Response.Redirect("~/Bestellen.aspx");
+
+            int ronde = (int)Session["ronde"];
+            int maxronde = int.Parse(Session["maxronde"].ToString());
+
+            if (ronde < maxronde)
+            {               
+                ronde++;
+                Session["ronde"] = ronde;
+                Response.Redirect("~/Timer.aspx");
+            }
+            else
+            {
+                Response.Redirect("~/regristratiepagina.aspx");
+            }
+            
         }
     }
 }

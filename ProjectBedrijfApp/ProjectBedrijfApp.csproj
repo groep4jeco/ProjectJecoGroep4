@@ -15,7 +15,11 @@
     <AssemblyName>ProjectBedrijfApp</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
+<<<<<<< HEAD
     <Use64BitIISExpress>false</Use64BitIISExpress>
+=======
+    <Use64BitIISExpress />
+>>>>>>> Jibbe
     <IISExpressSSLPort>44365</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -188,6 +192,10 @@
     <Content Include="Reserveren.aspx" />
     <Content Include="ReserveringPagina.aspx" />
     <Content Include="tabletkeuze.aspx" />
+<<<<<<< HEAD
+=======
+    <Content Include="Timer.aspx" />
+>>>>>>> Jibbe
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -283,6 +291,16 @@
     <Compile Include="tabletkeuze.aspx.designer.cs">
       <DependentUpon>tabletkeuze.aspx</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+=======
+    <Compile Include="Timer.aspx.cs">
+      <DependentUpon>Timer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Timer.aspx.designer.cs">
+      <DependentUpon>Timer.aspx</DependentUpon>
+    </Compile>
+>>>>>>> Jibbe
   </ItemGroup>
   <ItemGroup>
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
