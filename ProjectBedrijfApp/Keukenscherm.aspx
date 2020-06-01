@@ -24,7 +24,7 @@
             </DeleteParameters>
             <InsertParameters>
                 <asp:Parameter Name="Hoeveelheid" Type="Single" />
-                <asp:Parameter DbType="Time" Name="Besteltijd" />
+                <asp:Parameter DbType="Date" Name="Besteltijd" />
                 <asp:Parameter Name="Reserveringsnummer" Type="Int32" />
                 <asp:Parameter Name="menugerechtnummer" Type="Int32" />
                 <asp:Parameter Name="RondeNummer" Type="Int32" />
@@ -33,7 +33,7 @@
             </InsertParameters>
             <UpdateParameters>
                 <asp:Parameter Name="Hoeveelheid" Type="Single" />
-                <asp:Parameter DbType="Time" Name="Besteltijd" />
+                <asp:Parameter DbType="Date" Name="Besteltijd" />
                 <asp:Parameter Name="Reserveringsnummer" Type="Int32" />
                 <asp:Parameter Name="menugerechtnummer" Type="Int32" />
                 <asp:Parameter Name="RondeNummer" Type="Int32" />
@@ -169,6 +169,11 @@
                     </tr>
                 </table>
                 <div style="text-align: center;background-color: #CCCCCC;font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;">
+                    <asp:DataPager ID="DataPager1" runat="server">
+                        <Fields>
+                            <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True" />
+                        </Fields>
+                    </asp:DataPager>
                 </div>
             </LayoutTemplate>
             <SelectedItemTemplate>
