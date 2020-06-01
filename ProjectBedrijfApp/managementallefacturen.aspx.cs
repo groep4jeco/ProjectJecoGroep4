@@ -152,5 +152,10 @@ namespace ProjectBedrijfApp
         {
             ClientScript.RegisterClientScriptBlock(this.GetType(), "key", "panel2.print()", true);
         }
+
+        protected void Button1_Click1(object sender, EventArgs e)
+        {
+            Response.Redirect("~/tabletkeuze.aspx");
+        }
     }
 }
