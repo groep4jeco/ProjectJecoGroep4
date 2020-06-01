@@ -24,8 +24,7 @@ namespace ProjectBedrijfApp
             {
                 Session["TafelId"] = tafelID;
                 //Session["ReserveerStatus"] = ReserveerStatus;
-            }      
-
+            }
         }
 
         private void LoopButtons(ControlCollection controlCollection)
@@ -74,8 +73,8 @@ namespace ProjectBedrijfApp
 
         private void SettingReserverData()
         {
-          //  Tafel Tafel2 = new Tafel();
-           // Tafel.Reserveringsnummer1++;
+            //  Tafel Tafel2 = new Tafel();
+            // Tafel.Reserveringsnummer1++;
             //SelectedTafelID = Tafel.Reserveringsnummer1;
             Session["Reserveringsnummer"] = SelectedTafelID;
             Response.Redirect("~/ReserveringPagina.aspx");
@@ -84,24 +83,28 @@ namespace ProjectBedrijfApp
         public void SetReserverData(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-            string buttonId = button.Text;
-            System.Diagnostics.Debug.WriteLine(buttonId);
+            string buttonId = button.Text.Trim();
+
+
 
             //string combindedString = string.Join(",", tafelID);
             //System.Diagnostics.Debug.WriteLine(combindedString);
+            for (int i = 0; i <= tafelID.Count; i++)
+            {
+                if (tafelID[i] == buttonId)
+                {
+                    ReserveerStatus = true;
+                    tafelID = (List<string>)Session["TafelId"];
+                    tafelID.Add(buttonId);
+                    Session["TafelId"] = tafelID;
+                    string combindedString = string.Join(",", tafelID);
+                    System.Diagnostics.Debug.WriteLine(combindedString);
 
-            if (!tafelID.Contains(buttonId))
-            {
-                ReserveerStatus = true;
-                tafelID = (List<string>)Session["TafelId"];
-                tafelID.Add(buttonId);
-                Session["TafelId"] = tafelID;
-                string combindedString = string.Join(",", tafelID);
-                System.Diagnostics.Debug.WriteLine(combindedString);
-            }
-            else if(tafelID.Contains(buttonId))
-            {
-                ReserveerStatus = false;
+                }
+                else //if (tafelID.Contains(buttonId))
+                {
+                    ReserveerStatus = false;
+                }
             }
 
             System.Diagnostics.Debug.WriteLine(ReserveerStatus);
@@ -116,7 +119,6 @@ namespace ProjectBedrijfApp
                 System.Diagnostics.Debug.WriteLine(tafelID.Count);
 
             }
-
         }
 
         protected void btn_keuken_Click(object sender, EventArgs e)
