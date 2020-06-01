@@ -84,14 +84,14 @@ namespace ProjectBedrijfApp
         {
             Button button = (Button)sender;
             string buttonId = button.Text.Trim();
+            tafelID = (List<string>)Session["TafelId"];
 
             //string combindedString = string.Join(",", tafelID);
             //System.Diagnostics.Debug.WriteLine(combindedString);
-           
-                if (!tafelID.Contains(button.ID))
+
+                if (buttonId != "30")
                 {
                     ReserveerStatus = true;
-                    tafelID = (List<string>)Session["TafelId"];
                     tafelID.Add(buttonId);
                     Session["TafelId"] = tafelID;
                     string combindedString = string.Join(",", tafelID);
