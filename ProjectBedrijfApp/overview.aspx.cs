@@ -18,6 +18,7 @@ namespace ProjectBedrijfApp
         public List<string> tafelID = new List<string>();
         public List<string> results = new List<string>();
         string time;
+        bool drinkenbestellen;
         string tijdvakdata;
         int tijdvaknummer;
         string tijden;
@@ -94,7 +95,7 @@ namespace ProjectBedrijfApp
                                 {
                                     //System.Diagnostics.Debug.WriteLine("SomeText");
                                     ((Button)control).BackColor = Color.Red;
-                                    ((Button)control).Enabled = false;
+                                    //((Button)control).Enabled = false;
                                 }
                             }
                         }
