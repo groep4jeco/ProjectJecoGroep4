@@ -210,17 +210,6 @@ namespace ProjectBedrijfApp
         protected void BtnZoek_Click(object sender, EventArgs e)
         {
             lblSorry.Text = "";
-            /*
-            for (int i = 25; i < 80; i++)
-            {
-                con.Open();
-                string tafels = "Insert into Tafel (Tafelnummer, Zitplaatsen, [RestaurantRestaurant ID]) VALUES (@i, 2, 1)";
-                adapter.InsertCommand = new SqlCommand(tafels, con);
-                adapter.InsertCommand.Parameters.AddWithValue("@i", i);
-                int tewekeke = adapter.InsertCommand.ExecuteNonQuery();
-                con.Close();
-            }
-            */
         }
 
         protected void cbAlles_CheckedChanged(object sender, EventArgs e)
