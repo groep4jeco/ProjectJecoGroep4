@@ -211,6 +211,15 @@ namespace ProjectBedrijfApp
             int ronde = (int)Session["ronde"];
             int maxronde = int.Parse(Session["maxronde"].ToString());
 
+
+            for (int i = 1; i <= dt.Rows.Count; i++)
+            {
+                string hoeveelheid = GridView1.DataKeys[i]["Hoeveelheid"].ToString();
+                string Gerechtnummer = GridView1.DataKeys[i]["Nummer"].ToString();
+                string prijs = GridView1.DataKeys[i]["Prijs"].ToString();
+            }
+
+
             if (ronde < maxronde)
             {               
                 ronde++;
