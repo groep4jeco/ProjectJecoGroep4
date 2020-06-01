@@ -198,22 +198,26 @@ namespace ProjectBedrijfApp
 
             while (i < nrow)
             {
-                if (htotaal + Convert.ToInt32(dt.Rows[i]["Hoeveelheid"].ToString()) <= maxbestelbaar)
-                {
-                    htotaal = htotaal + Convert.ToInt32(dt.Rows[i]["Hoeveelheid"].ToString());
-                }
+
+                htotaal = htotaal + Convert.ToInt32(dt.Rows[i]["Hoeveelheid"].ToString());
+
 
 
                 i = i + 1;
 
-                if (htotaal == maxbestelbaar)
+                if (htotaal > maxbestelbaar)
                 {
-                    lblWaarschuwing.Text = "Je hebt het maximaal aantal gerechten bereikt!";
+                    lblWaarschuwing.Text = "Je hebt te veel!";
                 }
 
                 if (htotaal >= maxbestelbaar)
                 {
                     DataList1.Enabled = false;
+                }
+
+                if (htotaal > maxbestelbaar)
+                {
+                    btnOverzicht.Enabled = false;
                 }
 
             }
