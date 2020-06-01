@@ -85,13 +85,11 @@ namespace ProjectBedrijfApp
             Button button = (Button)sender;
             string buttonId = button.Text.Trim();
 
-
-
             //string combindedString = string.Join(",", tafelID);
             //System.Diagnostics.Debug.WriteLine(combindedString);
             for (int i = 0; i <= tafelID.Count; i++)
             {
-                if (tafelID[i] == buttonId)
+                if (!tafelID.Contains(buttonId))
                 {
                     ReserveerStatus = true;
                     tafelID = (List<string>)Session["TafelId"];
@@ -101,7 +99,7 @@ namespace ProjectBedrijfApp
                     System.Diagnostics.Debug.WriteLine(combindedString);
 
                 }
-                else //if (tafelID.Contains(buttonId))
+                else if (tafelID.Contains(buttonId))
                 {
                     ReserveerStatus = false;
                 }
