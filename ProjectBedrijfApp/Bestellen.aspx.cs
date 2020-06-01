@@ -50,6 +50,7 @@ namespace ProjectBedrijfApp
             con.Close();
 
             lblMaxRondes.Text = aantalrondes;
+            Session["maxronde"] = aantalrondes;
 
             if (int.Parse(lblRonde.Text) > int.Parse(aantalrondes))
             {
@@ -177,12 +178,12 @@ namespace ProjectBedrijfApp
                 }
 
             }
-            /*
-            if (totalehoeveelheid() >= maxbestelbaar)
+            
+            if (ronde == int.Parse(lblMaxRondes.Text))
             {
-                lblWaarschuwing.Text = "JE HEBT TE VEEL GERECHTEN!";
+                lblWaarschuwing2.Text = "(LAATSTE RONDE!)";
             }
-            */
+            
         }
 
         public int totalehoeveelheid()
