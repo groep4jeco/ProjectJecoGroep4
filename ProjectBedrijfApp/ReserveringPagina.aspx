@@ -13,13 +13,8 @@
             border-left-width: 900px;
             float: left;
             border-top: thick;
-<<<<<<< HEAD
             margin-left: 100px;
             height: 660px;
-=======
-            margin-left:300px;
-            height:660px;
->>>>>>> Jibbe
         }
 
         #form1 {
@@ -30,31 +25,17 @@
         .container2 {
             float: unset;
             background-color: seashell;
-<<<<<<< HEAD
             margin-left: 900px;
             height: 638px;
             margin-right: 100px;
             width: 550px;
             text-align: center;
-=======
-            margin-left: 1100px;
-            height:638px;
-            margin-right: 300px;
-            width: 550px;
-            text-align:center;
->>>>>>> Jibbe
         }
 
         .knop1 {
             position: center;
-<<<<<<< HEAD
             margin-left: 600px;
         }
-=======
-        }
-
-       
->>>>>>> Jibbe
     </style>
 </head>
 <body>
@@ -72,7 +53,6 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br />
             <br />
-<<<<<<< HEAD
             <asp:Label ID="lblVolwassenen" runat="server" Text="Aantal volwassenen"></asp:Label>
             <br />
             <br />
@@ -111,34 +91,11 @@
             <br />
             <br />
             <br />
-=======
-            <asp:Label ID="Label2" runat="server" Text="Aantal Personen"></asp:Label>
-            &nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
             <br />
             <br />
             <br />
             <br />
             <br />
-            <asp:CheckBox ID="cbAlles" runat="server" Text="All you can Eat" />
-            <br />
-            <br />
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <br />
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           <div class="knop1">
-               <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Reserveer Tafel" Height="47px" Width="117px" Font-Bold="True" Font-Italic="True" />
-           </div>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
->>>>>>> Jibbe
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-<<<<<<< HEAD
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
              <asp:Button ID="Button1" runat="server" Text="Vorige pagina" BackColor="Gray" />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -146,8 +103,6 @@
                <asp:Button ID="BtnClick" runat="server" OnClick="Button1_Click" Text="Reserveer Tafel" Height="47px" Width="159px" Font-Bold="True" Font-Italic="True" />
            </div>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-=======
->>>>>>> Jibbe
             <br />
             <br />
             <br />
@@ -156,7 +111,6 @@
         <div class="container2">
             &nbsp;<asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
             <div class="img1">
-<<<<<<< HEAD
                 &nbsp;
             </div>
             <br />
@@ -174,28 +128,10 @@
 
             <br />
             <asp:Label ID="lblAchternaam" runat="server" Text="Achternaam*"></asp:Label>
-=======
-                &nbsp;</div>
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <br />
-            <asp:TextBox ID="txtRondes" runat="server" Visible="False">Aantal rondes</asp:TextBox>
-            <asp:RangeValidator ID="RvRondes" runat="server" ControlToValidate="txtRondes" ErrorMessage="RangeValidator" MaximumValue="10" MinimumValue="0" Type="Integer"></asp:RangeValidator>
-            <asp:Label ID="lbldatum" runat="server" Text="Label" Visible="False"></asp:Label>
-            <br />
-            <br />
-            <asp:Label ID="lblVoornaam" runat="server" Text="Voornaam"></asp:Label>
-            <br />
-            <asp:TextBox ID="txtVoornaam" runat="server"></asp:TextBox>
-            <br />
-            <br />
-            <asp:Label ID="lblAchternaam" runat="server" Text="Achternaam"></asp:Label>
->>>>>>> Jibbe
             <br />
             <asp:TextBox ID="txtAchternaam" runat="server"></asp:TextBox>
             <br />
             <br />
-<<<<<<< HEAD
             <asp:Label ID="lbltelefoon" runat="server" Text="Telefoonnummer" Visible="False"></asp:Label>
             <br />
             &nbsp;<asp:TextBox ID="Txttelefoon" runat="server" Visible="False"></asp:TextBox>
@@ -208,10 +144,6 @@
             <br />
             <asp:Button ID="BtnZoek" runat="server" OnClick="BtnZoek_Click" Text="Zoek klant" />
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="KlantID" DataSourceID="sqlKlant" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnDataBound="GridView1_DataBound" OnLoad="GridView1_Load" OnPageIndexChanged="GridView1_PageIndexChanged">
-=======
-            <asp:Button ID="BtnZoek" runat="server" OnClick="BtnZoek_Click" Text="Zoek klant" />
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="KlantID" DataSourceID="sqlKlant" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
->>>>>>> Jibbe
                 <Columns>
                     <asp:CommandField ShowSelectButton="True" />
                     <asp:BoundField DataField="KlantID" HeaderText="KlantID" InsertVisible="False" ReadOnly="True" SortExpression="KlantID" />
@@ -221,14 +153,9 @@
                     <asp:BoundField DataField="Telefoonnummer" HeaderText="Telefoonnummer" SortExpression="Telefoonnummer" />
                 </Columns>
             </asp:GridView>
-<<<<<<< HEAD
             <asp:Button ID="btnNieuw" runat="server" OnClick="btnNieuw_Click" Text="Nieuwe klant" Visible="False" />
             <br />
             <asp:SqlDataSource ID="sqlKlant" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [KlantID], [Voornaam], [Achternaam], [Email], [Telefoonnummer] FROM [Klant] WHERE (([Voornaam] = @Voornaam) OR ([Achternaam] = @Achternaam))">
-=======
-                <br />
-            <asp:SqlDataSource ID="sqlKlant" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [KlantID], [Voornaam], [Achternaam], [Email], [Telefoonnummer] FROM [Klant] WHERE (([Voornaam] = @Voornaam) AND ([Achternaam] = @Achternaam))">
->>>>>>> Jibbe
                 <SelectParameters>
                     <asp:ControlParameter ControlID="txtVoornaam" Name="Voornaam" PropertyName="Text" Type="String" />
                     <asp:ControlParameter ControlID="txtAchternaam" Name="Achternaam" PropertyName="Text" Type="String" />
@@ -236,7 +163,6 @@
             </asp:SqlDataSource>
         </div>
         <br />
-<<<<<<< HEAD
 
         <br />
 
@@ -245,8 +171,6 @@
         <br />
        
 
-=======
->>>>>>> Jibbe
     </form>
 </body>
 </html>

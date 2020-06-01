@@ -49,7 +49,6 @@
     
        <form id="form1" runat="server">
          <div class="tafelbutton">
-<<<<<<< HEAD
              <asp:Button ID="Button1" runat="server" Text="TAFEL" Font-Bold="True" Font-Size="XX-Large" Height="190px" Width="924px" style="margin-right: 0px" OnClick="Button1_Click" BackColor="#CCCCCC" BorderStyle="Outset" />
              </div>
         <div class="bedieningbutton">
@@ -57,15 +56,6 @@
         
             <br />
              <asp:Button ID="Button3" runat="server" OnClick="ManagerButton_Click" Text="Management" BackColor="Gray" BorderStyle="Outset" Height="40px" Width="114px" />
-=======
-             <asp:Button ID="Button1" runat="server" Text="TAFEL" Font-Bold="True" Font-Size="XX-Large" Height="190px" Width="924px" style="margin-right: 0px" OnClick="Button1_Click" BackColor="#CCCCCC" />
-             </div>
-        <div class="bedieningbutton">
-            <asp:Button ID="Button2" runat="server" Text="BEDIENING" Font-Bold="True" Font-Size="XX-Large" Height="170px" Width="924px" OnClick="Button2_Click" BackColor="#CCCCCC" />
-        
-            <br />
-             <asp:Button ID="Button3" runat="server" OnClick="ManagerButton_Click" Text="Button" />
->>>>>>> Jibbe
             <br />
             <br />
             <asp:Label ID="IdLabel" runat="server" Text="Label"></asp:Label>

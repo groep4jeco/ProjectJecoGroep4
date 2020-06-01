@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="regristratiepagina.aspx.cs" Inherits="ProjectBedrijfApp.regristratiepagina" %>
-=======
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="regristratiepagina.aspx.cs" Inherits="ProjectBedrijfApp.Beginpagina" %>
->>>>>>> Jibbe
 
 <!DOCTYPE html>
 

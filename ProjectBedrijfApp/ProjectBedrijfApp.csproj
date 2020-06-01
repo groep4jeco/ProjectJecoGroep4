@@ -15,11 +15,7 @@
     <AssemblyName>ProjectBedrijfApp</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-<<<<<<< HEAD
     <Use64BitIISExpress>false</Use64BitIISExpress>
-=======
-    <Use64BitIISExpress />
->>>>>>> Jibbe
     <IISExpressSSLPort>44365</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -74,6 +70,29 @@
   <ItemGroup>
     <Content Include=".vs\ProjectBedrijfApp\versiersel.png" />
     <Content Include="AddToCard.aspx" />
+    <Content Include="Afbeeldingen\Gunkan\Avocado-Gunkan.png" />
+    <Content Include="Afbeeldingen\Gunkan\Ebiko-Gunkan.png" />
+    <Content Include="Afbeeldingen\Gunkan\Kani-Gunkan.png" />
+    <Content Include="Afbeeldingen\Gunkan\Mais-Gunkan.png" />
+    <Content Include="Afbeeldingen\Maki\Kappa-Maki.png" />
+    <Content Include="Afbeeldingen\Maki\Sake-Maki.png" />
+    <Content Include="Afbeeldingen\Maki\Tamago-Maki.png" />
+    <Content Include="Afbeeldingen\Maki\Tekka-Maki.png" />
+    <Content Include="Afbeeldingen\Nigiri\Ebi-Nigiri.png" />
+    <Content Include="Afbeeldingen\Nigiri\Kani-Nigiri.png" />
+    <Content Include="Afbeeldingen\Nigiri\Maguro-Nigiri.png" />
+    <Content Include="Afbeeldingen\Nigiri\Sake-Nigiri.png" />
+    <Content Include="Afbeeldingen\Nigiri\Suzuki-Nigiri.png" />
+    <Content Include="Afbeeldingen\Nigiri\Tamago-Nigiri.png" />
+    <Content Include="Afbeeldingen\overig\borrel-kroepoek.png" />
+    <Content Include="Afbeeldingen\overig\kippensoep.png" />
+    <Content Include="Afbeeldingen\Salads\Chicken-Salad.png" />
+    <Content Include="Afbeeldingen\Salads\Sashimi-Salad.png" />
+    <Content Include="Afbeeldingen\Salads\Sweet-Sour-Salad.png" />
+    <Content Include="Afbeeldingen\Salads\Wakame-Salad.png" />
+    <Content Include="Afbeeldingen\Temaki\Salmon-Avocado-Temaki.png" />
+    <Content Include="Afbeeldingen\Temaki\Shrimp-Temaki.png" />
+    <Content Include="Afbeeldingen\Temaki\Tuna-Avocado-Temaki.png" />
     <Content Include="regristratiepagina.aspx" />
     <Content Include="Bestellen.aspx" />
     <Content Include="Betalen.aspx" />
@@ -127,8 +146,6 @@
     <Content Include="managementallefacturen.aspx" />
     <Content Include="Managementfacturen.aspx" />
     <Content Include="Managementinformatiehome.aspx" />
-    <Content Include="obj\Debug\ProjectBedrijfApp.dll" />
-    <Content Include="obj\Debug\ProjectBedrijfApp.pdb" />
     <Content Include="overview.aspx" />
     <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
@@ -192,10 +209,7 @@
     <Content Include="Reserveren.aspx" />
     <Content Include="ReserveringPagina.aspx" />
     <Content Include="tabletkeuze.aspx" />
-<<<<<<< HEAD
-=======
     <Content Include="Timer.aspx" />
->>>>>>> Jibbe
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -291,8 +305,6 @@
     <Compile Include="tabletkeuze.aspx.designer.cs">
       <DependentUpon>tabletkeuze.aspx</DependentUpon>
     </Compile>
-<<<<<<< HEAD
-=======
     <Compile Include="Timer.aspx.cs">
       <DependentUpon>Timer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -300,13 +312,8 @@
     <Compile Include="Timer.aspx.designer.cs">
       <DependentUpon>Timer.aspx</DependentUpon>
     </Compile>
->>>>>>> Jibbe
   </ItemGroup>
   <ItemGroup>
-    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
-    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <Content Include="obj\Debug\ProjectBedrijfApp.csproj.CopyComplete" />
-    <Content Include="obj\Debug\ProjectBedrijfApp.csprojAssemblyReference.cache" />
     <Content Include=".vs\ProjectBedrijfApp\config\applicationhost.config" />
     <Content Include=".vs\ProjectBedrijfApp\v16\.suo" />
     <Content Include="bin\ProjectBedrijfApp.dll.config" />
@@ -320,6 +327,8 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\ProjectBedrijfApp.csprojAssemblyReference.cache" />
     <None Include="packages.config" />
     <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\.signature.p7s" />
     <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.Extensions.props" />

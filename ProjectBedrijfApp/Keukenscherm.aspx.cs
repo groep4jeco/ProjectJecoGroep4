@@ -6,10 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Data;
-<<<<<<< HEAD
 using System.ComponentModel;
-=======
->>>>>>> Jibbe
 
 namespace ProjectBedrijfApp
 {
@@ -36,13 +33,10 @@ namespace ProjectBedrijfApp
         protected void ListView1_ItemDeleted(object sender, ListViewDeletedEventArgs e)
         {
             Page.Response.Redirect(Page.Request.Url.ToString(), true);
-<<<<<<< HEAD
 
-            
-               
-            
-=======
->>>>>>> Jibbe
+
+
+
         }
 
         protected void ListView2_ItemDeleted(object sender, ListViewDeletedEventArgs e)
