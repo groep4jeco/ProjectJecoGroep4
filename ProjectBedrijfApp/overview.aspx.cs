@@ -25,6 +25,7 @@ namespace ProjectBedrijfApp
                 Session["TafelId"] = tafelID;
                 //Session["ReserveerStatus"] = ReserveerStatus;
             }
+            LoopButtons(Page.Controls);
         }
 
         private void LoopButtons(ControlCollection controlCollection)
@@ -118,11 +119,6 @@ namespace ProjectBedrijfApp
         protected void btn_keuken_Click(object sender, EventArgs e)
         {
             Response.Redirect ("Keukenscherm.aspx");
-        }
-
-        protected void Button1_Click1(object sender, EventArgs e)
-        {
-            LoopButtons(Page.Controls);
         }
     }
 
