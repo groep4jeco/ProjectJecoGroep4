@@ -15,7 +15,7 @@
     <AssemblyName>ProjectBedrijfApp</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress />
+    <Use64BitIISExpress>false</Use64BitIISExpress>
     <IISExpressSSLPort>44365</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -70,8 +70,29 @@
   <ItemGroup>
     <Content Include=".vs\ProjectBedrijfApp\versiersel.png" />
     <Content Include="AddToCard.aspx" />
-    <Content Include="Bestellen_drinken.aspx" />
-    <Content Include="Dranken_overzicht.aspx" />
+    <Content Include="Afbeeldingen\Gunkan\Avocado-Gunkan.png" />
+    <Content Include="Afbeeldingen\Gunkan\Ebiko-Gunkan.png" />
+    <Content Include="Afbeeldingen\Gunkan\Kani-Gunkan.png" />
+    <Content Include="Afbeeldingen\Gunkan\Mais-Gunkan.png" />
+    <Content Include="Afbeeldingen\Maki\Kappa-Maki.png" />
+    <Content Include="Afbeeldingen\Maki\Sake-Maki.png" />
+    <Content Include="Afbeeldingen\Maki\Tamago-Maki.png" />
+    <Content Include="Afbeeldingen\Maki\Tekka-Maki.png" />
+    <Content Include="Afbeeldingen\Nigiri\Ebi-Nigiri.png" />
+    <Content Include="Afbeeldingen\Nigiri\Kani-Nigiri.png" />
+    <Content Include="Afbeeldingen\Nigiri\Maguro-Nigiri.png" />
+    <Content Include="Afbeeldingen\Nigiri\Sake-Nigiri.png" />
+    <Content Include="Afbeeldingen\Nigiri\Suzuki-Nigiri.png" />
+    <Content Include="Afbeeldingen\Nigiri\Tamago-Nigiri.png" />
+    <Content Include="Afbeeldingen\overig\borrel-kroepoek.png" />
+    <Content Include="Afbeeldingen\overig\kippensoep.png" />
+    <Content Include="Afbeeldingen\Salads\Chicken-Salad.png" />
+    <Content Include="Afbeeldingen\Salads\Sashimi-Salad.png" />
+    <Content Include="Afbeeldingen\Salads\Sweet-Sour-Salad.png" />
+    <Content Include="Afbeeldingen\Salads\Wakame-Salad.png" />
+    <Content Include="Afbeeldingen\Temaki\Salmon-Avocado-Temaki.png" />
+    <Content Include="Afbeeldingen\Temaki\Shrimp-Temaki.png" />
+    <Content Include="Afbeeldingen\Temaki\Tuna-Avocado-Temaki.png" />
     <Content Include="regristratiepagina.aspx" />
     <Content Include="Bestellen.aspx" />
     <Content Include="Betalen.aspx" />
@@ -125,8 +146,6 @@
     <Content Include="managementallefacturen.aspx" />
     <Content Include="Managementfacturen.aspx" />
     <Content Include="Managementinformatiehome.aspx" />
-    <Content Include="obj\Debug\ProjectBedrijfApp.dll" />
-    <Content Include="obj\Debug\ProjectBedrijfApp.pdb" />
     <Content Include="overview.aspx" />
     <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
@@ -200,20 +219,6 @@
     </Compile>
     <Compile Include="AddToCard.aspx.designer.cs">
       <DependentUpon>AddToCard.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Bestellen_drinken.aspx.cs">
-      <DependentUpon>Bestellen_drinken.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Bestellen_drinken.aspx.designer.cs">
-      <DependentUpon>Bestellen_drinken.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Dranken_overzicht.aspx.cs">
-      <DependentUpon>Dranken_overzicht.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Dranken_overzicht.aspx.designer.cs">
-      <DependentUpon>Dranken_overzicht.aspx</DependentUpon>
     </Compile>
     <Compile Include="regristratiepagina.aspx.cs">
       <DependentUpon>regristratiepagina.aspx</DependentUpon>
@@ -309,10 +314,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
-    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <Content Include="obj\Debug\ProjectBedrijfApp.csproj.CopyComplete" />
-    <Content Include="obj\Debug\ProjectBedrijfApp.csprojAssemblyReference.cache" />
     <Content Include=".vs\ProjectBedrijfApp\config\applicationhost.config" />
     <Content Include=".vs\ProjectBedrijfApp\v16\.suo" />
     <Content Include="bin\ProjectBedrijfApp.dll.config" />
@@ -368,9 +369,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="obj\Debug\TempPE\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

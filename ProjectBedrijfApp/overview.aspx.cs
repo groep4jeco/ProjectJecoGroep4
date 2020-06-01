@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Collections;
+using System.Globalization;
 
 namespace ProjectBedrijfApp
 {
@@ -14,6 +16,10 @@ namespace ProjectBedrijfApp
         public int SelectedTafelID;
         public bool ReserveerStatus;
         public List<string> tafelID = new List<string>();
+        string time;
+        string tijdvakdata;
+        int tijdvaknummer;
+        string tijden;
 
         string connectionString = "Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019";
 
@@ -25,6 +31,38 @@ namespace ProjectBedrijfApp
                 Session["TafelId"] = tafelID;
                 //Session["ReserveerStatus"] = ReserveerStatus;
             }
+
+            CultureInfo dutch = new CultureInfo("nl-NL");
+            DateTime dagvandaag = DateTime.Now;
+            string dagen = dutch.DateTimeFormat.GetDayName(dagvandaag.DayOfWeek).ToString();
+
+            TimeSpan startdeel1 = new TimeSpan(16, 50, 0);
+            TimeSpan enddeel1 = new TimeSpan(19, 15, 0);
+            //TimeSpan now = DateTime.Now.TimeOfDay;
+            TimeSpan now = new TimeSpan(17, 30, 0);
+            if (startdeel1 < enddeel1 && startdeel1 <= now && now <= enddeel1)
+            {
+                time = "17:00:00";
+            }
+            TimeSpan startdeel2 = new TimeSpan(19, 15, 0);
+            TimeSpan enddeel2 = new TimeSpan(21, 30, 0);
+            if (startdeel2 < enddeel2 && startdeel2 <= now && now <= enddeel2)
+            {
+                time = "19:30:00";
+            }
+            SqlConnection con = new SqlConnection(connectionString);
+
+            con.Open();
+            string prequerie = "select Tijdvak.Nummer from Tijdvak where Begintijd = @tijd AND Dag = @dag";
+            SqlCommand cmdtijdvak = new SqlCommand(prequerie, con);
+            cmdtijdvak.Parameters.AddWithValue("@dag", dagen);
+            cmdtijdvak.Parameters.AddWithValue("@tijd", time);
+            object tijd = cmdtijdvak.ExecuteScalar();
+            tijden = tijd.ToString();
+            tijdvaknummer = int.Parse(tijden);
+            Session["tijdvaknummer"] = tijdvaknummer;
+            con.Close();
+            LoopButtons(Page.Controls);
         }
 
         private void LoopButtons(ControlCollection controlCollection)
@@ -32,9 +70,9 @@ namespace ProjectBedrijfApp
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
-
-                string query = "SELECT[TafelTafelnummer] FROM[Tafel_Reservering]";
+                string query = "SELECT[TafelTafelnummer] FROM[Tafelbezetting] where TijdvakNummer = @tijdvak";
                 SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@tijdvak", Session["tijdvaknummer"]);
                 SqlDataReader drTafel = cmd.ExecuteReader();
                 //string resulaat = drTafel.Read().ToString();
                 while (drTafel.Read())
@@ -84,26 +122,22 @@ namespace ProjectBedrijfApp
         {
             Button button = (Button)sender;
             string buttonId = button.Text.Trim();
+            tafelID = (List<string>)Session["TafelId"];
 
             //string combindedString = string.Join(",", tafelID);
             //System.Diagnostics.Debug.WriteLine(combindedString);
-            for (int i = 0; i <= tafelID.Count; i++)
-            {
-                if (!tafelID.Contains(buttonId))
-                {
-                    ReserveerStatus = true;
-                    tafelID = (List<string>)Session["TafelId"];
-                    tafelID.Add(buttonId);
-                    Session["TafelId"] = tafelID;
-                    string combindedString = string.Join(",", tafelID);
-                    System.Diagnostics.Debug.WriteLine(combindedString);
 
-                }
-                else if (tafelID.Contains(buttonId))
-                {
-                    ReserveerStatus = false;
-                }
+            if (!tafelID.Any(x => x.ToString() == buttonId))
+            {
+                ReserveerStatus = true;
+                tafelID.Add(buttonId);
+                Session["TafelId"] = tafelID;
             }
+            else if (tafelID.Contains(buttonId))
+            {
+                ReserveerStatus = false;
+            }
+
 
             System.Diagnostics.Debug.WriteLine(ReserveerStatus);
             if (ReserveerStatus)
@@ -121,12 +155,7 @@ namespace ProjectBedrijfApp
 
         protected void btn_keuken_Click(object sender, EventArgs e)
         {
-            Response.Redirect ("Keukenscherm.aspx");
-        }
-
-        protected void Button1_Click1(object sender, EventArgs e)
-        {
-            LoopButtons(Page.Controls);
+            Response.Redirect("Keukenscherm.aspx");
         }
     }
 

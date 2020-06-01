@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="regristratiepagina.aspx.cs" Inherits="ProjectBedrijfApp.Beginpagina" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="regristratiepagina.aspx.cs" Inherits="ProjectBedrijfApp.regristratiepagina" %>
 
 <!DOCTYPE html>
 
