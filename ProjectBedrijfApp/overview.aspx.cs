@@ -23,7 +23,9 @@ namespace ProjectBedrijfApp
             if (!IsPostBack)
             {
                 Session["TafelId"] = tafelID;
-            }      
+                //Session["ReserveerStatus"] = ReserveerStatus;
+            }
+            LoopButtons(Page.Controls);
         }
 
         private void LoopButtons(ControlCollection controlCollection)
@@ -72,52 +74,51 @@ namespace ProjectBedrijfApp
 
         private void SettingReserverData()
         {
-          //  Tafel Tafel2 = new Tafel();
-           // Tafel.Reserveringsnummer1++;
+            //  Tafel Tafel2 = new Tafel();
+            // Tafel.Reserveringsnummer1++;
             //SelectedTafelID = Tafel.Reserveringsnummer1;
             Session["Reserveringsnummer"] = SelectedTafelID;
-            Response.Redirect("~/ReserveringPagina.aspx?TafelID=");
+            Response.Redirect("~/ReserveringPagina.aspx");
         }
 
         public void SetReserverData(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-            string buttonId = button.Text;
-
+            string buttonId = button.Text.Trim();
             tafelID = (List<string>)Session["TafelId"];
-            Session["TafelId"] = tafelID;
 
-            foreach (var item in tafelID)
-            {
-                if (item.Contains(buttonId))
+            //string combindedString = string.Join(",", tafelID);
+            //System.Diagnostics.Debug.WriteLine(combindedString);
+
+                if (!tafelID.Any(x => x.ToString() == buttonId))
                 {
-                    ReserveerStatus = !ReserveerStatus;
-                    System.Diagnostics.Debug.WriteLine(ReserveerStatus);
-                    if (ReserveerStatus)
-                    {
-                        tafelID.Add(buttonId);
-                        Session["TafelId"] = tafelID;
-                        button.BackColor = Color.Green;
-                    }
-                    else if (!ReserveerStatus)
-                    {
-                        tafelID.Remove(buttonId);
-                        button.BackColor = default(Color);
-                        System.Diagnostics.Debug.WriteLine(tafelID.Count);
-
-                    }
+                    ReserveerStatus = true;
+                    tafelID.Add(buttonId);
+                    Session["TafelId"] = tafelID;
                 }
+                else if (tafelID.Contains(buttonId))
+                {
+                    ReserveerStatus = false;
+                }
+            
+
+            System.Diagnostics.Debug.WriteLine(ReserveerStatus);
+            if (ReserveerStatus)
+            {
+                button.BackColor = Color.Green;
+            }
+            if (!ReserveerStatus)
+            {
+                tafelID.Remove(buttonId);
+                button.BackColor = Color.Red;
+                System.Diagnostics.Debug.WriteLine(tafelID.Count);
+
             }
         }
 
         protected void btn_keuken_Click(object sender, EventArgs e)
         {
             Response.Redirect ("Keukenscherm.aspx");
-        }
-
-        protected void Button1_Click1(object sender, EventArgs e)
-        {
-            LoopButtons(Page.Controls);
         }
     }
 
