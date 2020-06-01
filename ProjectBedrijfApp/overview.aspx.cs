@@ -87,9 +87,8 @@ namespace ProjectBedrijfApp
 
             //string combindedString = string.Join(",", tafelID);
             //System.Diagnostics.Debug.WriteLine(combindedString);
-            for (int i = 0; i <= tafelID.Count; i++)
-            {
-                if (!tafelID.Contains(buttonId))
+           
+                if (!tafelID.Contains(button.ID))
                 {
                     ReserveerStatus = true;
                     tafelID = (List<string>)Session["TafelId"];
@@ -103,7 +102,7 @@ namespace ProjectBedrijfApp
                 {
                     ReserveerStatus = false;
                 }
-            }
+            
 
             System.Diagnostics.Debug.WriteLine(ReserveerStatus);
             if (ReserveerStatus)
