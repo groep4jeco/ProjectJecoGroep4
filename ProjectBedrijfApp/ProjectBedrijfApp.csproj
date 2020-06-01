@@ -70,6 +70,8 @@
   <ItemGroup>
     <Content Include=".vs\ProjectBedrijfApp\versiersel.png" />
     <Content Include="AddToCard.aspx" />
+    <Content Include="Bestellen_drinken.aspx" />
+    <Content Include="Dranken_overzicht.aspx" />
     <Content Include="regristratiepagina.aspx" />
     <Content Include="Bestellen.aspx" />
     <Content Include="Betalen.aspx" />
@@ -198,6 +200,20 @@
     </Compile>
     <Compile Include="AddToCard.aspx.designer.cs">
       <DependentUpon>AddToCard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Bestellen_drinken.aspx.cs">
+      <DependentUpon>Bestellen_drinken.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Bestellen_drinken.aspx.designer.cs">
+      <DependentUpon>Bestellen_drinken.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dranken_overzicht.aspx.cs">
+      <DependentUpon>Dranken_overzicht.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dranken_overzicht.aspx.designer.cs">
+      <DependentUpon>Dranken_overzicht.aspx</DependentUpon>
     </Compile>
     <Compile Include="regristratiepagina.aspx.cs">
       <DependentUpon>regristratiepagina.aspx</DependentUpon>
