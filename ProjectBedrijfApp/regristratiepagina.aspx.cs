@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace ProjectBedrijfApp
 {
-    public partial class Beginpagina : System.Web.UI.Page
+    public partial class regristratiepagina : System.Web.UI.Page
     {
 
 

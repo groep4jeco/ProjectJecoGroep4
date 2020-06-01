@@ -6,11 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-<<<<<<< HEAD
 using System.Collections;
 using System.Globalization;
-=======
->>>>>>> Jibbe
 
 namespace ProjectBedrijfApp
 {
@@ -19,13 +16,10 @@ namespace ProjectBedrijfApp
         public int SelectedTafelID;
         public bool ReserveerStatus;
         public List<string> tafelID = new List<string>();
-<<<<<<< HEAD
         string time;
         string tijdvakdata;
         int tijdvaknummer;
         string tijden;
-=======
->>>>>>> Jibbe
 
         string connectionString = "Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019";
 
@@ -37,7 +31,6 @@ namespace ProjectBedrijfApp
                 Session["TafelId"] = tafelID;
                 //Session["ReserveerStatus"] = ReserveerStatus;
             }
-<<<<<<< HEAD
 
             CultureInfo dutch = new CultureInfo("nl-NL");
             DateTime dagvandaag = DateTime.Now;
@@ -70,8 +63,6 @@ namespace ProjectBedrijfApp
             Session["tijdvaknummer"] = tijdvaknummer;
             con.Close();
             LoopButtons(Page.Controls);
-=======
->>>>>>> Jibbe
         }
 
         private void LoopButtons(ControlCollection controlCollection)
@@ -79,15 +70,9 @@ namespace ProjectBedrijfApp
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
-<<<<<<< HEAD
                 string query = "SELECT[TafelTafelnummer] FROM[Tafelbezetting] where TijdvakNummer = @tijdvak";
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@tijdvak", Session["tijdvaknummer"]);
-=======
-
-                string query = "SELECT[TafelTafelnummer] FROM[Tafel_Reservering]";
-                SqlCommand cmd = new SqlCommand(query, con);
->>>>>>> Jibbe
                 SqlDataReader drTafel = cmd.ExecuteReader();
                 //string resulaat = drTafel.Read().ToString();
                 while (drTafel.Read())
@@ -137,43 +122,22 @@ namespace ProjectBedrijfApp
         {
             Button button = (Button)sender;
             string buttonId = button.Text.Trim();
-<<<<<<< HEAD
             tafelID = (List<string>)Session["TafelId"];
 
             //string combindedString = string.Join(",", tafelID);
             //System.Diagnostics.Debug.WriteLine(combindedString);
 
-                if (!tafelID.Any(x => x.ToString() == buttonId))
-                {
-                    ReserveerStatus = true;
-                    tafelID.Add(buttonId);
-                    Session["TafelId"] = tafelID;
-=======
-
-            //string combindedString = string.Join(",", tafelID);
-            //System.Diagnostics.Debug.WriteLine(combindedString);
-            for (int i = 0; i <= tafelID.Count; i++)
+            if (!tafelID.Any(x => x.ToString() == buttonId))
             {
-                if (!tafelID.Contains(buttonId))
-                {
-                    ReserveerStatus = true;
-                    tafelID = (List<string>)Session["TafelId"];
-                    tafelID.Add(buttonId);
-                    Session["TafelId"] = tafelID;
-                    string combindedString = string.Join(",", tafelID);
-                    System.Diagnostics.Debug.WriteLine(combindedString);
-
->>>>>>> Jibbe
-                }
-                else if (tafelID.Contains(buttonId))
-                {
-                    ReserveerStatus = false;
-                }
-<<<<<<< HEAD
-            
-=======
+                ReserveerStatus = true;
+                tafelID.Add(buttonId);
+                Session["TafelId"] = tafelID;
             }
->>>>>>> Jibbe
+            else if (tafelID.Contains(buttonId))
+            {
+                ReserveerStatus = false;
+            }
+
 
             System.Diagnostics.Debug.WriteLine(ReserveerStatus);
             if (ReserveerStatus)
@@ -191,16 +155,8 @@ namespace ProjectBedrijfApp
 
         protected void btn_keuken_Click(object sender, EventArgs e)
         {
-            Response.Redirect ("Keukenscherm.aspx");
+            Response.Redirect("Keukenscherm.aspx");
         }
-<<<<<<< HEAD
-=======
-
-        protected void Button1_Click1(object sender, EventArgs e)
-        {
-            LoopButtons(Page.Controls);
-        }
->>>>>>> Jibbe
     }
 
     class Tafel2

@@ -51,33 +51,21 @@ namespace ProjectBedrijfApp
         protected global::System.Web.UI.WebControls.RadioButton RadioButton2;
 
         /// <summary>
-<<<<<<< HEAD
         /// lblVolwassenen control.
-=======
-        /// Label2 control.
->>>>>>> Jibbe
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-<<<<<<< HEAD
         protected global::System.Web.UI.WebControls.Label lblVolwassenen;
 
         /// <summary>
         /// RequiredFieldValidator1 control.
-=======
-        protected global::System.Web.UI.WebControls.Label Label2;
-
-        /// <summary>
-        /// TextBox1 control.
->>>>>>> Jibbe
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-<<<<<<< HEAD
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
 
         /// <summary>
@@ -115,9 +103,6 @@ namespace ProjectBedrijfApp
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RangeValidator RangeValidator1;
-=======
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
->>>>>>> Jibbe
 
         /// <summary>
         /// cbAlles control.
@@ -129,101 +114,58 @@ namespace ProjectBedrijfApp
         protected global::System.Web.UI.WebControls.CheckBox cbAlles;
 
         /// <summary>
-<<<<<<< HEAD
         /// lblRondes control.
-=======
-        /// Button1 control.
->>>>>>> Jibbe
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-<<<<<<< HEAD
         protected global::System.Web.UI.WebControls.Label lblRondes;
 
         /// <summary>
         /// txtRondes control.
-=======
-        protected global::System.Web.UI.WebControls.Button Button1;
-
-        /// <summary>
-        /// Label3 control.
->>>>>>> Jibbe
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-<<<<<<< HEAD
         protected global::System.Web.UI.WebControls.TextBox txtRondes;
 
         /// <summary>
         /// Button1 control.
-=======
-        protected global::System.Web.UI.WebControls.Label Label3;
-
-        /// <summary>
-        /// SqlDataSource1 control.
->>>>>>> Jibbe
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-<<<<<<< HEAD
         protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
         /// BtnClick control.
-=======
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
-
-        /// <summary>
-        /// txtRondes control.
->>>>>>> Jibbe
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-<<<<<<< HEAD
         protected global::System.Web.UI.WebControls.Button BtnClick;
 
         /// <summary>
         /// Label3 control.
-=======
-        protected global::System.Web.UI.WebControls.TextBox txtRondes;
-
-        /// <summary>
-        /// RvRondes control.
->>>>>>> Jibbe
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-<<<<<<< HEAD
         protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
         /// SqlDataSource1 control.
-=======
-        protected global::System.Web.UI.WebControls.RangeValidator RvRondes;
-
-        /// <summary>
-        /// RvRondes control.
->>>>>>> Jibbe
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-<<<<<<< HEAD
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
-=======
-        //protected global::System.Web.UI.WebControls.RangeValidator RvRondes;
->>>>>>> Jibbe
 
         /// <summary>
         /// lbldatum control.
@@ -235,7 +177,6 @@ namespace ProjectBedrijfApp
         protected global::System.Web.UI.WebControls.Label lbldatum;
 
         /// <summary>
-<<<<<<< HEAD
         /// RequiredFieldValidator3 control.
         /// </summary>
         /// <remarks>
@@ -245,8 +186,6 @@ namespace ProjectBedrijfApp
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
 
         /// <summary>
-=======
->>>>>>> Jibbe
         /// lblVoornaam control.
         /// </summary>
         /// <remarks>
@@ -265,7 +204,6 @@ namespace ProjectBedrijfApp
         protected global::System.Web.UI.WebControls.TextBox txtVoornaam;
 
         /// <summary>
-<<<<<<< HEAD
         /// RequiredFieldValidator2 control.
         /// </summary>
         /// <remarks>
@@ -275,8 +213,6 @@ namespace ProjectBedrijfApp
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
 
         /// <summary>
-=======
->>>>>>> Jibbe
         /// lblAchternaam control.
         /// </summary>
         /// <remarks>
@@ -295,7 +231,6 @@ namespace ProjectBedrijfApp
         protected global::System.Web.UI.WebControls.TextBox txtAchternaam;
 
         /// <summary>
-<<<<<<< HEAD
         /// lbltelefoon control.
         /// </summary>
         /// <remarks>
@@ -341,8 +276,6 @@ namespace ProjectBedrijfApp
         protected global::System.Web.UI.WebControls.Label lblSorry;
 
         /// <summary>
-=======
->>>>>>> Jibbe
         /// BtnZoek control.
         /// </summary>
         /// <remarks>
@@ -361,7 +294,6 @@ namespace ProjectBedrijfApp
         protected global::System.Web.UI.WebControls.GridView GridView1;
 
         /// <summary>
-<<<<<<< HEAD
         /// btnNieuw control.
         /// </summary>
         /// <remarks>
@@ -371,8 +303,6 @@ namespace ProjectBedrijfApp
         protected global::System.Web.UI.WebControls.Button btnNieuw;
 
         /// <summary>
-=======
->>>>>>> Jibbe
         /// sqlKlant control.
         /// </summary>
         /// <remarks>

@@ -51,7 +51,6 @@ namespace ProjectBedrijfApp
         protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
-<<<<<<< HEAD
         /// SqlDataSource2 control.
         /// </summary>
         /// <remarks>
@@ -70,8 +69,6 @@ namespace ProjectBedrijfApp
         protected global::System.Web.UI.WebControls.ListView ListView2;
 
         /// <summary>
-=======
->>>>>>> Jibbe
         /// SqlDataSource3 control.
         /// </summary>
         /// <remarks>
@@ -88,7 +85,6 @@ namespace ProjectBedrijfApp
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListView ListView3;
-<<<<<<< HEAD
 
         /// <summary>
         /// SqlDataSource4 control.
@@ -143,7 +139,5 @@ namespace ProjectBedrijfApp
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListView ListView6;
-=======
->>>>>>> Jibbe
     }
 }

@@ -11,7 +11,7 @@ namespace ProjectBedrijfApp
 {
 
 
-    public partial class Beginpagina
+    public partial class regristratiepagina
     {
 
         /// <summary>
