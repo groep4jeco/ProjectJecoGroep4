@@ -89,14 +89,11 @@ namespace ProjectBedrijfApp
             //string combindedString = string.Join(",", tafelID);
             //System.Diagnostics.Debug.WriteLine(combindedString);
 
-                if (buttonId != "30")
+                if (!tafelID.Any(x => x.ToString() == buttonId))
                 {
                     ReserveerStatus = true;
                     tafelID.Add(buttonId);
                     Session["TafelId"] = tafelID;
-                    string combindedString = string.Join(",", tafelID);
-                    System.Diagnostics.Debug.WriteLine(combindedString);
-
                 }
                 else if (tafelID.Contains(buttonId))
                 {
