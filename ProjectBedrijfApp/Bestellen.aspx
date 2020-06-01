@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Bestellen.aspx.cs" Inherits="Bestellen.Bestellen" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Bestellen.aspx.cs" Inherits="ProjectBedrijfApp.Bestellen" %>
 
 <!DOCTYPE html>
 
@@ -123,6 +123,7 @@
             &nbsp;<asp:Label ID="lblRonde" runat="server" Font-Size="X-Large" Text="1"></asp:Label>
             &nbsp;<asp:Label ID="Label9" runat="server" Font-Size="X-Large" Text="/"></asp:Label>
             &nbsp;<asp:Label ID="lblMaxRondes" runat="server" Font-Size="X-Large" Text=""></asp:Label>
+            &nbsp;<asp:Label ID="lblWaarschuwing2" runat="server" Font-Size="X-Large" ForeColor="#FF3300"></asp:Label>
         </div>
         <div id="tijd" class="auto-style3">
             <asp:Label ID="lblAantalpersonen" runat="server" Font-Size="X-Large" Text="0"></asp:Label>

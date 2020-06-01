@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Bestellen
+namespace ProjectBedrijfApp
 {
     public partial class AddToCard : System.Web.UI.Page
     {
@@ -45,7 +45,7 @@ namespace Bestellen
                         dr["sno"] = 1;
                         dr["afb_pad"] = ds.Tables[0].Rows[0]["afb_pad"].ToString();
                         dr["Gerechtnummer"] = ds.Tables[0].Rows[0]["Gerechtnummer"].ToString();
-                        dr["Omschrijving"] = ds.Tables[0].Rows[0]["Omschrijving"].ToString();                       
+                        dr["Omschrijving"] = ds.Tables[0].Rows[0]["Omschrijving"].ToString();
                         dr["Hoeveelheid"] = Request.QueryString["Hoeveelheid"];
                         dr["Prijs"] = ds.Tables[0].Rows[0]["Prijs"].ToString();
                         double price = Convert.ToDouble(ds.Tables[0].Rows[0]["Prijs"].ToString());
@@ -202,16 +202,26 @@ namespace Bestellen
 
         protected void btnBevestig_Click(object sender, EventArgs e)
         {
-            int ronde = (int)Session["ronde"];
-            ronde++;
-            Session["ronde"] = ronde;
-
-
+            
             DataTable dt = new DataTable();
             dt = (DataTable)Session["buyitems"];
 
             dt.Rows.Clear();
-            Response.Redirect("~/Bestellen.aspx");
+
+            int ronde = (int)Session["ronde"];
+            int maxronde = int.Parse(Session["maxronde"].ToString());
+
+            if (ronde < maxronde)
+            {               
+                ronde++;
+                Session["ronde"] = ronde;
+                Response.Redirect("~/Timer.aspx");
+            }
+            else
+            {
+                Response.Redirect("~/regristratiepagina.aspx");
+            }
+            
         }
-    }    
+    }
 }

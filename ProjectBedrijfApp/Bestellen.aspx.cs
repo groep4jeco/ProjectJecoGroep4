@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Bestellen
+namespace ProjectBedrijfApp
 {
     public partial class Bestellen : System.Web.UI.Page
     {
@@ -50,6 +50,7 @@ namespace Bestellen
             con.Close();
 
             lblMaxRondes.Text = aantalrondes;
+            Session["maxronde"] = aantalrondes;
 
             if (int.Parse(lblRonde.Text) > int.Parse(aantalrondes))
             {
@@ -65,7 +66,7 @@ namespace Bestellen
             {
 
                 Label3.Text = dt.Rows.Count.ToString();
-                
+
             }
             else
             {
@@ -149,7 +150,7 @@ namespace Bestellen
                         dr["Prijs"] = ds.Tables[0].Rows[0]["Prijs"].ToString();
                         double price = Convert.ToDouble(ds.Tables[0].Rows[0]["Prijs"].ToString());
                         double quantity = Convert.ToInt16(Request.QueryString["Hoeveelheid"].ToString());
-                        double totalprice = price * quantity;                       
+                        double totalprice = price * quantity;
                         dr["totalprice"] = totalprice;
 
                         dt2.Rows.Add(dr);
@@ -171,18 +172,18 @@ namespace Bestellen
                     {
                         GridView2.FooterRow.Cells[2].Text = "Totaal:";
                         GridView2.FooterRow.Cells[3].Text = totalehoeveelheid().ToString() + " / " + maxbestelbaar.ToString();
-                        
+
                     }
 
                 }
 
             }
-            /*
-            if (totalehoeveelheid() >= maxbestelbaar)
+            
+            if (ronde == int.Parse(lblMaxRondes.Text))
             {
-                lblWaarschuwing.Text = "JE HEBT TE VEEL GERECHTEN!";
+                lblWaarschuwing2.Text = "(LAATSTE RONDE!)";
             }
-            */
+            
         }
 
         public int totalehoeveelheid()
@@ -201,7 +202,7 @@ namespace Bestellen
                 {
                     htotaal = htotaal + Convert.ToInt32(dt.Rows[i]["Hoeveelheid"].ToString());
                 }
-                
+
 
                 i = i + 1;
 
@@ -229,8 +230,8 @@ namespace Bestellen
             {
 
 
-                    DropDownList dlist = (DropDownList)(e.Item.FindControl("DropDownList1"));
-                    Response.Redirect("Bestellen.aspx?id=" + e.CommandArgument.ToString() + "&Hoeveelheid=" + dlist.SelectedItem.ToString());          
+                DropDownList dlist = (DropDownList)(e.Item.FindControl("DropDownList1"));
+                Response.Redirect("Bestellen.aspx?id=" + e.CommandArgument.ToString() + "&Hoeveelheid=" + dlist.SelectedItem.ToString());
             }
         }
 
@@ -243,8 +244,8 @@ namespace Bestellen
         {
             DataTable dt2 = new DataTable();
             dt2 = (DataTable)Session["buyitems"];
-        
-        
+
+
             for (int i = 0; i <= dt2.Rows.Count - 1; i++)
             {
                 int sr;
@@ -291,11 +292,11 @@ namespace Bestellen
             }*/
         }
 
- 
+
 
         protected void GridView2_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            
+
             /*
             int index = Convert.ToInt32(e.CommandArgument);
             GridViewRow row = GridView2.Rows[index];

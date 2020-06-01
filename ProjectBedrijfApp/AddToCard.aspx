@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddToCard.aspx.cs" Inherits="Bestellen.AddToCard" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddToCard.aspx.cs" Inherits="ProjectBedrijfApp.AddToCard" %>
 
 <!DOCTYPE html>
 
