@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Bestellen
+namespace ProjectBedrijfApp
 {
 
 
