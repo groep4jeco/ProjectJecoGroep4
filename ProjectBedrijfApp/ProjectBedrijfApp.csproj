@@ -15,7 +15,7 @@
     <AssemblyName>ProjectBedrijfApp</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress />
+    <Use64BitIISExpress>false</Use64BitIISExpress>
     <IISExpressSSLPort>44365</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -70,29 +70,6 @@
   <ItemGroup>
     <Content Include=".vs\ProjectBedrijfApp\versiersel.png" />
     <Content Include="AddToCard.aspx" />
-    <Content Include="Afbeeldingen\Gunkan\Avocado-Gunkan.png" />
-    <Content Include="Afbeeldingen\Gunkan\Ebiko-Gunkan.png" />
-    <Content Include="Afbeeldingen\Gunkan\Kani-Gunkan.png" />
-    <Content Include="Afbeeldingen\Gunkan\Mais-Gunkan.png" />
-    <Content Include="Afbeeldingen\Maki\Kappa-Maki.png" />
-    <Content Include="Afbeeldingen\Maki\Sake-Maki.png" />
-    <Content Include="Afbeeldingen\Maki\Tamago-Maki.png" />
-    <Content Include="Afbeeldingen\Maki\Tekka-Maki.png" />
-    <Content Include="Afbeeldingen\Nigiri\Ebi-Nigiri.png" />
-    <Content Include="Afbeeldingen\Nigiri\Kani-Nigiri.png" />
-    <Content Include="Afbeeldingen\Nigiri\Maguro-Nigiri.png" />
-    <Content Include="Afbeeldingen\Nigiri\Sake-Nigiri.png" />
-    <Content Include="Afbeeldingen\Nigiri\Suzuki-Nigiri.png" />
-    <Content Include="Afbeeldingen\Nigiri\Tamago-Nigiri.png" />
-    <Content Include="Afbeeldingen\overig\borrel-kroepoek.png" />
-    <Content Include="Afbeeldingen\overig\kippensoep.png" />
-    <Content Include="Afbeeldingen\Salads\Chicken-Salad.png" />
-    <Content Include="Afbeeldingen\Salads\Sashimi-Salad.png" />
-    <Content Include="Afbeeldingen\Salads\Sweet-Sour-Salad.png" />
-    <Content Include="Afbeeldingen\Salads\Wakame-Salad.png" />
-    <Content Include="Afbeeldingen\Temaki\Salmon-Avocado-Temaki.png" />
-    <Content Include="Afbeeldingen\Temaki\Shrimp-Temaki.png" />
-    <Content Include="Afbeeldingen\Temaki\Tuna-Avocado-Temaki.png" />
     <Content Include="regristratiepagina.aspx" />
     <Content Include="Bestellen.aspx" />
     <Content Include="Betalen.aspx" />
