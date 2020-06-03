@@ -71,7 +71,6 @@
             <br />
             <asp:TextBox ID="TxtKind" runat="server" TextMode="Number"></asp:TextBox>
             <br />
-            <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="TxtVolw" ErrorMessage="Aantal personen mag niet lager zijn dan 0 of hoger dan 160" MaximumValue="160" MinimumValue="0"></asp:RangeValidator>
             <br />
             <br />
             <br />
