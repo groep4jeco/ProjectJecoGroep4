@@ -156,9 +156,9 @@ namespace ProjectBedrijfApp
                 tafelID.Remove(buttonId);
                 button.BackColor = Color.Red;
                 System.Diagnostics.Debug.WriteLine(tafelID.Count);
-
             }
         }
+
 
         protected void btn_keuken_Click(object sender, EventArgs e)
         {

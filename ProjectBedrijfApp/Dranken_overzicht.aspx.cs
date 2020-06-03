@@ -285,7 +285,7 @@ namespace ProjectBedrijfApp
 
             dt.Rows.Clear();
 
-            Response.Redirect("~/Bestellen_drinken.aspx");
+            Response.Redirect("~/overview.aspx");
 
         }
     }
