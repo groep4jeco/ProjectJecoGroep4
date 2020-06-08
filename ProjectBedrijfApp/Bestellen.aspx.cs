@@ -58,7 +58,6 @@ namespace ProjectBedrijfApp
             }
 
 
-
             DataTable dt = new DataTable();
             dt = (DataTable)Session["buyitems"];
 
