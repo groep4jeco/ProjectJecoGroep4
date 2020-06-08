@@ -225,6 +225,7 @@ namespace ProjectBedrijfApp
             {
                 time = "19:30:00";
             }
+            //SqlConnection con = new SqlConnection(connectionString);
 
             con.Open();
             string prequerie = "select Tijdvak.Nummer from Tijdvak where Begintijd = @tijd AND Dag = @dag";
@@ -236,23 +237,29 @@ namespace ProjectBedrijfApp
             tijdvaknummer = int.Parse(tijden);
             Session["tijdvaknummer"] = tijdvaknummer;
             con.Close();
-            con.Open();
-            string tafels = "select Reserveringsnummer from Tafelbezetting where TijdvakNummer = @tijdvak and TafelTafelnummer = @tafel";
-            SqlCommand cmdtafel = new SqlCommand(tafels, con);
-            cmdtafel.Parameters.AddWithValue("@tijdvak", Session["tijdvaknummer"]);
-            cmdtafel.Parameters.AddWithValue("@tafel", tafelID);
-            string tafeltje = cmdtafel.ExecuteScalar().ToString();
-            tafels = tafeltje.ToString();
-            int reserveringnummers = int.Parse(tafels);
-            Session["reserveringsnummer"] = reserveringnummers;
 
-            con.Close();
+            foreach (var item in tafelID)
+            {
+                con.Open();
+                string tafels = "select Reserveringsnummer from Tafelbezetting where TijdvakNummer = @tijdvak and TafelTafelnummer = @tafel";
+                SqlCommand cmdtafel = new SqlCommand(tafels, con);
+                cmdtafel.Parameters.AddWithValue("@tijdvak", Session["tijdvaknummer"]);
+                cmdtafel.Parameters.AddWithValue("@tafel",item);
+                object tafeltje = cmdtafel.ExecuteScalar();
+                tafels = tafeltje.ToString();
+                int reserveringnummers = int.Parse(tafels);
+                Session["reserveringsnummer"] = reserveringnummers;
+                con.Close();
+            }
+
+
 
             DataTable dt = new DataTable();
             dt = (DataTable)Session["koopdrinken"];
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
+                string kop = DateTime.Now.ToString("hh:mm:ss");
                 string querie = "select MAX(Bestelregel.Bestelregelcode) from Bestelregel";
                 con.Open();
                 SqlCommand cmdcode = new SqlCommand(querie, con);
@@ -269,7 +276,7 @@ namespace ProjectBedrijfApp
                 adapter.InsertCommand = new SqlCommand(querie2, con);
                 adapter.InsertCommand.Parameters.AddWithValue("@code", bestelregelcode + 1);
                 adapter.InsertCommand.Parameters.AddWithValue("@hoeveelheid", hoeveelheid);
-                adapter.InsertCommand.Parameters.AddWithValue("@tijd", tijd);
+                adapter.InsertCommand.Parameters.AddWithValue("@tijd", kop);
                 adapter.InsertCommand.Parameters.AddWithValue("@reservering", Session["reserveringsnummer"]);
                 adapter.InsertCommand.Parameters.AddWithValue("@drank", artikelnummer);
                 int probeer = adapter.InsertCommand.ExecuteNonQuery();
@@ -278,7 +285,7 @@ namespace ProjectBedrijfApp
 
             dt.Rows.Clear();
 
-            Response.Redirect("~/Bestellen_drinken.aspx");
+            Response.Redirect("~/overview.aspx");
 
         }
     }

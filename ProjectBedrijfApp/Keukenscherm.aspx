@@ -157,6 +157,7 @@ AND besteltijd = (select besteltijd from Listview4
 ORDER BY besteltijd asc
 OFFSET 0 ROWS
 FETCH NEXT 1 ROWS ONLY)"></asp:SqlDataSource>
+        <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Terug" />
         <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="ListView1_SelectedIndexChanged" OnItemDeleted="ListView1_ItemDeleted" GroupItemCount="3">
             <AlternatingItemTemplate>
               
