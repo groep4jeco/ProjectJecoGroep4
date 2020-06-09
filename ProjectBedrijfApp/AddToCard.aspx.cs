@@ -228,9 +228,8 @@ namespace ProjectBedrijfApp
             }
             else
             {
-                Response.Redirect("~/regristratiepagina.aspx");
+                Response.Redirect("~/login.aspx");
             }
-            
         }
     }
 }
