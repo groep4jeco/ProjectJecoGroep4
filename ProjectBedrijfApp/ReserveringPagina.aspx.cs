@@ -75,6 +75,8 @@ namespace ProjectBedrijfApp
             {
                 kinderen = 0;
             }
+
+
             else
             {
                 kinderen = int.Parse(TxtKind.Text);
@@ -83,8 +85,13 @@ namespace ProjectBedrijfApp
             if (int.Parse(TxtVolw.Text) + kinderen > teller * 2)
             {
                 lblSorry.Text = "Het aantal personen is hoger dan de capiciteit van de tafels ga terug naar het overzicht en selecteer meer tafels";
+                
             }
 
+            if (TxtVolw.Text == "")
+            {
+                lblSorry.Text = "Er moet minimaal 1 volwassenen mee";
+            }
 
             else
             {
@@ -110,6 +117,16 @@ namespace ProjectBedrijfApp
                         tijdvakdata = result.ToString("hh:mm:ss");
                     }
 
+                    if (cbAlles.Checked == true)
+                    {
+                        allin = 1;
+                    }
+
+                    else
+                    {
+                        allin = 0;
+                    }
+
                     try
                     {
                         aantalrondes = int.Parse(txtRondes.Text);
@@ -123,6 +140,8 @@ namespace ProjectBedrijfApp
 
                     }
 
+                    int volwassenen = int.Parse(TxtVolw.Text);
+
                     CultureInfo dutch = new CultureInfo("nl-NL");
                     DateTime dagvandaag = DateTime.Now;
                     string dagen = dutch.DateTimeFormat.GetDayName(dagvandaag.DayOfWeek).ToString();
@@ -133,7 +152,7 @@ namespace ProjectBedrijfApp
 
                     string reservering = "Insert into reservering(datum, klantklantID, [RestaurantRestaurant ID]) values (@datum, @klant, @restaurant)";
                     string reserveringsnummer = "select reserveringsnummer from reservering where klantklantid = @klant AND datum = @datum AND [RestaurantRestaurant ID] = @restaurant";
-                    string invoegen = "Begin transaction; Insert into in_restaurant([All you can eat], [Aantal rondes], [ReserveringsstatusStatus ID], TijdvakNummer, [Aantal kinderen], [Aantal Volwassenen], Reserveringsnummer)  values(@allin, @aantalrondes, 2, (select Tijdvak.Nummer from Tijdvak where Begintijd = @tijd AND Dag = @dagprobeer), @volw, @kind, @reserveringsnummers); commit;";
+                    string invoegen = "Begin transaction; Insert into in_restaurant([All you can eat], [Aantal rondes], [ReserveringsstatusStatus ID], TijdvakNummer, [Aantal kinderen], [Aantal Volwassenen], Reserveringsnummer)  values(@allin, @aantalrondes, 2, (select Tijdvak.Nummer from Tijdvak where Begintijd = @tijd AND Dag = @dagprobeer), @kind, @volw, @reserveringsnummers); commit;";
                     //command = new SqlCommand(invoegen, connnection);
                     //
                     con.Open();
@@ -165,7 +184,7 @@ namespace ProjectBedrijfApp
                     adapter.InsertCommand.Parameters.AddWithValue("@dagprobeer", dagen2);
                     adapter.InsertCommand.Parameters.AddWithValue("@tijd", time);
                     adapter.InsertCommand.Parameters.AddWithValue("@allin", allin);
-                    adapter.InsertCommand.Parameters.AddWithValue("@volw", TxtVolw.Text);
+                    adapter.InsertCommand.Parameters.AddWithValue("@volw", volwassenen);
                     adapter.InsertCommand.Parameters.AddWithValue("@kind", kinderen);
                     adapter.InsertCommand.Parameters.AddWithValue("@aantalrondes", aantalrondes);
                     int probeer = adapter.InsertCommand.ExecuteNonQuery();
@@ -183,9 +202,11 @@ namespace ProjectBedrijfApp
                         int tafeltjes = adapter.InsertCommand.ExecuteNonQuery();
                         con.Close();
                     }
+
+                    Response.Redirect("~/overview.aspx");
                 }
             }
-            Response.Redirect("~/overview.aspx");
+            
         }
 
 
@@ -241,7 +262,6 @@ namespace ProjectBedrijfApp
         private int telrijen()
         {
             int count = GridView1.Rows.Count;
-            TxtVolw.Text = count.ToString();
             btnNieuw.Visible = true;
             lblEmail.Visible = true;
             txtEmail.Visible = true;

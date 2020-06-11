@@ -231,7 +231,7 @@ namespace ProjectBedrijfApp
             string aantalv = volwassenen.ToString();
             int volw = int.Parse(aantalv);
 
-            SqlCommand cmdkind = new SqlCommand(eerstevol, con);
+            SqlCommand cmdkind = new SqlCommand(eerstekind, con);
             cmdkind.Parameters.AddWithValue("@reservering", Session["reservering"]);
             object kinderen1 = cmdvol.ExecuteScalar();
             string kinderen = kinderen1.ToString();

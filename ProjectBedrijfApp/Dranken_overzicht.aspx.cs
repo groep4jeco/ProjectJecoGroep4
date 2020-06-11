@@ -256,7 +256,6 @@ namespace ProjectBedrijfApp
 
             DataTable dt = new DataTable();
             dt = (DataTable)Session["koopdrinken"];
-
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 string kop = DateTime.Now.ToString("hh:mm:ss");
@@ -281,6 +280,65 @@ namespace ProjectBedrijfApp
                 adapter.InsertCommand.Parameters.AddWithValue("@drank", artikelnummer);
                 int probeer = adapter.InsertCommand.ExecuteNonQuery();
                 con.Close();
+
+                string controlebestaan = "select factuurnummer from factuur where reserveringsnummer = @reservering";
+                SqlCommand cmdfactuur = new SqlCommand(controlebestaan, con);
+                cmdfactuur.Parameters.AddWithValue("@reservering", Session["reserveringsnummer"]);
+                SqlDataReader drklant;
+
+
+
+
+
+
+                con.Open();
+                drklant = cmdfactuur.ExecuteReader();
+                con.Close();
+                try
+                {
+                    con.Open();
+                    
+                    string factuur = drklant.Read().ToString();
+                    int factuurnummer = (int)drklant["Factuurnummer"];
+                    drklant.Close();
+                    con.Close();
+                }
+
+                catch
+                {
+                    drklant.Close();
+                    string eerstevol = "select [Aantal Volwassenen] from in_restaurant where Reserveringsnummer = @reservering";
+                    string eerstekind = "select [Aantal kinderen] from in_restaurant where Reserveringsnummer = @reservering";
+
+                    
+                    SqlCommand cmdvol = new SqlCommand(eerstevol, con);
+                    cmdvol.Parameters.AddWithValue("@reservering", Session["reservering"]);
+                    object volwassenen = cmdvol.ExecuteScalar();
+                    string aantalv = volwassenen.ToString();
+                    int volw = int.Parse(aantalv);
+
+                    SqlCommand cmdkind = new SqlCommand(eerstekind, con);
+                    cmdkind.Parameters.AddWithValue("@reservering", Session["reservering"]);
+                    object kinderen1 = cmdvol.ExecuteScalar();
+                    string kinderen = kinderen1.ToString();
+                    int kind = int.Parse(kinderen);
+
+                    string factuurmaken = "insert into Factuur (KlantenpasEmail, Factuurdatum, Totaalbedrag, Reserveringsnummer, KlantKlantID) values ((select Klant.Email from Reservering inner join klant on Klant.KlantID = Reservering.KlantKlantID where Reserveringsnummer = @reservering), (SELECT CONVERT (date, GETDATE())), (select CAST(SUM([Prijs volwassenen] * @volw + [Prijs kinderen] * @kind)AS decimal (10,2)) from in_restaurant inner join Tijdvak on in_restaurant.TijdvakNummer = Tijdvak.Nummer where Reserveringsnummer = @reservering), @reservering, (select Reservering.KlantKlantID from Reservering where Reservering.Reserveringsnummer = @reservering))";
+                    SqlDataAdapter adapter2 = new SqlDataAdapter();
+                    adapter2.InsertCommand = new SqlCommand(factuurmaken, con);
+                    adapter2.InsertCommand.Parameters.AddWithValue("@reservering", Session["reservering"]);
+                    adapter2.InsertCommand.Parameters.AddWithValue("@volw", volw);
+                    adapter2.InsertCommand.Parameters.AddWithValue("@kind", kind);
+                    int doehet = adapter2.InsertCommand.ExecuteNonQuery();
+
+                }
+
+                finally
+                {
+                    con.Close();
+                    drklant.Close();
+                }
+
             }
 
             dt.Rows.Clear();
