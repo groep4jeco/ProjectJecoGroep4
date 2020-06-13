@@ -248,7 +248,7 @@ namespace ProjectBedrijfApp
                 object tafeltje = cmdtafel.ExecuteScalar();
                 tafels = tafeltje.ToString();
                 int reserveringnummers = int.Parse(tafels);
-                Session["reserveringsnummer"] = reserveringnummers;
+                Session["reservering"] = reserveringnummers;
                 con.Close();
             }
 
@@ -276,33 +276,36 @@ namespace ProjectBedrijfApp
                 adapter.InsertCommand.Parameters.AddWithValue("@code", bestelregelcode + 1);
                 adapter.InsertCommand.Parameters.AddWithValue("@hoeveelheid", hoeveelheid);
                 adapter.InsertCommand.Parameters.AddWithValue("@tijd", kop);
-                adapter.InsertCommand.Parameters.AddWithValue("@reservering", Session["reserveringsnummer"]);
+                adapter.InsertCommand.Parameters.AddWithValue("@reservering", Session["reservering"]);
                 adapter.InsertCommand.Parameters.AddWithValue("@drank", artikelnummer);
                 int probeer = adapter.InsertCommand.ExecuteNonQuery();
                 con.Close();
 
                 string controlebestaan = "select factuurnummer from factuur where reserveringsnummer = @reservering";
                 SqlCommand cmdfactuur = new SqlCommand(controlebestaan, con);
-                cmdfactuur.Parameters.AddWithValue("@reservering", Session["reserveringsnummer"]);
+                cmdfactuur.Parameters.AddWithValue("@reservering", Session["reservering"]);
                 SqlDataReader drklant;
-
-
-
-
 
 
                 con.Open();
                 drklant = cmdfactuur.ExecuteReader();
-                con.Close();
+
                 try
                 {
-                    con.Open();
-                    
+                   
                     string factuur = drklant.Read().ToString();
-                    int factuurnummer = (int)drklant["Factuurnummer"];
+                    string factuurtje = drklant["Factuurnummer"].ToString();
+                    int factuurnummer = int.Parse(factuurtje);
                     drklant.Close();
+                    string optellen = "Update factuur set Totaalbedrag += @prijs where Factuurnummer = @factuur";
+                    SqlDataAdapter adapter3 = new SqlDataAdapter();
+                    adapter3.UpdateCommand = new SqlCommand(optellen, con);
+                    adapter3.UpdateCommand.Parameters.AddWithValue("@factuur", factuurnummer);
+                    adapter3.UpdateCommand.Parameters.AddWithValue("@prijs", prijs);
+                    int doehet = adapter3.UpdateCommand.ExecuteNonQuery();
                     con.Close();
                 }
+
 
                 catch
                 {
@@ -323,20 +326,21 @@ namespace ProjectBedrijfApp
                     string kinderen = kinderen1.ToString();
                     int kind = int.Parse(kinderen);
 
-                    string factuurmaken = "insert into Factuur (KlantenpasEmail, Factuurdatum, Totaalbedrag, Reserveringsnummer, KlantKlantID) values ((select Klant.Email from Reservering inner join klant on Klant.KlantID = Reservering.KlantKlantID where Reserveringsnummer = @reservering), (SELECT CONVERT (date, GETDATE())), (select CAST(SUM([Prijs volwassenen] * @volw + [Prijs kinderen] * @kind)AS decimal (10,2)) from in_restaurant inner join Tijdvak on in_restaurant.TijdvakNummer = Tijdvak.Nummer where Reserveringsnummer = @reservering), @reservering, (select Reservering.KlantKlantID from Reservering where Reservering.Reserveringsnummer = @reservering))";
+                    string factuurmaken = "insert into Factuur (KlantenpasEmail, Factuurdatum, Totaalbedrag, Reserveringsnummer, KlantKlantID) values ((select Klant.Email from Reservering inner join klant on Klant.KlantID = Reservering.KlantKlantID where Reserveringsnummer = @reservering), (SELECT CONVERT (date, GETDATE())), @prijs, @reservering, (select Reservering.KlantKlantID from Reservering where Reservering.Reserveringsnummer = @reservering))";
                     SqlDataAdapter adapter2 = new SqlDataAdapter();
                     adapter2.InsertCommand = new SqlCommand(factuurmaken, con);
                     adapter2.InsertCommand.Parameters.AddWithValue("@reservering", Session["reservering"]);
+                    adapter2.InsertCommand.Parameters.AddWithValue("@prijs", prijs);
                     adapter2.InsertCommand.Parameters.AddWithValue("@volw", volw);
                     adapter2.InsertCommand.Parameters.AddWithValue("@kind", kind);
-                    int doehet = adapter2.InsertCommand.ExecuteNonQuery();
+                    int doehet2 = adapter2.InsertCommand.ExecuteNonQuery();
 
                 }
 
                 finally
                 {
                     con.Close();
-                    drklant.Close();
+                    //drklant.Close();
                 }
 
             }
