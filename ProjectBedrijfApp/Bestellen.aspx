@@ -4,284 +4,246 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Bestellen</title>
-<style>
-    #container{
-        height: 550px;
-        width: 910px;
-    }
+    <title></title>
 
+    <style type="text/css">
+        .auto-style1 {
+            width: 100%;
+        }
+        .auto-style2 {
+            height: 23px;
+            text-align: center;
+        }
+        .auto-style3 {
+            text-align: center;
+        }
+        .auto-style4 {
+            height: 30px;
+            text-align: center;
+        }
 
-    /* topbalk */
-    #topbalk {
-        height: 25px;
-        width: 900px;
-        border: 1px;
-        border-style: solid;
-    }
-    #datum {
-        height: 25px;
-        width: 300px;
-        float: left;
-    }
-    #ronde {
-        height: 25px;
-        width: 300px;
-        float: left;
-    }
-    #tijd {
-        height: 25px;
-        width: 300px;
-        float: left;
-    }
-    
+        /*buitenste container*/
+        .auto-style6 {
+            width: 1260px;
+            height: 860px;
+        }
 
-    /* menuselectie */
-    #infotekst {
-        width: 600px;
-        height: 25px;
-        float: left;
-    }
-    #menulijst {
-        height: 25px;
-        width: 300px;
-        float: left;
-    }    
-    #menuselectie {
-        height: 25px;
-        width: 900px;
-        border: 1px;
-        border-top: 0px;
-        border-style: solid;
-    }
+        /*topbalk*/
+        #datum {
+            float: left;
+            height: 30px;
+            text-align: left;
+            width: 420px;
+        }
 
-    #ddlMenulijst{
-        margin: 1px;
-    }
+        #ronde {
+            float: left;
+            height: 30px;
+            text-align: center;
+            width: 420px;
 
-    /* menu's */
-    .gerechtimg{
-        height: 150px;
-        width: 150px;
-        margin: 10px 10px 0px 10px;
-        border: 2px;
-        border-style: solid;        
-    }
-    .gerechtlbl{
-        
-    }
-    .gerecht {
-        width: 175px;
-        height: 200px;
-        float: left;
-        margin: 0px 5px 5px 5px
-    }
+        }
+        #tijd {
+            float: left;
+            height: 30px;
+            text-align: right;
+            width: 420px;
+            
+        }
 
+        /*infobalk*/
 
-    .menus {
-        height: 475px;
-        width: 740px;
-        float: left;
-        border: 1px;
-        border-top: 0px;
-        border-style: solid;
-    }
-    
+        #info{
+            float: left;
+            height: 30px;
+            width: 1258px;
+            text-align: center;
+            border: 1px;
+            border-style: solid;
+        }
 
-    /* bestelvenster */
-    #bestelvenster{
-        float: left;
-        width: 159px; 
-        height: 475px;
-        border-left-style: solid;
-        border-left-color: inherit;
-        border-left-width: 0px;
-        border-right-style: solid;
-        border-right-color: inherit;
-        border-right-width: 1px;
-        border-top-style: solid;
-        border-top-color: inherit;
-        border-top-width: 0px;
-        border-bottom-style: solid;
-        border-bottom-color: inherit;
-        border-bottom-width: 1px;        
-    }
+        /*Menu div*/
+        #menu {
+            float: left;
+            width: 968px;
+            height: 740px;
+            overflow-y: auto;
+            border-left-style: solid;
+            border-left-color: inherit;
+            border-left-width: 1px;
+            border-right-style: solid;
+            border-right-color: inherit;
+            border-right-width: 1px;
+            border-top-style: solid;
+            border-top-color: inherit;
+            border-top-width: 0px;
+            border-bottom-style: solid;
+            border-bottom-color: inherit;
+            border-bottom-width: 1px;
+        }
 
-    #bestelvenster2{
-        width: 154px; 
-        height: 470px;
-        margin: 5px
-    }
+        /*Overzicht*/
+        #overzicht{
+            float: left;
+            width: 289px;
+            height: 740px;
+            border-left-style: solid;
+            border-left-color: inherit;
+            border-left-width: 0px;
+            border-right-style: solid;
+            border-right-color: inherit;
+            border-right-width: 1px;
+            border-top-style: solid;
+            border-top-color: inherit;
+            border-top-width: 0px;
+            border-bottom-style: solid;
+            border-bottom-color: inherit;
+            border-bottom-width: 1px;
+        }
 
-    .toegevoegd{
-        float: left;
-        margin: 0px
-    }
+        #overzicht2{
+            width: 279px;
+            height: 730px;
+            margin: 5px;
+        }
 
-    .aantal{
-        float: right;
-    }
-
-    .plus{
-        float: right;
-    }
-
-    .minus{
-        float: right;
-    }
-    
-</style>
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <div id="container">
+    <div id="container" class="auto-style6">
 
-                <!-- topbalk -->
-                <div id="topbalk">
-                    <div id="datum">
-                        datum</div>
-                     <div id="ronde">
-                        ronde</div>
-                     <div id="tijd">
-                        tijd</div>
-                </div>
+        <!--Topbalk-->
+        <div id="datum">
+            &nbsp;
+            <asp:Label ID="lblDatum" runat="server" Font-Size="X-Large" Text="Datum"></asp:Label>
+        </div>
+        <div id="ronde">         
+            <asp:Label ID="Label8" runat="server" Font-Size="X-Large" Text="Ronde"></asp:Label>
+            &nbsp;<asp:Label ID="lblRonde" runat="server" Font-Size="X-Large" Text="1"></asp:Label>
+            &nbsp;<asp:Label ID="Label9" runat="server" Font-Size="X-Large" Text="/"></asp:Label>
+            &nbsp;<asp:Label ID="lblMaxRondes" runat="server" Font-Size="X-Large" Text=""></asp:Label>
+            &nbsp;<asp:Label ID="lblWaarschuwing2" runat="server" Font-Size="X-Large" ForeColor="#FF3300"></asp:Label>
+        </div>
+        <div id="tijd" class="auto-style3">
+            <asp:Label ID="lblAantalpersonen" runat="server" Font-Size="X-Large" Text="0"></asp:Label>
+            &nbsp
+            <asp:Label ID="Label1" runat="server" Font-Size="X-Large" Text="personen"></asp:Label>
 
-                <!-- menuselectie -->
-                <div id="menuselectie">
-                    <div id="menulijst">
-                        <asp:DropDownList ID="ddlMenulijst" runat="server" Height="23px" Width="298px">
-                            <asp:ListItem>Soepen</asp:ListItem>
-                            <asp:ListItem>Sushi</asp:ListItem>
-                            <asp:ListItem>Vlees</asp:ListItem>
-                            <asp:ListItem>Vis</asp:ListItem>
-                            <asp:ListItem>Kip</asp:ListItem>
-                            <asp:ListItem>Bijgerechten</asp:ListItem>
-                        </asp:DropDownList>
-                    </div>
-                    <div id="infotekst">
-                        Vragen stellen of drinken bestellen? Daar is het personeel voor!</div>
-                </div>
+            <!--
+            <asp:ScriptManager ID="ScriptManager1" runat="server">
+            </asp:ScriptManager>
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
+                    <asp:Label ID="lblTimer" runat="server" Font-Size="X-Large">150</asp:Label>
+                    <asp:Timer ID="Timer1" runat="server" OnTick="Timer1_Tick1" Interval="1000">
+                    </asp:Timer>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            -->
 
-                <!-- Alle menu's -->
-                <div class="menus" id="soepen">
-                    <div class="gerecht" id="soepgerecht1">
-                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht1" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
-                        <br/>
-                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht1" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
-                    </div>
-                    <div class="gerecht" id="soepgerecht2">
-                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht2" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
-                        <br/>
-                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht2" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
-                    </div>
-                    <div class="gerecht" id="soepgerecht3">
-                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht3" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
-                        <br/>
-                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht3" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
-                    </div>
-                    <div class="gerecht" id="soepgerecht4">
-                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht4" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
-                        <br/>
-                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht4" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
-                    </div>
-                    <div class="gerecht" id="soepgerecht5">
-                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht5" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
-                        <br/>
-                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht5" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
-                    </div>
-                    <div class="gerecht" id="soepgerecht6">
-                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht6" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
-                        <br/>
-                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht6" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
-                    </div>
-                    <div class="gerecht" id="soepgerecht7">
-                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht7" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
-                        <br/>
-                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht7" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
-                    </div>
-                    <div class="gerecht" id="soepgerecht8">
-                        <asp:ImageButton class= "gerechtimg" ID="imgbtnSoepgerecht8" runat="server" ImageUrl="https://www.dehippevegetarier.nl/wp-content/uploads/2018/10/APC_1350-1080x675.jpg" />
-                        <br/>
-                        <asp:Label class= "gerechtlbl" ID="lblSoepgerecht8" runat="server" Text="Overheerlijke tomatensoep vergemaakt in de keuken."></asp:Label>
-                    </div>
-                </div>
-                <!-- Tijdelijk uitgeschakeld
-                <div id="sushi">
-                </div>
-                <div id="vlees">
-                </div>
-                <div id="vis">
-                </div>
-                <div id="kip">
-                </div>
-                <div id="bijgerechten">
-                </div>
-                -->
+        </div>
+        
+        <!--Info-->
+        <div id="info">
+           <asp:Label ID="lblInfo" runat="server" Font-Size="X-Large" Text="Vragen stellen of drinken bestellen? Daar is het personeel voor!"></asp:Label>
+        </div>
+         
+        <!--Menu-->
+        <div id="menu">
+            <asp:DataList ID="DataList1" runat="server" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" DataKeyField="Gerechtnummer" DataSourceID="SqlDataSource1" ForeColor="Black" GridLines="Both" Height="350px" OnItemCommand="DataList1_ItemCommand" RepeatColumns="4" RepeatDirection="Horizontal" Width="850px">
+                <FooterStyle BackColor="#CCCCCC" />
+                <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+                <ItemStyle BackColor="White" />
+                <ItemTemplate>
+                    <table class="auto-style1">
+                        <tr>
+                            <td class="auto-style2">
+                                <asp:Label ID="Label4" runat="server" Text="Gerechtnummer:"></asp:Label>
+                                &nbsp;<asp:Label ID="Label5" runat="server" Text='<%# Eval("Gerechtnummer") %>'></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style3">
+                                <asp:Label ID="Label6" runat="server" Text='<%# Eval("Omschrijving") %>'></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style2">€<asp:Label ID="Label7" runat="server" Text='<%# Eval("Prijs") %>'></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style3">
+                                <asp:ImageButton ID="ImageButton1" runat="server" CommandArgument='<%# Eval("Gerechtnummer") %>' CommandName="addtocard" Height="200px" ImageUrl='<%# Eval("afb_pad") %>' Width="222px" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style4">
+                                <asp:DropDownList ID="DropDownList1" runat="server" Height="30px" Width="220px">
+                                    <asp:ListItem>1</asp:ListItem>
+                                    <asp:ListItem>2</asp:ListItem>
+                                    <asp:ListItem>3</asp:ListItem>
+                                    <asp:ListItem>4</asp:ListItem>
+                                    <asp:ListItem>5</asp:ListItem>
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                </ItemTemplate>
+                <SelectedItemStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+            </asp:DataList>
+            <br />
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT * FROM [Gerecht]"></asp:SqlDataSource>           
+            <br />
+        </div>
 
-                <!-- bestelvenster -->
-                <div id="bestelvenster">
-                    <div id="bestelvenster2">
-                        <asp:Button ID="btnBestel" runat="server" Text="BESTEL" Height="50px" Width="150px" />                      
-                        <br/>
-                        <br/>
-                        <asp:Label class="toegevoegd" ID="lblToegevoegd1" runat="server" Text="Gerecht1"></asp:Label>                        
-                        <asp:Button class="plus" ID="btnPlus1" runat="server" Height="16px" Text="+" Width="16px" />
-                        <asp:Button class="minus" ID="btnMinus1" runat="server" Height="16px" Text="-" Width="16px" />
-                        <asp:Label class="aantal" ID="lblAantal1" runat="server" Text="1"></asp:Label>
-                        <br/>
-                        <br/>
-                        <asp:Label class="toegevoegd" ID="lblToegevoegd2" runat="server" Text="Gerecht1"></asp:Label>                        
-                        <asp:Button class="plus" ID="btnPlus2" runat="server" Height="16px" Text="+" Width="16px" />
-                        <asp:Button class="minus" ID="btnMinus2" runat="server" Height="16px" Text="-" Width="16px" />
-                        <asp:Label class="aantal" ID="lblAantal2" runat="server" Text="1"></asp:Label>
-                        <br/>
-                        <br/>
-                        <asp:Label class="toegevoegd" ID="lblToegevoegd3" runat="server" Text="Gerecht1"></asp:Label>                        
-                        <asp:Button class="plus" ID="btnPlus3" runat="server" Height="16px" Text="+" Width="16px" />
-                        <asp:Button class="minus" ID="btnMinus3" runat="server" Height="16px" Text="-" Width="16px" />
-                        <asp:Label class="aantal" ID="lblAantal3" runat="server" Text="1"></asp:Label>
-                        <br/>
-                        <br/>
-                        <asp:Label class="toegevoegd" ID="lblToegevoegd4" runat="server" Text="Gerecht1"></asp:Label>                        
-                        <asp:Button class="plus" ID="btnPlus4" runat="server" Height="16px" Text="+" Width="16px" />
-                        <asp:Button class="minus" ID="btnMinus4" runat="server" Height="16px" Text="-" Width="16px" />
-                        <asp:Label class="aantal" ID="lblAantal4" runat="server" Text="1"></asp:Label>
-                        <br/>
-                        <br/>
-                        <asp:Label class="toegevoegd" ID="lblToegevoegd5" runat="server" Text="Gerecht1"></asp:Label>                        
-                        <asp:Button class="plus" ID="btnPlus5" runat="server" Height="16px" Text="+" Width="16px" />
-                        <asp:Button class="minus" ID="btnMinus5" runat="server" Height="16px" Text="-" Width="16px" />
-                        <asp:Label class="aantal" ID="lblAantal5" runat="server" Text="1"></asp:Label>
-                        <br/>
-                        <br/>
-                        <asp:Label class="toegevoegd" ID="lblToegevoegd6" runat="server" Text="Gerecht1"></asp:Label>                        
-                        <asp:Button class="plus" ID="btnPlus6" runat="server" Height="16px" Text="+" Width="16px" />
-                        <asp:Button class="minus" ID="btnMinus6" runat="server" Height="16px" Text="-" Width="16px" />
-                        <asp:Label class="aantal" ID="lblAantal6" runat="server" Text="1"></asp:Label>
-                        <br />
-                        <br/>
-                        <asp:Label class="toegevoegd" ID="lblToegevoegd7" runat="server" Text="Gerecht1"></asp:Label>                        
-                        <asp:Button class="plus" ID="btnPlus7" runat="server" Height="16px" Text="+" Width="16px" />
-                        <asp:Button class="minus" ID="btnMinus7" runat="server" Height="16px" Text="-" Width="16px" />
-                        <asp:Label class="aantal" ID="lblAantal7" runat="server" Text="1"></asp:Label>
-                        <br />
-                        <br/>
-                        <asp:Label class="toegevoegd" ID="lblToegevoegd8" runat="server" Text="Gerecht1"></asp:Label>                        
-                        <asp:Button class="plus" ID="btnPlus8" runat="server" Height="16px" Text="+" Width="16px" />
-                        <asp:Button class="minus" ID="btnMinus8" runat="server" Height="16px" Text="-" Width="16px" />
-                        <asp:Label class="aantal" ID="lblAantal8" runat="server" Text="1"></asp:Label>
-                        <br />
-                        <br/>
-                        <asp:Label class="toegevoegd" ID="lblToegevoegd9" runat="server" Text="Gerecht1"></asp:Label>                        
-                        <asp:Button class="plus" ID="btnPlus9" runat="server" Height="16px" Text="+" Width="16px" />
-                        <asp:Button class="minus" ID="btnMinus9" runat="server" Height="16px" Text="-" Width="16px" />
-                        <asp:Label class="aantal" ID="lblAantal9" runat="server" Text="1"></asp:Label>
-                        <br />
-                    </div>
-                </div>
+        <div id="overzicht">
+            <div id="overzicht2">
+                <asp:Button ID="btnOverzicht" runat="server" Height="40px" Text="Overzicht" Width="279px" OnClick="btnOverzicht_Click" />
+
+                <br />
+
+                <asp:Label ID="Label2" runat="server" Text="Aantal gekozen gerechten:" Font-Size="Large"></asp:Label>
+                &nbsp;<asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="X-Large"></asp:Label>
+                <br />
+                <asp:Label ID="lblWaarschuwing" runat="server" Font-Bold="True" Font-Size="X-Large" ForeColor="Red"></asp:Label>
+                <br />
+                <br />
+                <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" Height="200px" OnRowDeleting="GridView2_RowDeleting" Width="279px" OnRowCommand="GridView2_RowCommand" ShowFooter="True">
+                    <Columns>
+                        <asp:BoundField DataField="sno" />
+                        <asp:ImageField DataImageUrlField="afb_pad">
+                            <ControlStyle Height="30px" Width="30px" />
+                        </asp:ImageField>
+                        <asp:BoundField DataField="Omschrijving" HeaderText="Gerecht">
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="Hoeveelheid" HeaderText="Aantal">
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                        <asp:ButtonField CommandName="btnPlus" />
+                        <asp:ButtonField CommandName="btnMinus" />
+                        <asp:CommandField DeleteText="X" ShowDeleteButton="True">
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:CommandField>
+                    </Columns>
+                    <FooterStyle BackColor="#CCCCCC" ForeColor="Black" HorizontalAlign="Center" />
+                    <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
+                    <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
+                    <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
+                    <SortedAscendingCellStyle BackColor="#F7F7F7" />
+                    <SortedAscendingHeaderStyle BackColor="#4B4B4B" />
+                    <SortedDescendingCellStyle BackColor="#E5E5E5" />
+                    <SortedDescendingHeaderStyle BackColor="#242121" />
+                </asp:GridView>
+                <br />
             </div>
         </div>
+    </div>
     </form>
 </body>
 </html>

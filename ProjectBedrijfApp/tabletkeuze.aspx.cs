@@ -16,20 +16,20 @@ namespace ProjectBedrijfApp
         {
             //Id = Session["Id"].ToString();
             voornaam = (string)Session["Naam"];
-            isManager = (string)Session["IsManager"];
+            isManager = (string)Session["Functie"];
 
             VrmNaam.Text = voornaam;
             IdLabel.Text = Id;
 
-            if (isManager == "True")
+            if (isManager == "Manager")
             {
-                ManagerButton.Visible = true;
+                Button3.Visible = true;
             }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("regristratiepagina.aspx");
         }
 
         protected void Button2_Click(object sender, EventArgs e)

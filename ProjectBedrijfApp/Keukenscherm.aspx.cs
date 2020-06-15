@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Data;
+using System.ComponentModel;
 
 namespace ProjectBedrijfApp
 {
@@ -39,14 +40,9 @@ namespace ProjectBedrijfApp
             Page.Response.Redirect(Page.Request.Url.ToString(), true);
         }
 
-        protected void SqlDataSource1_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
+        protected void Button2_Click(object sender, EventArgs e)
         {
-
-        }
-
-        protected void SqlDataSource1_Selecting1(object sender, SqlDataSourceSelectingEventArgs e)
-        {
-
+            Response.Redirect("~/overview.aspx");
         }
     }
 }
