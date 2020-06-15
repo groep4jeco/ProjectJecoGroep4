@@ -38,5 +38,15 @@ namespace ProjectBedrijfApp
         {
             Page.Response.Redirect(Page.Request.Url.ToString(), true);
         }
+
+        protected void SqlDataSource1_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
+        {
+
+        }
+
+        protected void SqlDataSource1_Selecting1(object sender, SqlDataSourceSelectingEventArgs e)
+        {
+
+        }
     }
 }
