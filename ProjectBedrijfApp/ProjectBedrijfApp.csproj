@@ -94,6 +94,7 @@
     <Content Include="Afbeeldingen\Temaki\Shrimp-Temaki.png" />
     <Content Include="Afbeeldingen\Temaki\Tuna-Avocado-Temaki.png" />
     <Content Include="Bestellen_drinken.aspx" />
+    <Content Include="default.aspx" />
     <Content Include="Dranken_overzicht.aspx" />
     <Content Include="regristratiepagina.aspx" />
     <Content Include="Bestellen.aspx" />
@@ -228,6 +229,13 @@
     </Compile>
     <Compile Include="Bestellen_drinken.aspx.designer.cs">
       <DependentUpon>Bestellen_drinken.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Dranken_overzicht.aspx.cs">
       <DependentUpon>Dranken_overzicht.aspx</DependentUpon>
