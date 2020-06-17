@@ -25,10 +25,10 @@
                     <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
                    <DIV class="Keypad" style="WIDTH: 192px; POSITION: relative; HEIGHT: 320px; BACKGROUND-COLOR: #ffffcc"
 	ms_positioning="GridLayout"><INPUT onkeypress="if(event.keyCode==13){document.all('Keypad1_btnOK').click();return false;}if(event.keyCode==27){document.all('Keypad1_btnCancel').click();return false;}"
-		id="txtResult" style="FONT-SIZE: medium; Z-INDEX: 102; LEFT: 8px; WIDTH: 176px; FONT-FAMILY: Tahoma; POSITION: absolute; TOP: 8px; HEIGHT: 30px"
+		id="txtResult" style="FONT-SIZE: medium; Z-INDEX: 102; LEFT: -12px; WIDTH: 176px; FONT-FAMILY: Tahoma; POSITION: absolute; TOP: -100px; HEIGHT: 30px"
 		type="text" size="24" name="txtResult" runat="server">
 	<asp:button id="btnOK" style="Z-INDEX: 101; LEFT: 104px; POSITION: absolute; TOP: 264px" runat="server"
-		CssClass="FatButton" Text="OK" Width="81px" Height="48px" Font-Names="Verdana" Font-Size="Medium"></asp:button><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 104; LEFT: 16px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 152px; HEIGHT: 48px"
+		CssClass="FatButton" Text="OK" Width="81px" Height="48px" Font-Names="Verdana" Font-Size="Medium" OnClick="btnOK_Click"></asp:button><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 104; LEFT: 16px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 152px; HEIGHT: 48px"
 		onclick="numClicked(this);" type="button" value="1"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 105; LEFT: 72px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 152px; HEIGHT: 48px"
 		onclick="numClicked(this);" type="button" value="2"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 106; LEFT: 128px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 152px; HEIGHT: 48px"
 		onclick="numClicked(this);" type="button" value="3"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 107; LEFT: 16px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 96px; HEIGHT: 48px"
@@ -42,8 +42,8 @@
 		onclick="delClicked(this);" type="button" value="DEL"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 115; LEFT: 128px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 208px; HEIGHT: 48px"
 		onclick="clrClicked(this);" type="button" value="CLR">
 	<asp:button id="btnCancel" style="Z-INDEX: 116; LEFT: 8px; POSITION: absolute; TOP: 264px" runat="server"
-		CssClass="FatButton" Text="Cancel" Width="80px" Height="48px" Font-Names="Verdana" Font-Size="Medium"></asp:button><asp:label id="txtSource" style="Z-INDEX: 100; LEFT: 64px; POSITION: absolute; TOP: 280px"
-		runat="server" Width="32px" Visible="False"></asp:label><INPUT onkeypress="if(event.keyCode==13){document.all('Keypad1_btnOK').click();return false;}if(event.keyCode==27){document.all('Keypad1_btnCancel').click();return false;}"
+		CssClass="FatButton" Text="Cancel" Width="80px" Height="48px" Font-Names="Verdana" Font-Size="Medium"></asp:button><asp:label id="txtSource" style="Z-INDEX: 100; LEFT: 64px; POSITION: absolute; TOP: 280px; width: 66px;"
+		runat="server" Visible="False"></asp:label><INPUT onkeypress="if(event.keyCode==13){document.all('Keypad1_btnOK').click();return false;}if(event.keyCode==27){document.all('Keypad1_btnCancel').click();return false;}"
 		id="txtPasswordResult" style="FONT-SIZE: medium; Z-INDEX: 103; LEFT: 8px; WIDTH: 176px; FONT-FAMILY: Tahoma; POSITION: absolute; TOP: 8px; HEIGHT: 30px"
 		type="password" size="24" name="txtPasswordResult" runat="server">
 	<asp:label id="lblIsPassword" style="Z-INDEX: 99; LEFT: 8px; POSITION: absolute; TOP: 240px"

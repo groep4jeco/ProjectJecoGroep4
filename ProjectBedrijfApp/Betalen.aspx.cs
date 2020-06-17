@@ -30,5 +30,10 @@ namespace ProjectBedrijfApp
         {
 
         }
+
+        protected void btnOK_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
