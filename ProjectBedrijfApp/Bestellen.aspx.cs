@@ -54,9 +54,8 @@ namespace ProjectBedrijfApp
 
             if (int.Parse(lblRonde.Text) > int.Parse(aantalrondes))
             {
-                Response.Redirect("Beginpagina.aspx");
+                Response.Redirect("regristratiepagina.aspx");
             }
-
 
 
             DataTable dt = new DataTable();

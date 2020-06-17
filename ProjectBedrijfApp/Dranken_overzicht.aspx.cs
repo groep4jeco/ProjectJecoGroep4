@@ -6,13 +6,21 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 
 namespace ProjectBedrijfApp
 {
     public partial class Dranken_overzicht : System.Web.UI.Page
     {
+        public List<string> tafelID = new List<string>();
+        string time;
+        string tijdvakdata;
+        int tijdvaknummer;
+        string tijden;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            tafelID = (List<string>)Session["TafelId"];
             if (!IsPostBack)
             {
                 DataTable dt2 = new DataTable();
@@ -197,13 +205,87 @@ namespace ProjectBedrijfApp
 
         protected void btnBevestig_Click(object sender, EventArgs e)
         {
+            SqlConnection con = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
+
+            CultureInfo dutch = new CultureInfo("nl-NL");
+            DateTime dagvandaag = DateTime.Now;
+            string dagen = dutch.DateTimeFormat.GetDayName(dagvandaag.DayOfWeek).ToString();
+
+            TimeSpan startdeel1 = new TimeSpan(16, 50, 0);
+            TimeSpan enddeel1 = new TimeSpan(19, 15, 0);
+            //TimeSpan now = DateTime.Now.TimeOfDay;
+            TimeSpan now = new TimeSpan(17, 30, 0);
+            if (startdeel1 < enddeel1 && startdeel1 <= now && now <= enddeel1)
+            {
+                time = "17:00:00";
+            }
+            TimeSpan startdeel2 = new TimeSpan(19, 15, 0);
+            TimeSpan enddeel2 = new TimeSpan(21, 30, 0);
+            if (startdeel2 < enddeel2 && startdeel2 <= now && now <= enddeel2)
+            {
+                time = "19:30:00";
+            }
+            //SqlConnection con = new SqlConnection(connectionString);
+
+            con.Open();
+            string prequerie = "select Tijdvak.Nummer from Tijdvak where Begintijd = @tijd AND Dag = @dag";
+            SqlCommand cmdtijdvak = new SqlCommand(prequerie, con);
+            cmdtijdvak.Parameters.AddWithValue("@dag", dagen);
+            cmdtijdvak.Parameters.AddWithValue("@tijd", time);
+            object tijd = cmdtijdvak.ExecuteScalar();
+            tijden = tijd.ToString();
+            tijdvaknummer = int.Parse(tijden);
+            Session["tijdvaknummer"] = tijdvaknummer;
+            con.Close();
+
+            foreach (var item in tafelID)
+            {
+                con.Open();
+                string tafels = "select Reserveringsnummer from Tafelbezetting where TijdvakNummer = @tijdvak and TafelTafelnummer = @tafel";
+                SqlCommand cmdtafel = new SqlCommand(tafels, con);
+                cmdtafel.Parameters.AddWithValue("@tijdvak", Session["tijdvaknummer"]);
+                cmdtafel.Parameters.AddWithValue("@tafel",item);
+                object tafeltje = cmdtafel.ExecuteScalar();
+                tafels = tafeltje.ToString();
+                int reserveringnummers = int.Parse(tafels);
+                Session["reserveringsnummer"] = reserveringnummers;
+                con.Close();
+            }
+
+
 
             DataTable dt = new DataTable();
             dt = (DataTable)Session["koopdrinken"];
 
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                string kop = DateTime.Now.ToString("hh:mm:ss");
+                string querie = "select MAX(Bestelregel.Bestelregelcode) from Bestelregel";
+                con.Open();
+                SqlCommand cmdcode = new SqlCommand(querie, con);
+                object bestelregel = cmdcode.ExecuteScalar();
+                string code = bestelregel.ToString();
+                int bestelregelcode = int.Parse(code);
+
+                string hoeveelheid = GridView1.DataKeys[i]["Hoeveelheid"].ToString();
+                string artikelnummer = GridView1.DataKeys[i]["artikelnummer"].ToString();
+                string prijs = GridView1.DataKeys[i]["Prijs"].ToString();
+
+                string querie2 = "SET IDENTITY_INSERT Bestelregel ON Insert into Bestelregel([Bestelregelcode], [Hoeveelheid] ,[Besteltijd] ,[Reserveringsnummer] ,[Drankenartikelnummer],[bestelstatusID]) values(@code, @hoeveelheid, @Tijd, @reservering, @drank, 1); SET IDENTITY_INSERT Bestelregel OFF";
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.InsertCommand = new SqlCommand(querie2, con);
+                adapter.InsertCommand.Parameters.AddWithValue("@code", bestelregelcode + 1);
+                adapter.InsertCommand.Parameters.AddWithValue("@hoeveelheid", hoeveelheid);
+                adapter.InsertCommand.Parameters.AddWithValue("@tijd", kop);
+                adapter.InsertCommand.Parameters.AddWithValue("@reservering", Session["reserveringsnummer"]);
+                adapter.InsertCommand.Parameters.AddWithValue("@drank", artikelnummer);
+                int probeer = adapter.InsertCommand.ExecuteNonQuery();
+                con.Close();
+            }
+
             dt.Rows.Clear();
 
-            Response.Redirect("~/Bestellen_drinken.aspx");
+            Response.Redirect("~/overview.aspx");
 
         }
     }

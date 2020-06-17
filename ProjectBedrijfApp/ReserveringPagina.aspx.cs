@@ -185,7 +185,7 @@ namespace ProjectBedrijfApp
                     }
                 }
             }
-
+            Response.Redirect("~/overview.aspx");
         }
 
 
@@ -308,6 +308,11 @@ namespace ProjectBedrijfApp
         protected void Txttelefoon_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void Button1_Click1(object sender, EventArgs e)
+        {
+            Response.Redirect("~/overview.aspx");
         }
     }
 }

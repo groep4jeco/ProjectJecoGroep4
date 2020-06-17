@@ -16,7 +16,9 @@ namespace ProjectBedrijfApp
         public int SelectedTafelID;
         public bool ReserveerStatus;
         public List<string> tafelID = new List<string>();
+        public List<string> results = new List<string>();
         string time;
+        bool drinkenbestellen;
         string tijdvakdata;
         int tijdvaknummer;
         string tijden;
@@ -75,8 +77,11 @@ namespace ProjectBedrijfApp
                 cmd.Parameters.AddWithValue("@tijdvak", Session["tijdvaknummer"]);
                 SqlDataReader drTafel = cmd.ExecuteReader();
                 //string resulaat = drTafel.Read().ToString();
+
                 while (drTafel.Read())
                 {
+                    results.Add(drTafel["TafelTafelnummer"].ToString());
+                }
                     foreach (Control control in controlCollection)
                     {
                         if (control is Button)
@@ -84,11 +89,14 @@ namespace ProjectBedrijfApp
                             string id = control.ID;
                             string y = id.Trim('t');
                             System.Diagnostics.Debug.WriteLine(y);
-                            if (y == drTafel["TafelTafelnummer"].ToString())
+                            foreach (var item in results)
                             {
-                                //System.Diagnostics.Debug.WriteLine("SomeText");
-                                ((Button)control).BackColor = Color.Red;
-                                ((Button)control).Enabled = false;
+                                if (results.Any(x => x.ToString() == y))
+                                {
+                                    //System.Diagnostics.Debug.WriteLine("SomeText");
+                                    ((Button)control).BackColor = Color.Red;
+                                    //((Button)control).Enabled = false;
+                                }
                             }
                         }
 
@@ -98,7 +106,6 @@ namespace ProjectBedrijfApp
                         }
 
                     }
-                }
                 drTafel.Close();
                 con.Close();
             }
@@ -149,14 +156,24 @@ namespace ProjectBedrijfApp
                 tafelID.Remove(buttonId);
                 button.BackColor = Color.Red;
                 System.Diagnostics.Debug.WriteLine(tafelID.Count);
-
             }
         }
+
 
         protected void btn_keuken_Click(object sender, EventArgs e)
         {
             Response.Redirect("Keukenscherm.aspx");
         }
+
+        protected void Button1_Click1(object sender, EventArgs e)
+        {
+            Response.Redirect("~/login.aspx");
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Bestellen_drinken.aspx");
+        } 
     }
 
     class Tafel2

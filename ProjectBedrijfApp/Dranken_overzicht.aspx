@@ -22,7 +22,7 @@
 &nbsp;<asp:Label ID="Label3" runat="server" Font-Bold="True" ForeColor="Red" Font-Size="X-Large"></asp:Label>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br />
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" ForeColor="Black" Height="363px" OnRowDeleting="GridView1_RowDeleting" ShowFooter="True" Width="700px">
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" ForeColor="Black" Height="363px" OnRowDeleting="GridView1_RowDeleting" ShowFooter="True" Width="700px" DataKeyNames="Hoeveelheid,artikelnummer,Prijs">
                 <Columns>
                     <asp:BoundField DataField="sno" />
                     <asp:ImageField DataImageUrlField="afb_pad">

@@ -231,5 +231,10 @@ namespace ProjectBedrijfApp
             Session["aantal"] = Convert.ToInt32(row.Cells[3].Text);
             */
         }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/overview.aspx");
+        }
     }
 }

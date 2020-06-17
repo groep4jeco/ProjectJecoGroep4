@@ -71,7 +71,6 @@
             <br />
             <asp:TextBox ID="TxtKind" runat="server" TextMode="Number"></asp:TextBox>
             <br />
-            <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="TxtVolw" ErrorMessage="Aantal personen mag niet lager zijn dan 0 of hoger dan 160" MaximumValue="160" MinimumValue="0"></asp:RangeValidator>
             <br />
             <br />
             <br />
@@ -97,7 +96,7 @@
             <br />
             <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-             <asp:Button ID="Button1" runat="server" Text="Vorige pagina" BackColor="Gray" />
+             <asp:Button ID="Button1" runat="server" Text="Vorige pagina" BackColor="Gray" OnClick="Button1_Click1" />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <div class="knop1">
                <asp:Button ID="BtnClick" runat="server" OnClick="Button1_Click" Text="Reserveer Tafel" Height="47px" Width="159px" Font-Bold="True" Font-Italic="True" />

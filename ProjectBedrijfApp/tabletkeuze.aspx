@@ -38,7 +38,7 @@
             width: 926px;
             margin-left: 60px;
         }
-        .
+        
       
 
     </style>
