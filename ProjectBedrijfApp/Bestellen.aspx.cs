@@ -41,6 +41,7 @@ namespace ProjectBedrijfApp
             int ronde = int.Parse(lblRonde.Text);
             Session["ronde"] = ronde;
 
+
             con.Open();
             string maxrondes = ("select [Aantal rondes] from in_restaurant where Reserveringsnummer = @reservering");
             SqlCommand rondesaanvraag = new SqlCommand(maxrondes, con);
@@ -48,6 +49,7 @@ namespace ProjectBedrijfApp
             object test = rondesaanvraag.ExecuteScalar();
             string aantalrondes = test.ToString();
             con.Close();
+
 
             lblMaxRondes.Text = aantalrondes;
             Session["maxronde"] = aantalrondes;

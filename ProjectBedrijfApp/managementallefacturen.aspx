@@ -145,6 +145,9 @@
             margin-left: 888px;
             
         }
+        .auto-style1 {
+            margin-right: 0px;
+        }
     </style>
 </head>
 <body style="height: 567px">
@@ -241,7 +244,7 @@ COMMIT;">
                         </SelectParameters>
                     </asp:SqlDataSource>
                 <br />
-                <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource2">
+                <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource2" CssClass="auto-style1">
                     <Columns>
                         <asp:BoundField DataField="omschrijving" HeaderText="omschrijving" SortExpression="omschrijving" />
                         <asp:BoundField DataField="prijs" HeaderText="prijs" SortExpression="prijs" />
@@ -250,6 +253,19 @@ COMMIT;">
                         <asp:BoundField DataField="rondenummer" HeaderText="rondenummer" ReadOnly="True" SortExpression="rondenummer" />
                     </Columns>
                 </asp:GridView>
+                <asp:GridView ID="GridView4" runat="server" AutoGenerateColumns="False" DataSourceID="drankenfactureren">
+                    <Columns>
+                        <asp:BoundField DataField="Omschrijving" HeaderText="Omschrijving" SortExpression="Omschrijving" />
+                        <asp:BoundField DataField="Prijs" HeaderText="Prijs" SortExpression="Prijs" />
+                        <asp:BoundField DataField="hoeveelheid" HeaderText="hoeveelheid" SortExpression="hoeveelheid" />
+                        <asp:BoundField DataField="besteltijd" HeaderText="besteltijd" SortExpression="besteltijd" />
+                    </Columns>
+                </asp:GridView>
+                <asp:SqlDataSource ID="drankenfactureren" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [Omschrijving], [Prijs], [hoeveelheid], [besteltijd] FROM [factuurdrank] WHERE ([Factuurnummer] = @Factuurnummer)">
+                    <SelectParameters>
+                        <asp:ControlParameter ControlID="GridView1" Name="Factuurnummer" PropertyName="SelectedValue" Type="Int32" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
                 <br />
                 <table class="auto-style2">
                     <tr>

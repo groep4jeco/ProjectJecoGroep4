@@ -203,9 +203,10 @@ namespace ProjectBedrijfApp
 
         protected void btnBevestig_Click(object sender, EventArgs e)
         {
+            
             SqlConnection con = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
             int ronde = (int)Session["ronde"];
-
+            /*
             string eerstekeer = "select [All you can eat] from in_restaurant where Reserveringsnummer = @reservering";
             string eerstevol = "select [Aantal Volwassenen] from in_restaurant where Reserveringsnummer = @reservering";
             string eerstekind = "select [Aantal kinderen] from in_restaurant where Reserveringsnummer = @reservering";
@@ -237,8 +238,8 @@ namespace ProjectBedrijfApp
             string kinderen = kinderen1.ToString();
             int kind = int.Parse(kinderen);
             con.Close();
-
-
+            */
+            /*
             if (inclusief == 1 && ronde == 1)
             {
                 con.Open();
@@ -251,6 +252,7 @@ namespace ProjectBedrijfApp
                 int doehet = adapter2.InsertCommand.ExecuteNonQuery();
                 con.Close();
             }
+            */
 
             DataTable dt = new DataTable();
             dt = (DataTable)Session["buyitems"];
@@ -283,6 +285,67 @@ namespace ProjectBedrijfApp
                 adapter.InsertCommand.Parameters.AddWithValue("@ronde", Session["ronde"]);
                 int probeer = adapter.InsertCommand.ExecuteNonQuery();
                 con.Close();
+
+                string controlebestaan = "select factuurnummer from factuur where reserveringsnummer = @reservering";
+                SqlCommand cmdfactuur = new SqlCommand(controlebestaan, con);
+                cmdfactuur.Parameters.AddWithValue("@reservering", Session["reservering"]);
+                SqlDataReader drklant;
+
+                con.Open();
+                drklant = cmdfactuur.ExecuteReader();
+
+                try
+                {
+
+                    string factuur = drklant.Read().ToString();
+                    string factuurtje = drklant["Factuurnummer"].ToString();
+                    int factuurnummer = int.Parse(factuurtje);
+                    drklant.Close();
+                    string optellen = "Update factuur set Totaalbedrag += @prijs where Factuurnummer = @factuur";
+                    SqlDataAdapter adapter3 = new SqlDataAdapter();
+                    adapter3.UpdateCommand = new SqlCommand(optellen, con);
+                    adapter3.UpdateCommand.Parameters.AddWithValue("@factuur", factuurnummer);
+                    adapter3.UpdateCommand.Parameters.AddWithValue("@prijs", prijs);
+                    int doehet = adapter3.UpdateCommand.ExecuteNonQuery();
+                    con.Close();
+                }
+
+
+                catch
+                {
+                    drklant.Close();
+                    string eerstevol = "select [Aantal Volwassenen] from in_restaurant where Reserveringsnummer = @reservering";
+                    string eerstekind = "select [Aantal kinderen] from in_restaurant where Reserveringsnummer = @reservering";
+
+
+                    SqlCommand cmdvol = new SqlCommand(eerstevol, con);
+                    cmdvol.Parameters.AddWithValue("@reservering", Session["reservering"]);
+                    object volwassenen = cmdvol.ExecuteScalar();
+                    string aantalv = volwassenen.ToString();
+                    int volw = int.Parse(aantalv);
+
+                    SqlCommand cmdkind = new SqlCommand(eerstekind, con);
+                    cmdkind.Parameters.AddWithValue("@reservering", Session["reservering"]);
+                    object kinderen1 = cmdvol.ExecuteScalar();
+                    string kinderen = kinderen1.ToString();
+                    int kind = int.Parse(kinderen);
+
+                    string factuurmaken = "insert into Factuur (KlantenpasEmail, Factuurdatum, Totaalbedrag, Reserveringsnummer, KlantKlantID) values ((select Klant.Email from Reservering inner join klant on Klant.KlantID = Reservering.KlantKlantID where Reserveringsnummer = @reservering), (SELECT CONVERT (date, GETDATE())), @prijs, @reservering, (select Reservering.KlantKlantID from Reservering where Reservering.Reserveringsnummer = @reservering))";
+                    SqlDataAdapter adapter2 = new SqlDataAdapter();
+                    adapter2.InsertCommand = new SqlCommand(factuurmaken, con);
+                    adapter2.InsertCommand.Parameters.AddWithValue("@reservering", Session["reservering"]);
+                    adapter2.InsertCommand.Parameters.AddWithValue("@prijs", prijs);
+                    adapter2.InsertCommand.Parameters.AddWithValue("@volw", volw);
+                    adapter2.InsertCommand.Parameters.AddWithValue("@kind", kind);
+                    int doehet2 = adapter2.InsertCommand.ExecuteNonQuery();
+
+                }
+
+                finally
+                {
+                    con.Close();
+                    //drklant.Close();
+                }
             }
             
             dt.Rows.Clear();
