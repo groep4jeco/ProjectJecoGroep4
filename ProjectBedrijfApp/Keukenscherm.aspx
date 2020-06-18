@@ -31,95 +31,6 @@ Where tafeltafelnummer =
 OFFSET 0 ROWS
 FETCH NEXT 1 ROWS ONLY)) not in (select factuur.reserveringsnummer from Factuur)
 
-BEGIN 
-INSERT INTO factuur (klantenpasemail, factuurdatum, totaalbedrag, reserveringsnummer, klantklantid, actieactienummer) 
-
-values( (select DISTINCT email from listview111
-
-Where tafeltafelnummer =
-
- (select tafeltafelnummer from Listview4
- group by tafeltafelnummer, besteltijd, bestelstatusid
- ORDER BY besteltijd asc
-OFFSET 0 ROWS
-FETCH NEXT 1 ROWS ONLY)),
-
- 
-
-(SELECT CONVERT (date, GETDATE())),
-
- 
-
-(select 
-CASE 
-WHEN [All you can eat] = '2'
-then  0.00
-ELSE
-CAST(SUM(regelprijs)AS decimal (10,2))
-end as Totaalbedrag
-from listview111
-Where tafeltafelnummer =
-
- 
-
- (select tafeltafelnummer from Listview4
- group by tafeltafelnummer, besteltijd, bestelstatusid
- ORDER BY besteltijd asc
-OFFSET 0 ROWS
-FETCH NEXT 1 ROWS ONLY)
-
-group by [All you can eat]),
-
- 
-
-(select DISTINCT reserveringsnummer from listview111
-
-Where tafeltafelnummer =
-
- 
-
- (select tafeltafelnummer from Listview4
- group by tafeltafelnummer, besteltijd, bestelstatusid
- ORDER BY besteltijd asc
-OFFSET 0 ROWS
-FETCH NEXT 1 ROWS ONLY)),
-
- 
-
-(select DISTINCT klantklantid from listview111
-
-Where tafeltafelnummer =
-
- 
-
- (select tafeltafelnummer from Listview4
- group by tafeltafelnummer, besteltijd, bestelstatusid
- ORDER BY besteltijd asc
-OFFSET 0 ROWS
-FETCH NEXT 1 ROWS ONLY)),
-
-(select actienummer from actie where actienummer =1))
-
-END 
-
-ELSE
-begin
-UPDATE Factuur
-set Totaalbedrag = Totaalbedrag + (select CAST(SUM(regelprijs)AS decimal (10,2)) from listview111) 
-from Factuur
-inner join Reservering on Factuur.Reserveringsnummer = Reservering.Reserveringsnummer 
-inner join in_restaurant on in_restaurant.Reserveringsnummer = Reservering.Reserveringsnummer
-inner join  Tafel_Reservering on Tafel_Reservering.Reserveringsnummer = in_restaurant.Reserveringsnummer
-inner join Bestelregel on Bestelregel.Reserveringsnummer = Bestelregel.Reserveringsnummer
-inner join Gerecht on Gerecht.Gerechtnummer = Bestelregel.menugerechtnummer
-Where tafeltafelnummer =
-
- (select tafeltafelnummer from Listview4
- group by tafeltafelnummer, besteltijd, bestelstatusid
- ORDER BY besteltijd asc
-OFFSET 0 ROWS
-FETCH NEXT 1 ROWS ONLY)
-end
 
 UPDATE bestelregel
 SET bestelstatusID = 2
@@ -205,7 +116,7 @@ FETCH NEXT 1 ROWS ONLY)"></asp:SqlDataSource>
             <EmptyDataTemplate>
                 <table style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;" runat="server">
                     <tr>
-                        <td>alle bestellingen zijn verwerkt</td>
+                        <td>No data was returned.</td>
                     </tr>
                 </table>
             </EmptyDataTemplate>
