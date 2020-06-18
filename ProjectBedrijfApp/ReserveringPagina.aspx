@@ -74,10 +74,10 @@
             <br />
             <br />
             <br />
-            <asp:CheckBox ID="cbAlles" runat="server" Text="All you can Eat" OnCheckedChanged="cbAlles_CheckedChanged" AutoPostBack="True" />
+            <asp:CheckBox ID="cbAlles" runat="server" Text="All you can Eat arregementen" OnCheckedChanged="cbAlles_CheckedChanged" AutoPostBack="True" />
             <br />
             <br />
-            <asp:Label ID="lblRondes" runat="server" Text="Aantal rondes" Visible="False"></asp:Label>
+            <asp:Label ID="lblRondes" runat="server" Text="Aantal arragementen" Visible="False"></asp:Label>
             <br />
             <asp:TextBox ID="txtRondes" runat="server" Visible="False" Height="30px" OnTextChanged="txtRondes_TextChanged" TextMode="Number" ToolTip="Voer hier het aantal rondes in"></asp:TextBox>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
