@@ -15,6 +15,7 @@ namespace ProjectBedrijfApp
         int menuutjes;
         string prijs;
         int gerechtjes;
+        int htotaal;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -151,7 +152,7 @@ namespace ProjectBedrijfApp
             dt = (DataTable)Session["buyitems"];
             int nrow = dt.Rows.Count;
             int i = 0;
-            int htotaal = 0;
+            htotaal = 0;
             while (i < nrow)
             {
                 htotaal = htotaal + Convert.ToInt32(dt.Rows[i]["Hoeveelheid"].ToString());
@@ -318,15 +319,47 @@ namespace ProjectBedrijfApp
                     int bestelregelcode = int.Parse(code);
 
                     string hoeveelheid = GridView1.DataKeys[i]["Hoeveelheid"].ToString();
+                int hoeveelheid2 = int.Parse(hoeveelheid);
+
                     string Gerechtnummer = GridView1.DataKeys[i]["Gerechtnummer"].ToString();
-                    if (gerechtjes >= 1)
+                if (gerechtjes <= 0)
+                {
+                    string prijsperproduct = GridView1.DataKeys[i]["Prijs"].ToString();
+                    int totaal = int.Parse(prijsperproduct) * hoeveelheid2;
+                    prijs = totaal.ToString();
+                }
+
+                if (gerechtjes >= 1)
+                {
+                    if (hoeveelheid2 > 1)
+                    {
+                        int mingerechten = hoeveelheid2;
+
+                        if (gerechtjes < hoeveelheid2)
+                        {
+                            int over = mingerechten - gerechtjes;
+                            string kosten = GridView1.DataKeys[i]["Prijs"].ToString();
+                            int prijskaartje = int.Parse(kosten);
+                            int berekening = prijskaartje * over;
+                            prijs = berekening.ToString();
+                            gerechtjes = 0;
+                        }
+
+                        if (gerechtjes >= hoeveelheid2)
+                        {
+                            gerechtjes = gerechtjes - hoeveelheid2;
+                            prijs = "0";
+                        }
+                    }
+                    if (hoeveelheid2 == 1)
                     {
                         prijs = "0";
+                        gerechtjes = gerechtjes - 1;
                     }
-                    if (gerechtjes <= 0)
-                    {
-                        prijs = GridView1.DataKeys[i]["Prijs"].ToString();
-                    }
+
+
+                }
+
 
                     string querie = "SET IDENTITY_INSERT Bestelregel ON Insert into Bestelregel([Bestelregelcode], [Hoeveelheid] ,[Besteltijd] ,[Reserveringsnummer] ,[menugerechtnummer],[RondeNummer],[bestelstatusID]) values(@code, @hoeveelheid, @Tijd, @reservering, @gerecht, @ronde, 1); SET IDENTITY_INSERT Bestelregel OFF";
                     SqlDataAdapter adapter = new SqlDataAdapter();
@@ -383,7 +416,6 @@ namespace ProjectBedrijfApp
                     finally
                     {
                         con.Close();
-                        gerechtjes = gerechtjes - 1;
                     }
                 
                     
