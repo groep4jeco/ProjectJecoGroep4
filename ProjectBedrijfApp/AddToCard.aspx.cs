@@ -325,7 +325,7 @@ namespace ProjectBedrijfApp
                 if (gerechtjes <= 0)
                 {
                     string prijsperproduct = GridView1.DataKeys[i]["Prijs"].ToString();
-                    int totaal = int.Parse(prijsperproduct) * hoeveelheid2;
+                    double totaal = double.Parse(prijsperproduct) * hoeveelheid2;
                     prijs = totaal.ToString();
                 }
 
@@ -339,8 +339,8 @@ namespace ProjectBedrijfApp
                         {
                             int over = mingerechten - gerechtjes;
                             string kosten = GridView1.DataKeys[i]["Prijs"].ToString();
-                            int prijskaartje = int.Parse(kosten);
-                            int berekening = prijskaartje * over;
+                            double prijskaartje = double.Parse(kosten);
+                            double berekening = prijskaartje * over;
                             prijs = berekening.ToString();
                             gerechtjes = 0;
                         }
