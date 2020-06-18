@@ -268,7 +268,9 @@ namespace ProjectBedrijfApp
 
                 string hoeveelheid = GridView1.DataKeys[i]["Hoeveelheid"].ToString();
                 string artikelnummer = GridView1.DataKeys[i]["artikelnummer"].ToString();
-                string prijs = GridView1.DataKeys[i]["Prijs"].ToString();
+                string prijsperproduct = GridView1.DataKeys[i]["Prijs"].ToString();
+                int prijsje = int.Parse(prijsperproduct) * int.Parse(hoeveelheid);
+                string prijs = prijsje.ToString();
 
                 string querie2 = "SET IDENTITY_INSERT Bestelregel ON Insert into Bestelregel([Bestelregelcode], [Hoeveelheid] ,[Besteltijd] ,[Reserveringsnummer] ,[Drankenartikelnummer],[bestelstatusID]) values(@code, @hoeveelheid, @Tijd, @reservering, @drank, 1); SET IDENTITY_INSERT Bestelregel OFF";
                 SqlDataAdapter adapter = new SqlDataAdapter();
