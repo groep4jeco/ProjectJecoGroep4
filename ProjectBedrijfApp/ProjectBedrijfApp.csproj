@@ -95,6 +95,7 @@
     <Content Include="Afbeeldingen\Temaki\Tuna-Avocado-Temaki.png" />
     <Content Include="Bestellen_drinken.aspx" />
     <Content Include="Dranken_overzicht.aspx" />
+    <Content Include="Extra.aspx" />
     <Content Include="regristratiepagina.aspx" />
     <Content Include="Bestellen.aspx" />
     <Content Include="Betalen.aspx" />
@@ -235,6 +236,13 @@
     </Compile>
     <Compile Include="Dranken_overzicht.aspx.designer.cs">
       <DependentUpon>Dranken_overzicht.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Extra.aspx.cs">
+      <DependentUpon>Extra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Extra.aspx.designer.cs">
+      <DependentUpon>Extra.aspx</DependentUpon>
     </Compile>
     <Compile Include="regristratiepagina.aspx.cs">
       <DependentUpon>regristratiepagina.aspx</DependentUpon>
