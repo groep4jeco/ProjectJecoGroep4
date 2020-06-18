@@ -27,6 +27,10 @@
         .container {
             height: 761px;
         }
+        .legend {
+            float:right;
+            display: inline-block;
+        }
 
         
 
@@ -49,6 +53,11 @@
             <asp:Button ID="t53" runat="server" Height="49px" Text="53" OnClick="SetReserverData" Width="53px" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Button ID="t66" runat="server" Height="49px" Text="66" OnClick="SetReserverData" Width="53px" />
+            <div class ="legend">
+            <asp:Button ID="Button3" runat="server" Enabled="False" Text="Gereserveerd" BackColor="Red" BorderStyle="None" /><br/>
+            <asp:Button ID="Button4" runat="server" Enabled="False" Text="Geselecteerd voor reserveren" BackColor="#00CC00" BorderStyle="None" /><br/>
+            <asp:Button ID="Button5" runat="server" Enabled="False" Text="Geselecteerd voor drinken" BackColor="Blue" BorderStyle="None" /><br/>
+               </div>
             <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Button ID="t2" runat="server" Height="49px" Text="2" Width="53px" OnClick="SetReserverData" />
@@ -215,7 +224,10 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="t79" runat="server" Height="49px" Text="79" OnClick="SetReserverData" Width="53px" />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Button ID="t80" runat="server" Height="49px" Text="80" OnClick="SetReserverData" Width="53px" />
-&nbsp;</div>
+&nbsp;
+
+        </div>
+       
     </form>
 </body>
 </html>
