@@ -89,7 +89,7 @@ namespace ProjectBedrijfApp
                         {
                             string id = control.ID;
                             string y = id.Trim('t');
-                            System.Diagnostics.Debug.WriteLine(y);
+                            // System.Diagnostics.Debug.WriteLine(y);
                             foreach (var item in results)
                             {
                                 if (results.Any(x => x.ToString() == y))
@@ -119,10 +119,7 @@ namespace ProjectBedrijfApp
 
         private void SettingReserverData()
         {
-            //  Tafel Tafel2 = new Tafel();
-            // Tafel.Reserveringsnummer1++;
-            //SelectedTafelID = Tafel.Reserveringsnummer1;
-            Session["Reserveringsnummer"] = SelectedTafelID;
+             Session["Reserveringsnummer"] = SelectedTafelID;
             Response.Redirect("~/ReserveringPagina.aspx");
         }
 
@@ -133,20 +130,20 @@ namespace ProjectBedrijfApp
             tafelID = (List<string>)Session["TafelId"];
 
             CheckStatus(buttonId, button);
+            System.Diagnostics.Debug.WriteLine(statusCheck);
 
-            if (statusCheck)
+
+            if (!tafelID.Any(x => x.ToString() == buttonId))
             {
-                if (!tafelID.Any(x => x.ToString() == buttonId))
-                {
-                    ReserveerStatus = true;
-                    tafelID.Add(buttonId);
-                    Session["TafelId"] = tafelID;
-                }
-                else if (tafelID.Contains(buttonId))
-                {
-                    ReserveerStatus = false;
-                }
+                ReserveerStatus = true;
+                tafelID.Add(buttonId);
+                Session["TafelId"] = tafelID;
             }
+            else if (tafelID.Contains(buttonId))
+            {
+                ReserveerStatus = false;
+            }
+
 
             if (!statusCheck)
             {
@@ -158,7 +155,7 @@ namespace ProjectBedrijfApp
                 if (!ReserveerStatus)
                 {
                     tafelID.Remove(buttonId);
-                    button.BackColor = default;
+                    button.BackColor = Color.Red;
                     Buon83.Enabled = false;
                 }
             }
@@ -178,7 +175,6 @@ namespace ProjectBedrijfApp
                 {
                     statusCheck = false;
                     Button2.Enabled = false;
-                    
                 }
             }
         }
