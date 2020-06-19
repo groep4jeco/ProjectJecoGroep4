@@ -121,7 +121,26 @@ namespace ProjectBedrijfApp
              
             drfactuur.Close();
             con.Close();
+            
+            string eerstekind = "select [Aantal kinderen] from in_restaurant where Reserveringsnummer = @reservering";
+            string eerstevol = "select [Aantal Volwassenen] from in_restaurant where Reserveringsnummer = @reservering";
 
+            con.Open();
+            SqlCommand cmdvol = new SqlCommand(eerstevol, con);
+            cmdvol.Parameters.AddWithValue("@reservering", Session["reservering"]);
+            object volwassenen = cmdvol.ExecuteScalar();
+            string aantalv = volwassenen.ToString();
+            int volw = int.Parse(aantalv);
+
+            SqlCommand cmdkind = new SqlCommand(eerstekind, con);
+            cmdkind.Parameters.AddWithValue("@reservering", Session["reservering"]);
+            object kinderen1 = cmdkind.ExecuteScalar();
+            string kinderen = kinderen1.ToString();
+            int kind = int.Parse(kinderen);
+            con.Close();
+
+            lblAantalKind.Text = kind.ToString();
+            lblAantalVolw.Text = volw.ToString();
 
         }
 
