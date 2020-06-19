@@ -22,6 +22,7 @@ namespace ProjectBedrijfApp
         string tijdvakdata;
         int tijdvaknummer;
         string tijden;
+        bool selected;
 
         string connectionString = "Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019";
 
@@ -133,7 +134,7 @@ namespace ProjectBedrijfApp
             System.Diagnostics.Debug.WriteLine(statusCheck);
 
 
-            if (!tafelID.Any(x => x.ToString() == buttonId))
+            if (!tafelID.Any(x => x.ToString() == buttonId) || tafelID == null)
             {
                 ReserveerStatus = true;
                 tafelID.Add(buttonId);
@@ -155,14 +156,14 @@ namespace ProjectBedrijfApp
                 if (!ReserveerStatus)
                 {
                     tafelID.Remove(buttonId);
-                    button.BackColor = Color.Red;
+                    button.BackColor = default;
                     Buon83.Enabled = false;
                 }
             }
         }
         private void CheckStatus(string BtnId, Button btn) 
         {
-            foreach (var item in results)
+            for (int i = 0; i < results.Count; i++)
             {
                 if (results.Any(x => x.ToString() == BtnId))
                 {
@@ -170,8 +171,9 @@ namespace ProjectBedrijfApp
                     Button2.Enabled = true;
                     Buon83.Enabled = false;
                     btn.BackColor = Color.Blue;
+                    selected = true;
                 }
-                else 
+                else if (selected)
                 {
                     statusCheck = false;
                     Button2.Enabled = false;
