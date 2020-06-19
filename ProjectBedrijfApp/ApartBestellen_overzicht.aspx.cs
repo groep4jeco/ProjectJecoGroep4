@@ -237,7 +237,7 @@ namespace ProjectBedrijfApp
             tijdvaknummer = int.Parse(tijden);
             Session["tijdvaknummer"] = tijdvaknummer;
             con.Close();
-
+/*
             foreach (var item in tafelID)
             {
                 con.Open();
@@ -251,7 +251,7 @@ namespace ProjectBedrijfApp
                 Session["reservering"] = reserveringnummers;
                 con.Close();
             }
-
+            */
 
 
             DataTable dt = new DataTable();
@@ -269,7 +269,7 @@ namespace ProjectBedrijfApp
                 string hoeveelheid = GridView1.DataKeys[i]["Hoeveelheid"].ToString();
                 string Gerechtnummer = GridView1.DataKeys[i]["Gerechtnummer"].ToString();
                 string prijsperproduct = GridView1.DataKeys[i]["Prijs"].ToString();
-                int prijsje = int.Parse(prijsperproduct) * int.Parse(hoeveelheid);
+                double prijsje = double.Parse(prijsperproduct) * int.Parse(hoeveelheid);
                 string prijs = prijsje.ToString();
 
                 string querie2 = "SET IDENTITY_INSERT Bestelregel ON Insert into Bestelregel([Bestelregelcode], [Hoeveelheid] ,[Besteltijd] ,[Reserveringsnummer] ,[menugerechtnummer],[bestelstatusID]) values(@code, @hoeveelheid, @Tijd, @reservering, @gerecht, 1); SET IDENTITY_INSERT Bestelregel OFF";
