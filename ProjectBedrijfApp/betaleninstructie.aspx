@@ -36,6 +36,7 @@
             <asp:Label ID="Label2" runat="server" BackColor="White" Font-Size="X-Large" Text="Betaal pagina Jeco Sushi"></asp:Label>
             <br />
             <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <table class="auto-style1">
                 <tr>
                     <td>
