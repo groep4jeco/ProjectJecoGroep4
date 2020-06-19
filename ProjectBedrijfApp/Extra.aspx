@@ -72,6 +72,9 @@
             <br />
             <asp:Label ID="Label4" runat="server" Font-Size="Large" Text="Aantal rondes:"></asp:Label>
             <asp:TextBox ID="txbAantal" runat="server" Font-Size="Large" Font-Underline="False" Width="80px" TextMode="Number">1</asp:TextBox>
+            <asp:DropDownList ID="ddlfruit" runat="server">
+            </asp:DropDownList>
+            <br />
             <br />
             <br />
 
