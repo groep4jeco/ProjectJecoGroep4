@@ -9,58 +9,16 @@ using System.Data.SqlClient;
 
 namespace ProjectBedrijfApp
 {
-    public partial class Bestellen : System.Web.UI.Page
+    public partial class ApartBestellen : System.Web.UI.Page
     {
-        int maxbestelbaar;
-        int htotaal;
-        int nrow;
-        int i;
-        int toevoegen;
-
 
         protected void Page_Load(object sender, EventArgs e)
         {
             lblDatum.Text = DateTime.Now.ToString("D");
 
 
-            string queriepersonen = ("select SUM([Aantal Volwassenen] + [Aantal kinderen]) from in_restaurant where Reserveringsnummer = @reservering");
-            SqlConnection con = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
-            con.Open();
-            SqlCommand cmdklant = new SqlCommand(queriepersonen, con);
-            cmdklant.Parameters.AddWithValue("@reservering", Session["reservering"]);
-            object drpersonen = cmdklant.ExecuteScalar();
-            string aantalpersonen = drpersonen.ToString();
-            con.Close();
-
-            lblAantalpersonen.Text = aantalpersonen;
-            maxbestelbaar = int.Parse(aantalpersonen) * 5;
-
-
-            lblRonde.Text = Session["ronde"].ToString();
-            Session["ronde"] = lblRonde.Text;
-            int ronde = int.Parse(lblRonde.Text);
-            Session["ronde"] = ronde;
-
-            /*
-            con.Open();
-            string maxrondes = ("select [Aantal rondes] from in_restaurant where Reserveringsnummer = @reservering");
-            SqlCommand rondesaanvraag = new SqlCommand(maxrondes, con);
-            rondesaanvraag.Parameters.AddWithValue("@reservering", Session["reservering"]);
-            object test = rondesaanvraag.ExecuteScalar();
-            string aantalrondes = test.ToString();
-            con.Close();
-            */
-
-            lblMaxRondes.Text = Session["maxronde"].ToString();
-
-            if (int.Parse(lblRonde.Text) > (int)Session["ronde"])
-            {
-                Response.Redirect("regristratiepagina.aspx");
-            }
-
-
             DataTable dt = new DataTable();
-            dt = (DataTable)Session["buyitems"];
+            dt = (DataTable)Session["bestelapart"];
 
             if (dt != null)
             {
@@ -91,7 +49,7 @@ namespace ProjectBedrijfApp
 
                 if (Request.QueryString["id"] != null)
                 {
-                    if (Session["Buyitems"] == null)
+                    if (Session["bestelapart"] == null)
                     {
                         dr = dt2.NewRow();
                         String mycon = "Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;Persist Security Info=True;User ID=BIM01A2019;Password=BIM01A2019";
@@ -119,15 +77,15 @@ namespace ProjectBedrijfApp
                         GridView2.DataSource = dt2;
                         GridView2.DataBind();
 
-                        Session["buyitems"] = dt2;
+                        Session["bestelapart"] = dt2;
 
 
-                        Response.Redirect("Bestellen.aspx");
+                        Response.Redirect("ApartBestellen.aspx");
                     }
                     else
                     {
 
-                        dt2 = (DataTable)Session["buyitems"];
+                        dt2 = (DataTable)Session["bestelapart"];
                         int sr;
                         sr = dt2.Rows.Count;
 
@@ -157,75 +115,25 @@ namespace ProjectBedrijfApp
                         GridView2.DataSource = dt2;
                         GridView2.DataBind();
 
-                        Session["buyitems"] = dt2;
+                        Session["bestelapart"] = dt2;
 
 
-                        Response.Redirect("Bestellen.aspx");
+                        Response.Redirect("ApartBestellen.aspx");
                     }
                 }
                 else
                 {
-                    dt2 = (DataTable)Session["buyitems"];
+                    dt2 = (DataTable)Session["bestelapart"];
                     GridView2.DataSource = dt2;
                     GridView2.DataBind();
-                    if (GridView2.Rows.Count > 0)
-                    {
-                        GridView2.FooterRow.Cells[2].Text = "Totaal:";
-                        GridView2.FooterRow.Cells[3].Text = totalehoeveelheid().ToString() + " / " + maxbestelbaar.ToString();
-
-                    }
 
                 }
 
             }
-            
-            if (ronde == int.Parse(lblMaxRondes.Text))
-            {
-                lblWaarschuwing2.Text = "(LAATSTE RONDE!)";
-            }
-            
+
         }
 
-        public int totalehoeveelheid()
-        {
-            DataTable dt = new DataTable();
-            dt = (DataTable)Session["buyitems"];
-            nrow = dt.Rows.Count;
-            i = 0;
-            htotaal = 0;
 
-            toevoegen = htotaal + Convert.ToInt32(dt.Rows[i]["Hoeveelheid"].ToString());
-
-            while (i < nrow)
-            {
-
-                htotaal = htotaal + Convert.ToInt32(dt.Rows[i]["Hoeveelheid"].ToString());
-
-
-
-                i = i + 1;
-
-                if (htotaal > maxbestelbaar)
-                {
-                    lblWaarschuwing.Text = "Je hebt te veel!";
-                }
-
-                if (htotaal >= maxbestelbaar)
-                {
-                    DataList1.Enabled = false;
-                }
-
-                if (htotaal > maxbestelbaar)
-                {
-                    btnOverzicht.Enabled = false;
-                }
-
-            }
-            return htotaal;
-
-
-
-        }
 
 
         protected void DataList1_ItemCommand(object source, DataListCommandEventArgs e)
@@ -235,19 +143,19 @@ namespace ProjectBedrijfApp
 
 
                 DropDownList dlist = (DropDownList)(e.Item.FindControl("DropDownList1"));
-                Response.Redirect("Bestellen.aspx?id=" + e.CommandArgument.ToString() + "&Hoeveelheid=" + dlist.SelectedItem.ToString());
+                Response.Redirect("ApartBestellen.aspx?id=" + e.CommandArgument.ToString() + "&Hoeveelheid=" + dlist.SelectedItem.ToString());
             }
         }
 
         protected void btnOverzicht_Click(object sender, EventArgs e)
         {
-            Response.Redirect("AddToCard.aspx");
+            Response.Redirect("ApartBestellen_overzicht.aspx");
         }
 
         protected void GridView2_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             DataTable dt2 = new DataTable();
-            dt2 = (DataTable)Session["buyitems"];
+            dt2 = (DataTable)Session["bestelapart"];
 
 
             for (int i = 0; i <= dt2.Rows.Count - 1; i++)
@@ -276,7 +184,7 @@ namespace ProjectBedrijfApp
                 dt2.AcceptChanges();
             }
 
-            Session["buyitems"] = dt2;
+            Session["bestelapart"] = dt2;
             Response.Redirect(Request.RawUrl);
         }
 
@@ -322,6 +230,11 @@ namespace ProjectBedrijfApp
 
             Session["aantal"] = Convert.ToInt32(row.Cells[3].Text);
             */
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/overview.aspx");
         }
     }
 }
