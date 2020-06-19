@@ -133,6 +133,7 @@ namespace ProjectBedrijfApp
             tafelID = (List<string>)Session["TafelId"];
 
             CheckStatus(buttonId, button);
+
             if (statusCheck)
             {
                 if (!tafelID.Any(x => x.ToString() == buttonId))
