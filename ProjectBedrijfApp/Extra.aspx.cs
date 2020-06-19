@@ -89,11 +89,12 @@ namespace ProjectBedrijfApp
             
 
 
-            int extrarondes = int.Parse(txbAantal.Text);
+            int extrarondes = 1;
             int maxrondes = (int)Session["maxronde"];
 
             if (btnExtraRondes.Enabled == false)
             {
+                Session["extraatjes"] = ddlfruit.SelectedValue.ToString();
                 maxrondes += extrarondes; 
                 Session["maxronde"] = maxrondes;
                 Response.Redirect("Bestellen.aspx");

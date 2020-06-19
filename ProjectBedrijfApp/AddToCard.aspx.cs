@@ -29,6 +29,8 @@ namespace ProjectBedrijfApp
         int tijdvaknummer;
         string tijden;
         double arregementprijzen;
+
+        int factuurnummer;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -79,7 +81,7 @@ namespace ProjectBedrijfApp
                         GridView1.FooterRow.Cells[5].Text = "Totaal:";
                         GridView1.FooterRow.Cells[6].Text = grandtotal().ToString();
                         Response.Redirect("AddToCard.aspx");
-
+                        GridViewRow gvr = GridView1.SelectedRow;
                     }
                     else
                     {
@@ -401,7 +403,7 @@ namespace ProjectBedrijfApp
                 drklant = cmdfactuur.ExecuteReader();
                     string factuur = drklant.Read().ToString();
                     string factuurtje = drklant["Factuurnummer"].ToString();
-                    int factuurnummer = int.Parse(factuurtje);
+                    factuurnummer = int.Parse(factuurtje);
                     drklant.Close();
                 con.Close();
 
@@ -473,9 +475,23 @@ namespace ProjectBedrijfApp
             }
             int maxronde = int.Parse(Session["maxronde"].ToString());
 
-              
+            if (Session["extraatjes"] != null)
+            {
+                int extraprijs = (int)Session["extraatjes"] * 5;
 
-               
+                con.Open();
+                string allintoevoegen = "Update factuur set Totaalbedrag += @prijs where Factuurnummer = @factuur";
+                SqlDataAdapter adapter3 = new SqlDataAdapter();
+                adapter3.UpdateCommand = new SqlCommand(allintoevoegen, con);
+                adapter3.UpdateCommand.Parameters.AddWithValue("@factuur", factuurnummer);
+                adapter3.UpdateCommand.Parameters.AddWithValue("@prijs", extraprijs);
+                int doehet = adapter3.UpdateCommand.ExecuteNonQuery();
+                con.Close();
+            }
+
+
+
+
 
             if (ronde < maxronde)
             { 
