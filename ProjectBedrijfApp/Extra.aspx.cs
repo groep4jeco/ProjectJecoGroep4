@@ -36,11 +36,22 @@ namespace ProjectBedrijfApp
 
         protected void btnDoorgaan_Click(object sender, EventArgs e)
         {
-            if (btnApartBestellen.Enabled = false)
+            int extrarondes = int.Parse(txbAantal.Text);
+            int maxrondes = (int)Session["maxronde"];
+
+            if (btnExtraRondes.Enabled == false)
             {
-                
+                maxrondes += extrarondes; 
+                Session["maxronde"] = maxrondes;
+                Response.Redirect("Bestellen.aspx");
+               
             }
-            Response.Redirect("ApartBestellen.aspx");
+
+            else
+            {
+                Response.Redirect("ApartBestellen.aspx");
+            }
+            
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
