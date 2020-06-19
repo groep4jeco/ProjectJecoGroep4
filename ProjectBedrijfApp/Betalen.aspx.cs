@@ -33,7 +33,7 @@ namespace ProjectBedrijfApp
 
         }
 
-        private void clickBetalen(object sender, EventArgs e)
+        protected void ClickBetalen(object sender, EventArgs e)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -57,9 +57,6 @@ namespace ProjectBedrijfApp
                 }
                 con.Close();
             }
-
-
-
         }
         protected void TextBox1_TextChanged(object sender, EventArgs e)
         {
