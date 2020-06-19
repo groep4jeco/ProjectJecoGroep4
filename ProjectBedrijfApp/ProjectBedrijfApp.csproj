@@ -97,6 +97,10 @@
     <Content Include="betalen.aspx" />
     <Content Include="betaleninstructie.aspx" />
     <Content Include="Dranken_overzicht.aspx" />
+    <Content Include="images\euro teken.png" />
+    <Content Include="images\image cash.jpg" />
+    <Content Include="images\mastercard-casinos-750x400.jpg" />
+    <Content Include="images\meastro teken.png" />
     <Content Include="regristratiepagina.aspx" />
     <Content Include="Bestellen.aspx" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
