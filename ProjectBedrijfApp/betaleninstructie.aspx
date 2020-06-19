@@ -43,6 +43,8 @@
                         tafelnummer:
                         <br />
                         <asp:TextBox ID="txtinvoeremail" runat="server" CssClass="auto-style4"></asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <asp:Button ID="btnzoekfactuur" runat="server" Text="zoek factuur" />
                     </td>
                 </tr>
                 <tr>
