@@ -42,7 +42,7 @@
             <br />
             <br />
             <br />
-                <asp:Label ID="Label3" runat="server" Text="Voer het reserveringsnummer in:" Font-Size="Large"></asp:Label>
+                <asp:Label ID="Label3" runat="server" Text="Voer het tafelnummer in:" Font-Size="Large"></asp:Label>
             <br />
             <br />
           
