@@ -157,5 +157,10 @@ namespace ProjectBedrijfApp
         {
             Response.Redirect("~/tabletkeuze.aspx");
         }
+
+        protected void btnPrint_Click1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

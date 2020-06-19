@@ -20,6 +20,11 @@
         .auto-style4 {
             margin-top: 10px;
         }
+
+        .body
+        {
+            background-color: lightslategray;
+        }
     </style>
 </head>
 <body>
@@ -31,11 +36,11 @@
             <asp:Label ID="Label2" runat="server" BackColor="White" Font-Size="X-Large" Text="Betaal pagina Jeco Sushi"></asp:Label>
             <br />
             <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <table class="auto-style1">
                 <tr>
                     <td>
-                        <br />
-                        E-mail adres klant:
+                        tafelnummer:
                         <br />
                         <asp:TextBox ID="txtinvoeremail" runat="server" CssClass="auto-style4"></asp:TextBox>
                     </td>
@@ -91,7 +96,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Kortingscode:<br />
+                    <td>Korting:<br />
                         <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
                     </td>
                 </tr>

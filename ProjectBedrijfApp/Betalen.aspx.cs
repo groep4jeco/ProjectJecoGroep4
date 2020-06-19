@@ -11,12 +11,12 @@ namespace ProjectBedrijfApp
 {
     public partial class betalen2 : System.Web.UI.Page
     {
-        DataTable dt = new DataTable();
-        SqlConnection connection = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
-        
+        string connectionString = "Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019";
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
 
 
         }
@@ -26,7 +26,58 @@ namespace ProjectBedrijfApp
             MultiView1.ActiveViewIndex = Convert.ToInt32(DropDownList1.SelectedValue);
         }
 
-        protected void Btnbetaalcash_Click(object sender, EventArgs e)
+
+        protected void BtnCash1_Click(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void clickBetalen(object sender, EventArgs e)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+
+                if (DropDownList1.SelectedValue == "Maestro")
+                {
+
+
+                }
+                if (DropDownList1.SelectedValue == "MasterCard")
+
+                {
+
+
+                }
+                if (DropDownList1.SelectedValue == "Cash")
+
+                {
+
+                }
+                con.Close();
+            }
+
+
+
+        }
+        protected void TextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+
+        }
+
+        protected void btnPrint_Click1(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnmcprinten_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnMaestro_Click(object sender, EventArgs e)
         {
 
         }

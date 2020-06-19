@@ -6,265 +6,297 @@
 <head runat="server">
     <title></title>
     <style type="text/css">
+        @media print {
+            @page {  margin: 0;}
+        }
+         body  { margin: 1.6cm;
+          height: auto;
+          overflow: hidden;
+          position: fixed;
+     
+
         .auto-style1 {
-            bottom: 232px;
+            text-align: center;
+        }
+
+        .auto-style2 {
+            margin-left: 512px;
+        }
+
+        .auto-style3 {
+            margin-left: 511px;
+        }
+
+        .auto-style4 {
+            width: 104px;
+            height: 55px;
+        }
+
+        .auto-style5 {
+            width: 104px;
+            height: 51px;
+        }
+
+        .auto-style6 {
+            width: 112px;
+            height: 51px;
+        }
+
+        .auto-style7 {
+            width: 22px;
+            height: 22px;
+        }
+    }
+        .auto-style1 {
+            width: 268px;
+            height: 295px;
+        }
+        .auto-style2 {
+            width: 268px;
+            height: 103px;
+        }
+        .auto-style3 {
+            width: 140px;
+            height: 103px;
+        }
+        .auto-style4 {
+            width: 1136px;
+            height: 295px;
+        }
+        .auto-style5 {
+            width: 90px;
+            height: 83px;
+        }
+        .auto-style6 {
+            width: 32px;
+            height: 29px;
+        }
+        .auto-style7 {
+            width: 29px;
+            height: 31px;
+        }
+        .auto-style8 {
+            width: 130px;
+            height: 87px;
+        }
+        .auto-style9 {
+            width: 104px;
+            height: 73px;
         }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+        <div class="auto-style1">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" Height="39px" Width="234px">
                 <asp:ListItem Value="0">Cash</asp:ListItem>
                 <asp:ListItem Value="1">Maestro</asp:ListItem>
                 <asp:ListItem Value="2">Mastercard</asp:ListItem>
 
             </asp:DropDownList>
-            <asp:MultiView ID="MultiView1" runat="server">
-                <asp:View ID="View1" runat="server">
-                    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-                   <DIV class="Keypad" style="WIDTH: 192px; POSITION: relative; HEIGHT: 320px; BACKGROUND-COLOR: #ffffcc"
-	ms_positioning="GridLayout"><INPUT onkeypress="if(event.keyCode==13){document.all('Keypad1_btnOK').click();return false;}if(event.keyCode==27){document.all('Keypad1_btnCancel').click();return false;}"
-		id="txtResult" style="FONT-SIZE: medium; Z-INDEX: 102; LEFT: -12px; WIDTH: 176px; FONT-FAMILY: Tahoma; POSITION: absolute; TOP: -100px; HEIGHT: 30px"
-		type="text" size="24" name="txtResult" runat="server">
-	<asp:button id="btnOK" style="Z-INDEX: 101; LEFT: 104px; POSITION: absolute; TOP: 264px" runat="server"
-		CssClass="FatButton" Text="OK" Width="81px" Height="48px" Font-Names="Verdana" Font-Size="Medium" OnClick="btnOK_Click"></asp:button><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 104; LEFT: 16px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 152px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="1"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 105; LEFT: 72px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 152px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="2"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 106; LEFT: 128px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 152px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="3"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 107; LEFT: 16px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 96px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="4"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 108; LEFT: 72px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 96px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="5"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 109; LEFT: 128px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 96px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="6"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 110; LEFT: 16px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 40px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="7"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 111; LEFT: 72px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 40px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="8"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 112; LEFT: 128px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 40px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="9"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 113; LEFT: 72px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 208px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="0"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 114; LEFT: 16px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 208px; HEIGHT: 48px"
-		onclick="delClicked(this);" type="button" value="DEL"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 115; LEFT: 128px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 208px; HEIGHT: 48px"
-		onclick="clrClicked(this);" type="button" value="CLR">
-	<asp:button id="btnCancel" style="Z-INDEX: 116; LEFT: 8px; POSITION: absolute; TOP: 264px" runat="server"
-		CssClass="FatButton" Text="Cancel" Width="80px" Height="48px" Font-Names="Verdana" Font-Size="Medium"></asp:button><asp:label id="txtSource" style="Z-INDEX: 100; LEFT: 64px; POSITION: absolute; TOP: 280px; width: 66px;"
-		runat="server" Visible="False"></asp:label><INPUT onkeypress="if(event.keyCode==13){document.all('Keypad1_btnOK').click();return false;}if(event.keyCode==27){document.all('Keypad1_btnCancel').click();return false;}"
-		id="txtPasswordResult" style="FONT-SIZE: medium; Z-INDEX: 103; LEFT: 8px; WIDTH: 176px; FONT-FAMILY: Tahoma; POSITION: absolute; TOP: 8px; HEIGHT: 30px"
-		type="password" size="24" name="txtPasswordResult" runat="server">
-	<asp:label id="lblIsPassword" style="Z-INDEX: 99; LEFT: 8px; POSITION: absolute; TOP: 240px"
-		runat="server" Visible="False">False</asp:label></DIV>
-<!--<script>document.onload=document.all("Keypad1_txtResult").focus();</script>-->
-<script>
-function focusToInput() {
-   try {
-      document.all("Keypad1_txtResult").focus();
-   }
-   catch (e) {
-      document.all("Keypad1_txtPasswordResult").focus();
-   }
-}
-function numClicked(elem) {
-   try {
-      document.all("Keypad1_txtResult").value+=elem.value;
-   } 
-   catch(e) {}
-   try {
-      document.all("Keypad1_txtPasswordResult").value+=elem.value;
-   } 
-   catch(e) {}
-   //document.all("Keypad1_txtResult").focus();
-   focusToInput();
-}
-function delClicked(elem) {
-   try {
-      document.all("Keypad1_txtResult").value=document.all("Keypad1_txtResult").value.substr(0,document.all("Keypad1_txtResult").value.length-1);
-   } 
-   catch(e) {}
-   try {
-      document.all("Keypad1_txtPasswordResult").value=document.all("Keypad1_txtPasswordResult").value.substr(0,document.all("Keypad1_txtPasswordResult").value.length-1);
-   } 
-   catch(e) {}
-   //document.all("Keypad1_txtResult").focus();
-   focusToInput();
-}
-function clrClicked(elem) {
-   try {
-      document.all("Keypad1_txtResult").value="";
-   } 
-   catch(e) {}
-   try {
-      document.all("Keypad1_txtPasswordResult").value="";
-   } 
-   catch(e) {}
-   
-   //document.all("Keypad1_txtResult").focus();
-   focusToInput();
-}
-</script>
-<script>document.onload=focusToInput();</script>
+            &nbsp;<asp:MultiView ID="MultiView1" runat="server">
 
-                    <asp:Button ID="Btnbetaalcash" runat="server" Text="Betalen" OnClick="Btnbetaalcash_Click" />
+                <asp:View ID="View1" runat="server">
+                    <asp:Label ID="lblfactuurCash" runat="server" Text="Label"></asp:Label>
+
+                    &nbsp;<br />
+                    <br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img alt="" class="auto-style5" src="images/image%20cash.jpg" />
+                    <br />
+                    <asp:FormView ID="FormView1" runat="server" BackColor="White" BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellPadding="3" CellSpacing="1" CssClass="auto-style2" DataSourceID="SqlDataSource1" Height="240px" margin-left="auto" margin-right="auto" Width="342px">
+                        <EditItemTemplate>
+                            KlantenpasEmail:
+                            <asp:TextBox ID="KlantenpasEmailTextBox" runat="server" Text='<%# Bind("KlantenpasEmail") %>' />
+                            <br />
+                            Factuurdatum:
+                            <asp:TextBox ID="FactuurdatumTextBox" runat="server" Text='<%# Bind("Factuurdatum") %>' />
+                            <br />
+                            Totaalbedrag:
+                            <asp:TextBox ID="TotaalbedragTextBox" runat="server" Text='<%# Bind("Totaalbedrag") %>' />
+                            <br />
+                            <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" Text="Update" />
+                            &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+                        </EditItemTemplate>
+                        <EditRowStyle BackColor="#9471DE" Font-Bold="True" ForeColor="White" />
+                        <FooterStyle BackColor="#C6C3C6" ForeColor="Black" />
+                        <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#E7E7FF" />
+                        <InsertItemTemplate>
+                            KlantenpasEmail:
+                            <asp:TextBox ID="KlantenpasEmailTextBox" runat="server" Text='<%# Bind("KlantenpasEmail") %>' />
+                            <br />
+                            Factuurdatum:
+                            <asp:TextBox ID="FactuurdatumTextBox" runat="server" Text='<%# Bind("Factuurdatum") %>' />
+                            <br />
+                            Totaalbedrag:
+                            <asp:TextBox ID="TotaalbedragTextBox" runat="server" Text='<%# Bind("Totaalbedrag") %>' />
+                            <br />
+                            <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insert" />
+                            &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+                        </InsertItemTemplate>
+                        <ItemTemplate>
+                            KlantenpasEmail:
+                            <asp:Label ID="KlantenpasEmailLabel" runat="server" Text='<%# Bind("KlantenpasEmail") %>' />
+                            <br />
+                            Factuurdatum:
+                            <asp:Label ID="FactuurdatumLabel" runat="server" Text='<%# Bind("Factuurdatum") %>' />
+                            <br />
+                            Totaalbedrag:
+                            <asp:Label ID="TotaalbedragLabel" runat="server" Text='<%# Bind("Totaalbedrag") %>' />
+                            <br />
+                        </ItemTemplate>
+                        <PagerStyle BackColor="#C6C3C6" ForeColor="Black" HorizontalAlign="Right" />
+                        <RowStyle BackColor="#DEDFDE" ForeColor="Black" />
+                    </asp:FormView>
+                    <br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [KlantenpasEmail], [Factuurdatum], [Totaalbedrag] FROM [Factuur]"></asp:SqlDataSource>
+                    <br />
+                    <asp:SqlDataSource ID="SqlDataSource2" runat="server"></asp:SqlDataSource>
+                    <br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:Button ID="btnprint" runat="server" Text="Bon printen " />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img alt="" class="auto-style7" src="images/euro%20teken.png" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                    &nbsp;<asp:Button ID="BtnCash1" runat="server" Text="Betalen" OnClick="clickBetalen" Width="159px" />
                 </asp:View>
                 <asp:View ID="View2" runat="server">
-                    <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
-                  <DIV class="Keypad" style="WIDTH: 192px; POSITION: relative; HEIGHT: 320px; BACKGROUND-COLOR: #ffffcc"
-	ms_positioning="GridLayout">
-                      <INPUT onkeypress="if(event.keyCode==13){document.all('Keypad1_btnOK').click();return false;}if(event.keyCode==27){document.all('Keypad1_btnCancel').click();return false;}"
-		id="Text1" style="FONT-SIZE: medium; Z-INDEX: 102; LEFT: 8px; WIDTH: 176px; FONT-FAMILY: Tahoma; POSITION: absolute; TOP: 8px; HEIGHT: 30px"
-		
-                          type="text" size="24" name="txtResult" runat="server">
-	<asp:button id="Button1" style="Z-INDEX: 101; LEFT: 104px; POSITION: absolute; TOP: 264px" runat="server"
-		CssClass="FatButton" Text="OK" Width="81px" Height="48px" Font-Names="Verdana" Font-Size="Medium"></asp:button><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 104; LEFT: 16px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 152px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="1"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 105; LEFT: 72px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 152px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="2"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 106; LEFT: 128px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 152px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="3"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 107; LEFT: 16px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 96px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="4"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 108; LEFT: 72px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 96px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="5"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 109; LEFT: 128px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 96px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="6"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 110; LEFT: 16px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 40px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="7"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 111; LEFT: 72px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 40px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="8"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 112; LEFT: 128px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 40px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="9" class="auto-style1"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 113; LEFT: 72px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 208px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="0"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 114; LEFT: 16px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 208px; HEIGHT: 48px"
-		onclick="delClicked(this);" type="button" value="DEL"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 115; LEFT: 128px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 208px; HEIGHT: 48px"
-		onclick="clrClicked(this);" type="button" value="CLR">
-	<asp:button id="Button2" style="Z-INDEX: 116; LEFT: 8px; POSITION: absolute; TOP: 264px" runat="server"
-		CssClass="FatButton" Text="Cancel" Width="80px" Height="48px" Font-Names="Verdana" Font-Size="Medium"></asp:button><asp:label id="Label4" style="Z-INDEX: 100; LEFT: 64px; POSITION: absolute; TOP: 280px"
-		runat="server" Width="32px" Visible="False"></asp:label><INPUT onkeypress="if(event.keyCode==13){document.all('Keypad1_btnOK').click();return false;}if(event.keyCode==27){document.all('Keypad1_btnCancel').click();return false;}"
-		id="Password1" style="FONT-SIZE: medium; Z-INDEX: 103; LEFT: 8px; WIDTH: 176px; FONT-FAMILY: Tahoma; POSITION: absolute; TOP: 8px; HEIGHT: 30px"
-		type="password" size="24" name="txtPasswordResult" runat="server">
-	<asp:label id="Label5" style="Z-INDEX: 99; LEFT: 8px; POSITION: absolute; TOP: 240px"
-		runat="server" Visible="False">False</asp:label></DIV>
-<!--<script>document.onload=document.all("Keypad1_txtResult").focus();</script>-->
-<script>
-    function focusToInput() {
-        try {
-            document.all("Keypad1_txtResult").focus();
-        }
-        catch (e) {
-            document.all("Keypad1_txtPasswordResult").focus();
-        }
-    }
-    function numClicked(elem) {
-        try {
-            document.all("Keypad1_txtResult").value += elem.value;
-        }
-        catch (e) { }
-        try {
-            document.all("Keypad1_txtPasswordResult").value += elem.value;
-        }
-        catch (e) { }
-        //document.all("Keypad1_txtResult").focus();
-        focusToInput();
-    }
-    function delClicked(elem) {
-        try {
-            document.all("Keypad1_txtResult").value = document.all("Keypad1_txtResult").value.substr(0, document.all("Keypad1_txtResult").value.length - 1);
-        }
-        catch (e) { }
-        try {
-            document.all("Keypad1_txtPasswordResult").value = document.all("Keypad1_txtPasswordResult").value.substr(0, document.all("Keypad1_txtPasswordResult").value.length - 1);
-        }
-        catch (e) { }
-        //document.all("Keypad1_txtResult").focus();
-        focusToInput();
-    }
-    function clrClicked(elem) {
-        try {
-            document.all("Keypad1_txtResult").value = "";
-        }
-        catch (e) { }
-        try {
-            document.all("Keypad1_txtPasswordResult").value = "";
-        }
-        catch (e) { }
-
-        //document.all("Keypad1_txtResult").focus();
-        focusToInput();
-    }
-</script>
-<script>document.onload = focusToInput();</script>
-
-                    <asp:Button ID="Btnbetaalmaestro" runat="server" Text="Betalen" />
+                    <asp:Label ID="lblfactuurMaestro" runat="server" Text="Label"></asp:Label>
+                    &nbsp;<div class="auto-style4">
+                        <br />
+                        <br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <img alt="" class="auto-style9" src="images/meastro%20teken.png" />
+                        <br />
+                        <asp:FormView ID="FormView2" runat="server" BackColor="White" BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellPadding="3" CellSpacing="1" CssClass="auto-style3" DataSourceID="SqlDataSource1" Height="240px" Width="343px">
+                            <EditItemTemplate>
+                                KlantenpasEmail:
+                                <asp:TextBox ID="KlantenpasEmailTextBox" runat="server" Text='<%# Bind("KlantenpasEmail") %>' />
+                                <br />
+                                Factuurdatum:
+                                <asp:TextBox ID="FactuurdatumTextBox" runat="server" Text='<%# Bind("Factuurdatum") %>' />
+                                <br />
+                                Totaalbedrag:
+                                <asp:TextBox ID="TotaalbedragTextBox" runat="server" Text='<%# Bind("Totaalbedrag") %>' />
+                                <br />
+                                <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" Text="Update" />
+                                &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+                            </EditItemTemplate>
+                            <EditRowStyle BackColor="#9471DE" Font-Bold="True" ForeColor="White" />
+                            <FooterStyle BackColor="#C6C3C6" ForeColor="Black" />
+                            <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#E7E7FF" />
+                            <InsertItemTemplate>
+                                KlantenpasEmail:
+                                <asp:TextBox ID="KlantenpasEmailTextBox" runat="server" Text='<%# Bind("KlantenpasEmail") %>' />
+                                <br />
+                                Factuurdatum:
+                                <asp:TextBox ID="FactuurdatumTextBox" runat="server" Text='<%# Bind("Factuurdatum") %>' />
+                                <br />
+                                Totaalbedrag:
+                                <asp:TextBox ID="TotaalbedragTextBox" runat="server" Text='<%# Bind("Totaalbedrag") %>' />
+                                <br />
+                                <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insert" />
+                                &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+                            </InsertItemTemplate>
+                            <ItemTemplate>
+                                KlantenpasEmail:
+                                <asp:Label ID="KlantenpasEmailLabel" runat="server" Text='<%# Bind("KlantenpasEmail") %>' />
+                                <br />
+                                Factuurdatum:
+                                <asp:Label ID="FactuurdatumLabel" runat="server" Text='<%# Bind("Factuurdatum") %>' />
+                                <br />
+                                Totaalbedrag:
+                                <asp:Label ID="TotaalbedragLabel" runat="server" Text='<%# Bind("Totaalbedrag") %>' />
+                                <br />
+                            </ItemTemplate>
+                            <PagerStyle BackColor="#C6C3C6" ForeColor="Black" HorizontalAlign="Right" />
+                            <RowStyle BackColor="#DEDFDE" ForeColor="Black" />
+                        </asp:FormView>
+                        &nbsp;
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <br />
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="btnprinten" runat="server" Text="Bon Printen" />
+                    &nbsp;<img alt="" class="auto-style6" src="images/euro%20teken.png" />&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="TextBox1" runat="server" OnTextChanged="TextBox1_TextChanged" Width="127px"></asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Button ID="btnMaestro" runat="server" Text="Betalen" Width="159px" OnClick="clickBetalen" />
+                    <br />
+                    <br />
                 </asp:View>
                 <asp:View ID="View3" runat="server">
-                    <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
-                    <DIV class="Keypad" style="WIDTH: 192px; POSITION: relative; HEIGHT: 320px; BACKGROUND-COLOR: #ffffcc"
-	ms_positioning="GridLayout"><INPUT onkeypress="if(event.keyCode==13){document.all('Keypad1_btnOK').click();return false;}if(event.keyCode==27){document.all('Keypad1_btnCancel').click();return false;}"
-		id="Text2" style="FONT-SIZE: medium; Z-INDEX: 102; LEFT: 8px; WIDTH: 176px; FONT-FAMILY: Tahoma; POSITION: absolute; TOP: 8px; HEIGHT: 30px"
-		type="text" size="24" name="txtResult" runat="server">
-	<asp:button id="Button3" style="Z-INDEX: 101; LEFT: 104px; POSITION: absolute; TOP: 264px" runat="server"
-		CssClass="FatButton" Text="OK" Width="81px" Height="48px" Font-Names="Verdana" Font-Size="Medium"></asp:button><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 104; LEFT: 16px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 152px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="1"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 105; LEFT: 72px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 152px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="2"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 106; LEFT: 128px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 152px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="3"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 107; LEFT: 16px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 96px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="4"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 108; LEFT: 72px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 96px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="5"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 109; LEFT: 128px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 96px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="6"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 110; LEFT: 16px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 40px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="7"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 111; LEFT: 72px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 40px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="8"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 112; LEFT: 128px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 40px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="9"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 113; LEFT: 72px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 208px; HEIGHT: 48px"
-		onclick="numClicked(this);" type="button" value="0"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 114; LEFT: 16px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 208px; HEIGHT: 48px"
-		onclick="delClicked(this);" type="button" value="DEL"><INPUT style="FONT-WEIGHT: bold; FONT-SIZE: 12pt; Z-INDEX: 115; LEFT: 128px; WIDTH: 48px; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 208px; HEIGHT: 48px"
-		onclick="clrClicked(this);" type="button" value="CLR">
-	<asp:button id="Button4" style="Z-INDEX: 116; LEFT: 8px; POSITION: absolute; TOP: 264px" runat="server"
-		CssClass="FatButton" Text="Cancel" Width="80px" Height="48px" Font-Names="Verdana" Font-Size="Medium"></asp:button><asp:label id="Label6" style="Z-INDEX: 100; LEFT: 64px; POSITION: absolute; TOP: 280px"
-		runat="server" Width="32px" Visible="False"></asp:label><INPUT onkeypress="if(event.keyCode==13){document.all('Keypad1_btnOK').click();return false;}if(event.keyCode==27){document.all('Keypad1_btnCancel').click();return false;}"
-		id="Password2" style="FONT-SIZE: medium; Z-INDEX: 103; LEFT: 8px; WIDTH: 176px; FONT-FAMILY: Tahoma; POSITION: absolute; TOP: 8px; HEIGHT: 30px"
-		type="password" size="24" name="txtPasswordResult" runat="server">
-	<asp:label id="Label7" style="Z-INDEX: 99; LEFT: 8px; POSITION: absolute; TOP: 240px"
-		runat="server" Visible="False">False</asp:label></DIV>
-<!--<script>document.onload=document.all("Keypad1_txtResult").focus();</script>-->
-<script>
-    function focusToInput() {
-        try {
-            document.all("Keypad1_txtResult").focus();
-        }
-        catch (e) {
-            document.all("Keypad1_txtPasswordResult").focus();
-        }
-    }
-    function numClicked(elem) {
-        try {
-            document.all("Keypad1_txtResult").value += elem.value;
-        }
-        catch (e) { }
-        try {
-            document.all("Keypad1_txtPasswordResult").value += elem.value;
-        }
-        catch (e) { }
-        //document.all("Keypad1_txtResult").focus();
-        focusToInput();
-    }
-    function delClicked(elem) {
-        try {
-            document.all("Keypad1_txtResult").value = document.all("Keypad1_txtResult").value.substr(0, document.all("Keypad1_txtResult").value.length - 1);
-        }
-        catch (e) { }
-        try {
-            document.all("Keypad1_txtPasswordResult").value = document.all("Keypad1_txtPasswordResult").value.substr(0, document.all("Keypad1_txtPasswordResult").value.length - 1);
-        }
-        catch (e) { }
-        //document.all("Keypad1_txtResult").focus();
-        focusToInput();
-    }
-    function clrClicked(elem) {
-        try {
-            document.all("Keypad1_txtResult").value = "";
-        }
-        catch (e) { }
-        try {
-            document.all("Keypad1_txtPasswordResult").value = "";
-        }
-        catch (e) { }
-
-        //document.all("Keypad1_txtResult").focus();
-        focusToInput();
-    }
-</script>
-<script>document.onload = focusToInput();</script>
-
-                    <asp:Button ID="BtnbetaalMC" runat="server" Text="Betalen" />
+                    <asp:Label ID="lblfactuurMC" runat="server" Text="Label"></asp:Label>
+                    &nbsp;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img alt="" class="auto-style8" src="images/mastercard-casinos-750x400.jpg" />
+                    <br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:FormView ID="FormView3" runat="server" BackColor="White" BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellPadding="3" CellSpacing="1" CssClass="auto-style3" DataSourceID="SqlDataSource1" Height="240px" Width="341px">
+                        <EditItemTemplate>
+                            KlantenpasEmail:
+                            <asp:TextBox ID="KlantenpasEmailTextBox" runat="server" Text='<%# Bind("KlantenpasEmail") %>' />
+                            <br />
+                            Factuurdatum:
+                            <asp:TextBox ID="FactuurdatumTextBox" runat="server" Text='<%# Bind("Factuurdatum") %>' />
+                            <br />
+                            Totaalbedrag:
+                            <asp:TextBox ID="TotaalbedragTextBox" runat="server" Text='<%# Bind("Totaalbedrag") %>' />
+                            <br />
+                            <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" Text="Update" />
+                            &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+                        </EditItemTemplate>
+                        <EditRowStyle BackColor="#9471DE" Font-Bold="True" ForeColor="White" />
+                        <FooterStyle BackColor="#C6C3C6" ForeColor="Black" />
+                        <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#E7E7FF" />
+                        <InsertItemTemplate>
+                            KlantenpasEmail:
+                            <asp:TextBox ID="KlantenpasEmailTextBox" runat="server" Text='<%# Bind("KlantenpasEmail") %>' />
+                            <br />
+                            Factuurdatum:
+                            <asp:TextBox ID="FactuurdatumTextBox" runat="server" Text='<%# Bind("Factuurdatum") %>' />
+                            <br />
+                            Totaalbedrag:
+                            <asp:TextBox ID="TotaalbedragTextBox" runat="server" Text='<%# Bind("Totaalbedrag") %>' />
+                            <br />
+                            <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insert" />
+                            &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
+                        </InsertItemTemplate>
+                        <ItemTemplate>
+                            KlantenpasEmail:
+                            <asp:Label ID="KlantenpasEmailLabel" runat="server" Text='<%# Bind("KlantenpasEmail") %>' />
+                            <br />
+                            Factuurdatum:
+                            <asp:Label ID="FactuurdatumLabel" runat="server" Text='<%# Bind("Factuurdatum") %>' />
+                            <br />
+                            Totaalbedrag:
+                            <asp:Label ID="TotaalbedragLabel" runat="server" Text='<%# Bind("Totaalbedrag") %>' />
+                            <br />
+                        </ItemTemplate>
+                        <PagerStyle BackColor="#C6C3C6" ForeColor="Black" HorizontalAlign="Right" />
+                        <RowStyle BackColor="#DEDFDE" ForeColor="Black" />
+                    </asp:FormView>
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:Button ID="btnmcprinten" runat="server" OnClick="btnmcprinten_Click" OnClientClick="window.print()" Text="Bon printen" />
+                    &nbsp;&nbsp;&nbsp;
+                    <img alt="" class="auto-style7" src="images/euro%20teken.png" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+                    &nbsp;
+                     <asp:Button ID="BtnbetaalMC" runat="server" Text="Betalen" Height="26px" Width="159px" OnClick="clickBetalen" />
                 </asp:View>
-              
-                    
+
+
             </asp:MultiView>
         </div>
-     
+
     </form>
 </body>
 </html>
