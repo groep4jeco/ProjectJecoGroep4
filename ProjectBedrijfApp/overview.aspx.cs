@@ -18,7 +18,7 @@ namespace ProjectBedrijfApp
         public List<string> tafelID = new List<string>();
         public List<string> results = new List<string>();
         string time;
-        bool drinkenbestellen;
+        private bool statusCheck;
         string tijdvakdata;
         int tijdvaknummer;
         string tijden;
@@ -65,6 +65,7 @@ namespace ProjectBedrijfApp
             Session["tijdvaknummer"] = tijdvaknummer;
             con.Close();
             LoopButtons(Page.Controls);
+
         }
 
         private void LoopButtons(ControlCollection controlCollection)
@@ -95,7 +96,7 @@ namespace ProjectBedrijfApp
                                 {
                                     //System.Diagnostics.Debug.WriteLine("SomeText");
                                     ((Button)control).BackColor = Color.Red;
-                                    //((Button)control).Enabled = false;
+                                    
                                 }
                             }
                         }
@@ -131,31 +132,53 @@ namespace ProjectBedrijfApp
             string buttonId = button.Text.Trim();
             tafelID = (List<string>)Session["TafelId"];
 
-            //string combindedString = string.Join(",", tafelID);
-            //System.Diagnostics.Debug.WriteLine(combindedString);
-
-            if (!tafelID.Any(x => x.ToString() == buttonId))
+            CheckStatus(buttonId, button);
+            if (statusCheck)
             {
-                ReserveerStatus = true;
-                tafelID.Add(buttonId);
-                Session["TafelId"] = tafelID;
+                if (!tafelID.Any(x => x.ToString() == buttonId))
+                {
+                    ReserveerStatus = true;
+                    tafelID.Add(buttonId);
+                    Session["TafelId"] = tafelID;
+                }
+                else if (tafelID.Contains(buttonId))
+                {
+                    ReserveerStatus = false;
+                }
             }
-            else if (tafelID.Contains(buttonId))
-            {
-                ReserveerStatus = false;
-            }
 
-
-            System.Diagnostics.Debug.WriteLine(ReserveerStatus);
-            if (ReserveerStatus)
+            if (!statusCheck)
             {
-                button.BackColor = Color.Green;
+                if (ReserveerStatus)
+                {
+                    Buon83.Enabled = true;
+                    button.BackColor = Color.Green;
+                }
+                if (!ReserveerStatus)
+                {
+                    tafelID.Remove(buttonId);
+                    button.BackColor = default;
+                    Buon83.Enabled = false;
+                }
             }
-            if (!ReserveerStatus)
+        }
+        private void CheckStatus(string BtnId, Button btn) 
+        {
+            foreach (var item in results)
             {
-                tafelID.Remove(buttonId);
-                button.BackColor = Color.Red;
-                System.Diagnostics.Debug.WriteLine(tafelID.Count);
+                if (results.Any(x => x.ToString() == BtnId))
+                {
+                    statusCheck = true;
+                    Button2.Enabled = true;
+                    Buon83.Enabled = false;
+                    btn.BackColor = Color.Blue;
+                }
+                else 
+                {
+                    statusCheck = false;
+                    Button2.Enabled = false;
+                    
+                }
             }
         }
 
