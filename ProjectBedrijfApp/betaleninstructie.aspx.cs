@@ -18,5 +18,10 @@ namespace ProjectBedrijfApp
         {
            
         }
+
+        protected void txtinvoeremail_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
