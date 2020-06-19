@@ -485,7 +485,7 @@ namespace ProjectBedrijfApp
             }
             else
             {
-                Response.Redirect("~/regristratiepagina.aspx");
+                Response.Redirect("~/Extra.aspx");
             }
 
         }

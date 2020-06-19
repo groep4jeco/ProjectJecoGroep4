@@ -36,7 +36,11 @@ namespace ProjectBedrijfApp
 
         protected void btnDoorgaan_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Bestellen.aspx");
+            if (btnApartBestellen.Enabled = false)
+            {
+                
+            }
+            Response.Redirect("ApartBestellen.aspx");
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
