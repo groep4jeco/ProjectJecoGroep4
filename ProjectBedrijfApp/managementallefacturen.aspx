@@ -148,6 +148,31 @@
         .auto-style1 {
             margin-right: 0px;
         }
+        .auto-style2 {
+            width: 22%;
+        }
+        .auto-style3 {
+            width: 228px;
+        }
+        .auto-style4 {
+            width: 110px;
+        }
+        .auto-style5 {
+            width: 18%;
+        }
+        .auto-style6 {
+            width: 488px;
+        }
+        .auto-style7 {
+            width: 488px;
+            height: 22px;
+        }
+        .auto-style8 {
+            height: 22px;
+        }
+        .auto-style10 {
+            width: 117px;
+        }
     </style>
 </head>
 <body style="height: 567px">
@@ -243,6 +268,29 @@ COMMIT;">
                             <asp:ControlParameter ControlID="GridView1" Name="Restaurant_ID" PropertyName="SelectedValue" Type="Int32" />
                         </SelectParameters>
                     </asp:SqlDataSource>
+                <table class="auto-style2">
+                    <tr>
+                        <td></td>
+                        <td><strong>Aantal</strong></td>
+                        <td><strong>Prijs</strong></td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style4"><strong>Kind</strong></td>
+                        <td class="auto-style10">
+                            <asp:Label ID="lblAantalKind" runat="server" Text="lblAantalKind"></asp:Label>
+                        </td>
+                        <td>€<asp:Label ID="lblTotKind" runat="server" Text="lblTotKind"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style4"><strong>Volwassene</strong></td>
+                        <td class="auto-style10">
+                            <asp:Label ID="lblAantalVolw" runat="server" Text="lblAantalVolw"></asp:Label>
+                        </td>
+                        <td>€<asp:Label ID="lblTotVolw" runat="server" Text="lblTotVolw"></asp:Label>
+                        </td>
+                    </tr>
+                </table>
                 <br />
                 <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource2" CssClass="auto-style1">
                     <Columns>
@@ -267,23 +315,23 @@ COMMIT;">
                     </SelectParameters>
                 </asp:SqlDataSource>
                 <br />
-                <table class="auto-style2">
+                <table class="auto-style5">
                     <tr>
-                        <td class="auto-style3">Factuurtotaal exclusief btw</td>
+                        <td class="auto-style6">Factuurtotaal exclusief btw</td>
                         <td class="auto-style3">
-                            <asp:Label ID="Label12" runat="server" Text="Label"></asp:Label>
+                            €<asp:Label ID="Label12" runat="server" Text="Label"></asp:Label>
                         </td>
                     </tr>
                     <tr>
-                        <td>Btw bedrag</td>
-                        <td>
-                            <asp:Label ID="Label13" runat="server" Text="Label"></asp:Label>
+                        <td class="auto-style7">Btw bedrag</td>
+                        <td class="auto-style8">
+                            €<asp:Label ID="Label13" runat="server" Text="Label"></asp:Label>
                         </td>
                     </tr>
                     <tr>
-                        <td>Factuurtotaal inclusief btw</td>
+                        <td class="auto-style6">Factuurtotaal inclusief btw</td>
                         <td>
-                            <asp:Label ID="Label14" runat="server" Text="Label"></asp:Label>
+                            €<asp:Label ID="Label14" runat="server" Text="Label"></asp:Label>
                         </td>
                     </tr>
                 </table>
