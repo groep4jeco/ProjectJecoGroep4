@@ -22,6 +22,7 @@ namespace ProjectBedrijfApp
         string tijdvakdata;
         int tijdvaknummer;
         string tijden;
+        bool selected;
 
         string connectionString = "Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019";
 
@@ -89,7 +90,7 @@ namespace ProjectBedrijfApp
                         {
                             string id = control.ID;
                             string y = id.Trim('t');
-                            System.Diagnostics.Debug.WriteLine(y);
+                            // System.Diagnostics.Debug.WriteLine(y);
                             foreach (var item in results)
                             {
                                 if (results.Any(x => x.ToString() == y))
@@ -119,10 +120,7 @@ namespace ProjectBedrijfApp
 
         private void SettingReserverData()
         {
-            //  Tafel Tafel2 = new Tafel();
-            // Tafel.Reserveringsnummer1++;
-            //SelectedTafelID = Tafel.Reserveringsnummer1;
-            Session["Reserveringsnummer"] = SelectedTafelID;
+             Session["Reserveringsnummer"] = SelectedTafelID;
             Response.Redirect("~/ReserveringPagina.aspx");
         }
 
@@ -133,19 +131,20 @@ namespace ProjectBedrijfApp
             tafelID = (List<string>)Session["TafelId"];
 
             CheckStatus(buttonId, button);
-            if (statusCheck)
+            System.Diagnostics.Debug.WriteLine(statusCheck);
+
+
+            if (!tafelID.Any(x => x.ToString() == buttonId) || tafelID == null)
             {
-                if (!tafelID.Any(x => x.ToString() == buttonId))
-                {
-                    ReserveerStatus = true;
-                    tafelID.Add(buttonId);
-                    Session["TafelId"] = tafelID;
-                }
-                else if (tafelID.Contains(buttonId))
-                {
-                    ReserveerStatus = false;
-                }
+                ReserveerStatus = true;
+                tafelID.Add(buttonId);
+                Session["TafelId"] = tafelID;
             }
+            else if (tafelID.Contains(buttonId))
+            {
+                ReserveerStatus = false;
+            }
+
 
             if (!statusCheck)
             {
@@ -164,7 +163,7 @@ namespace ProjectBedrijfApp
         }
         private void CheckStatus(string BtnId, Button btn) 
         {
-            foreach (var item in results)
+            for (int i = 0; i < results.Count; i++)
             {
                 if (results.Any(x => x.ToString() == BtnId))
                 {
@@ -172,12 +171,12 @@ namespace ProjectBedrijfApp
                     Button2.Enabled = true;
                     Buon83.Enabled = false;
                     btn.BackColor = Color.Blue;
+                    selected = true;
                 }
-                else 
+                else if (selected)
                 {
                     statusCheck = false;
                     Button2.Enabled = false;
-                    
                 }
             }
         }
