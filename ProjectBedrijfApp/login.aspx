@@ -29,7 +29,7 @@
         }
     </style>
 </head>
-<body>
+<body style="height: 448px">
     <form id="form1" runat="server">
         <div class="logo">
             <img src="images/loginlogo%202.png" style="height: 156px" />
