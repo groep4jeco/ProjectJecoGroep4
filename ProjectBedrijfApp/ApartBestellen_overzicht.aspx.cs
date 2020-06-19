@@ -303,7 +303,7 @@ namespace ProjectBedrijfApp
                     SqlDataAdapter adapter3 = new SqlDataAdapter();
                     adapter3.UpdateCommand = new SqlCommand(optellen, con);
                     adapter3.UpdateCommand.Parameters.AddWithValue("@factuur", factuurnummer);
-                    adapter3.UpdateCommand.Parameters.AddWithValue("@prijs", prijs);
+                    adapter3.UpdateCommand.Parameters.AddWithValue("@prijs", prijsje);
                     int doehet = adapter3.UpdateCommand.ExecuteNonQuery();
                     con.Close();
                 }
@@ -332,9 +332,7 @@ namespace ProjectBedrijfApp
                     SqlDataAdapter adapter2 = new SqlDataAdapter();
                     adapter2.InsertCommand = new SqlCommand(factuurmaken, con);
                     adapter2.InsertCommand.Parameters.AddWithValue("@reservering", Session["reservering"]);
-                    adapter2.InsertCommand.Parameters.AddWithValue("@prijs", prijs);
-                    adapter2.InsertCommand.Parameters.AddWithValue("@volw", volw);
-                    adapter2.InsertCommand.Parameters.AddWithValue("@kind", kind);
+                    adapter2.InsertCommand.Parameters.AddWithValue("@prijs", prijsje);
                     int doehet2 = adapter2.InsertCommand.ExecuteNonQuery();
 
                 }
