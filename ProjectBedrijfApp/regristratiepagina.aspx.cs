@@ -16,6 +16,7 @@ namespace ProjectBedrijfApp
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["ronde"] = "1";
+            Session["maxronde"] = 4;
         }
 
         protected void Button1_Click(object sender, EventArgs e)
