@@ -18,6 +18,16 @@ namespace ProjectBedrijfApp
     public partial class managementallefacturen : System.Web.UI.Page
     {
         DateTime kalender = DateTime.Today;
+        string time;
+        bool drinkenbestellen;
+        string tijdvakdata;
+        int tijdvaknummer;
+        string tijden;
+
+        int volmetallin;
+        int kinderenmetallin;
+
+        int menuutjes;
         protected void Page_Load(object sender, EventArgs e)
         {
             kalender = calendarTest.SelectedDate;
@@ -48,6 +58,7 @@ namespace ProjectBedrijfApp
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
 
         {
+            int reserveringsnummer = (int)GridView1.DataKeys[GridView1.SelectedIndex]["Reserveringsnummer"];
             kalender = calendarTest.SelectedDate;
             Panel2.Visible = true;
          int resultaat = (int)GridView1.DataKeys[GridView1.SelectedIndex]["Restaurant ID"];
@@ -121,7 +132,109 @@ namespace ProjectBedrijfApp
              
             drfactuur.Close();
             con.Close();
+            
+            string eerstekind = "select [Aantal kinderen] from in_restaurant where Reserveringsnummer = @reservering";
+            string eerstevol = "select [Aantal Volwassenen] from in_restaurant where Reserveringsnummer = @reservering";
 
+            con.Open();
+            SqlCommand cmdvol = new SqlCommand(eerstevol, con);
+            cmdvol.Parameters.AddWithValue("@reservering", reserveringsnummer);
+            object volwassenen = cmdvol.ExecuteScalar();
+            string aantalv = volwassenen.ToString();
+            int volw = int.Parse(aantalv);
+
+            SqlCommand cmdkind = new SqlCommand(eerstekind, con);
+            cmdkind.Parameters.AddWithValue("@reservering", reserveringsnummer);
+            object kinderen1 = cmdkind.ExecuteScalar();
+            string kinderen = kinderen1.ToString();
+            int kind = int.Parse(kinderen);
+            con.Close();
+
+            try
+            {
+                string allin = "select [Aantal arregementen] from in_restaurant where Reserveringsnummer = @reservering";
+                con.Open();
+                SqlCommand cmdalles = new SqlCommand(allin, con);
+                cmdalles.Parameters.AddWithValue("@reservering", reserveringsnummer);
+                object allinss = cmdalles.ExecuteScalar();
+                string arregementen1 = allinss.ToString();
+                menuutjes = int.Parse(arregementen1);
+                con.Close();
+            }
+
+            catch
+            {
+                menuutjes = 0;
+            }
+
+            finally
+            {
+                con.Close();
+            }
+
+            if (menuutjes > volw)
+            {
+                kinderenmetallin = menuutjes - volw;
+            }
+
+            if (menuutjes <= volw)
+            {
+                int volwzonderallin = volw - menuutjes;
+                volmetallin = volw - volwzonderallin;
+            }
+
+            //int kinderenmetallin = menuutjes - volw;
+            // int volwzonderallin = volw - menuutjes;
+            //int volmetallin = volw - volwzonderallin;
+
+            lblAantalKind.Text = kinderenmetallin.ToString();
+            lblAantalVolw.Text = volmetallin.ToString();
+
+            CultureInfo dutch = new CultureInfo("nl-NL");
+            DateTime dagvandaag = DateTime.Now;
+            string dagen = dutch.DateTimeFormat.GetDayName(dagvandaag.DayOfWeek).ToString();
+
+            TimeSpan startdeel1 = new TimeSpan(16, 50, 0);
+            TimeSpan enddeel1 = new TimeSpan(19, 15, 0);
+            TimeSpan now = new TimeSpan(17, 30, 0);
+            if (startdeel1 < enddeel1 && startdeel1 <= now && now <= enddeel1)
+            {
+                time = "17:00:00";
+            }
+            TimeSpan startdeel2 = new TimeSpan(19, 15, 0);
+            TimeSpan enddeel2 = new TimeSpan(21, 30, 0);
+            if (startdeel2 < enddeel2 && startdeel2 <= now && now <= enddeel2)
+            {
+                time = "19:30:00";
+            }
+
+            con.Open();
+            string prequerie = "select Tijdvak.Nummer from Tijdvak where Begintijd = @tijd AND Dag = @dag";
+            SqlCommand cmdtijdvak = new SqlCommand(prequerie, con);
+            cmdtijdvak.Parameters.AddWithValue("@dag", dagen);
+            cmdtijdvak.Parameters.AddWithValue("@tijd", time);
+            object tijd2 = cmdtijdvak.ExecuteScalar();
+            tijden = tijd2.ToString();
+            tijdvaknummer = int.Parse(tijden);
+            Session["tijdvaknummer"] = tijdvaknummer;
+            con.Close();
+            con.Open();
+            string zoekprijsvolw = "select [prijs volwassenen] from tijdvak where Nummer = @tijdvak";
+            SqlCommand cmdprijsv = new SqlCommand(zoekprijsvolw, con);
+            cmdprijsv.Parameters.AddWithValue("@tijdvak", Session["tijdvaknummer"]);
+            object prijsv = cmdprijsv.ExecuteScalar();
+            string prijsvol = prijsv.ToString();
+            double prijsvolwassenen = double.Parse(prijsvol) * volmetallin;
+
+            string zoekprijsvolkind = "select [prijs kinderen] from tijdvak where Nummer = @tijdvak";
+            SqlCommand cmdprijsk = new SqlCommand(zoekprijsvolkind, con);
+            cmdprijsk.Parameters.AddWithValue("@tijdvak", Session["tijdvaknummer"]);
+            object prijsk = cmdprijsk.ExecuteScalar();
+            string prijskin = prijsk.ToString();
+            double prijskids = double.Parse(prijskin) * kinderenmetallin;
+
+            lblTotKind.Text = prijskids.ToString();
+            lblTotVolw.Text = prijsvolwassenen.ToString();
 
         }
 
