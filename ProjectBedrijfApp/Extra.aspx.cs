@@ -20,38 +20,45 @@ namespace ProjectBedrijfApp
 
             Label4.Visible = false;
             txbAantal.Visible = false;
+            ddlfruit.Visible = false;
+            Label5.Visible = false;
 
             int reserveringsnummer = (int)Session["reservering"];
             SqlConnection con = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
-            try
-            {
-                string allin = "select [Aantal arregementen] from in_restaurant where Reserveringsnummer = @reservering";
-                con.Open();
-                SqlCommand cmdalles = new SqlCommand(allin, con);
-                cmdalles.Parameters.AddWithValue("@reservering", Session["reservering"]);
-                object allinss = cmdalles.ExecuteScalar();
-                string arregementen1 = allinss.ToString();
-                menuutjes = int.Parse(arregementen1);
-                con.Close();
 
-                for (int i = 1; i <= menuutjes; i++)
-                {
-                    int getal = i;
-                    string fruit = getal.ToString();
-                    ddlfruit.Items.Add(new ListItem(fruit, fruit));
-                }
-            }
-
-            catch
+            if (!IsPostBack)
             {
-                menuutjes = 0;
-                ddlfruit.Enabled = false;
-            }
+                    try
+                    {
+                        string allin = "select [Aantal arregementen] from in_restaurant where Reserveringsnummer = @reservering";
+                        con.Open();
+                        SqlCommand cmdalles = new SqlCommand(allin, con);
+                        cmdalles.Parameters.AddWithValue("@reservering", Session["reservering"]);
+                        object allinss = cmdalles.ExecuteScalar();
+                        string arregementen1 = allinss.ToString();
+                        menuutjes = int.Parse(arregementen1);
+                        con.Close();
 
-            finally
-            {
-                con.Close();
+                        for (int i = 1; i <= menuutjes; i++)
+                        {
+                            int getal = i;
+                            string fruit = getal.ToString();
+                            ddlfruit.Items.Add(new ListItem(fruit, fruit));
+                        }
+                    }
+
+                    catch
+                    {
+                        menuutjes = 0;
+                        ddlfruit.Enabled = false;
+                    }
+
+                    finally
+                    {
+                        con.Close();
+                    }
             }
+            
         }
 
         protected void btnExtraRondes_Click(object sender, EventArgs e)
@@ -62,6 +69,8 @@ namespace ProjectBedrijfApp
 
             Label4.Visible = true;
             txbAantal.Visible = true;
+            ddlfruit.Visible = true;
+            Label5.Visible = true;
         }
 
         protected void btnApartBestellen_Click(object sender, EventArgs e)
