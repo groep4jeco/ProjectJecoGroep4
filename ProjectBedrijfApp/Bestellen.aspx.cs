@@ -51,8 +51,7 @@ namespace ProjectBedrijfApp
             con.Close();
             */
 
-            lblMaxRondes.Text = "4";
-            Session["maxronde"] = 4;
+            lblMaxRondes.Text = Session["maxronde"].ToString();
 
             if (int.Parse(lblRonde.Text) > (int)Session["ronde"])
             {
