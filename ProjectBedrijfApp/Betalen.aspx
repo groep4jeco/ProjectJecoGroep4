@@ -161,7 +161,7 @@
                     <img alt="" class="auto-style7" src="images/euro%20teken.png" />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-                    &nbsp;<asp:Button ID="BtnCash1" runat="server" Text="Betalen" OnClick="clickBetalen" Width="159px" />
+                    &nbsp;<asp:Button ID="BtnCash1" runat="server" Text="Betalen" OnClick="BtnCash1_Click" Width="159px" />
                 </asp:View>
                 <asp:View ID="View2" runat="server">
                     <asp:Label ID="lblfactuurMaestro" runat="server" Text="Label"></asp:Label>
@@ -227,7 +227,7 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="btnprinten" runat="server" Text="Bon Printen" />
                     &nbsp;<img alt="" class="auto-style6" src="images/euro%20teken.png" />&nbsp;&nbsp;&nbsp;&nbsp;
                     <asp:TextBox ID="TextBox1" runat="server" OnTextChanged="TextBox1_TextChanged" Width="127px"></asp:TextBox>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Button ID="btnMaestro" runat="server" Text="Betalen" Width="159px" OnClick="clickBetalen" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Button ID="btnMaestro" runat="server" Text="Betalen" Width="159px" OnClick="btnMaestro_Click" />
                     <br />
                     <br />
                 </asp:View>
@@ -290,7 +290,7 @@
                     <img alt="" class="auto-style7" src="images/euro%20teken.png" />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
                     &nbsp;
-                     <asp:Button ID="BtnbetaalMC" runat="server" Text="Betalen" Height="26px" Width="159px" OnClick="clickBetalen" />
+                     <asp:Button ID="BtnbetaalMC" runat="server" Text="Betalen" Height="26px" Width="159px" OnClick="btnMaestro_Click" />
                 </asp:View>
 
 
