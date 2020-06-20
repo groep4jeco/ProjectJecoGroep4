@@ -16,7 +16,12 @@ namespace ProjectBedrijfApp
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            DropDownList1.SelectedValue = "1";
+            if (IsPostBack)
+            {
+                DropDownList1.SelectedValue = "1";
+            }
+            
+            MultiView1.ActiveViewIndex = Convert.ToInt32(DropDownList1.SelectedValue);
 
 
         }
@@ -37,13 +42,24 @@ namespace ProjectBedrijfApp
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-               
+                con.Open();
+                string queriefactuur = "SELECT [Totaalbedrag] FROM [Factuur] WHERE [Factuurnummer] = @Factuurnummer";
+                SqlCommand cmdfactuur = new SqlCommand(queriefactuur, con);
+                cmdfactuur.Parameters.AddWithValue("@Factuurnummer", (int)Session["factuurnummer"]);
+                SqlDataReader drfactuur = cmdfactuur.ExecuteReader();
+                string resultaatfactuur = drfactuur.Read().ToString();
+                string factuurtotaal = drfactuur["Totaalbedrag"].ToString();
+                double probeer = double.Parse(factuurtotaal);
+                con.Close();
+
                 string controle = DropDownList1.SelectedValue.ToString();
+
+
                 if (DropDownList1.SelectedValue.ToString() == "2")
                 {
                     double prijs = double.Parse(TextBox1.Text);
                     con.Open();
-                    string optellen = "Update factuur set Betaalmethode = @betaal, Betaaldbedrag = @payment where Factuurnummer = @factuur";
+                    string optellen = "Update factuur set Betaalmethode = @betaal, Betaaldbedrag += @payment where Factuurnummer = @factuur";
                     SqlDataAdapter adapter4 = new SqlDataAdapter();
                     adapter4.UpdateCommand = new SqlCommand(optellen, con);
                     adapter4.UpdateCommand.Parameters.AddWithValue("@factuur", (int)Session["factuurnummer"]);
@@ -51,6 +67,13 @@ namespace ProjectBedrijfApp
                     adapter4.UpdateCommand.Parameters.AddWithValue("@payment", prijs);
                     int doehet = adapter4.UpdateCommand.ExecuteNonQuery();
                     con.Close();
+                    
+                    if (prijs < probeer)
+                    {
+                        double tekort = probeer - prijs;
+                        //labelnaam.text = "U moet nog" + tekort + "betalen."
+                    }
+
 
                 }
                 if (DropDownList1.SelectedValue.ToString() == "3")
