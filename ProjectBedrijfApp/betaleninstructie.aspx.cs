@@ -27,7 +27,12 @@ namespace ProjectBedrijfApp
         int volmetallin;
         int kinderenmetallin;
         double drankentotaal;
+        double foodtotaal;
+        double prijskids;
         int menuutjes;
+        double prijsvolwassenen;
+        double labeltje14;
+        double subtotaal;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -35,7 +40,7 @@ namespace ProjectBedrijfApp
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("betalen.aspx");
         }
 
         protected void txtinvoeremail_TextChanged(object sender, EventArgs e)
@@ -68,7 +73,6 @@ namespace ProjectBedrijfApp
             string querie = "SELECT[Naam], [Adres], [Plaats] FROM[Restaurant] WHERE [Restaurant ID] = @ID";
             SqlCommand cmd = new SqlCommand(querie, con);
 
-            //int resultaat = (int)GridView1.DataKeys[GridView1.SelectedIndex]["Restaurant ID"];
             cmd.Parameters.AddWithValue("@ID", 1);
             SqlDataReader dr = cmd.ExecuteReader();
             string resultaat2 = dr.Read().ToString();
@@ -82,10 +86,11 @@ namespace ProjectBedrijfApp
         protected void Button2_Click(object sender, EventArgs e)
 
         {
-           foreach (GridViewRow gvr in GridView1.Rows)
+
+            foreach (GridViewRow gvr in GridView1.Rows)
 
             {
-                 resultaattotaal = (int)GridView1.DataKeys[gvr.RowIndex].Values["Factuurnummer"];
+                resultaattotaal = (int)GridView1.DataKeys[gvr.RowIndex].Values["Factuurnummer"];
             }
             Session["factuurnummer"] = resultaattotaal;
             foreach (GridViewRow gvr in GridView1.Rows)
@@ -108,8 +113,8 @@ namespace ProjectBedrijfApp
 
             drklant.Close();
 
-            
-            
+
+
             string querieadres = "SELECT Online_bestellen.AdresHuisnummer, Online_bestellen.AdresPostcode, adres.Straatnaam, adres.Plaats FROM [Klant] INNER JOIN Adres on adres.KlantKlantID = klant.KlantID inner join Online_bestellen on Adres.Postcode = Online_bestellen.AdresPostcode  WHERE [KlantKlantID] = @IDKLANT";
             SqlCommand cmdadres = new SqlCommand(querieadres, con);
             cmdadres.Parameters.AddWithValue("@IDKLANT", resultaatklant);
@@ -143,33 +148,182 @@ namespace ProjectBedrijfApp
 
 
            
+            bijwerken();
+            subtotaal = labeltje14;
+
+
+
+            /////dit label komt de labels waar de kortingen vanaf gaan//////labelnaam.text = subtotaal.tostring("0.00")
+            allinmenu();
+
+
+
+
+        }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                con.Open();
+
+                string query = "SELECT[Kortingscode], [Catogorienummer], korting FROM[Actie] WHERE[Kortingscode] = @korting";
+                string invoer = TextBox1.Text;
+
+
+
+                SqlCommand cmdSchedule = new SqlCommand(query, con);
+
+                cmdSchedule.Parameters.AddWithValue("@korting", invoer);
+
+
+                SqlDataReader dr = cmdSchedule.ExecuteReader();
+                string resulaat = dr.Read().ToString();
+                string ikwilweten = dr["Kortingscode"].ToString();
+
+                if (dr["Kortingscode"].ToString() == invoer)
+                {
+                    
+                    string cat = dr["Catogorienummer"].ToString();
+                    
+                    if (cat == "1") //drankjes
+                    {
+                       
+                        string kortingp = dr["korting"].ToString();
+                        double kortingdrank = (double)drankentotaal * double.Parse(kortingp);
+                        double test = (double)drankentotaal - kortingdrank;
+                        dr.Close();
+                        int weetikveel = (int)Session["factuurnummer"];
+                        string poging = kortingdrank.ToString();
+                        /////dit label is voor kortingbedrag//////labelnaam.text = kortingdrank.tostring("0.00")
+                        string optellen = "Update factuur set Totaalbedrag = Totaalbedrag - @prijs where Factuurnummer = @factuur";
+                        SqlDataAdapter adapter4 = new SqlDataAdapter();
+                        adapter4.UpdateCommand = new SqlCommand(optellen, con);
+                        adapter4.UpdateCommand.Parameters.AddWithValue("@factuur", (int)Session["factuurnummer"]);
+                        adapter4.UpdateCommand.Parameters.AddWithValue("@prijs", kortingdrank);
+                        int doehet = adapter4.UpdateCommand.ExecuteNonQuery();
+                        con.Close();
+                        bijwerken();
+                    }
+
+                    if (cat == "2") //losse gerechten
+                    {
+                        
+                        con.Close();
+                        allinmenu();
+                        double allin = prijskids + prijsvolwassenen;
+                        Drankjesberekenen();
+                        double drankjes = drankentotaal;
+                        bijwerken();
+                        foodtotaal = labeltje14 - allin - drankjes;
+                        con.Open();
+                        SqlDataReader dr2 = cmdSchedule.ExecuteReader();
+                        string resulaat2 = dr2.Read().ToString();
+                        string kortingp = dr2["korting"].ToString();
+                        dr2.Close();
+                        
+                        double kortingfood = (double)foodtotaal * double.Parse(kortingp);
+                        double test = (double)foodtotaal - kortingfood;
+
+                        /////dit label is voor kortingbedrag//////labelnaam.text = kortingfood.tostring("0.00")
+
+                        string optellen = "Update factuur set Totaalbedrag = Totaalbedrag - @prijs where Factuurnummer = @factuur";
+                        SqlDataAdapter adapter4 = new SqlDataAdapter();
+                        adapter4.UpdateCommand = new SqlCommand(optellen, con);
+                        adapter4.UpdateCommand.Parameters.AddWithValue("@factuur", (int)Session["factuurnummer"]);
+                        adapter4.UpdateCommand.Parameters.AddWithValue("@prijs", kortingfood);
+                        int doehet = adapter4.UpdateCommand.ExecuteNonQuery();
+                        con.Close();
+                        bijwerken();
+                    }
+
+                    if (cat == "3") //alles
+                    {
+                        con.Close();
+                        bijwerken();
+                        con.Open();
+                        SqlDataReader dr3 = cmdSchedule.ExecuteReader();
+                        string resulaat3 = dr3.Read().ToString();
+                        string kortingp = dr3["korting"].ToString();
+                        double vermenigvuldiger = 1.00 - double.Parse(kortingp);
+                        dr3.Close();
+                        double nieuwtot = labeltje14 * vermenigvuldiger;
+                        double kortingbedrag = subtotaal - nieuwtot;
+
+                        /////dit label is voor kortingbedrag//////labelnaam.text = kortingbedrag.tostring("0.00")
+
+                        string optellen = "Update factuur set Totaalbedrag = @prijs where Factuurnummer = @factuur";
+                        SqlDataAdapter adapter4 = new SqlDataAdapter();
+                        adapter4.UpdateCommand = new SqlCommand(optellen, con);
+                        adapter4.UpdateCommand.Parameters.AddWithValue("@factuur", (int)Session["factuurnummer"]);
+                        adapter4.UpdateCommand.Parameters.AddWithValue("@prijs", nieuwtot);
+                        int doehet = adapter4.UpdateCommand.ExecuteNonQuery();
+                        con.Close();
+                        bijwerken();
+                        
+                    }
+
+                }
+                dr.Close();
+            }
+
+            catch
+            {
+                //oke geen korting
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        private void bijwerken()
+        {
             con.Open();
             string queriefactuur = "SELECT [Totaalbedrag] FROM [Factuur] WHERE [Factuurnummer] = @Factuurnummer";
-            SqlCommand cmdfactuur = new SqlCommand(queriefactuur, con);
-            cmdfactuur.Parameters.AddWithValue("@Factuurnummer", resultaattotaal);
+        SqlCommand cmdfactuur = new SqlCommand(queriefactuur, con);
+        cmdfactuur.Parameters.AddWithValue("@Factuurnummer", (int)Session["factuurnummer"]);
             SqlDataReader drfactuur = cmdfactuur.ExecuteReader();
-            string resultaatfactuur = drfactuur.Read().ToString();
-            string factuurtotaal = drfactuur["Totaalbedrag"].ToString();
-            double probeer = double.Parse(factuurtotaal);
-            double label12 = probeer / 1.09;
-            double label13 = probeer / 109 * 9;
-            Label14.Text = drfactuur["Totaalbedrag"].ToString();
-            lblAantalVolw.Text = label12.ToString("0.00");
+        string resultaatfactuur = drfactuur.Read().ToString();
+        string factuurtotaal = drfactuur["Totaalbedrag"].ToString();
+        double probeer = double.Parse(factuurtotaal);
+        double label12 = probeer / 1.09;
+        double label13 = probeer / 109 * 9;
+        string label14 = drfactuur["Totaalbedrag"].ToString();
+            labeltje14 = double.Parse(label14);
+        Label14.Text = labeltje14.ToString("0.00");
+        lblAantalVolw.Text = label12.ToString("0.00");
             LblAantalKind.Text = label13.ToString("0.00");
 
             drfactuur.Close();
             con.Close();
+        }
 
-            string eerstekind = "select [Aantal kinderen] from in_restaurant where Reserveringsnummer = @reservering";
+        private void Drankjesberekenen()
+        {
+            foreach (GridViewRow gvr in GridView4.Rows)
+            {
+                string drankkor = GridView4.DataKeys[gvr.RowIndex].Values["Prijs"].ToString();
+                string drankaantal = GridView4.DataKeys[gvr.RowIndex].Values["hoeveelheid"].ToString();
+                double regelprijs = double.Parse(drankkor) * double.Parse(drankaantal);
+                drankentotaal += regelprijs;
+
+            }
+        }
+
+        private void allinmenu()
+        {
+                        string eerstekind = "select [Aantal kinderen] from in_restaurant where Reserveringsnummer = @reservering";
             string eerstevol = "select [Aantal Volwassenen] from in_restaurant where Reserveringsnummer = @reservering";
 
             con.Open();
             SqlCommand cmdvol = new SqlCommand(eerstevol, con);
             cmdvol.Parameters.AddWithValue("@reservering", Session["tafel"]);
             object volwassenen = cmdvol.ExecuteScalar();
-            string aantalv = volwassenen.ToString(); 
-            
-           
+            string aantalv = volwassenen.ToString();
+
+
 
             int volw = int.Parse(aantalv);
 
@@ -205,6 +359,7 @@ namespace ProjectBedrijfApp
             if (menuutjes > volw)
             {
                 kinderenmetallin = menuutjes - volw;
+                volmetallin = menuutjes - kinderenmetallin;
             }
 
             if (menuutjes <= volw)
@@ -254,82 +409,18 @@ namespace ProjectBedrijfApp
             cmdprijsv.Parameters.AddWithValue("@tijdvak", Session["tijdvaknummer"]);
             object prijsv = cmdprijsv.ExecuteScalar();
             string prijsvol = prijsv.ToString();
-            double prijsvolwassenen = double.Parse(prijsvol) * volmetallin;
+            prijsvolwassenen = double.Parse(prijsvol) * volmetallin;
 
             string zoekprijsvolkind = "select [prijs kinderen] from tijdvak where Nummer = @tijdvak";
             SqlCommand cmdprijsk = new SqlCommand(zoekprijsvolkind, con);
             cmdprijsk.Parameters.AddWithValue("@tijdvak", Session["tijdvaknummer"]);
             object prijsk = cmdprijsk.ExecuteScalar();
+            con.Close();
             string prijskin = prijsk.ToString();
-            double prijskids = double.Parse(prijskin) * kinderenmetallin;
+            prijskids = double.Parse(prijskin) * kinderenmetallin;
 
             lblTotKind.Text = prijskids.ToString();
             lblTotVolw.Text = prijsvolwassenen.ToString();
-
-
-
-
-        }
-
-        protected void Button3_Click(object sender, EventArgs e)
-        {
-            string invoer = TextBox1.Text;
-            try
-            {
-                con.Open();
-
-                string query = "SELECT[Kortingscode], [Catogorienummer], korting FROM[Actie] WHERE[Kortingscode] = @korting)";
-
-
-
-
-                SqlCommand cmdSchedule = new SqlCommand(query, con);
-
-                cmdSchedule.Parameters.AddWithValue("@korting", invoer);
-              
-
-                SqlDataReader dr = cmdSchedule.ExecuteReader();
-                string resulaat = dr.Read().ToString();
-                System.Diagnostics.Debug.WriteLine(dr["kortingscode"].ToString());
-
-                if (dr["Kortingscode"].ToString() == invoer)
-                {
-
-                    string cat = dr["Catogorienummer"].ToString();
-                    
-                    if (cat == "1")
-                    {
-                        foreach (GridViewRow gvr in GridView1.Rows)
-
-                        {
-                            double drankkor = (double)GridView1.DataKeys[gvr.RowIndex].Values["Prijs"];
-                            int drankaantal = (int)GridView1.DataKeys[gvr.RowIndex].Values["Hoeveelheid"];
-                            double regelprijs = drankkor * drankaantal;
-                            drankentotaal += regelprijs;
-
-                        }
-                        double kortingp = (double)dr["korting"];
-                        double kortingdrank = (double)drankentotaal * kortingp;
-                        double test = (double)drankentotaal - kortingdrank; 
-                    }
-
-                    else
-                    {
-                        
-                    }
-
-                }
-                dr.Close();
-            }
-
-            catch
-            {
-                Label3.Text = "inloggen mislukt";
-            }
-            finally
-            {
-                con.Close();
-            }
         }
     }
 }

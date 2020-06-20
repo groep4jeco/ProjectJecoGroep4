@@ -175,6 +175,7 @@ namespace ProjectBedrijfApp
             if (menuutjes > volw)
             {
                 kinderenmetallin = menuutjes - volw;
+                volmetallin = menuutjes - kinderenmetallin;
             }
 
             if (menuutjes <= volw)
@@ -272,6 +273,11 @@ namespace ProjectBedrijfApp
         }
 
         protected void btnPrint_Click1(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void GridView3_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
