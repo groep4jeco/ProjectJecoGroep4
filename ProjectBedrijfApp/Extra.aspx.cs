@@ -4,17 +4,61 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+using System.Collections;
+using System.Globalization;
 
 namespace ProjectBedrijfApp
 {
     public partial class Extra : System.Web.UI.Page
     {
+        int menuutjes;
         protected void Page_Load(object sender, EventArgs e)
         {
             btnDoorgaan.Enabled = false;
 
             Label4.Visible = false;
             txbAantal.Visible = false;
+            ddlfruit.Visible = false;
+            Label5.Visible = false;
+
+            int reserveringsnummer = (int)Session["reservering"];
+            SqlConnection con = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
+
+            if (!IsPostBack)
+            {
+                    try
+                    {
+                        string allin = "select [Aantal arregementen] from in_restaurant where Reserveringsnummer = @reservering";
+                        con.Open();
+                        SqlCommand cmdalles = new SqlCommand(allin, con);
+                        cmdalles.Parameters.AddWithValue("@reservering", Session["reservering"]);
+                        object allinss = cmdalles.ExecuteScalar();
+                        string arregementen1 = allinss.ToString();
+                        menuutjes = int.Parse(arregementen1);
+                        con.Close();
+
+                        for (int i = 1; i <= menuutjes; i++)
+                        {
+                            int getal = i;
+                            string fruit = getal.ToString();
+                            ddlfruit.Items.Add(new ListItem(fruit, fruit));
+                        }
+                    }
+
+                    catch
+                    {
+                        menuutjes = 0;
+                        ddlfruit.Enabled = false;
+                    }
+
+                    finally
+                    {
+                        con.Close();
+                    }
+            }
+            
         }
 
         protected void btnExtraRondes_Click(object sender, EventArgs e)
@@ -25,6 +69,8 @@ namespace ProjectBedrijfApp
 
             Label4.Visible = true;
             txbAantal.Visible = true;
+            ddlfruit.Visible = true;
+            Label5.Visible = true;
         }
 
         protected void btnApartBestellen_Click(object sender, EventArgs e)
@@ -32,11 +78,34 @@ namespace ProjectBedrijfApp
             btnExtraRondes.Enabled = true;
             btnApartBestellen.Enabled = false;
             btnDoorgaan.Enabled = true;
+            
         }
 
         protected void btnDoorgaan_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Bestellen.aspx");
+
+
+
+            
+
+
+            int extrarondes = 1;
+            int maxrondes = (int)Session["maxronde"];
+
+            if (btnExtraRondes.Enabled == false)
+            {
+                Session["extraatjes"] = ddlfruit.SelectedValue.ToString();
+                maxrondes += extrarondes; 
+                Session["maxronde"] = maxrondes;
+                Response.Redirect("Bestellen.aspx");
+               
+            }
+
+            else
+            {
+                Response.Redirect("ApartBestellen.aspx");
+            }
+            
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)

@@ -25,6 +25,19 @@
         {
             background-color: lightslategray;
         }
+        .auto-style5 {
+            width: 100%;
+        }
+        .auto-style6 {
+            text-align: left;
+            width: 157px;
+        }
+        .auto-style8 {
+            width: 113px;
+        }
+        .auto-style9 {
+            width: 223px;
+        }
     </style>
 </head>
 <body>
@@ -42,62 +55,132 @@
                     <td>
                         tafelnummer:
                         <br />
-                        <asp:TextBox ID="txtinvoeremail" runat="server" CssClass="auto-style4"></asp:TextBox>
+                        <asp:TextBox ID="txttafelnummer" runat="server" CssClass="auto-style4"></asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <asp:Button ID="btnzoekfactuur" runat="server" Text="zoek factuur" OnClick="btnzoekfactuur_Click" />
+                        <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Button" />
                     </td>
                 </tr>
                 <tr>
                     <td class="auto-style2">
-                        <asp:FormView ID="FormView1" runat="server" CellPadding="4" DataSourceID="SqlDataSource1" ForeColor="#333333" Height="147px" Width="405px">
-                            <EditItemTemplate>
-                                Totaalbedrag:
-                                <asp:TextBox ID="TotaalbedragTextBox" runat="server" Text='<%# Bind("Totaalbedrag") %>' />
-                                <br />
-                                Factuurdatum:
-                                <asp:TextBox ID="FactuurdatumTextBox" runat="server" Text='<%# Bind("Factuurdatum") %>' />
-                                <br />
-                                KlantenpasEmail:
-                                <asp:TextBox ID="KlantenpasEmailTextBox" runat="server" Text='<%# Bind("KlantenpasEmail") %>' />
-                                <br />
-                                <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" Text="Update" />
-                                &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
-                            </EditItemTemplate>
-                            <EditRowStyle BackColor="#999999" />
-                            <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                            <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                            <InsertItemTemplate>
-                                Totaalbedrag:
-                                <asp:TextBox ID="TotaalbedragTextBox" runat="server" Text='<%# Bind("Totaalbedrag") %>' />
-                                <br />
-                                Factuurdatum:
-                                <asp:TextBox ID="FactuurdatumTextBox" runat="server" Text='<%# Bind("Factuurdatum") %>' />
-                                <br />
-                                KlantenpasEmail:
-                                <asp:TextBox ID="KlantenpasEmailTextBox" runat="server" Text='<%# Bind("KlantenpasEmail") %>' />
-                                <br />
-                                <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insert" />
-                                &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
-                            </InsertItemTemplate>
-                            <ItemTemplate>
-                                Totaalbedrag:
-                                <asp:Label ID="TotaalbedragLabel" runat="server" Text='<%# Bind("Totaalbedrag") %>' />
-                                <br />
-                                Factuurdatum:
-                                <asp:Label ID="FactuurdatumLabel" runat="server" Text='<%# Bind("Factuurdatum") %>' />
-                                <br />
-                                KlantenpasEmail:
-                                <asp:Label ID="KlantenpasEmailLabel" runat="server" Text='<%# Bind("KlantenpasEmail") %>' />
-                                <br />
-
-                            </ItemTemplate>
-                            <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-                            <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
-                        </asp:FormView>
-                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [Totaalbedrag], [Factuurdatum], [KlantenpasEmail] FROM [Factuur]"></asp:SqlDataSource>
+                        <br />
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="Factuurnummer,Restaurant ID,KlantKlantID" DataSourceID="SqlDataSource1" Height="171px" Width="430px">
+                            <Columns>
+                                <asp:BoundField DataField="Factuurnummer" HeaderText="Factuurnummer" SortExpression="Factuurnummer" />
+                                <asp:BoundField DataField="KlantenpasEmail" HeaderText="KlantenpasEmail" SortExpression="KlantenpasEmail" />
+                                <asp:BoundField DataField="Factuurdatum" HeaderText="Factuurdatum" SortExpression="Factuurdatum" />
+                                <asp:BoundField DataField="Totaalbedrag" HeaderText="Totaalbedrag" SortExpression="Totaalbedrag" />
+                                <asp:BoundField DataField="Reserveringsnummer" HeaderText="Reserveringsnummer" SortExpression="Reserveringsnummer" />
+                                <asp:BoundField DataField="KlantKlantID" HeaderText="KlantKlantID" SortExpression="KlantKlantID" />
+                                <asp:BoundField DataField="Restaurant ID" HeaderText="Restaurant ID" SortExpression="Restaurant ID" />
+                                <asp:BoundField DataField="Restaurant ID" HeaderText="Restaurant ID" SortExpression="Restaurant ID" Visible="False" />
+                            </Columns>
+                        </asp:GridView>
+                        <br />
+                        <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
+                        <br />
+                        <asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
+                        <br />
+                        <asp:Label ID="Label5" runat="server" Text="Label"></asp:Label>
+                        <br />
+                        <br />
+                        <asp:Label ID="Label6" runat="server" Text="Label"></asp:Label>
+                        <br />
+                        <asp:Label ID="Label7" runat="server" Text="Label"></asp:Label>
+                        <br />
+                        <asp:Label ID="Label8" runat="server" Text="Label"></asp:Label>
+                        <br />
+                        <br />
+                        <asp:Label ID="Label9" runat="server" Text="Label"></asp:Label>
+                        <br />
+                        <asp:Label ID="Label10" runat="server" Text="Label"></asp:Label>
+                        <br />
+                        <asp:Label ID="Label11" runat="server" Text="Label"></asp:Label>
+                        <br />
+                        <br />
+                        <table class="auto-style5">
+                            <tr>
+                                <td class="auto-style6">Volwassene</td>
+                                <td class="auto-style8">
+                                    <asp:Label ID="lblAantalVolw" runat="server" Text="Label"></asp:Label>
+                                </td>
+                                <td>
+                                    <asp:Label ID="lblTotVolw" runat="server" Text="Label"></asp:Label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style6">Kind</td>
+                                <td class="auto-style8">
+                                    <asp:Label ID="LblAantalKind" runat="server" Text="Label"></asp:Label>
+                                </td>
+                                <td>
+                                    <asp:Label ID="lblTotKind" runat="server" Text="Label"></asp:Label>
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        <br />
+                        <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False" DataKeyNames="prijs,hoeveelheid" DataSourceID="SqlDataSource2">
+                            <Columns>
+                                <asp:BoundField DataField="omschrijving" HeaderText="omschrijving" SortExpression="omschrijving" />
+                                <asp:BoundField DataField="hoeveelheid" HeaderText="hoeveelheid" SortExpression="hoeveelheid" />
+                                <asp:BoundField DataField="prijs" HeaderText="prijs" SortExpression="prijs" />
+                                <asp:BoundField DataField="rondenummer" HeaderText="rondenummer" ReadOnly="True" SortExpression="rondenummer" />
+                            </Columns>
+                        </asp:GridView>
+                        <asp:GridView ID="GridView4" runat="server" AutoGenerateColumns="False" DataKeyNames="hoeveelheid,Prijs" DataSourceID="drankenfactureren" Width="334px">
+                            <Columns>
+                                <asp:BoundField DataField="Omschrijving" HeaderText="Omschrijving" SortExpression="Omschrijving" />
+                                <asp:BoundField DataField="hoeveelheid" HeaderText="hoeveelheid" SortExpression="hoeveelheid" />
+                                <asp:BoundField DataField="Prijs" HeaderText="Prijs" SortExpression="Prijs" />
+                            </Columns>
+                        </asp:GridView>
+                        <br />
+                        <table class="auto-style5">
+                            <tr>
+                                <td class="auto-style9">Factuurtotaal exclusief btw</td>
+                                <td>
+                                    <asp:Label ID="Label12" runat="server" Text="Label"></asp:Label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style9">btw bedrag</td>
+                                <td>
+                                    <asp:Label ID="Label13" runat="server" Text="Label"></asp:Label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style9">factuurtotaal inclusief btw</td>
+                                <td>
+                                    <asp:Label ID="Label14" runat="server" Text="Label"></asp:Label>
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [omschrijving], [hoeveelheid], [prijs], [rondenummer] FROM [listviewfactuur] WHERE ([Factuurnummer] = @Factuurnummer)">
+                            <SelectParameters>
+                                <asp:SessionParameter Name="Factuurnummer" SessionField="factuurnummer" Type="Int32" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
+                <asp:SqlDataSource ID="drankenfactureren" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [Omschrijving], [hoeveelheid], [Prijs] FROM [factuurdrank] WHERE ([Factuurnummer] = @Factuurnummer)">
+                    <SelectParameters>
+                        <asp:SessionParameter Name="Factuurnummer" SessionField="factuurnummer" Type="Int32" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT * FROM [listviewGeenidee] WHERE ([Reserveringsnummer] = @Reserveringsnummer)">
+                            <SelectParameters>
+                                <asp:SessionParameter Name="Reserveringsnummer" SessionField="Tafel" Type="Int32" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
                     </td>
                 </tr>
                 <tr>
                     <td>Korting:<br />
                         <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                        <asp:Button ID="btnkorting" runat="server" OnClick="Button3_Click" Text="Button" />
                     </td>
                 </tr>
                 <tr>

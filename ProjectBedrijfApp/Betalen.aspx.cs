@@ -16,7 +16,12 @@ namespace ProjectBedrijfApp
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (IsPostBack)
+            {
+                DropDownList1.SelectedValue = "1";
+            }
+            
+            MultiView1.ActiveViewIndex = Convert.ToInt32(DropDownList1.SelectedValue);
 
 
         }
@@ -29,34 +34,82 @@ namespace ProjectBedrijfApp
 
         protected void BtnCash1_Click(object sender, EventArgs e)
         {
-
+            ClickBetalen();
 
         }
 
-        protected void ClickBetalen(object sender, EventArgs e)
+        private void ClickBetalen()
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
+                string queriefactuur = "SELECT [Totaalbedrag] FROM [Factuur] WHERE [Factuurnummer] = @Factuurnummer";
+                SqlCommand cmdfactuur = new SqlCommand(queriefactuur, con);
+                cmdfactuur.Parameters.AddWithValue("@Factuurnummer", (int)Session["factuurnummer"]);
+                SqlDataReader drfactuur = cmdfactuur.ExecuteReader();
+                string resultaatfactuur = drfactuur.Read().ToString();
+                string factuurtotaal = drfactuur["Totaalbedrag"].ToString();
+                double probeer = double.Parse(factuurtotaal);
+                con.Close();
 
-                if (DropDownList1.SelectedValue == "Maestro")
+                string controle = DropDownList1.SelectedValue.ToString();
+
+
+                if (DropDownList1.SelectedValue.ToString() == "2")
                 {
+                    double prijs = double.Parse(TextBox1.Text);
+                    con.Open();
+                    string optellen = "Update factuur set Betaalmethode = @betaal, Betaaldbedrag += @payment where Factuurnummer = @factuur";
+                    SqlDataAdapter adapter4 = new SqlDataAdapter();
+                    adapter4.UpdateCommand = new SqlCommand(optellen, con);
+                    adapter4.UpdateCommand.Parameters.AddWithValue("@factuur", (int)Session["factuurnummer"]);
+                    adapter4.UpdateCommand.Parameters.AddWithValue("@betaal", "Maestro");
+                    adapter4.UpdateCommand.Parameters.AddWithValue("@payment", prijs);
+                    int doehet = adapter4.UpdateCommand.ExecuteNonQuery();
+                    con.Close();
+                    
+                    if (prijs < probeer)
+                    {
+                        double tekort = probeer - prijs;
+                        //labelnaam.text = "U moet nog" + tekort + "betalen."
+                    }
 
 
                 }
-                if (DropDownList1.SelectedValue == "MasterCard")
+                if (DropDownList1.SelectedValue.ToString() == "3")
 
                 {
-
+                    double prijs = double.Parse(TextBox3.Text);
+                    con.Open();
+                    string optellen = "Update factuur set Betaalmethode = @betaal, Betaaldbedrag = @payment where Factuurnummer = @factuur";
+                    SqlDataAdapter adapter4 = new SqlDataAdapter();
+                    adapter4.UpdateCommand = new SqlCommand(optellen, con);
+                    adapter4.UpdateCommand.Parameters.AddWithValue("@factuur", (int)Session["factuurnummer"]);
+                    adapter4.UpdateCommand.Parameters.AddWithValue("@betaal", "MasterCard");
+                    adapter4.UpdateCommand.Parameters.AddWithValue("@payment", prijs);
+                    int doehet = adapter4.UpdateCommand.ExecuteNonQuery();
+                    con.Close();
 
                 }
-                if (DropDownList1.SelectedValue == "Cash")
+                if (DropDownList1.SelectedValue.ToString() == "1")
 
                 {
-
+                    double prijs = double.Parse(TextBox2.Text);
+                    con.Open();
+                    string optellen = "Update factuur set Betaalmethode = @betaal, Betaaldbedrag = @payment where Factuurnummer = @factuur";
+                    SqlDataAdapter adapter4 = new SqlDataAdapter();
+                    adapter4.UpdateCommand = new SqlCommand(optellen, con);
+                    adapter4.UpdateCommand.Parameters.AddWithValue("@factuur", (int)Session["factuurnummer"]);
+                    adapter4.UpdateCommand.Parameters.AddWithValue("@betaal", "Cash");
+                    adapter4.UpdateCommand.Parameters.AddWithValue("@payment", prijs);
+                    int doehet = adapter4.UpdateCommand.ExecuteNonQuery();
+                    con.Close();
                 }
                 con.Close();
             }
+
+
+
         }
         protected void TextBox1_TextChanged(object sender, EventArgs e)
         {
@@ -76,12 +129,17 @@ namespace ProjectBedrijfApp
 
         protected void btnMaestro_Click(object sender, EventArgs e)
         {
-
+            ClickBetalen();
         }
 
         protected void btnOK_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void ClickBetalen(object sender, EventArgs e)
+        {
+            ClickBetalen();
         }
     }
 }
