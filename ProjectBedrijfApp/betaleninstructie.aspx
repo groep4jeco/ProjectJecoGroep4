@@ -13,9 +13,11 @@
         }
         .auto-style2 {
             height: 97px;
+            background-color: seashell;
         }
         .auto-style3 {
             text-align: center;
+            background-color:lightslategray;
         }
         .auto-style4 {
             margin-top: 10px;
@@ -28,16 +30,16 @@
         .auto-style5 {
             width: 100%;
         }
-        .auto-style6 {
-            text-align: left;
-            width: 157px;
-        }
         .auto-style8 {
             width: 113px;
         }
         .auto-style9 {
             width: 223px;
         }
+        .auto-style10 {
+            width: 157px;
+        }
+        .
     </style>
 </head>
 <body>
@@ -54,15 +56,30 @@
                 <tr>
                     <td>
                         tafelnummer:
+                        <asp:TextBox ID="txttafelnummer" runat="server" CssClass="auto-style4" OnTextChanged="txttafelnummer_TextChanged"></asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txttafelnummer" ErrorMessage="Vul een geldig tafelnummer in"></asp:RequiredFieldValidator>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <asp:Label ID="lblValidator" runat="server" Enabled="False" Text="Deze tafel is niet gereserveerd" Visible="False"></asp:Label>
                         <br />
-                        <asp:TextBox ID="txttafelnummer" runat="server" CssClass="auto-style4"></asp:TextBox>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <asp:Button ID="btnzoekfactuur" runat="server" Text="zoek factuur" OnClick="btnzoekfactuur_Click" />
-                        <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Button" />
+                        <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <asp:Button ID="btnzoekfactuur" runat="server" Text="zoek factuur" OnClick="btnzoekfactuur_Click" BackColor="#FFCCCC" />
+                        &nbsp;&nbsp;&nbsp;
+                        <br />
+                        <br />
+                        <br />
+&nbsp;&nbsp;&nbsp;&nbsp;
+                        <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Selecteer factuur" BackColor="#FF9999" BorderColor="#FF5050" Width="113px" />
+                        <br />
+                        <asp:Label ID="lblSelecteer" runat="server" Text="Zoek eerst een factuur op"></asp:Label>
+                        <br />
+                        <br />
                     </td>
                 </tr>
                 <tr>
-                    <td class="auto-style2">
+                    <td class="auto-style2" role="document">
                         <br />
                         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="Factuurnummer,Restaurant ID,KlantKlantID" DataSourceID="SqlDataSource1" Height="171px" Width="430px">
                             <Columns>
@@ -100,7 +117,7 @@
                         <br />
                         <table class="auto-style5">
                             <tr>
-                                <td class="auto-style6">Volwassene</td>
+                                <td class="auto-style10">Volwassene</td>
                                 <td class="auto-style8">
                                     <asp:Label ID="lblAantalVolw" runat="server" Text="Label"></asp:Label>
                                 </td>
@@ -109,7 +126,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="auto-style6">Kind</td>
+                                <td class="auto-style10">Kind</td>
                                 <td class="auto-style8">
                                     <asp:Label ID="LblAantalKind" runat="server" Text="Label"></asp:Label>
                                 </td>
@@ -178,14 +195,16 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Korting:<br />
+                    <td role="article">Korting:<br />
                         <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-                        <asp:Button ID="btnkorting" runat="server" OnClick="Button3_Click" Text="Button" />
+                        <br />
+                        <asp:Button ID="btnkorting" runat="server" OnClick="Button3_Click" Text="Kortings code toevoegen" BackColor="#669999" />
+                        <br />
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Betalen" />
+                        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Betalen" BackColor="#669999" BorderColor="#006666" BorderStyle="Outset" Width="246px" />
                     </td>
                 </tr>
             </table>

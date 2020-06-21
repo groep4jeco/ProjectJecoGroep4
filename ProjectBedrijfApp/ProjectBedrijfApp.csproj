@@ -97,6 +97,7 @@
     <Content Include="betalen.aspx" />
     <Content Include="betaleninstructie.aspx" />
     <Content Include="Dranken_overzicht.aspx" />
+    <Content Include="Extra.aspx" />
     <Content Include="images\euro teken.png" />
     <Content Include="images\image cash.jpg" />
     <Content Include="images\mastercard-casinos-750x400.jpg" />
@@ -254,6 +255,13 @@
     </Compile>
     <Compile Include="Dranken_overzicht.aspx.designer.cs">
       <DependentUpon>Dranken_overzicht.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Extra.aspx.cs">
+      <DependentUpon>Extra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Extra.aspx.designer.cs">
+      <DependentUpon>Extra.aspx</DependentUpon>
     </Compile>
     <Compile Include="regristratiepagina.aspx.cs">
       <DependentUpon>regristratiepagina.aspx</DependentUpon>
