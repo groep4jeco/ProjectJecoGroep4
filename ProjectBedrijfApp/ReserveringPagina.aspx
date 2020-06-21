@@ -46,7 +46,7 @@
             <br />
             <br />
             <br />
-            &nbsp;<asp:Label ID="Label1" runat="server" Text="Tijdvak"></asp:Label>
+            &nbsp;<asp:Label ID="Label1" runat="server" Text="Tijd vak"></asp:Label>
             <asp:RadioButton ID="RadioButton1" runat="server" GroupName="Tijdvak" OnCheckedChanged="RadioButton1_CheckedChanged" Text="17:00-19:30" />
             <asp:RadioButton ID="RadioButton2" runat="server" GroupName="Tijdvak" OnCheckedChanged="RadioButton2_CheckedChanged" Text="19:30-22:00" />
             <br />
