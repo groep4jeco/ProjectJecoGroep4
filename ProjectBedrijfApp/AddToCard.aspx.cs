@@ -29,6 +29,8 @@ namespace ProjectBedrijfApp
         int tijdvaknummer;
         string tijden;
         double arregementprijzen;
+
+        int factuurnummer;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -68,7 +70,8 @@ namespace ProjectBedrijfApp
                         dr["Prijs"] = ds.Tables[0].Rows[0]["Prijs"].ToString();
                         double price = Convert.ToDouble(ds.Tables[0].Rows[0]["Prijs"].ToString());
                         double quantity = Convert.ToInt16(Request.QueryString["Hoeveelheid"].ToString());
-                        double totalprice = price * quantity;
+                        double totalprices = price * quantity;
+                        string totalprice = totalprices.ToString("0.00");
                         dr["totalprice"] = totalprice;
 
                         dt.Rows.Add(dr);
@@ -79,7 +82,7 @@ namespace ProjectBedrijfApp
                         GridView1.FooterRow.Cells[5].Text = "Totaal:";
                         GridView1.FooterRow.Cells[6].Text = grandtotal().ToString();
                         Response.Redirect("AddToCard.aspx");
-
+                        GridViewRow gvr = GridView1.SelectedRow;
                     }
                     else
                     {
@@ -354,17 +357,16 @@ namespace ProjectBedrijfApp
                         string factuur = drklant.Read().ToString();
                         string factuurtje = drklant["Factuurnummer"].ToString();
                         int factuurnummer = int.Parse(factuurtje);
+                        Session["factuur"] = factuurnummer; 
                         drklant.Close();
                         string optellen = "Update factuur set Totaalbedrag += @prijs where Factuurnummer = @factuur";
                         SqlDataAdapter adapter3 = new SqlDataAdapter();
                         adapter3.UpdateCommand = new SqlCommand(optellen, con);
-                        adapter3.UpdateCommand.Parameters.AddWithValue("@factuur", factuurnummer);
+                        adapter3.UpdateCommand.Parameters.AddWithValue("@factuur", Session["factuur"]);
                         adapter3.UpdateCommand.Parameters.AddWithValue("@prijs", double.Parse(prijs.ToString()));
                         int doehet = adapter3.UpdateCommand.ExecuteNonQuery();
                         con.Close();
                     }
-
-
                     catch
                     {
                         drklant.Close();
@@ -377,8 +379,16 @@ namespace ProjectBedrijfApp
                         adapter2.InsertCommand.Parameters.AddWithValue("@volw", volw);
                         adapter2.InsertCommand.Parameters.AddWithValue("@kind", kind);
                         int doehet2 = adapter2.InsertCommand.ExecuteNonQuery();
+                        string prequerie2 = "select Factuurnummer from Factuur where Reserveringnummer = @reservering";
+                    con.Open();
+                        SqlCommand cmdcode2 = new SqlCommand(prequerie2, con);
+                        cmdcode2.Parameters.AddWithValue("@reservering", Session["reservering"]);
+                        object bestelregel2 = cmdcode.ExecuteScalar();
+                        string code2 = bestelregel2.ToString();
+                        int bestelregelcode2 = int.Parse(code2);
+                        Session["factuur"] = bestelregelcode2;
 
-                    }
+                }
 
                     finally
                     {
@@ -401,7 +411,7 @@ namespace ProjectBedrijfApp
                 drklant = cmdfactuur.ExecuteReader();
                     string factuur = drklant.Read().ToString();
                     string factuurtje = drklant["Factuurnummer"].ToString();
-                    int factuurnummer = int.Parse(factuurtje);
+                    factuurnummer = int.Parse(factuurtje);
                     drklant.Close();
                 con.Close();
 
@@ -463,19 +473,35 @@ namespace ProjectBedrijfApp
                 }
 
 
-                    string allintoevoegen = "Update factuur set Totaalbedrag += @prijs where Factuurnummer = @factuur";
+                string allintoevoegen = "Update factuur set Totaalbedrag += @prijs where Factuurnummer = @factuur";
                 SqlDataAdapter adapter3 = new SqlDataAdapter();
                 adapter3.UpdateCommand = new SqlCommand(allintoevoegen, con);
-                adapter3.UpdateCommand.Parameters.AddWithValue("@factuur", factuurnummer);
+                adapter3.UpdateCommand.Parameters.AddWithValue("@factuur", Session["factuur"]);
                 adapter3.UpdateCommand.Parameters.AddWithValue("@prijs", arregementprijzen);
                 int doehet = adapter3.UpdateCommand.ExecuteNonQuery();
                 con.Close();
             }
             int maxronde = int.Parse(Session["maxronde"].ToString());
 
-              
+            if (Session["extraatjes"] != null)
+            {
+                int extraprijs = int.Parse(Session["extraatjes"].ToString()) * 5;
 
-               
+                con.Open();
+                string allintoevoegen = "Update factuur set Totaalbedrag += @prijs where Factuurnummer = @factuur";
+                SqlDataAdapter adapter3 = new SqlDataAdapter();
+                adapter3.UpdateCommand = new SqlCommand(allintoevoegen, con);
+                adapter3.UpdateCommand.Parameters.AddWithValue("@factuur", Session["factuur"]);
+                adapter3.UpdateCommand.Parameters.AddWithValue("@prijs", extraprijs);
+                int doehet = adapter3.UpdateCommand.ExecuteNonQuery();
+                Session["extraatjes"] = null;
+                con.Close();
+
+            }
+
+
+
+
 
             if (ronde < maxronde)
             { 
