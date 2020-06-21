@@ -357,7 +357,7 @@ namespace ProjectBedrijfApp
                         string factuur = drklant.Read().ToString();
                         string factuurtje = drklant["Factuurnummer"].ToString();
                         int factuurnummer = int.Parse(factuurtje);
-                    Session["factuur"] = factuurnummer; 
+                        Session["factuur"] = factuurnummer; 
                         drklant.Close();
                         string optellen = "Update factuur set Totaalbedrag += @prijs where Factuurnummer = @factuur";
                         SqlDataAdapter adapter3 = new SqlDataAdapter();
@@ -367,8 +367,6 @@ namespace ProjectBedrijfApp
                         int doehet = adapter3.UpdateCommand.ExecuteNonQuery();
                         con.Close();
                     }
-
-
                     catch
                     {
                         drklant.Close();
@@ -381,8 +379,16 @@ namespace ProjectBedrijfApp
                         adapter2.InsertCommand.Parameters.AddWithValue("@volw", volw);
                         adapter2.InsertCommand.Parameters.AddWithValue("@kind", kind);
                         int doehet2 = adapter2.InsertCommand.ExecuteNonQuery();
+                        string prequerie2 = "select Factuurnummer from Factuur where Reserveringnummer = @reservering";
+                    con.Open();
+                        SqlCommand cmdcode2 = new SqlCommand(prequerie2, con);
+                        cmdcode2.Parameters.AddWithValue("@reservering", Session["reservering"]);
+                        object bestelregel2 = cmdcode.ExecuteScalar();
+                        string code2 = bestelregel2.ToString();
+                        int bestelregelcode2 = int.Parse(code2);
+                        Session["factuur"] = bestelregelcode2;
 
-                    }
+                }
 
                     finally
                     {
