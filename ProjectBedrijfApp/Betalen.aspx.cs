@@ -12,6 +12,7 @@ namespace ProjectBedrijfApp
     public partial class betalen2 : System.Web.UI.Page
     {
         string connectionString = "Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019";
+        double prijs;
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -59,7 +60,9 @@ namespace ProjectBedrijfApp
 
                 {
                     con.Open();
-                    double prijs = double.Parse(TextBox2.Text);
+                    try {  prijs = double.Parse(TextBox2.Text); }
+                    catch {  prijs = 15.00; }
+                    
 
                     string optellen = "Update factuur set Betaalmethode = @betaal, Betaaldbedrag = isnull([Betaaldbedrag], 0) + @payment where Factuurnummer = @factuur";
                     SqlDataAdapter adapter4 = new SqlDataAdapter();

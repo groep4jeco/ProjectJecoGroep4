@@ -46,7 +46,7 @@
             <br />
             <br />
             <br />
-            &nbsp;<asp:Label ID="Label1" runat="server" Text="Tijdvlak"></asp:Label>
+            &nbsp;<asp:Label ID="Label1" runat="server" Text="Tijdvak"></asp:Label>
             <asp:RadioButton ID="RadioButton1" runat="server" GroupName="Tijdvak" OnCheckedChanged="RadioButton1_CheckedChanged" Text="17:00-19:30" />
             <asp:RadioButton ID="RadioButton2" runat="server" GroupName="Tijdvak" OnCheckedChanged="RadioButton2_CheckedChanged" Text="19:30-22:00" />
             <br />
@@ -74,10 +74,10 @@
             <br />
             <br />
             <br />
-            <asp:CheckBox ID="cbAlles" runat="server" Text="All you can Eat arregementen" OnCheckedChanged="cbAlles_CheckedChanged" AutoPostBack="True" />
+            <asp:CheckBox ID="cbAlles" runat="server" Text="All you can Eat arrangementen" OnCheckedChanged="cbAlles_CheckedChanged" AutoPostBack="True" />
             <br />
             <br />
-            <asp:Label ID="lblRondes" runat="server" Text="Aantal arragementen" Visible="False"></asp:Label>
+            <asp:Label ID="lblRondes" runat="server" Text="Aantal arrangement" Visible="False"></asp:Label>
             <br />
             <asp:TextBox ID="txtRondes" runat="server" Visible="False" Height="30px" OnTextChanged="txtRondes_TextChanged" TextMode="Number" ToolTip="Voer hier het aantal rondes in"></asp:TextBox>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
