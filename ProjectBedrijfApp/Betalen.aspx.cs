@@ -16,11 +16,11 @@ namespace ProjectBedrijfApp
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack)
+            if (!IsPostBack)
             {
                 DropDownList1.SelectedValue = "1";
             }
-            
+
             MultiView1.ActiveViewIndex = Convert.ToInt32(DropDownList1.SelectedValue);
 
 
@@ -49,16 +49,18 @@ namespace ProjectBedrijfApp
                 SqlDataReader drfactuur = cmdfactuur.ExecuteReader();
                 string resultaatfactuur = drfactuur.Read().ToString();
                 string factuurtotaal = drfactuur["Totaalbedrag"].ToString();
-                double probeer = double.Parse(factuurtotaal);
+                decimal probeer = decimal.Parse(factuurtotaal);
                 con.Close();
 
                 string controle = DropDownList1.SelectedValue.ToString();
 
 
                 if (DropDownList1.SelectedValue.ToString() == "2")
+
                 {
-                    double prijs = double.Parse(TextBox1.Text);
                     con.Open();
+                    decimal prijs = decimal.Parse(TextBox1.Text);
+
                     string optellen = "Update factuur set Betaalmethode = @betaal, Betaaldbedrag += @payment where Factuurnummer = @factuur";
                     SqlDataAdapter adapter4 = new SqlDataAdapter();
                     adapter4.UpdateCommand = new SqlCommand(optellen, con);
@@ -67,11 +69,11 @@ namespace ProjectBedrijfApp
                     adapter4.UpdateCommand.Parameters.AddWithValue("@payment", prijs);
                     int doehet = adapter4.UpdateCommand.ExecuteNonQuery();
                     con.Close();
-                    
+
                     if (prijs < probeer)
                     {
-                        double tekort = probeer - prijs;
-                        //labelnaam.text = "U moet nog" + tekort + "betalen."
+                        decimal tekort = probeer - prijs;
+                        Label1.Text = "U moet nog" + tekort + "betalen.";
                     }
 
 
@@ -79,7 +81,7 @@ namespace ProjectBedrijfApp
                 if (DropDownList1.SelectedValue.ToString() == "3")
 
                 {
-                    double prijs = double.Parse(TextBox3.Text);
+                    decimal prijs = decimal.Parse(TextBox3.Text);
                     con.Open();
                     string optellen = "Update factuur set Betaalmethode = @betaal, Betaaldbedrag = @payment where Factuurnummer = @factuur";
                     SqlDataAdapter adapter4 = new SqlDataAdapter();
@@ -94,7 +96,7 @@ namespace ProjectBedrijfApp
                 if (DropDownList1.SelectedValue.ToString() == "1")
 
                 {
-                    double prijs = double.Parse(TextBox2.Text);
+                    decimal prijs = decimal.Parse(TextBox2.Text);
                     con.Open();
                     string optellen = "Update factuur set Betaalmethode = @betaal, Betaaldbedrag = @payment where Factuurnummer = @factuur";
                     SqlDataAdapter adapter4 = new SqlDataAdapter();

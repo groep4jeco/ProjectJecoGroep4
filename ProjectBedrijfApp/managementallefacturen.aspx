@@ -147,6 +147,7 @@
         }
         .auto-style1 {
             margin-right: 0px;
+            margin-top: 76px;
         }
         .auto-style2 {
             width: 22%;
@@ -172,6 +173,12 @@
         }
         .auto-style10 {
             width: 117px;
+        }
+        .auto-style11 {
+            width: 30%;
+        }
+        .auto-style12 {
+            width: 93px;
         }
     </style>
 </head>
@@ -268,6 +275,17 @@ COMMIT;">
                             <asp:ControlParameter ControlID="GridView1" Name="Restaurant_ID" PropertyName="SelectedValue" Type="Int32" />
                         </SelectParameters>
                     </asp:SqlDataSource>
+                <table class="auto-style11">
+                    <tr>
+                        <td class="auto-style12">
+                            <asp:Label ID="lbllatenzien" runat="server" Font-Bold="True" Text="Extra rondes"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:Label ID="lblExtrarondes" runat="server"></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+                <br />
                 <table class="auto-style2">
                     <tr>
                         <td></td>
@@ -291,7 +309,6 @@ COMMIT;">
                         </td>
                     </tr>
                 </table>
-                <br />
                 <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource2" CssClass="auto-style1" OnSelectedIndexChanged="GridView3_SelectedIndexChanged">
                     <Columns>
                         <asp:BoundField DataField="omschrijving" HeaderText="omschrijving" SortExpression="omschrijving" />

@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Collections;
 using System.Globalization;
 using System.Web.UI.DataVisualization.Charting;
+using System.Runtime.InteropServices;
 
 namespace ProjectBedrijfApp
 {
@@ -35,7 +36,24 @@ namespace ProjectBedrijfApp
         double subtotaal;
         protected void Page_Load(object sender, EventArgs e)
         {
+            Label3.Visible = false;
+            Label4.Visible = false;
+            Label5.Visible = false;
 
+            Label6.Visible = false;
+            Label7.Visible = false;
+            Label8.Visible = false;
+            Label9.Visible = false;
+            Label10.Visible = false;
+            Label11.Visible = false;
+
+            Label12.Visible = false;
+            Label13.Visible = false;
+            Label14.Visible = false;
+            lblAantalVolw.Visible = false;
+            lblTotKind.Visible = false;
+            LblAantalKind.Visible = false;
+            lblTotVolw.Visible = false;
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -62,7 +80,7 @@ namespace ProjectBedrijfApp
             SqlCommand cmdtafel = new SqlCommand(reserveringophalen, con);
             cmdtafel.Parameters.AddWithValue("@tafel", tafelnummer);
             object objreservering = cmdtafel.ExecuteScalar();
-           
+
 
             if (objreservering == null)
 
@@ -87,17 +105,44 @@ namespace ProjectBedrijfApp
             string querie = "SELECT[Naam], [Adres], [Plaats] FROM[Restaurant] WHERE [Restaurant ID] = @ID";
             SqlCommand cmd = new SqlCommand(querie, con);
 
-            cmd.Parameters.AddWithValue("@ID", 1);
-            SqlDataReader dr = cmd.ExecuteReader();
-            string resultaat2 = dr.Read().ToString();
-            Label3.Text = dr["Naam"].ToString();
-            Label4.Text = dr["Adres"].ToString();
-            Label5.Text = dr["Plaats"].ToString();
-            dr.Close();
+            if (querie == null)
+
+            {
+
+                Label3.Visible = true;
+                Label4.Visible = true;
+                Label5.Visible = true;
+
+                Label6.Visible = true;
+                Label7.Visible = true;
+                Label8.Visible = true;
+                Label9.Visible = true;
+                Label10.Visible = true;
+                Label11.Visible = true;
+
+
+
+            }
+
+            else
+
+            {
+
+                cmd.Parameters.AddWithValue("@ID", 1);
+                SqlDataReader dr = cmd.ExecuteReader();
+                string resultaat2 = dr.Read().ToString();
+                Label3.Text = dr["Naam"].ToString();
+                Label4.Text = dr["Adres"].ToString();
+                Label5.Text = dr["Plaats"].ToString();
+                dr.Close();
+            }
+
+            Button2.Enabled = true;
         }
 
 
         protected void Button2_Click(object sender, EventArgs e)
+
 
         {
 
@@ -167,7 +212,7 @@ namespace ProjectBedrijfApp
 
 
 
-            /////dit label komt de labels waar de kortingen vanaf gaan//////labelnaam.text = subtotaal.tostring("0.00")
+            lblSubtotaal.Text = subtotaal.ToString("0.00");
             allinmenu();
 
 
@@ -210,7 +255,7 @@ namespace ProjectBedrijfApp
                         dr.Close();
                         int weetikveel = (int)Session["factuurnummer"];
                         string poging = kortingdrank.ToString();
-                        /////dit label is voor kortingbedrag//////labelnaam.text = kortingdrank.tostring("0.00")
+                        lblKorting.Text = kortingdrank.ToString("0.00");
                         string optellen = "Update factuur set Totaalbedrag = Totaalbedrag - @prijs where Factuurnummer = @factuur";
                         SqlDataAdapter adapter4 = new SqlDataAdapter();
                         adapter4.UpdateCommand = new SqlCommand(optellen, con);
@@ -240,7 +285,7 @@ namespace ProjectBedrijfApp
                         double kortingfood = (double)foodtotaal * double.Parse(kortingp);
                         double test = (double)foodtotaal - kortingfood;
 
-                        /////dit label is voor kortingbedrag//////labelnaam.text = kortingfood.tostring("0.00")
+                        lblKorting.Text = kortingfood.ToString("0.00");
 
                         string optellen = "Update factuur set Totaalbedrag = Totaalbedrag - @prijs where Factuurnummer = @factuur";
                         SqlDataAdapter adapter4 = new SqlDataAdapter();
@@ -265,7 +310,8 @@ namespace ProjectBedrijfApp
                         double nieuwtot = labeltje14 * vermenigvuldiger;
                         double kortingbedrag = subtotaal - nieuwtot;
 
-                        /////dit label is voor kortingbedrag//////labelnaam.text = kortingbedrag.tostring("0.00")
+                        lblKorting.Text = kortingbedrag.ToString("0.00");
+
 
                         string optellen = "Update factuur set Totaalbedrag = @prijs where Factuurnummer = @factuur";
                         SqlDataAdapter adapter4 = new SqlDataAdapter();
@@ -298,19 +344,46 @@ namespace ProjectBedrijfApp
             string queriefactuur = "SELECT [Totaalbedrag] FROM [Factuur] WHERE [Factuurnummer] = @Factuurnummer";
             SqlCommand cmdfactuur = new SqlCommand(queriefactuur, con);
             cmdfactuur.Parameters.AddWithValue("@Factuurnummer", (int)Session["factuurnummer"]);
-            SqlDataReader drfactuur = cmdfactuur.ExecuteReader();
-            string resultaatfactuur = drfactuur.Read().ToString();
-            string factuurtotaal = drfactuur["Totaalbedrag"].ToString();
-            double probeer = double.Parse(factuurtotaal);
-            double label12 = probeer / 1.09;
-            double label13 = probeer / 109 * 9;
-            string label14 = drfactuur["Totaalbedrag"].ToString();
-            labeltje14 = double.Parse(label14);
-            Label14.Text = labeltje14.ToString("0.00");
-            lblAantalVolw.Text = label12.ToString("0.00");
-            LblAantalKind.Text = label13.ToString("0.00");
 
-            drfactuur.Close();
+
+            if (queriefactuur == null)
+
+            {
+                Label12.Visible = true;
+                Label13.Visible = true;
+                Label14.Visible = true;
+                lblAantalVolw.Visible = true;
+                lblTotKind.Visible = true;
+                lblTotVolw.Visible = true;
+                LblAantalKind.Visible = true;
+
+            }
+
+            else
+            {
+
+                Label12.Visible = true;
+                Label13.Visible = true;
+                Label14.Visible = true;
+                lblAantalVolw.Visible = true;
+                lblTotKind.Visible = true;
+                lblTotVolw.Visible = true;
+                LblAantalKind.Visible = true;
+
+                SqlDataReader drfactuur = cmdfactuur.ExecuteReader();
+                string resultaatfactuur = drfactuur.Read().ToString();
+                string factuurtotaal = drfactuur["Totaalbedrag"].ToString();
+                double probeer = double.Parse(factuurtotaal);
+                double label12 = probeer / 1.09;
+                double label13 = probeer / 109 * 9;
+                string label14 = drfactuur["Totaalbedrag"].ToString();
+                labeltje14 = double.Parse(label14);
+                Label14.Text = labeltje14.ToString("0.00");
+                Label12.Text = label12.ToString("0.00");
+                Label13.Text = label13.ToString("0.00");
+                drfactuur.Close();
+            }
+
             con.Close();
         }
 
@@ -382,8 +455,8 @@ namespace ProjectBedrijfApp
                 volmetallin = volw - volwzonderallin;
             }
 
-            //int kinderenmetallin = menuutjes - volw;
-            // int volwzonderallin = volw - menuutjes;
+            // int kinderenmetallin = menuutjes - volw;
+            //int volwzonderallin = volw - menuutjes;
             //int volmetallin = volw - volwzonderallin;
 
             LblAantalKind.Text = kinderenmetallin.ToString();
@@ -435,11 +508,34 @@ namespace ProjectBedrijfApp
 
             lblTotKind.Text = prijskids.ToString();
             lblTotVolw.Text = prijsvolwassenen.ToString();
+
+            lblTotKind.Visible = true;
+            lblTotVolw.Visible = true;
         }
 
         protected void txttafelnummer_TextChanged(object sender, EventArgs e)
         {
 
         }
+
+        private void extrarondes(object sender, EventArgs e)
+
+        {
+            string vraagoprondes = "select [Extra rondes] from in_restaurant where Reserveringsnummer = @reservering";
+            con.Open();
+            SqlCommand cmdrondes = new SqlCommand(vraagoprondes, con);
+            cmdrondes.Parameters.AddWithValue("@reservering", Session["reservering"]);
+            object objrondes = cmdrondes.ExecuteScalar();
+            string extraro = objrondes.ToString();
+            int extrarondes = int.Parse(extraro);
+            con.Close();
+
+            lblextrarondes.Text = vraagoprondes.ToString();
+
+
+
+
+        }
+
     }
 }
