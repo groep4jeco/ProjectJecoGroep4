@@ -47,6 +47,9 @@
         .auto-style12 {
             height: 21px;
         }
+        .auto-style13 {
+            width: 219px;
+        }
     </style>
 </head>
 <body>
@@ -164,6 +167,14 @@
                             </Columns>
                         </asp:GridView>
                         <br />
+                        <table class="auto-style5">
+                            <tr>
+                                <td class="auto-style13">extra rondes </td>
+                                <td>
+                                    <asp:Label ID="lblextrarondes" runat="server"></asp:Label>
+                                </td>
+                            </tr>
+                        </table>
                         <br />
                         <br />
                         <br />
