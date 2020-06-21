@@ -175,7 +175,7 @@
             width: 117px;
         }
         .auto-style11 {
-            width: 30%;
+            width: 37%;
         }
         .auto-style12 {
             width: 93px;
@@ -282,6 +282,8 @@ COMMIT;">
                         </td>
                         <td>
                             <asp:Label ID="lblExtrarondes" runat="server"></asp:Label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <asp:Label ID="LblExtraRondesPrijs" runat="server" Text="LblExtraRondesPrijs"></asp:Label>
                         </td>
                     </tr>
                 </table>

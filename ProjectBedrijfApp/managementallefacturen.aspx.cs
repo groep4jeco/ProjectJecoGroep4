@@ -26,6 +26,7 @@ namespace ProjectBedrijfApp
         int reserveringsnummer;
         int volmetallin;
         int kinderenmetallin;
+        int AantalExtraRondes;
 
         int menuutjes;
         protected void Page_Load(object sender, EventArgs e)
@@ -294,22 +295,27 @@ namespace ProjectBedrijfApp
             SqlConnection con = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
             string vraagoprondes = "select [Extra rondes] from in_restaurant where Reserveringsnummer = @reservering";
             con.Open();
+            try
+            {
+                SqlCommand cmdrondes = new SqlCommand(vraagoprondes, con);
+                cmdrondes.Parameters.AddWithValue("@reservering", reserveringsnummer);
+                object objrondes = cmdrondes.ExecuteScalar();
+                string extraro = objrondes.ToString();
+                AantalExtraRondes = int.Parse(extraro);
+                con.Close();
+            }
+            catch { AantalExtraRondes = 0; }
+            finally { con.Close(); }
 
-
-            SqlCommand cmdrondes = new SqlCommand(vraagoprondes, con);
-            cmdrondes.Parameters.AddWithValue("@reservering", reserveringsnummer);
-            object objrondes = cmdrondes.ExecuteScalar();
-            string extraro = objrondes.ToString();
-            int extrarondes = int.Parse(extraro);
-            con.Close();
-
-            if (extrarondes == 0)
+            if (AantalExtraRondes == 0)
             {
                 lbllatenzien.Visible = false;
             }
             else
             {
-                lblExtrarondes.Text = extrarondes.ToString();
+                int prijs = AantalExtraRondes * 5;
+                LblExtraRondesPrijs.Text = prijs.ToString("0.00");
+                lblExtrarondes.Text = AantalExtraRondes.ToString();
             }
 
 

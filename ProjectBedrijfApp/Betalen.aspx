@@ -112,8 +112,8 @@
                             Factuurdatum:
                             <asp:TextBox ID="FactuurdatumTextBox" runat="server" Text='<%# Bind("Factuurdatum") %>' />
                             <br />
-                            Totaalbedrag:
-                            <asp:TextBox ID="TotaalbedragTextBox" runat="server" Text='<%# Bind("Totaalbedrag") %>' />
+                            Totaalbetaalbedrag:
+                            <asp:TextBox ID="TotaalbetaalbedragTextBox" runat="server" Text='<%# Bind("Totaalbetaalbedrag") %>' />
                             <br />
                             <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" Text="Update" />
                             &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
@@ -128,8 +128,8 @@
                             Factuurdatum:
                             <asp:TextBox ID="FactuurdatumTextBox" runat="server" Text='<%# Bind("Factuurdatum") %>' />
                             <br />
-                            Totaalbedrag:
-                            <asp:TextBox ID="TotaalbedragTextBox" runat="server" Text='<%# Bind("Totaalbedrag") %>' />
+                            Totaalbetaalbedrag:
+                            <asp:TextBox ID="TotaalbetaalbedragTextBox" runat="server" Text='<%# Bind("Totaalbetaalbedrag") %>' />
                             <br />
                             <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insert" />
                             &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
@@ -141,8 +141,8 @@
                             Factuurdatum:
                             <asp:Label ID="FactuurdatumLabel" runat="server" Text='<%# Bind("Factuurdatum") %>' />
                             <br />
-                            Totaalbedrag:
-                            <asp:Label ID="TotaalbedragLabel" runat="server" Text='<%# Bind("Totaalbedrag") %>' />
+                            Totaalbetaalbedrag:
+                            <asp:Label ID="TotaalbetaalbedragLabel" runat="server" Text='<%# Bind("Totaalbetaalbedrag") %>' />
                             <br />
                         </ItemTemplate>
                         <PagerStyle BackColor="#C6C3C6" ForeColor="Black" HorizontalAlign="Right" />
@@ -150,7 +150,8 @@
                     </asp:FormView>
                     <br />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand= "SELECT [KlantenpasEmail], [Factuurdatum], [Totaalbedrag] FROM [ikbenerklaarmee] WHERE ([Factuurnummer] = @Factuurnummer)">
+                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand= "SELECT [KlantenpasEmail], [Factuurdatum], CAST(sum(Totaalbedrag - ISNULL(Betaaldbedrag, 0)) AS decimal(7,2)) AS Totaalbetaalbedrag FROM Factuur WHERE ([Factuurnummer] = @Factuurnummer)
+group by KlantenpasEmail, Factuurdatum">
                         <SelectParameters>
                             <asp:SessionParameter Name="Factuurnummer" SessionField="factuurnummer" Type="Int32" />
                         </SelectParameters>
@@ -187,8 +188,8 @@
                                 Factuurdatum:
                                 <asp:TextBox ID="FactuurdatumTextBox" runat="server" Text='<%# Bind("Factuurdatum") %>' />
                                 <br />
-                                Totaalbedrag:
-                                <asp:TextBox ID="TotaalbedragTextBox" runat="server" Text='<%# Bind("Totaalbedrag") %>' />
+                                Totaalbetaalbedrag:
+                                <asp:TextBox ID="TotaalbetaalbedragTextBox" runat="server" Text='<%# Bind("Totaalbetaalbedrag") %>' />
                                 <br />
                                 <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" Text="Update" />
                                 &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
@@ -203,8 +204,8 @@
                                 Factuurdatum:
                                 <asp:TextBox ID="FactuurdatumTextBox" runat="server" Text='<%# Bind("Factuurdatum") %>' />
                                 <br />
-                                Totaalbedrag:
-                                <asp:TextBox ID="TotaalbedragTextBox" runat="server" Text='<%# Bind("Totaalbedrag") %>' />
+                                Totaalbetaalbedrag:
+                                <asp:TextBox ID="TotaalbetaalbedragTextBox" runat="server" Text='<%# Bind("Totaalbetaalbedrag") %>' />
                                 <br />
                                 <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insert" />
                                 &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
@@ -216,8 +217,8 @@
                                 Factuurdatum:
                                 <asp:Label ID="FactuurdatumLabel" runat="server" Text='<%# Bind("Factuurdatum") %>' />
                                 <br />
-                                Totaalbedrag:
-                                <asp:Label ID="TotaalbedragLabel" runat="server" Text='<%# Bind("Totaalbedrag") %>' />
+                                Totaalbetaalbedrag:
+                                <asp:Label ID="TotaalbetaalbedragLabel" runat="server" Text='<%# Bind("Totaalbetaalbedrag") %>' />
                                 <br />
                             </ItemTemplate>
                             <PagerStyle BackColor="#C6C3C6" ForeColor="Black" HorizontalAlign="Right" />
@@ -254,8 +255,8 @@
                             Factuurdatum:
                             <asp:TextBox ID="FactuurdatumTextBox" runat="server" Text='<%# Bind("Factuurdatum") %>' />
                             <br />
-                            Totaalbedrag:
-                            <asp:TextBox ID="TotaalbedragTextBox" runat="server" Text='<%# Bind("Totaalbedrag") %>' />
+                            Totaalbetaalbedrag:
+                            <asp:TextBox ID="TotaalbetaalbedragTextBox" runat="server" Text='<%# Bind("Totaalbetaalbedrag") %>' />
                             <br />
                             <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update" Text="Update" />
                             &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
@@ -270,8 +271,8 @@
                             Factuurdatum:
                             <asp:TextBox ID="FactuurdatumTextBox" runat="server" Text='<%# Bind("Factuurdatum") %>' />
                             <br />
-                            Totaalbedrag:
-                            <asp:TextBox ID="TotaalbedragTextBox" runat="server" Text='<%# Bind("Totaalbedrag") %>' />
+                            Totaalbetaalbedrag:
+                            <asp:TextBox ID="TotaalbetaalbedragTextBox" runat="server" Text='<%# Bind("Totaalbetaalbedrag") %>' />
                             <br />
                             <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" CommandName="Insert" Text="Insert" />
                             &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel" />
@@ -283,8 +284,8 @@
                             Factuurdatum:
                             <asp:Label ID="FactuurdatumLabel" runat="server" Text='<%# Bind("Factuurdatum") %>' />
                             <br />
-                            Totaalbedrag:
-                            <asp:Label ID="TotaalbedragLabel" runat="server" Text='<%# Bind("Totaalbedrag") %>' />
+                            Totaalbetaalbedrag:
+                            <asp:Label ID="TotaalbetaalbedragLabel" runat="server" Text='<%# Bind("Totaalbetaalbedrag") %>' />
                             <br />
                         </ItemTemplate>
                         <PagerStyle BackColor="#C6C3C6" ForeColor="Black" HorizontalAlign="Right" />

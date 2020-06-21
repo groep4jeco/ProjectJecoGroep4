@@ -49,7 +49,7 @@ namespace ProjectBedrijfApp
                 SqlDataReader drfactuur = cmdfactuur.ExecuteReader();
                 string resultaatfactuur = drfactuur.Read().ToString();
                 string factuurtotaal = drfactuur["Totaalbedrag"].ToString();
-                decimal probeer = decimal.Parse(factuurtotaal);
+                double probeer = double.Parse(factuurtotaal);
                 con.Close();
 
                 string controle = DropDownList1.SelectedValue.ToString();
@@ -59,9 +59,9 @@ namespace ProjectBedrijfApp
 
                 {
                     con.Open();
-                    decimal prijs = decimal.Parse(TextBox1.Text);
+                    double prijs = double.Parse(TextBox2.Text);
 
-                    string optellen = "Update factuur set Betaalmethode = @betaal, Betaaldbedrag += @payment where Factuurnummer = @factuur";
+                    string optellen = "Update factuur set Betaalmethode = @betaal, Betaaldbedrag = isnull([Betaaldbedrag], 0) + @payment where Factuurnummer = @factuur";
                     SqlDataAdapter adapter4 = new SqlDataAdapter();
                     adapter4.UpdateCommand = new SqlCommand(optellen, con);
                     adapter4.UpdateCommand.Parameters.AddWithValue("@factuur", (int)Session["factuurnummer"]);
@@ -72,7 +72,7 @@ namespace ProjectBedrijfApp
 
                     if (prijs < probeer)
                     {
-                        decimal tekort = probeer - prijs;
+                        double tekort = probeer - prijs;
                         Label1.Text = "U moet nog" + tekort + "betalen.";
                     }
 
@@ -81,9 +81,9 @@ namespace ProjectBedrijfApp
                 if (DropDownList1.SelectedValue.ToString() == "3")
 
                 {
-                    decimal prijs = decimal.Parse(TextBox3.Text);
+                    double prijs = double.Parse(TextBox3.Text);
                     con.Open();
-                    string optellen = "Update factuur set Betaalmethode = @betaal, Betaaldbedrag = @payment where Factuurnummer = @factuur";
+                    string optellen = "Update factuur set Betaalmethode = @betaal, Betaaldbedrag = isnull([Betaaldbedrag], 0) + @payment where Factuurnummer = @factuur";
                     SqlDataAdapter adapter4 = new SqlDataAdapter();
                     adapter4.UpdateCommand = new SqlCommand(optellen, con);
                     adapter4.UpdateCommand.Parameters.AddWithValue("@factuur", (int)Session["factuurnummer"]);
@@ -96,9 +96,9 @@ namespace ProjectBedrijfApp
                 if (DropDownList1.SelectedValue.ToString() == "1")
 
                 {
-                    decimal prijs = decimal.Parse(TextBox2.Text);
+                    double prijs = double.Parse(TextBox1.Text);
                     con.Open();
-                    string optellen = "Update factuur set Betaalmethode = @betaal, Betaaldbedrag = @payment where Factuurnummer = @factuur";
+                    string optellen = "Update factuur set Betaalmethode = @betaal, Betaaldbedrag = isnull([Betaaldbedrag], 0) + @payment where Factuurnummer = @factuur";
                     SqlDataAdapter adapter4 = new SqlDataAdapter();
                     adapter4.UpdateCommand = new SqlCommand(optellen, con);
                     adapter4.UpdateCommand.Parameters.AddWithValue("@factuur", (int)Session["factuurnummer"]);
@@ -108,9 +108,8 @@ namespace ProjectBedrijfApp
                     con.Close();
                 }
                 con.Close();
+                Response.Redirect("~/betalen.aspx");
             }
-
-
 
         }
         protected void TextBox1_TextChanged(object sender, EventArgs e)

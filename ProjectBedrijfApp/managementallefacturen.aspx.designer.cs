@@ -222,6 +222,15 @@ namespace ProjectBedrijfApp
         protected global::System.Web.UI.WebControls.Label lblExtrarondes;
 
         /// <summary>
+        /// LblExtraRondesPrijs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblExtraRondesPrijs;
+
+        /// <summary>
         /// lblAantalKind control.
         /// </summary>
         /// <remarks>

@@ -65,8 +65,6 @@ namespace ProjectBedrijfApp
             btnExtraRondes.Enabled = false;
             btnApartBestellen.Enabled = true;
             btnDoorgaan.Enabled = true;
-
-            
             ddlfruit.Visible = true;
             Label5.Visible = true;
         }
@@ -102,12 +100,13 @@ namespace ProjectBedrijfApp
                 maxrondes += extrarondes;
                 Session["maxronde"] = maxrondes;
                 string aantal = Session["extraatjes"].ToString();
+                string nummer = Session["reservering"].ToString();
 
                 con.Open();
-                string rondestoevoegen = "Update in_restaurant set [Extra rondes] += @aantal where reserveringsnummer = @reserveringsnummero";
+                string rondestoevoegen = "Update in_restaurant set [Extra rondes] = isnull([Extra rondes], 0) + @aantal where reserveringsnummer = @reserveringsnummero";
                 SqlDataAdapter adapter3 = new SqlDataAdapter();
                 adapter3.UpdateCommand = new SqlCommand(rondestoevoegen, con);
-                adapter3.UpdateCommand.Parameters.AddWithValue("@reserveringsnummero", Session["reservering"]);
+                adapter3.UpdateCommand.Parameters.AddWithValue("@reserveringsnummero", nummer);
                 adapter3.UpdateCommand.Parameters.AddWithValue("@aantal", aantal);
                 int doehet = adapter3.UpdateCommand.ExecuteNonQuery();
                 con.Close();
