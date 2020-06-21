@@ -10,7 +10,7 @@
     <form id="form1" runat="server">
         <div>
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" DeleteCommand="UPDATE bestelregel
-SET bestelstatusID = 2
+SET bestelstatusID = 3
 from bestelregel
 INNER JOIN Reservering ON Bestelregel.Reserveringsnummer = Reservering.Reserveringsnummer
 INNER JOIN in_restaurant ON Reservering.Reserveringsnummer = in_restaurant.Reserveringsnummer
@@ -186,9 +186,9 @@ FETCH NEXT 1 ROWS ONLY)"></asp:SqlDataSource>
             </SelectedItemTemplate>
         </asp:ListView>
         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" DeleteCommand="UPDATE bestelregel
-SET bestelstatusID = 2
-from bestelrege
-l
+SET bestelstatusID = 3
+from bestelregel
+
 INNER JOIN Reservering ON Bestelregel.Reserveringsnummer = Reservering.Reserveringsnummer
 
 INNER JOIN in_restaurant ON Reservering.Reserveringsnummer = in_restaurant.Reserveringsnummer
@@ -346,7 +346,10 @@ FETCH NEXT 1 ROWS ONLY)"></asp:SqlDataSource>
                 </td>
             </SelectedItemTemplate>
         </asp:ListView>
-        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" DeleteCommand="l
+        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" DeleteCommand="UPDATE bestelregel
+SET bestelstatusID = 3
+from bestelregel
+
 INNER JOIN Reservering ON Bestelregel.Reserveringsnummer = Reservering.Reserveringsnummer
 
 INNER JOIN in_restaurant ON Reservering.Reserveringsnummer = in_restaurant.Reserveringsnummer
@@ -358,7 +361,7 @@ Where tafeltafelnummer =
 
  ORDER BY besteltijd asc
 
-OFFSET 2 ROWS 
+OFFSET 1 ROWS 
 FETCH NEXT 1 ROWS ONLY)
 
 
@@ -367,7 +370,7 @@ AND besteltijd = (select besteltijd from serveertafels
 
 ORDER BY besteltijd asc
 
-OFFSET 2 ROWS
+OFFSET 1 ROWS
 FETCH NEXT 1 ROWS ONLY)" SelectCommand="SELECT tafeltafelnummer, Hoeveelheid, Omschrijving, besteltijd, rondenummer
  
 
@@ -504,7 +507,10 @@ FETCH NEXT 1 ROWS ONLY)
                     <br /></td>
             </SelectedItemTemplate>
         </asp:ListView>
-        <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" DeleteCommand="l
+        <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" DeleteCommand="UPDATE bestelregel
+SET bestelstatusID = 3
+from bestelregel
+
 INNER JOIN Reservering ON Bestelregel.Reserveringsnummer = Reservering.Reserveringsnummer
 
 INNER JOIN in_restaurant ON Reservering.Reserveringsnummer = in_restaurant.Reserveringsnummer
@@ -662,7 +668,10 @@ FETCH NEXT 1 ROWS ONLY)
                     <br /></td>
             </SelectedItemTemplate>
         </asp:ListView>
-        <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" DeleteCommand="l
+        <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" DeleteCommand="UPDATE bestelregel
+SET bestelstatusID = 3
+from bestelregel
+
 INNER JOIN Reservering ON Bestelregel.Reserveringsnummer = Reservering.Reserveringsnummer
 
 INNER JOIN in_restaurant ON Reservering.Reserveringsnummer = in_restaurant.Reserveringsnummer
@@ -674,8 +683,8 @@ Where tafeltafelnummer =
 
  ORDER BY besteltijd asc
 
-OFFSET 4 ROWS 
-FETCH NEXT 1 ROWS ONLY)
+OFFSET 1 ROWS 
+FETCH NEXT 4 ROWS ONLY)
 
 
 AND besteltijd = (select besteltijd from serveertafels
@@ -820,7 +829,10 @@ FETCH NEXT 1 ROWS ONLY)
                     <br /></td>
             </SelectedItemTemplate>
         </asp:ListView>
-        <asp:SqlDataSource ID="SqlDataSource8" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" DeleteCommand="l
+        <asp:SqlDataSource ID="SqlDataSource8" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" DeleteCommand="UPDATE bestelregel
+SET bestelstatusID = 3
+from bestelregel
+
 INNER JOIN Reservering ON Bestelregel.Reserveringsnummer = Reservering.Reserveringsnummer
 
 INNER JOIN in_restaurant ON Reservering.Reserveringsnummer = in_restaurant.Reserveringsnummer
@@ -832,7 +844,7 @@ Where tafeltafelnummer =
 
  ORDER BY besteltijd asc
 
-OFFSET 4 ROWS 
+OFFSET 5 ROWS 
 FETCH NEXT 1 ROWS ONLY)
 
 
@@ -841,7 +853,7 @@ AND besteltijd = (select besteltijd from serveertafels
 
 ORDER BY besteltijd asc
 
-OFFSET 4 ROWS
+OFFSET 5 ROWS
 FETCH NEXT 1 ROWS ONLY)" SelectCommand="SELECT tafeltafelnummer, Hoeveelheid, Omschrijving, besteltijd, rondenummer
  
 

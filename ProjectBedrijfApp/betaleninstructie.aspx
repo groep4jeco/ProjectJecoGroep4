@@ -40,6 +40,13 @@
             width: 157px;
         }
         .
+        .auto-style11 {
+            width: 223px;
+            height: 21px;
+        }
+        .auto-style12 {
+            height: 21px;
+        }
     </style>
 </head>
 <body>
@@ -71,16 +78,17 @@
                         <br />
                         <br />
 &nbsp;&nbsp;&nbsp;&nbsp;
-                        <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Selecteer factuur" BackColor="#FF9999" BorderColor="#FF5050" Width="113px" />
+                        <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Selecteer factuur" BackColor="#FF9999" BorderColor="#FF5050" Width="113px" Enabled="False" />
                         <br />
-                        <asp:Label ID="lblSelecteer" runat="server" Text="Zoek eerst een factuur op"></asp:Label>
                         <br />
                         <br />
                     </td>
                 </tr>
                 <tr>
+                    
+                    &nbsp;&nbsp;&nbsp;
                     <td class="auto-style2" role="document">
-                        <br />
+                        Factuur: <br />
                         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="Factuurnummer,Restaurant ID,KlantKlantID" DataSourceID="SqlDataSource1" Height="171px" Width="430px">
                             <Columns>
                                 <asp:BoundField DataField="Factuurnummer" HeaderText="Factuurnummer" SortExpression="Factuurnummer" />
@@ -94,7 +102,7 @@
                             </Columns>
                         </asp:GridView>
                         <br />
-                        <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
+                        <asp:Label ID="Label3" runat="server" Text="Label" Enabled="False"></asp:Label>
                         <br />
                         <asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
                         <br />
@@ -137,7 +145,8 @@
                         </table>
                         <br />
                         <br />
-                        <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False" DataKeyNames="prijs,hoeveelheid" DataSourceID="SqlDataSource2">
+                        <div>
+                        <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False" DataKeyNames="prijs,hoeveelheid" DataSourceID="SqlDataSource2" Width="334px">
                             <Columns>
                                 <asp:BoundField DataField="omschrijving" HeaderText="omschrijving" SortExpression="omschrijving" />
                                 <asp:BoundField DataField="hoeveelheid" HeaderText="hoeveelheid" SortExpression="hoeveelheid" />
@@ -145,6 +154,8 @@
                                 <asp:BoundField DataField="rondenummer" HeaderText="rondenummer" ReadOnly="True" SortExpression="rondenummer" />
                             </Columns>
                         </asp:GridView>
+                        </div>
+                        <br />
                         <asp:GridView ID="GridView4" runat="server" AutoGenerateColumns="False" DataKeyNames="hoeveelheid,Prijs" DataSourceID="drankenfactureren" Width="334px">
                             <Columns>
                                 <asp:BoundField DataField="Omschrijving" HeaderText="Omschrijving" SortExpression="Omschrijving" />
@@ -153,10 +164,28 @@
                             </Columns>
                         </asp:GridView>
                         <br />
+                        <br />
+                        <br />
+                        <br />
                         <table class="auto-style5">
                             <tr>
-                                <td class="auto-style9">Factuurtotaal exclusief btw</td>
+                                <td class="auto-style9">Subtotaal</td>
                                 <td>
+                                    <asp:Label ID="lblSubtotaal" runat="server"></asp:Label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style9">Korting</td>
+                                <td>
+                                    <asp:Label ID="lblKorting" runat="server"></asp:Label>
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        <table class="auto-style5">
+                            <tr>
+                                <td class="auto-style11">Factuurtotaal exclusief btw</td>
+                                <td class="auto-style12">
                                     <asp:Label ID="Label12" runat="server" Text="Label"></asp:Label>
                                 </td>
                             </tr>
@@ -193,6 +222,7 @@
                             </SelectParameters>
                         </asp:SqlDataSource>
                     </td>
+                       
                 </tr>
                 <tr>
                     <td role="article">Korting:<br />
