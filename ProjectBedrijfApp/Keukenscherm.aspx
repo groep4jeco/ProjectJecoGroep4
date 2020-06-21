@@ -18,21 +18,7 @@
     <form id="form1" runat="server">
         <div>
         </div>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" DeleteCommand="BEGIN TRANSACTION;
-
-
-IF (select DISTINCT Reserveringsnummer from listview111
-
-Where tafeltafelnummer =
-
- (select tafeltafelnummer from Listview4
- group by tafeltafelnummer, besteltijd, bestelstatusid
- ORDER BY besteltijd asc
-OFFSET 0 ROWS
-FETCH NEXT 1 ROWS ONLY)) not in (select factuur.reserveringsnummer from Factuur)
-
-
-UPDATE bestelregel
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" DeleteCommand="UPDATE bestelregel
 SET bestelstatusID = 2
 from bestelregel
 INNER JOIN Reservering ON Bestelregel.Reserveringsnummer = Reservering.Reserveringsnummer
@@ -49,9 +35,7 @@ AND besteltijd = (select besteltijd from Listview4
  group by tafeltafelnummer, bestelstatusid, besteltijd
 ORDER BY besteltijd asc
 OFFSET 0 ROWS
-FETCH NEXT 1 ROWS ONLY);
-
-commit;" SelectCommand="SELECT tafeltafelnummer, Hoeveelheid, Omschrijving, besteltijd, rondenummer
+FETCH NEXT 1 ROWS ONLY)" SelectCommand="SELECT tafeltafelnummer, Hoeveelheid, Omschrijving, besteltijd, rondenummer
  
 FROM Listview11
 
@@ -87,7 +71,7 @@ FETCH NEXT 1 ROWS ONLY)"></asp:SqlDataSource>
                     rondenummer:
                     <asp:Label ID="rondenummerLabel" runat="server" Text='<%# Eval("rondenummer") %>' />
                     <br />
-                    <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text="Delete" />
+                    <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text="Bestelling gereed" />
                     <br />
                 </td>
             </AlternatingItemTemplate>
@@ -116,7 +100,7 @@ FETCH NEXT 1 ROWS ONLY)"></asp:SqlDataSource>
             <EmptyDataTemplate>
                 <table style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;" runat="server">
                     <tr>
-                        <td>No data was returned.</td>
+                        <td>Alle bestellingen zijn gereed.</td>
                     </tr>
                 </table>
             </EmptyDataTemplate>
@@ -166,7 +150,7 @@ FETCH NEXT 1 ROWS ONLY)"></asp:SqlDataSource>
                     rondenummer:
                     <asp:Label ID="rondenummerLabel" runat="server" Text='<%# Eval("rondenummer") %>' />
                     <br />
-                    <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text="Delete" />
+                    <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text="Bestelling gereed" />
                     <br />
                 </td>
             </ItemTemplate>
@@ -202,7 +186,7 @@ FETCH NEXT 1 ROWS ONLY)"></asp:SqlDataSource>
                     rondenummer:
                     <asp:Label ID="rondenummerLabel" runat="server" Text='<%# Eval("rondenummer") %>' />
                     <br />
-                    <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text="Delete" />
+                    <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Text="Bestelling gereed" />
                     <br />
                 </td>
             </SelectedItemTemplate>
