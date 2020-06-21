@@ -18,8 +18,7 @@ namespace ProjectBedrijfApp
         {
             btnDoorgaan.Enabled = false;
 
-            Label4.Visible = false;
-            txbAantal.Visible = false;
+            
             ddlfruit.Visible = false;
             Label5.Visible = false;
 
@@ -67,8 +66,7 @@ namespace ProjectBedrijfApp
             btnApartBestellen.Enabled = true;
             btnDoorgaan.Enabled = true;
 
-            Label4.Visible = true;
-            txbAantal.Visible = true;
+            
             ddlfruit.Visible = true;
             Label5.Visible = true;
         }

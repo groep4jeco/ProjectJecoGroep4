@@ -212,6 +212,7 @@
     <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\VBCSCompiler.exe" />
     <Content Include="Reserveren.aspx" />
     <Content Include="ReserveringPagina.aspx" />
+    <Content Include="Serveerscherm.aspx" />
     <Content Include="tabletkeuze.aspx" />
     <Content Include="Timer.aspx" />
     <Content Include="Web.config" />
@@ -329,6 +330,13 @@
     </Compile>
     <Compile Include="ReserveringPagina.aspx.designer.cs">
       <DependentUpon>ReserveringPagina.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Serveerscherm.aspx.cs">
+      <DependentUpon>Serveerscherm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Serveerscherm.aspx.designer.cs">
+      <DependentUpon>Serveerscherm.aspx</DependentUpon>
     </Compile>
     <Compile Include="tabletkeuze.aspx.cs">
       <DependentUpon>tabletkeuze.aspx</DependentUpon>
