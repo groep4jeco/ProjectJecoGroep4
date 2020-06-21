@@ -53,7 +53,7 @@ namespace ProjectBedrijfApp
             lblAantalVolw.Visible = false;
             lblTotKind.Visible = false;
             LblAantalKind.Visible = false;
-            lblTotVolw.Visible = false; 
+            lblTotVolw.Visible = false;
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -137,7 +137,7 @@ namespace ProjectBedrijfApp
                 dr.Close();
             }
 
-            Button2.Enabled = true; 
+            Button2.Enabled = true;
         }
 
 
@@ -248,7 +248,7 @@ namespace ProjectBedrijfApp
 
                     if (cat == "1") //drankjes
                     {
-                        
+
                         string kortingp = dr["korting"].ToString();
                         double kortingdrank = (double)drankentotaal * double.Parse(kortingp);
                         double test = (double)drankentotaal - kortingdrank;
@@ -455,7 +455,7 @@ namespace ProjectBedrijfApp
                 volmetallin = volw - volwzonderallin;
             }
 
-           // int kinderenmetallin = menuutjes - volw;
+            // int kinderenmetallin = menuutjes - volw;
             //int volwzonderallin = volw - menuutjes;
             //int volmetallin = volw - volwzonderallin;
 
@@ -510,12 +510,32 @@ namespace ProjectBedrijfApp
             lblTotVolw.Text = prijsvolwassenen.ToString();
 
             lblTotKind.Visible = true;
-            lblTotVolw.Visible = true; 
+            lblTotVolw.Visible = true;
         }
 
         protected void txttafelnummer_TextChanged(object sender, EventArgs e)
         {
 
         }
+
+        private void extrarondes(object sender, EventArgs e)
+
+        {
+            string vraagoprondes = "select [Extra rondes] from in_restaurant where Reserveringsnummer = @reservering";
+            con.Open();
+            SqlCommand cmdrondes = new SqlCommand(vraagoprondes, con);
+            cmdrondes.Parameters.AddWithValue("@reservering", Session["reservering"]);
+            object objrondes = cmdrondes.ExecuteScalar();
+            string extraro = objrondes.ToString();
+            int extrarondes = int.Parse(extraro);
+            con.Close();
+
+            lblextrarondes.Text = vraagoprondes.ToString();
+
+
+
+
+        }
+
     }
 }
