@@ -20,6 +20,20 @@ namespace ProjectBedrijfApp
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (btnStop.Enabled == true)
+            {
+                lblAfbreken.Visible = false;
+                btnJA.Visible = false;
+                btnNee.Visible = false;
+            }
+            else
+            {
+                lblAfbreken.Visible = true;
+                btnJA.Visible = true;
+                btnNee.Visible = true;
+            }
+            
+
             lblDatum.Text = DateTime.Now.ToString("D");
 
 
@@ -332,6 +346,29 @@ namespace ProjectBedrijfApp
 
             Session["aantal"] = Convert.ToInt32(row.Cells[3].Text);
             */
+        }
+
+        protected void btnStop_Click(object sender, EventArgs e)
+        {
+            btnStop.Enabled = false;
+
+            lblAfbreken.Visible = true;
+            btnJA.Visible = true;
+            btnNee.Visible = true;
+        }
+
+        protected void btnJA_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("login.aspx");
+        }
+
+        protected void btnNee_Click(object sender, EventArgs e)
+        {
+            lblAfbreken.Visible = false;
+            btnJA.Visible = false;
+            btnNee.Visible = false;
+
+            btnStop.Enabled = true;
         }
     }
 }

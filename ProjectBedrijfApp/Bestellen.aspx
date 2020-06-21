@@ -33,7 +33,7 @@
             float: left;
             height: 30px;
             text-align: left;
-            width: 420px;
+            width: 390px;
         }
 
         #ronde {
@@ -49,6 +49,13 @@
             text-align: right;
             width: 420px;
             
+        }
+
+        #btnStop{
+            float: left;
+            height: 30px;
+            text-align: center;
+            width: 30px;
         }
 
         /*infobalk*/
@@ -107,6 +114,14 @@
             margin: 5px;
         }
 
+        #afbreken{
+            float: right;
+        }
+
+        .auto-style7 {
+            width: 1260px;
+        }
+
     </style>
 </head>
 <body>
@@ -114,6 +129,15 @@
     <div id="container" class="auto-style6">
 
         <!--Topbalk-->
+        <div id="afbreken" class="auto-style7">
+            <asp:Label ID="lblAfbreken" runat="server" Font-Bold="True" Font-Overline="True" Font-Size="XX-Large" Font-Underline="True" ForeColor="Red" Text="Weet je zeker dat je het bestellen permanent wilt afbreken?"></asp:Label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:Button ID="btnJA" runat="server" Font-Bold="True" Font-Size="XX-Large" Height="45px" OnClick="btnJA_Click" Text="Ja" Width="120px" />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:Button ID="btnNee" runat="server" Font-Bold="True" Font-Size="XX-Large" Height="45px" OnClick="btnNee_Click" Text="Nee" Width="120px" />
+        </div>
+        <asp:Button ID="btnStop" runat="server" BackColor="#CC0000" Font-Bold="True" Text="X" OnClick="btnStop_Click"/>
+    
         <div id="datum">
             &nbsp;
             <asp:Label ID="lblDatum" runat="server" Font-Size="X-Large" Text="Datum"></asp:Label>
@@ -125,7 +149,7 @@
             &nbsp;<asp:Label ID="lblMaxRondes" runat="server" Font-Size="X-Large" Text=""></asp:Label>
             &nbsp;<asp:Label ID="lblWaarschuwing2" runat="server" Font-Size="X-Large" ForeColor="#FF3300"></asp:Label>
         </div>
-        <div id="tijd" class="auto-style3">
+        <div id="tijd">
             <asp:Label ID="lblAantalpersonen" runat="server" Font-Size="X-Large" Text="0"></asp:Label>
             &nbsp
             <asp:Label ID="Label1" runat="server" Font-Size="X-Large" Text="personen"></asp:Label>
