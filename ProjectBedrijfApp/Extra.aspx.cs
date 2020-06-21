@@ -95,6 +95,8 @@ namespace ProjectBedrijfApp
             if (btnExtraRondes.Enabled == false)
             {
                 Session["extraatjes"] = ddlfruit.SelectedValue.ToString();
+                int rondetjes = int.Parse(Session["ronde"].ToString()) + 1;
+                Session["ronde"] = rondetjes; 
                 maxrondes += extrarondes; 
                 Session["maxronde"] = maxrondes;
                 Response.Redirect("Bestellen.aspx");
