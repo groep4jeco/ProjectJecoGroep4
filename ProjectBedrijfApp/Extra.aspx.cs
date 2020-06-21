@@ -84,23 +84,37 @@ namespace ProjectBedrijfApp
         protected void btnDoorgaan_Click(object sender, EventArgs e)
         {
 
+            SqlConnection con = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
 
 
-            
 
 
             int extrarondes = 1;
             int maxrondes = (int)Session["maxronde"];
 
+
+
+
+
             if (btnExtraRondes.Enabled == false)
             {
                 Session["extraatjes"] = ddlfruit.SelectedValue.ToString();
                 int rondetjes = int.Parse(Session["ronde"].ToString()) + 1;
-                Session["ronde"] = rondetjes; 
-                maxrondes += extrarondes; 
+                Session["ronde"] = rondetjes;
+                maxrondes += extrarondes;
                 Session["maxronde"] = maxrondes;
+                string aantal = Session["extraatjes"].ToString();
+
+                con.Open();
+                string rondestoevoegen = "Update in_restaurant set [Extra rondes] += @aantal where reserveringsnummer = @reserveringsnummero";
+                SqlDataAdapter adapter3 = new SqlDataAdapter();
+                adapter3.UpdateCommand = new SqlCommand(rondestoevoegen, con);
+                adapter3.UpdateCommand.Parameters.AddWithValue("@reserveringsnummero", Session["reservering"]);
+                adapter3.UpdateCommand.Parameters.AddWithValue("@aantal", aantal);
+                int doehet = adapter3.UpdateCommand.ExecuteNonQuery();
+                con.Close();
+
                 Response.Redirect("Bestellen.aspx");
-               
             }
 
             else
@@ -116,3 +130,6 @@ namespace ProjectBedrijfApp
         }
     }
 }
+
+
+

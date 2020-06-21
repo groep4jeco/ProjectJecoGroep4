@@ -70,7 +70,8 @@ namespace ProjectBedrijfApp
                         dr["Prijs"] = ds.Tables[0].Rows[0]["Prijs"].ToString();
                         double price = Convert.ToDouble(ds.Tables[0].Rows[0]["Prijs"].ToString());
                         double quantity = Convert.ToInt16(Request.QueryString["Hoeveelheid"].ToString());
-                        double totalprice = price * quantity;
+                        double totalprices = price * quantity;
+                        string totalprice = totalprices.ToString("0.00");
                         dr["totalprice"] = totalprice;
 
                         dt.Rows.Add(dr);

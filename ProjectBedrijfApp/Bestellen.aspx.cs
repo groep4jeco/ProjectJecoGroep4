@@ -133,10 +133,15 @@ namespace ProjectBedrijfApp
                         dr["Gerechtnummer"] = ds.Tables[0].Rows[0]["Gerechtnummer"].ToString();
                         dr["Omschrijving"] = ds.Tables[0].Rows[0]["Omschrijving"].ToString();
                         dr["Hoeveelheid"] = Request.QueryString["Hoeveelheid"];
-                        dr["Prijs"] = ds.Tables[0].Rows[0]["Prijs"].ToString();
-                        double price = Convert.ToDouble(ds.Tables[0].Rows[0]["Prijs"].ToString());
+                       // dr["Prijs"] = ds.Tables[0].Rows[0]["Prijs"].ToString();
+
+                        double prices = Convert.ToDouble(ds.Tables[0].Rows[0]["Prijs"].ToString());
+                        string price = prices.ToString("0.00");
+                        dr["Prijs"] = price;
                         double quantity = Convert.ToInt16(Request.QueryString["Hoeveelheid"].ToString());
-                        double totalprice = price * quantity;
+
+                        double totalprices = double.Parse(price) * quantity;
+                        string totalprice = totalprices.ToString("0.00");
                         dr["totalprice"] = totalprice;
 
                         dt2.Rows.Add(dr);
@@ -171,10 +176,13 @@ namespace ProjectBedrijfApp
                         dr["Gerechtnummer"] = ds.Tables[0].Rows[0]["Gerechtnummer"].ToString();
                         dr["Omschrijving"] = ds.Tables[0].Rows[0]["Omschrijving"].ToString();
                         dr["Hoeveelheid"] = Request.QueryString["Hoeveelheid"];
-                        dr["Prijs"] = ds.Tables[0].Rows[0]["Prijs"].ToString();
-                        double price = Convert.ToDouble(ds.Tables[0].Rows[0]["Prijs"].ToString());
+                        double prices = Convert.ToDouble(ds.Tables[0].Rows[0]["Prijs"].ToString());
+                        string price = prices.ToString("0.00");
+                        dr["Prijs"] = price;
                         double quantity = Convert.ToInt16(Request.QueryString["Hoeveelheid"].ToString());
-                        double totalprice = price * quantity;
+
+                        double totalprices = double.Parse(price) * quantity;
+                        string totalprice = totalprices.ToString("0.00");
                         dr["totalprice"] = totalprice;
 
                         dt2.Rows.Add(dr);
