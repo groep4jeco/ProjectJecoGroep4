@@ -359,6 +359,11 @@ namespace ProjectBedrijfApp
 
         protected void btnJA_Click(object sender, EventArgs e)
         {
+            DataTable dt = new DataTable();
+            dt = (DataTable)Session["buyitems"];
+
+            dt.Rows.Clear();
+
             Response.Redirect("login.aspx");
         }
 
