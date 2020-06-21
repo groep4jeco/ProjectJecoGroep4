@@ -20,6 +20,20 @@ namespace ProjectBedrijfApp
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (btnStop.Enabled == true)
+            {
+                lblAfbreken.Visible = false;
+                btnJA.Visible = false;
+                btnNee.Visible = false;
+            }
+            else
+            {
+                lblAfbreken.Visible = true;
+                btnJA.Visible = true;
+                btnNee.Visible = true;
+            }
+            
+
             lblDatum.Text = DateTime.Now.ToString("D");
 
 
@@ -33,8 +47,18 @@ namespace ProjectBedrijfApp
             con.Close();
 
             lblAantalpersonen.Text = aantalpersonen;
-            maxbestelbaar = int.Parse(aantalpersonen) * 5;
+            //maxbestelbaar = int.Parse(aantalpersonen) * 5;
 
+            string queriearregementen = ("select [Aantal arregementen] from in_restaurant where Reserveringsnummer = @reservering");
+            SqlConnection con2 = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
+            con2.Open();
+            SqlCommand cmdarregementen = new SqlCommand(queriearregementen, con2);
+            cmdarregementen.Parameters.AddWithValue("@reservering", Session["reservering"]);
+            object drarregementen = cmdarregementen.ExecuteScalar();
+            string aantalarregementen = drarregementen.ToString();
+            con2.Close();
+
+            maxbestelbaar = int.Parse(aantalarregementen) * 5;
 
             lblRonde.Text = Session["ronde"].ToString();
             Session["ronde"] = lblRonde.Text;
@@ -207,10 +231,10 @@ namespace ProjectBedrijfApp
 
                 if (htotaal > maxbestelbaar)
                 {
-                    lblWaarschuwing.Text = "Je hebt te veel!";
+                    lblWaarschuwing.Text = "Je hebt het maximaal aantal gratis gerechten bereikt!";
                 }
 
-                if (htotaal >= maxbestelbaar)
+                /*if (htotaal >= maxbestelbaar)
                 {
                     DataList1.Enabled = false;
                 }
@@ -218,7 +242,7 @@ namespace ProjectBedrijfApp
                 if (htotaal > maxbestelbaar)
                 {
                     btnOverzicht.Enabled = false;
-                }
+                }*/
 
             }
             return htotaal;
@@ -322,6 +346,29 @@ namespace ProjectBedrijfApp
 
             Session["aantal"] = Convert.ToInt32(row.Cells[3].Text);
             */
+        }
+
+        protected void btnStop_Click(object sender, EventArgs e)
+        {
+            btnStop.Enabled = false;
+
+            lblAfbreken.Visible = true;
+            btnJA.Visible = true;
+            btnNee.Visible = true;
+        }
+
+        protected void btnJA_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("login.aspx");
+        }
+
+        protected void btnNee_Click(object sender, EventArgs e)
+        {
+            lblAfbreken.Visible = false;
+            btnJA.Visible = false;
+            btnNee.Visible = false;
+
+            btnStop.Enabled = true;
         }
     }
 }
