@@ -70,7 +70,8 @@ namespace ProjectBedrijfApp
                         dr["Prijs"] = ds.Tables[0].Rows[0]["Prijs"].ToString();
                         double price = Convert.ToDouble(ds.Tables[0].Rows[0]["Prijs"].ToString());
                         double quantity = Convert.ToInt16(Request.QueryString["Hoeveelheid"].ToString());
-                        double totalprice = price * quantity;
+                        double totalprices = price * quantity;
+                        string totalprice = totalprices.ToString("0.00");
                         dr["totalprice"] = totalprice;
 
                         dt.Rows.Add(dr);
@@ -356,11 +357,12 @@ namespace ProjectBedrijfApp
                         string factuur = drklant.Read().ToString();
                         string factuurtje = drklant["Factuurnummer"].ToString();
                         int factuurnummer = int.Parse(factuurtje);
+                    Session["factuur"] = factuurnummer; 
                         drklant.Close();
                         string optellen = "Update factuur set Totaalbedrag += @prijs where Factuurnummer = @factuur";
                         SqlDataAdapter adapter3 = new SqlDataAdapter();
                         adapter3.UpdateCommand = new SqlCommand(optellen, con);
-                        adapter3.UpdateCommand.Parameters.AddWithValue("@factuur", factuurnummer);
+                        adapter3.UpdateCommand.Parameters.AddWithValue("@factuur", Session["factuur"]);
                         adapter3.UpdateCommand.Parameters.AddWithValue("@prijs", double.Parse(prijs.ToString()));
                         int doehet = adapter3.UpdateCommand.ExecuteNonQuery();
                         con.Close();
@@ -468,7 +470,7 @@ namespace ProjectBedrijfApp
                     string allintoevoegen = "Update factuur set Totaalbedrag += @prijs where Factuurnummer = @factuur";
                 SqlDataAdapter adapter3 = new SqlDataAdapter();
                 adapter3.UpdateCommand = new SqlCommand(allintoevoegen, con);
-                adapter3.UpdateCommand.Parameters.AddWithValue("@factuur", factuurnummer);
+                adapter3.UpdateCommand.Parameters.AddWithValue("@factuur", Session["factuur"]);
                 adapter3.UpdateCommand.Parameters.AddWithValue("@prijs", arregementprijzen);
                 int doehet = adapter3.UpdateCommand.ExecuteNonQuery();
                 con.Close();
@@ -477,16 +479,17 @@ namespace ProjectBedrijfApp
 
             if (Session["extraatjes"] != null)
             {
-                int extraprijs = (int)Session["extraatjes"] * 5;
+                int extraprijs = int.Parse(Session["extraatjes"].ToString()) * 5;
 
                 con.Open();
                 string allintoevoegen = "Update factuur set Totaalbedrag += @prijs where Factuurnummer = @factuur";
                 SqlDataAdapter adapter3 = new SqlDataAdapter();
                 adapter3.UpdateCommand = new SqlCommand(allintoevoegen, con);
-                adapter3.UpdateCommand.Parameters.AddWithValue("@factuur", factuurnummer);
+                adapter3.UpdateCommand.Parameters.AddWithValue("@factuur", Session["factuur"]);
                 adapter3.UpdateCommand.Parameters.AddWithValue("@prijs", extraprijs);
                 int doehet = adapter3.UpdateCommand.ExecuteNonQuery();
                 con.Close();
+
             }
 
 
