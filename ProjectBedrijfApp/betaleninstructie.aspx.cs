@@ -62,10 +62,24 @@ namespace ProjectBedrijfApp
             SqlCommand cmdtafel = new SqlCommand(reserveringophalen, con);
             cmdtafel.Parameters.AddWithValue("@tafel", tafelnummer);
             object objreservering = cmdtafel.ExecuteScalar();
-            string stringreservering = objreservering.ToString();
-            reserveringsnummer = int.Parse(stringreservering);
-            Session["tafel"] = reserveringsnummer;
+           
 
+            if (objreservering == null)
+
+            {
+                lblValidator.Visible = true;
+
+
+            }
+
+            else
+
+            {
+                lblValidator.Visible = false;
+                string stringreservering = objreservering.ToString();
+                reserveringsnummer = int.Parse(stringreservering);
+                Session["tafel"] = reserveringsnummer;
+            }
             con.Close();
 
 
@@ -147,7 +161,7 @@ namespace ProjectBedrijfApp
             dradres.Close();
 
 
-           
+
             bijwerken();
             subtotaal = labeltje14;
 
@@ -184,12 +198,12 @@ namespace ProjectBedrijfApp
 
                 if (dr["Kortingscode"].ToString() == invoer)
                 {
-                    
+
                     string cat = dr["Catogorienummer"].ToString();
-                    
+
                     if (cat == "1") //drankjes
                     {
-                       
+
                         string kortingp = dr["korting"].ToString();
                         double kortingdrank = (double)drankentotaal * double.Parse(kortingp);
                         double test = (double)drankentotaal - kortingdrank;
@@ -209,7 +223,7 @@ namespace ProjectBedrijfApp
 
                     if (cat == "2") //losse gerechten
                     {
-                        
+
                         con.Close();
                         allinmenu();
                         double allin = prijskids + prijsvolwassenen;
@@ -222,7 +236,7 @@ namespace ProjectBedrijfApp
                         string resulaat2 = dr2.Read().ToString();
                         string kortingp = dr2["korting"].ToString();
                         dr2.Close();
-                        
+
                         double kortingfood = (double)foodtotaal * double.Parse(kortingp);
                         double test = (double)foodtotaal - kortingfood;
 
@@ -261,7 +275,7 @@ namespace ProjectBedrijfApp
                         int doehet = adapter4.UpdateCommand.ExecuteNonQuery();
                         con.Close();
                         bijwerken();
-                        
+
                     }
 
                 }
@@ -282,18 +296,18 @@ namespace ProjectBedrijfApp
         {
             con.Open();
             string queriefactuur = "SELECT [Totaalbedrag] FROM [Factuur] WHERE [Factuurnummer] = @Factuurnummer";
-        SqlCommand cmdfactuur = new SqlCommand(queriefactuur, con);
-        cmdfactuur.Parameters.AddWithValue("@Factuurnummer", (int)Session["factuurnummer"]);
+            SqlCommand cmdfactuur = new SqlCommand(queriefactuur, con);
+            cmdfactuur.Parameters.AddWithValue("@Factuurnummer", (int)Session["factuurnummer"]);
             SqlDataReader drfactuur = cmdfactuur.ExecuteReader();
-        string resultaatfactuur = drfactuur.Read().ToString();
-        string factuurtotaal = drfactuur["Totaalbedrag"].ToString();
-        double probeer = double.Parse(factuurtotaal);
-        double label12 = probeer / 1.09;
-        double label13 = probeer / 109 * 9;
-        string label14 = drfactuur["Totaalbedrag"].ToString();
+            string resultaatfactuur = drfactuur.Read().ToString();
+            string factuurtotaal = drfactuur["Totaalbedrag"].ToString();
+            double probeer = double.Parse(factuurtotaal);
+            double label12 = probeer / 1.09;
+            double label13 = probeer / 109 * 9;
+            string label14 = drfactuur["Totaalbedrag"].ToString();
             labeltje14 = double.Parse(label14);
-        Label14.Text = labeltje14.ToString("0.00");
-        lblAantalVolw.Text = label12.ToString("0.00");
+            Label14.Text = labeltje14.ToString("0.00");
+            lblAantalVolw.Text = label12.ToString("0.00");
             LblAantalKind.Text = label13.ToString("0.00");
 
             drfactuur.Close();
@@ -314,7 +328,7 @@ namespace ProjectBedrijfApp
 
         private void allinmenu()
         {
-                        string eerstekind = "select [Aantal kinderen] from in_restaurant where Reserveringsnummer = @reservering";
+            string eerstekind = "select [Aantal kinderen] from in_restaurant where Reserveringsnummer = @reservering";
             string eerstevol = "select [Aantal Volwassenen] from in_restaurant where Reserveringsnummer = @reservering";
 
             con.Open();
@@ -421,6 +435,11 @@ namespace ProjectBedrijfApp
 
             lblTotKind.Text = prijskids.ToString();
             lblTotVolw.Text = prijsvolwassenen.ToString();
+        }
+
+        protected void txttafelnummer_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
