@@ -95,7 +95,7 @@ FETCH NEXT 1 ROWS ONLY)"></asp:SqlDataSource>
             <EmptyDataTemplate>
                 <table runat="server" style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;">
                     <tr>
-                        <td></td>
+                        <td>Alle bestellingen zijn verwerkt</td>
                     </tr>
                 </table>
             </EmptyDataTemplate>
