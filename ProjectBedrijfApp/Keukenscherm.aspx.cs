@@ -26,8 +26,6 @@ namespace ProjectBedrijfApp
         {
 
             Page.Response.Redirect(Page.Request.Url.ToString(), true);
-
-
         }
 
         protected void ListView1_ItemDeleted(object sender, ListViewDeletedEventArgs e)
@@ -43,6 +41,11 @@ namespace ProjectBedrijfApp
         protected void Button2_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/overview.aspx");
+        }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Serveerscherm.aspx");
         }
     }
 }

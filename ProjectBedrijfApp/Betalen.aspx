@@ -156,6 +156,7 @@ group by KlantenpasEmail, Factuurdatum">
                             <asp:SessionParameter Name="Factuurnummer" SessionField="factuurnummer" Type="Int32" />
                         </SelectParameters>
                     </asp:SqlDataSource>
+                    <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
                     <br />
                     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [Factuurnummer] FROM [Factuur] WHERE ([Factuurnummer] = @Factuurnummer)">
                         <SelectParameters>
