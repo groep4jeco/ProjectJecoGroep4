@@ -347,7 +347,7 @@ namespace ProjectBedrijfApp
 
             dt.Rows.Clear();
 
-            Response.Redirect("~/overview.aspx");
+            Response.Redirect("~/Extra.aspx");
 
         }
     }

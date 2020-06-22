@@ -216,7 +216,7 @@
             <asp:Button ID="t28" runat="server" Height="49px" Text="28" OnClick="SetReserverData" Width="53px" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Button ID="Buon46" runat="server" Height="30px" Text="Entree" Width="151px" />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="Button6" runat="server" Text="Button" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="Button6" runat="server" Text="Button" OnClick="Button6_Click1" />
             <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Drinken bestellen" Enabled="False" />
             <asp:Button ID="Buon83" runat="server" OnClick="Button1_Click" Text="Reserveren" Enabled="False" />
             <asp:Button ID="Button1" runat="server" OnClick="Button1_Click1" Text="log uit" />

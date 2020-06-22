@@ -379,11 +379,10 @@ namespace ProjectBedrijfApp
                         adapter2.InsertCommand.Parameters.AddWithValue("@volw", volw);
                         adapter2.InsertCommand.Parameters.AddWithValue("@kind", kind);
                         int doehet2 = adapter2.InsertCommand.ExecuteNonQuery();
-                        string prequerie2 = "select Factuurnummer from Factuur where Reserveringnummer = @reservering";
-                    con.Open();
-                        SqlCommand cmdcode2 = new SqlCommand(prequerie2, con);
+                        string prequerie2 = "select Factuurnummer from Factuur where Reserveringsnummer = @reservering";
+                                            SqlCommand cmdcode2 = new SqlCommand(prequerie2, con);
                         cmdcode2.Parameters.AddWithValue("@reservering", Session["reservering"]);
-                        object bestelregel2 = cmdcode.ExecuteScalar();
+                        object bestelregel2 = cmdcode2.ExecuteScalar();
                         string code2 = bestelregel2.ToString();
                         int bestelregelcode2 = int.Parse(code2);
                         Session["factuur"] = bestelregelcode2;

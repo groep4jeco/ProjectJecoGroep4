@@ -201,6 +201,11 @@ namespace ProjectBedrijfApp
         {
             Response.Redirect("~/betaleninstructie.aspx");
         }
+
+        protected void Button6_Click1(object sender, EventArgs e)
+        {
+            Response.Redirect("~/betaleninstructie.aspx");
+        }
     }
 
     class Tafel2
