@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Bestellen.aspx.cs" Inherits="ProjectBedrijfApp.Bestellen" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ApartBestellen.aspx.cs" Inherits="ProjectBedrijfApp.ApartBestellen" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+<title></title>
 
     <style type="text/css">
         .auto-style1 {
@@ -33,7 +33,7 @@
             float: left;
             height: 30px;
             text-align: left;
-            width: 390px;
+            width: 420px;
         }
 
         #ronde {
@@ -49,13 +49,6 @@
             text-align: right;
             width: 420px;
             
-        }
-
-        #btnStop{
-            float: left;
-            height: 30px;
-            text-align: center;
-            width: 30px;
         }
 
         /*infobalk*/
@@ -114,14 +107,6 @@
             margin: 5px;
         }
 
-        #afbreken{
-            float: right;
-        }
-
-        .auto-style7 {
-            width: 1260px;
-        }
-
     </style>
 </head>
 <body>
@@ -129,49 +114,21 @@
     <div id="container" class="auto-style6">
 
         <!--Topbalk-->
-        <div id="afbreken" class="auto-style7">
-            <asp:Label ID="lblAfbreken" runat="server" Font-Bold="True" Font-Overline="True" Font-Size="XX-Large" Font-Underline="True" ForeColor="Red" Text="Weet je zeker dat je het bestellen permanent wilt afbreken?"></asp:Label>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:Button ID="btnJA" runat="server" Font-Bold="True" Font-Size="XX-Large" Height="45px" OnClick="btnJA_Click" Text="Ja" Width="120px" />
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:Button ID="btnNee" runat="server" Font-Bold="True" Font-Size="XX-Large" Height="45px" OnClick="btnNee_Click" Text="Nee" Width="120px" />
-        </div>
-        <asp:Button ID="btnStop" runat="server" BackColor="#CC0000" Font-Bold="True" Text="X" OnClick="btnStop_Click"/>
-    
         <div id="datum">
             &nbsp;
             <asp:Label ID="lblDatum" runat="server" Font-Size="X-Large" Text="Datum"></asp:Label>
         </div>
         <div id="ronde">         
-            <asp:Label ID="Label8" runat="server" Font-Size="X-Large" Text="Ronde"></asp:Label>
-            &nbsp;<asp:Label ID="lblRonde" runat="server" Font-Size="X-Large" Text="1"></asp:Label>
-            &nbsp;<asp:Label ID="Label9" runat="server" Font-Size="X-Large" Text="/"></asp:Label>
-            &nbsp;<asp:Label ID="lblMaxRondes" runat="server" Font-Size="X-Large" Text=""></asp:Label>
-            &nbsp;<asp:Label ID="lblWaarschuwing2" runat="server" Font-Size="X-Large" ForeColor="#FF3300"></asp:Label>
-        </div>
-        <div id="tijd">
-            <asp:Label ID="lblAantalpersonen" runat="server" Font-Size="X-Large" Text="0"></asp:Label>
+            &nbsp;&nbsp;<asp:Label ID="Label9" runat="server" Font-Size="X-Large" Text="Gerechten menu"></asp:Label>
+            &nbsp;&nbsp;</div>
+        <div id="tijd" class="auto-style3">
             &nbsp
-            <asp:Label ID="Label1" runat="server" Font-Size="X-Large" Text="personen"></asp:Label>
-
-            <!--
-            <asp:ScriptManager ID="ScriptManager1" runat="server">
-            </asp:ScriptManager>
-            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                <ContentTemplate>
-                    <asp:Label ID="lblTimer" runat="server" Font-Size="X-Large">150</asp:Label>
-                    <asp:Timer ID="Timer1" runat="server" OnTick="Timer1_Tick1" Interval="1000">
-                    </asp:Timer>
-                </ContentTemplate>
-            </asp:UpdatePanel>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            -->
-
+            
         </div>
         
         <!--Info-->
         <div id="info">
-           <asp:Label ID="lblInfo" runat="server" Font-Size="X-Large" Text="Vragen stellen of drinken bestellen? Daar is het personeel voor!"></asp:Label>
+           <asp:Label ID="lblInfo" runat="server" Font-Size="X-Large" Text="Bestel hier al je gerechten!"></asp:Label>
         </div>
          
         <!--Menu-->
@@ -221,7 +178,7 @@
                 <SelectedItemStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
             </asp:DataList>
             <br />
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT * FROM [Gerecht]"></asp:SqlDataSource>           
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT * FROM [Gerecht]"></asp:SqlDataSource>
             <br />
         </div>
 
@@ -231,13 +188,12 @@
 
                 <br />
 
-                <asp:Label ID="Label2" runat="server" Text="Aantal gekozen gerechten:" Font-Size="Large"></asp:Label>
+                <asp:Label ID="Label2" runat="server" Text="Aantal gekozen dranken:" Font-Size="Large"></asp:Label>
                 &nbsp;<asp:Label ID="Label3" runat="server" Font-Bold="True" Font-Size="X-Large"></asp:Label>
                 <br />
-                <asp:Label ID="lblWaarschuwing" runat="server" Font-Bold="True" Font-Size="X-Large" ForeColor="Red"></asp:Label>
                 <br />
                 <br />
-                <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" Height="200px" OnRowDeleting="GridView2_RowDeleting" Width="279px" OnRowCommand="GridView2_RowCommand" ShowFooter="True">
+                <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" Height="200px" OnRowDeleting="GridView2_RowDeleting" Width="279px" OnRowCommand="GridView2_RowCommand">
                     <Columns>
                         <asp:BoundField DataField="sno" />
                         <asp:ImageField DataImageUrlField="afb_pad">
@@ -249,8 +205,6 @@
                         <asp:BoundField DataField="Hoeveelheid" HeaderText="Aantal">
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
-                        <asp:ButtonField CommandName="btnPlus" />
-                        <asp:ButtonField CommandName="btnMinus" />
                         <asp:CommandField DeleteText="X" ShowDeleteButton="True">
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:CommandField>
@@ -267,6 +221,7 @@
                 <br />
             </div>
         </div>
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Terug" />
     </div>
     </form>
 </body>

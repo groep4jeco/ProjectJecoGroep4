@@ -18,10 +18,11 @@ namespace ProjectBedrijfApp
         public List<string> tafelID = new List<string>();
         public List<string> results = new List<string>();
         string time;
-        bool drinkenbestellen;
+        private bool statusCheck;
         string tijdvakdata;
         int tijdvaknummer;
         string tijden;
+        bool selected;
 
         string connectionString = "Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019";
 
@@ -65,6 +66,7 @@ namespace ProjectBedrijfApp
             Session["tijdvaknummer"] = tijdvaknummer;
             con.Close();
             LoopButtons(Page.Controls);
+
         }
 
         private void LoopButtons(ControlCollection controlCollection)
@@ -88,14 +90,14 @@ namespace ProjectBedrijfApp
                         {
                             string id = control.ID;
                             string y = id.Trim('t');
-                            System.Diagnostics.Debug.WriteLine(y);
+                            // System.Diagnostics.Debug.WriteLine(y);
                             foreach (var item in results)
                             {
                                 if (results.Any(x => x.ToString() == y))
                                 {
                                     //System.Diagnostics.Debug.WriteLine("SomeText");
                                     ((Button)control).BackColor = Color.Red;
-                                    //((Button)control).Enabled = false;
+                                    
                                 }
                             }
                         }
@@ -118,10 +120,7 @@ namespace ProjectBedrijfApp
 
         private void SettingReserverData()
         {
-            //  Tafel Tafel2 = new Tafel();
-            // Tafel.Reserveringsnummer1++;
-            //SelectedTafelID = Tafel.Reserveringsnummer1;
-            Session["Reserveringsnummer"] = SelectedTafelID;
+             Session["Reserveringsnummer"] = SelectedTafelID;
             Response.Redirect("~/ReserveringPagina.aspx");
         }
 
@@ -131,10 +130,11 @@ namespace ProjectBedrijfApp
             string buttonId = button.Text.Trim();
             tafelID = (List<string>)Session["TafelId"];
 
-            //string combindedString = string.Join(",", tafelID);
-            //System.Diagnostics.Debug.WriteLine(combindedString);
+            CheckStatus(buttonId, button);
+            System.Diagnostics.Debug.WriteLine(statusCheck);
 
-            if (!tafelID.Any(x => x.ToString() == buttonId))
+
+            if (!tafelID.Any(x => x.ToString() == buttonId) || tafelID == null)
             {
                 ReserveerStatus = true;
                 tafelID.Add(buttonId);
@@ -146,16 +146,38 @@ namespace ProjectBedrijfApp
             }
 
 
-            System.Diagnostics.Debug.WriteLine(ReserveerStatus);
-            if (ReserveerStatus)
+            if (!statusCheck)
             {
-                button.BackColor = Color.Green;
+                if (ReserveerStatus)
+                {
+                    Buon83.Enabled = true;
+                    button.BackColor = Color.Green;
+                }
+                if (!ReserveerStatus)
+                {
+                    tafelID.Remove(buttonId);
+                    button.BackColor = default;
+                    Buon83.Enabled = false;
+                }
             }
-            if (!ReserveerStatus)
+        }
+        private void CheckStatus(string BtnId, Button btn) 
+        {
+            for (int i = 0; i < results.Count; i++)
             {
-                tafelID.Remove(buttonId);
-                button.BackColor = Color.Red;
-                System.Diagnostics.Debug.WriteLine(tafelID.Count);
+                if (results.Any(x => x.ToString() == BtnId))
+                {
+                    statusCheck = true;
+                    Button2.Enabled = true;
+                    Buon83.Enabled = false;
+                    btn.BackColor = Color.Blue;
+                    selected = true;
+                }
+                else if (selected)
+                {
+                    statusCheck = false;
+                    Button2.Enabled = false;
+                }
             }
         }
 
@@ -173,7 +195,12 @@ namespace ProjectBedrijfApp
         protected void Button2_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Bestellen_drinken.aspx");
-        } 
+        }
+
+        protected void Button6_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/betaleninstructie.aspx");
+        }
     }
 
     class Tafel2

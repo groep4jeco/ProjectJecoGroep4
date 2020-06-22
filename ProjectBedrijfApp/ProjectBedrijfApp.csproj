@@ -94,10 +94,12 @@
     <Content Include="Afbeeldingen\Temaki\Shrimp-Temaki.png" />
     <Content Include="Afbeeldingen\Temaki\Tuna-Avocado-Temaki.png" />
     <Content Include="Bestellen_drinken.aspx" />
+    <Content Include="betalen.aspx" />
+    <Content Include="betaleninstructie.aspx" />
     <Content Include="Dranken_overzicht.aspx" />
+    <Content Include="Extra.aspx" />
     <Content Include="regristratiepagina.aspx" />
     <Content Include="Bestellen.aspx" />
-    <Content Include="Betalen.aspx" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
     <Content Include="bin\ProjectBedrijfApp.dll" />
@@ -210,6 +212,7 @@
     <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\VBCSCompiler.exe" />
     <Content Include="Reserveren.aspx" />
     <Content Include="ReserveringPagina.aspx" />
+    <Content Include="Serveerscherm.aspx" />
     <Content Include="tabletkeuze.aspx" />
     <Content Include="Timer.aspx" />
     <Content Include="Web.config" />
@@ -229,12 +232,33 @@
     <Compile Include="Bestellen_drinken.aspx.designer.cs">
       <DependentUpon>Bestellen_drinken.aspx</DependentUpon>
     </Compile>
+    <Compile Include="betalen.aspx.cs">
+      <DependentUpon>betalen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="betalen.aspx.designer.cs">
+      <DependentUpon>betalen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="betaleninstructie.aspx.cs">
+      <DependentUpon>betaleninstructie.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="betaleninstructie.aspx.designer.cs">
+      <DependentUpon>betaleninstructie.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Dranken_overzicht.aspx.cs">
       <DependentUpon>Dranken_overzicht.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Dranken_overzicht.aspx.designer.cs">
       <DependentUpon>Dranken_overzicht.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Extra.aspx.cs">
+      <DependentUpon>Extra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Extra.aspx.designer.cs">
+      <DependentUpon>Extra.aspx</DependentUpon>
     </Compile>
     <Compile Include="regristratiepagina.aspx.cs">
       <DependentUpon>regristratiepagina.aspx</DependentUpon>
@@ -249,13 +273,6 @@
     </Compile>
     <Compile Include="Bestellen.aspx.designer.cs">
       <DependentUpon>Bestellen.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Betalen.aspx.cs">
-      <DependentUpon>Betalen.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Betalen.aspx.designer.cs">
-      <DependentUpon>Betalen.aspx</DependentUpon>
     </Compile>
     <Compile Include="Keukenscherm.aspx.cs">
       <DependentUpon>Keukenscherm.aspx</DependentUpon>
@@ -313,6 +330,13 @@
     </Compile>
     <Compile Include="ReserveringPagina.aspx.designer.cs">
       <DependentUpon>ReserveringPagina.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Serveerscherm.aspx.cs">
+      <DependentUpon>Serveerscherm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Serveerscherm.aspx.designer.cs">
+      <DependentUpon>Serveerscherm.aspx</DependentUpon>
     </Compile>
     <Compile Include="tabletkeuze.aspx.cs">
       <DependentUpon>tabletkeuze.aspx</DependentUpon>
