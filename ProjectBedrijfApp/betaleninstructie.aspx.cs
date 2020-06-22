@@ -301,6 +301,7 @@ namespace ProjectBedrijfApp
                     {
                         con.Close();
                         bijwerken();
+                        subtotaal = labeltje14;
                         con.Open();
                         SqlDataReader dr3 = cmdSchedule.ExecuteReader();
                         string resulaat3 = dr3.Read().ToString();
