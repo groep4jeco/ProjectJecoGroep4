@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddToCard.aspx.cs" Inherits="ProjectBedrijfApp.AddToCard" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ApartBestellen_overzicht.aspx.cs" Inherits="ProjectBedrijfApp.ApartBestellen_overzicht" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+<title></title>
     <style type="text/css">
         .auto-style1 {
             text-align: left;
@@ -18,11 +18,11 @@
 <body>
     <form id="form1" runat="server">
         <div class="auto-style1">
-            <asp:Label ID="Label2" runat="server" Text="Aantal producten in winkelmand:" Font-Size="X-Large"></asp:Label>
+            <asp:Label ID="Label2" runat="server" Text="Aantal producten:" Font-Size="X-Large"></asp:Label>
 &nbsp;<asp:Label ID="Label3" runat="server" Font-Bold="True" ForeColor="Red" Font-Size="X-Large"></asp:Label>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br />
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" ForeColor="Black" Height="363px" OnRowDeleting="GridView1_RowDeleting" ShowFooter="True" Width="700px" DataKeyNames="Hoeveelheid,Gerechtnummer,Prijs" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" ForeColor="Black" Height="363px" OnRowDeleting="GridView1_RowDeleting" ShowFooter="True" Width="700px" DataKeyNames="Hoeveelheid,Gerechtnummer,Prijs">
                 <Columns>
                     <asp:BoundField DataField="sno" />
                     <asp:ImageField DataImageUrlField="afb_pad">
@@ -42,6 +42,7 @@
                     </asp:BoundField>
                     <asp:BoundField DataField="totalprice" HeaderText="Totale Prijs">
                     <HeaderStyle HorizontalAlign="Center" />
+                    <ItemStyle HorizontalAlign="Center" />
                     </asp:BoundField>
                     <asp:CommandField DeleteText="Verwijder" ShowDeleteButton="True" />
                 </Columns>

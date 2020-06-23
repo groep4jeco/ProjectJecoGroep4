@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace ProjectBedrijfApp
 {
-    public partial class Bestellen_drinken : System.Web.UI.Page
+    public partial class ApartBestellen : System.Web.UI.Page
     {
 
         protected void Page_Load(object sender, EventArgs e)
@@ -18,7 +18,7 @@ namespace ProjectBedrijfApp
 
 
             DataTable dt = new DataTable();
-            dt = (DataTable)Session["koopdrinken"];
+            dt = (DataTable)Session["bestelapart"];
 
             if (dt != null)
             {
@@ -38,7 +38,7 @@ namespace ProjectBedrijfApp
                 DataTable dt2 = new DataTable();
                 DataRow dr;
                 dt2.Columns.Add("sno");
-                dt2.Columns.Add("artikelnummer");
+                dt2.Columns.Add("Gerechtnummer");
                 dt2.Columns.Add("Omschrijving");
                 dt2.Columns.Add("Hoeveelheid");
                 dt2.Columns.Add("Prijs");
@@ -49,12 +49,12 @@ namespace ProjectBedrijfApp
 
                 if (Request.QueryString["id"] != null)
                 {
-                    if (Session["koopdrinken"] == null)
+                    if (Session["bestelapart"] == null)
                     {
                         dr = dt2.NewRow();
                         String mycon = "Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;Persist Security Info=True;User ID=BIM01A2019;Password=BIM01A2019";
                         SqlConnection scon = new SqlConnection(mycon);
-                        String myquery = "select * from Dranken where artikelnummer=" + Request.QueryString["id"];
+                        String myquery = "select * from Gerecht where Gerechtnummer=" + Request.QueryString["id"];
                         SqlCommand cmd = new SqlCommand();
                         cmd.CommandText = myquery;
                         cmd.Connection = scon;
@@ -64,7 +64,7 @@ namespace ProjectBedrijfApp
                         da.Fill(ds);
                         dr["sno"] = 1;
                         dr["afb_pad"] = ds.Tables[0].Rows[0]["afb_pad"].ToString();
-                        dr["artikelnummer"] = ds.Tables[0].Rows[0]["artikelnummer"].ToString();
+                        dr["Gerechtnummer"] = ds.Tables[0].Rows[0]["Gerechtnummer"].ToString();
                         dr["Omschrijving"] = ds.Tables[0].Rows[0]["Omschrijving"].ToString();
                         dr["Hoeveelheid"] = Request.QueryString["Hoeveelheid"];
                         dr["Prijs"] = ds.Tables[0].Rows[0]["Prijs"].ToString();
@@ -77,22 +77,22 @@ namespace ProjectBedrijfApp
                         GridView2.DataSource = dt2;
                         GridView2.DataBind();
 
-                        Session["koopdrinken"] = dt2;
+                        Session["bestelapart"] = dt2;
 
 
-                        Response.Redirect("Bestellen_drinken.aspx");
+                        Response.Redirect("ApartBestellen.aspx");
                     }
                     else
                     {
 
-                        dt2 = (DataTable)Session["koopdrinken"];
+                        dt2 = (DataTable)Session["bestelapart"];
                         int sr;
                         sr = dt2.Rows.Count;
 
                         dr = dt2.NewRow();
                         String mycon = "Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;Persist Security Info=True;User ID=BIM01A2019;Password=BIM01A2019";
                         SqlConnection scon = new SqlConnection(mycon);
-                        String myquery = "select * from Dranken where artikelnummer=" + Request.QueryString["id"];
+                        String myquery = "select * from Gerecht where Gerechtnummer=" + Request.QueryString["id"];
                         SqlCommand cmd = new SqlCommand();
                         cmd.CommandText = myquery;
                         cmd.Connection = scon;
@@ -102,7 +102,7 @@ namespace ProjectBedrijfApp
                         da.Fill(ds);
                         dr["sno"] = sr + 1;
                         dr["afb_pad"] = ds.Tables[0].Rows[0]["afb_pad"].ToString();
-                        dr["artikelnummer"] = ds.Tables[0].Rows[0]["artikelnummer"].ToString();
+                        dr["Gerechtnummer"] = ds.Tables[0].Rows[0]["Gerechtnummer"].ToString();
                         dr["Omschrijving"] = ds.Tables[0].Rows[0]["Omschrijving"].ToString();
                         dr["Hoeveelheid"] = Request.QueryString["Hoeveelheid"];
                         dr["Prijs"] = ds.Tables[0].Rows[0]["Prijs"].ToString();
@@ -115,17 +115,17 @@ namespace ProjectBedrijfApp
                         GridView2.DataSource = dt2;
                         GridView2.DataBind();
 
-                        Session["koopdrinken"] = dt2;
+                        Session["bestelapart"] = dt2;
 
 
-                        Response.Redirect("Bestellen_drinken.aspx");
+                        Response.Redirect("ApartBestellen.aspx");
                     }
                 }
                 else
                 {
-                    dt2 = (DataTable)Session["koopdrinken"];
+                    dt2 = (DataTable)Session["bestelapart"];
                     GridView2.DataSource = dt2;
-                    GridView2.DataBind();                   
+                    GridView2.DataBind();
 
                 }
 
@@ -133,7 +133,7 @@ namespace ProjectBedrijfApp
 
         }
 
-        
+
 
 
         protected void DataList1_ItemCommand(object source, DataListCommandEventArgs e)
@@ -143,19 +143,19 @@ namespace ProjectBedrijfApp
 
 
                 DropDownList dlist = (DropDownList)(e.Item.FindControl("DropDownList1"));
-                Response.Redirect("Bestellen_drinken.aspx?id=" + e.CommandArgument.ToString() + "&Hoeveelheid=" + dlist.SelectedItem.ToString());
+                Response.Redirect("ApartBestellen.aspx?id=" + e.CommandArgument.ToString() + "&Hoeveelheid=" + dlist.SelectedItem.ToString());
             }
         }
 
         protected void btnOverzicht_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Dranken_overzicht.aspx");
+            Response.Redirect("ApartBestellen_overzicht.aspx");
         }
 
         protected void GridView2_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             DataTable dt2 = new DataTable();
-            dt2 = (DataTable)Session["koopdrinken"];
+            dt2 = (DataTable)Session["bestelapart"];
 
 
             for (int i = 0; i <= dt2.Rows.Count - 1; i++)
@@ -184,7 +184,7 @@ namespace ProjectBedrijfApp
                 dt2.AcceptChanges();
             }
 
-            Session["koopdrinken"] = dt2;
+            Session["bestelapart"] = dt2;
             Response.Redirect(Request.RawUrl);
         }
 

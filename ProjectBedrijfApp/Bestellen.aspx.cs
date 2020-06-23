@@ -20,6 +20,20 @@ namespace ProjectBedrijfApp
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (btnStop.Enabled == true)
+            {
+                lblAfbreken.Visible = false;
+                btnJA.Visible = false;
+                btnNee.Visible = false;
+            }
+            else
+            {
+                lblAfbreken.Visible = true;
+                btnJA.Visible = true;
+                btnNee.Visible = true;
+            }
+            
+
             lblDatum.Text = DateTime.Now.ToString("D");
 
 
@@ -33,14 +47,25 @@ namespace ProjectBedrijfApp
             con.Close();
 
             lblAantalpersonen.Text = aantalpersonen;
-            maxbestelbaar = int.Parse(aantalpersonen) * 5;
+            //maxbestelbaar = int.Parse(aantalpersonen) * 5;
 
+            string queriearregementen = ("select [Aantal arregementen] from in_restaurant where Reserveringsnummer = @reservering");
+            SqlConnection con2 = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
+            con2.Open();
+            SqlCommand cmdarregementen = new SqlCommand(queriearregementen, con2);
+            cmdarregementen.Parameters.AddWithValue("@reservering", Session["reservering"]);
+            object drarregementen = cmdarregementen.ExecuteScalar();
+            string aantalarregementen = drarregementen.ToString();
+            con2.Close();
+
+            maxbestelbaar = int.Parse(aantalarregementen) * 5;
 
             lblRonde.Text = Session["ronde"].ToString();
             Session["ronde"] = lblRonde.Text;
             int ronde = int.Parse(lblRonde.Text);
             Session["ronde"] = ronde;
 
+            /*
             con.Open();
             string maxrondes = ("select [Aantal rondes] from in_restaurant where Reserveringsnummer = @reservering");
             SqlCommand rondesaanvraag = new SqlCommand(maxrondes, con);
@@ -48,15 +73,14 @@ namespace ProjectBedrijfApp
             object test = rondesaanvraag.ExecuteScalar();
             string aantalrondes = test.ToString();
             con.Close();
+            */
 
-            lblMaxRondes.Text = aantalrondes;
-            Session["maxronde"] = aantalrondes;
+            lblMaxRondes.Text = Session["maxronde"].ToString();
 
-            if (int.Parse(lblRonde.Text) > int.Parse(aantalrondes))
+            if (int.Parse(lblRonde.Text) > (int)Session["ronde"])
             {
-                Response.Redirect("Beginpagina.aspx");
+                Response.Redirect("regristratiepagina.aspx");
             }
-
 
 
             DataTable dt = new DataTable();
@@ -109,10 +133,15 @@ namespace ProjectBedrijfApp
                         dr["Gerechtnummer"] = ds.Tables[0].Rows[0]["Gerechtnummer"].ToString();
                         dr["Omschrijving"] = ds.Tables[0].Rows[0]["Omschrijving"].ToString();
                         dr["Hoeveelheid"] = Request.QueryString["Hoeveelheid"];
-                        dr["Prijs"] = ds.Tables[0].Rows[0]["Prijs"].ToString();
-                        double price = Convert.ToDouble(ds.Tables[0].Rows[0]["Prijs"].ToString());
+                       // dr["Prijs"] = ds.Tables[0].Rows[0]["Prijs"].ToString();
+
+                        double prices = Convert.ToDouble(ds.Tables[0].Rows[0]["Prijs"].ToString());
+                        string price = prices.ToString("0.00");
+                        dr["Prijs"] = price;
                         double quantity = Convert.ToInt16(Request.QueryString["Hoeveelheid"].ToString());
-                        double totalprice = price * quantity;
+
+                        double totalprices = double.Parse(price) * quantity;
+                        string totalprice = totalprices.ToString("0.00");
                         dr["totalprice"] = totalprice;
 
                         dt2.Rows.Add(dr);
@@ -147,10 +176,13 @@ namespace ProjectBedrijfApp
                         dr["Gerechtnummer"] = ds.Tables[0].Rows[0]["Gerechtnummer"].ToString();
                         dr["Omschrijving"] = ds.Tables[0].Rows[0]["Omschrijving"].ToString();
                         dr["Hoeveelheid"] = Request.QueryString["Hoeveelheid"];
-                        dr["Prijs"] = ds.Tables[0].Rows[0]["Prijs"].ToString();
-                        double price = Convert.ToDouble(ds.Tables[0].Rows[0]["Prijs"].ToString());
+                        double prices = Convert.ToDouble(ds.Tables[0].Rows[0]["Prijs"].ToString());
+                        string price = prices.ToString("0.00");
+                        dr["Prijs"] = price;
                         double quantity = Convert.ToInt16(Request.QueryString["Hoeveelheid"].ToString());
-                        double totalprice = price * quantity;
+
+                        double totalprices = double.Parse(price) * quantity;
+                        string totalprice = totalprices.ToString("0.00");
                         dr["totalprice"] = totalprice;
 
                         dt2.Rows.Add(dr);
@@ -207,10 +239,10 @@ namespace ProjectBedrijfApp
 
                 if (htotaal > maxbestelbaar)
                 {
-                    lblWaarschuwing.Text = "Je hebt te veel!";
+                    lblWaarschuwing.Text = "Je hebt het maximaal aantal gratis gerechten bereikt!";
                 }
 
-                if (htotaal >= maxbestelbaar)
+                /*if (htotaal >= maxbestelbaar)
                 {
                     DataList1.Enabled = false;
                 }
@@ -218,7 +250,7 @@ namespace ProjectBedrijfApp
                 if (htotaal > maxbestelbaar)
                 {
                     btnOverzicht.Enabled = false;
-                }
+                }*/
 
             }
             return htotaal;
@@ -322,6 +354,34 @@ namespace ProjectBedrijfApp
 
             Session["aantal"] = Convert.ToInt32(row.Cells[3].Text);
             */
+        }
+
+        protected void btnStop_Click(object sender, EventArgs e)
+        {
+            btnStop.Enabled = false;
+
+            lblAfbreken.Visible = true;
+            btnJA.Visible = true;
+            btnNee.Visible = true;
+        }
+
+        protected void btnJA_Click(object sender, EventArgs e)
+        {
+            DataTable dt = new DataTable();
+            dt = (DataTable)Session["buyitems"];
+
+            dt.Rows.Clear();
+
+            Response.Redirect("login.aspx");
+        }
+
+        protected void btnNee_Click(object sender, EventArgs e)
+        {
+            lblAfbreken.Visible = false;
+            btnJA.Visible = false;
+            btnNee.Visible = false;
+
+            btnStop.Enabled = true;
         }
     }
 }
