@@ -39,26 +39,51 @@ namespace ProjectBedrijfApp
 
             string queriepersonen = ("select SUM([Aantal Volwassenen] + [Aantal kinderen]) from in_restaurant where Reserveringsnummer = @reservering");
             SqlConnection con = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
-            con.Open();
-            SqlCommand cmdklant = new SqlCommand(queriepersonen, con);
-            cmdklant.Parameters.AddWithValue("@reservering", Session["reservering"]);
-            object drpersonen = cmdklant.ExecuteScalar();
-            string aantalpersonen = drpersonen.ToString();
-            con.Close();
 
-            lblAantalpersonen.Text = aantalpersonen;
+            try
+            {
+                con.Open();
+                SqlCommand cmdklant = new SqlCommand(queriepersonen, con);
+                cmdklant.Parameters.AddWithValue("@reservering", Session["reservering"]);
+                object drpersonen = cmdklant.ExecuteScalar();
+                string aantalpersonen = drpersonen.ToString();
+
+                lblAantalpersonen.Text = aantalpersonen;
+            }
+            catch
+            {
+                lblWaarschuwing.Text = "Kan aantal personen niet ophalen";
+            }
+            finally
+            {
+                con.Close();
+            }
+
             //maxbestelbaar = int.Parse(aantalpersonen) * 5;
 
             string queriearregementen = ("select [Aantal arregementen] from in_restaurant where Reserveringsnummer = @reservering");
             SqlConnection con2 = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
-            con2.Open();
-            SqlCommand cmdarregementen = new SqlCommand(queriearregementen, con2);
-            cmdarregementen.Parameters.AddWithValue("@reservering", Session["reservering"]);
-            object drarregementen = cmdarregementen.ExecuteScalar();
-            string aantalarregementen = drarregementen.ToString();
-            con2.Close();
 
-            maxbestelbaar = int.Parse(aantalarregementen) * 5;
+            try
+            {
+                con2.Open();
+                SqlCommand cmdarregementen = new SqlCommand(queriearregementen, con2);
+                cmdarregementen.Parameters.AddWithValue("@reservering", Session["reservering"]);
+                object drarregementen = cmdarregementen.ExecuteScalar();
+                string aantalarregementen = drarregementen.ToString();
+
+                maxbestelbaar = int.Parse(aantalarregementen) * 5;
+            }
+            catch
+            {
+                lblWaarschuwing.Text = "Aantal arregementen zijn niet vastgesteld!";
+            }
+            finally
+            {
+                con2.Close();
+            }
+
+            
 
             lblRonde.Text = Session["ronde"].ToString();
             Session["ronde"] = lblRonde.Text;
@@ -367,12 +392,23 @@ namespace ProjectBedrijfApp
 
         protected void btnJA_Click(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-            dt = (DataTable)Session["buyitems"];
+            try
+            {
+                DataTable dt = new DataTable();
+                dt = (DataTable)Session["buyitems"];
 
-            dt.Rows.Clear();
+                dt.Rows.Clear();
+            }
 
-            Response.Redirect("login.aspx");
+            catch
+            {
+
+            }
+            finally
+            {
+                Response.Redirect("login.aspx");
+            }
+            
         }
 
         protected void btnNee_Click(object sender, EventArgs e)

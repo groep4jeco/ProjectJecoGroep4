@@ -96,15 +96,12 @@
     <Content Include="ApartBestellen.aspx" />
     <Content Include="ApartBestellen_overzicht.aspx" />
     <Content Include="Bestellen_drinken.aspx" />
-    <Content Include="betalen.aspx" />
     <Content Include="betaleninstructie.aspx" />
+    <Content Include="default.aspx" />
     <Content Include="Dranken_overzicht.aspx" />
-    <Content Include="Extra.aspx" />
-    <Content Include="obj\Debug\ProjectBedrijfApp.csproj.FileListAbsolute.txt" />
-    <Content Include="obj\Debug\ProjectBedrijfApp.dll" />
-    <Content Include="obj\Debug\ProjectBedrijfApp.pdb" />
     <Content Include="regristratiepagina.aspx" />
     <Content Include="Bestellen.aspx" />
+    <Content Include="Betalen.aspx" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
     <Content Include="bin\ProjectBedrijfApp.dll" />
@@ -217,7 +214,6 @@
     <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\VBCSCompiler.exe" />
     <Content Include="Reserveren.aspx" />
     <Content Include="ReserveringPagina.aspx" />
-    <Content Include="Serveerscherm.aspx" />
     <Content Include="tabletkeuze.aspx" />
     <Content Include="Timer.aspx" />
     <Content Include="Web.config" />
@@ -251,13 +247,6 @@
     <Compile Include="Bestellen_drinken.aspx.designer.cs">
       <DependentUpon>Bestellen_drinken.aspx</DependentUpon>
     </Compile>
-    <Compile Include="betalen.aspx.cs">
-      <DependentUpon>betalen.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="betalen.aspx.designer.cs">
-      <DependentUpon>betalen.aspx</DependentUpon>
-    </Compile>
     <Compile Include="betaleninstructie.aspx.cs">
       <DependentUpon>betaleninstructie.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -265,19 +254,19 @@
     <Compile Include="betaleninstructie.aspx.designer.cs">
       <DependentUpon>betaleninstructie.aspx</DependentUpon>
     </Compile>
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Dranken_overzicht.aspx.cs">
       <DependentUpon>Dranken_overzicht.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Dranken_overzicht.aspx.designer.cs">
       <DependentUpon>Dranken_overzicht.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Extra.aspx.cs">
-      <DependentUpon>Extra.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Extra.aspx.designer.cs">
-      <DependentUpon>Extra.aspx</DependentUpon>
     </Compile>
     <Compile Include="regristratiepagina.aspx.cs">
       <DependentUpon>regristratiepagina.aspx</DependentUpon>
@@ -292,6 +281,13 @@
     </Compile>
     <Compile Include="Bestellen.aspx.designer.cs">
       <DependentUpon>Bestellen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Betalen.aspx.cs">
+      <DependentUpon>Betalen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Betalen.aspx.designer.cs">
+      <DependentUpon>Betalen.aspx</DependentUpon>
     </Compile>
     <Compile Include="Keukenscherm.aspx.cs">
       <DependentUpon>Keukenscherm.aspx</DependentUpon>
@@ -350,13 +346,6 @@
     <Compile Include="ReserveringPagina.aspx.designer.cs">
       <DependentUpon>ReserveringPagina.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Serveerscherm.aspx.cs">
-      <DependentUpon>Serveerscherm.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Serveerscherm.aspx.designer.cs">
-      <DependentUpon>Serveerscherm.aspx</DependentUpon>
-    </Compile>
     <Compile Include="tabletkeuze.aspx.cs">
       <DependentUpon>tabletkeuze.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -386,11 +375,6 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
-    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
-    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <Content Include="obj\Debug\ProjectBedrijfApp.csproj.CopyComplete" />
-    <Content Include="obj\Debug\ProjectBedrijfApp.csproj.CoreCompileInputs.cache" />
-    <Content Include="obj\Debug\ProjectBedrijfApp.csprojAssemblyReference.cache" />
     <None Include="packages.config" />
     <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\.signature.p7s" />
     <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.Extensions.props" />
@@ -433,9 +417,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="obj\Debug\TempPE\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

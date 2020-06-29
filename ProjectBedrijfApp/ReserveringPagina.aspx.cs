@@ -71,142 +71,176 @@ namespace ProjectBedrijfApp
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            if (TxtKind.Text == "")
+            if (Page.IsValid == true)
             {
-                kinderen = 0;
-            }
 
 
-            else
-            {
-                kinderen = int.Parse(TxtKind.Text);
-            }
 
-            if (int.Parse(TxtVolw.Text) + kinderen > teller * 2)
-            {
-                lblSorry.Text = "Het aantal personen is hoger dan de capiciteit van de tafels ga terug naar het overzicht en selecteer meer tafels";
-                
-            }
-
-            if (TxtVolw.Text == "")
-            {
-                lblSorry.Text = "Er moet minimaal 1 volwassenen mee";
-            }
-
-            else
-            {
-                if (RadioButton1.Checked == false && RadioButton2.Checked == false)
+                if (TxtKind.Text == "")
                 {
-                    lblSorry.Text = "Vink een tijdvak aan";
+                    kinderen = 0;
                 }
+
+
                 else
                 {
-                    lblSorry.Text = "";
+                    kinderen = int.Parse(TxtKind.Text);
+                }
 
-                    if (RadioButton1.Checked == true)
+                if (int.Parse(TxtVolw.Text) + kinderen > teller * 2)
+                {
+                    lblSorry.Text = "Het aantal personen is hoger dan de capiciteit van de tafels ga terug naar het overzicht en selecteer meer tafels";
+
+                }
+
+                if (TxtVolw.Text == "")
+                {
+                    lblSorry.Text = "Er moet minimaal 1 volwassenen mee";
+                }
+
+                else
+                {
+                    if (RadioButton1.Checked == false && RadioButton2.Checked == false)
                     {
-                        time = "17:00:00";
-                        var result = Convert.ToDateTime(time);
-                        tijdvakdata = result.ToString("hh:mm:ss tt", CultureInfo.CurrentCulture);
+                        lblSorry.Text = "Vink een tijdvak aan";
                     }
-
-                    else if (RadioButton2.Checked == true)
-                    {
-                        time = "19:30:00";
-                        var result = Convert.ToDateTime(time);
-                        tijdvakdata = result.ToString("hh:mm:ss");
-                    }
-
-                    if (cbAlles.Checked == true)
-                    {
-                        allin = 1;
-                    }
-
                     else
                     {
-                        allin = 0;
-                    }
+                        lblSorry.Text = "";
 
-                    try
-                    {
-                        aantalrondes = int.Parse(txtRondes.Text);
-                    }
-                    catch
-                    {
-                        aantalrondes = 0;
-                    }
-                    finally
-                    {
+                        if (RadioButton1.Checked == true)
+                        {
+                            time = "17:00:00";
+                            var result = Convert.ToDateTime(time);
+                            tijdvakdata = result.ToString("hh:mm:ss tt", CultureInfo.CurrentCulture);
+                        }
 
-                    }
+                        else if (RadioButton2.Checked == true)
+                        {
+                            time = "19:30:00";
+                            var result = Convert.ToDateTime(time);
+                            tijdvakdata = result.ToString("hh:mm:ss");
+                        }
 
-                    int volwassenen = int.Parse(TxtVolw.Text);
+                        if (cbAlles.Checked == true)
+                        {
+                            allin = 1;
+                        }
 
-                    CultureInfo dutch = new CultureInfo("nl-NL");
-                    DateTime dagvandaag = DateTime.Now;
-                    string dagen = dutch.DateTimeFormat.GetDayName(dagvandaag.DayOfWeek).ToString();
-                    string dagen2 = dagen.ToString();
-                    Label1.Text = dagen2;
-                    string datum = dagvandaag.ToString("yyyy-MM-dd");
-                    DateTime test = DateTime.Parse(datum);
+                        else
+                        {
+                            allin = 0;
+                        }
 
-                    string reservering = "Insert into reservering(datum, klantklantID, [RestaurantRestaurant ID]) values (@datum, @klant, @restaurant)";
-                    string reserveringsnummer = "select reserveringsnummer from reservering where klantklantid = @klant AND datum = @datum AND [RestaurantRestaurant ID] = @restaurant";
-                    string invoegen = "Begin transaction; Insert into in_restaurant([All you can eat], [Aantal arregementen], [ReserveringsstatusStatus ID], TijdvakNummer, [Aantal kinderen], [Aantal Volwassenen], Reserveringsnummer)  values(@allin, @aantalrondes, 2, (select Tijdvak.Nummer from Tijdvak where Begintijd = @tijd AND Dag = @dagprobeer), @kind, @volw, @reserveringsnummers); commit;";
-                    //command = new SqlCommand(invoegen, connnection);
-                    //
-                    con.Open();
-                    adapter2.InsertCommand = new SqlCommand(reservering, con);
-                    adapter2.InsertCommand.Parameters.AddWithValue("@datum", test);
-                    adapter2.InsertCommand.Parameters.AddWithValue("@klant", Session["klantid"]);
-                    adapter2.InsertCommand.Parameters.AddWithValue("@restaurant", 1);
-                    int probeer1 = adapter2.InsertCommand.ExecuteNonQuery();
+                        try
+                        {
+                            aantalrondes = int.Parse(txtRondes.Text);
+                        }
+                        catch
+                        {
+                            aantalrondes = 0;
+                        }
+                        finally
+                        {
 
-                    con.Close();
+                        }
 
-                    con.Open();
-                    SqlCommand cmdklant = new SqlCommand(reserveringsnummer, con);
-                    cmdklant.Parameters.AddWithValue("@datum", test);
-                    cmdklant.Parameters.AddWithValue("@klant", Session["klantid"]);
-                    cmdklant.Parameters.AddWithValue("@restaurant", 1);
-                    SqlDataReader drklant = cmdklant.ExecuteReader();
-                    string resultaatklant2 = drklant.Read().ToString();
-                    Session["Reserveringsnummer"] = drklant["Reserveringsnummer"];
-                    drklant.Close();
-                    con.Close();
+                        int volwassenen = int.Parse(TxtVolw.Text);
 
+                        CultureInfo dutch = new CultureInfo("nl-NL");
+                        DateTime dagvandaag = DateTime.Now;
+                        string dagen = dutch.DateTimeFormat.GetDayName(dagvandaag.DayOfWeek).ToString();
+                        string dagen2 = dagen.ToString();
+                        Label1.Text = dagen2;
+                        string datum = dagvandaag.ToString("yyyy-MM-dd");
+                        DateTime test = DateTime.Parse(datum);
 
-
-                    con.Open();
-                    //command.CommandType = CommandType.StoredProcedure;
-                    adapter.InsertCommand = new SqlCommand(invoegen, con);
-                    adapter.InsertCommand.Parameters.AddWithValue("@reserveringsnummers", Session["Reserveringsnummer"]);
-                    adapter.InsertCommand.Parameters.AddWithValue("@dagprobeer", dagen2);
-                    adapter.InsertCommand.Parameters.AddWithValue("@tijd", time);
-                    adapter.InsertCommand.Parameters.AddWithValue("@allin", allin);
-                    adapter.InsertCommand.Parameters.AddWithValue("@volw", volwassenen);
-                    adapter.InsertCommand.Parameters.AddWithValue("@kind", kinderen);
-                    adapter.InsertCommand.Parameters.AddWithValue("@aantalrondes", aantalrondes);
-                    int probeer = adapter.InsertCommand.ExecuteNonQuery();
-
-                    con.Close();
-
-                    foreach (var item in tafelID)
-                    {
+                        string reservering = "Insert into reservering(datum, klantklantID, [RestaurantRestaurant ID]) values (@datum, @klant, @restaurant)";
+                        string reserveringsnummer = "select reserveringsnummer from reservering where klantklantid = @klant AND datum = @datum AND [RestaurantRestaurant ID] = @restaurant";
+                        string invoegen = "Begin transaction; Insert into in_restaurant([All you can eat], [Aantal arregementen], [ReserveringsstatusStatus ID], TijdvakNummer, [Aantal kinderen], [Aantal Volwassenen], Reserveringsnummer)  values(@allin, @aantalrondes, 2, (select Tijdvak.Nummer from Tijdvak where Begintijd = @tijd AND Dag = @dagprobeer), @kind, @volw, @reserveringsnummers); commit;";
+                        //command = new SqlCommand(invoegen, connnection);
+                        //
                         con.Open();
-                        string tafelreservering = "INSERT INTO Tafel_Reservering (TafelTafelnummer, [TafelRestaurantRestaurant ID], [Reserveringsnummer]) VALUES (@tafelnummer, @restaurant, @reservering)";
-                        adapter.InsertCommand = new SqlCommand(tafelreservering, con);
-                        adapter.InsertCommand.Parameters.AddWithValue("@reservering", Session["Reserveringsnummer"]);
-                        adapter.InsertCommand.Parameters.AddWithValue("@tafelnummer", item);
-                        adapter.InsertCommand.Parameters.AddWithValue("@restaurant", 1);
-                        int tafeltjes = adapter.InsertCommand.ExecuteNonQuery();
-                        con.Close();
-                    }
+                        adapter2.InsertCommand = new SqlCommand(reservering, con);
+                        adapter2.InsertCommand.Parameters.AddWithValue("@datum", test);
+                        adapter2.InsertCommand.Parameters.AddWithValue("@klant", Session["klantid"]);
+                        adapter2.InsertCommand.Parameters.AddWithValue("@restaurant", 1);
+                        try
+                        {
+                            int probeer1 = adapter2.InsertCommand.ExecuteNonQuery();
+                        }
+                        finally
+                        {
+                            con.Close();
+                        }
 
-                    Response.Redirect("~/overview.aspx");
+                        
+
+                        con.Open();
+                        SqlCommand cmdklant = new SqlCommand(reserveringsnummer, con);
+                        cmdklant.Parameters.AddWithValue("@datum", test);
+                        cmdklant.Parameters.AddWithValue("@klant", Session["klantid"]);
+                        cmdklant.Parameters.AddWithValue("@restaurant", 1);
+                        try
+                        {
+                            SqlDataReader drklant = cmdklant.ExecuteReader();
+                            string resultaatklant2 = drklant.Read().ToString();
+                            Session["Reserveringsnummer"] = drklant["Reserveringsnummer"];
+                            drklant.Close();
+                            con.Close();
+                        }
+                        finally
+                        {
+                            con.Close();
+                            drklant.Close();
+                        }
+
+
+
+                        con.Open();
+                        //command.CommandType = CommandType.StoredProcedure;
+                        adapter.InsertCommand = new SqlCommand(invoegen, con);
+                        adapter.InsertCommand.Parameters.AddWithValue("@reserveringsnummers", Session["Reserveringsnummer"]);
+                        adapter.InsertCommand.Parameters.AddWithValue("@dagprobeer", dagen2);
+                        adapter.InsertCommand.Parameters.AddWithValue("@tijd", time);
+                        adapter.InsertCommand.Parameters.AddWithValue("@allin", allin);
+                        adapter.InsertCommand.Parameters.AddWithValue("@volw", volwassenen);
+                        adapter.InsertCommand.Parameters.AddWithValue("@kind", kinderen);
+                        adapter.InsertCommand.Parameters.AddWithValue("@aantalrondes", aantalrondes);
+                        try
+                        {
+                            int probeer = adapter.InsertCommand.ExecuteNonQuery();
+                        }
+                        finally
+                        {
+                            con.Close();
+                        }
+
+                        
+
+                        foreach (var item in tafelID)
+                        {
+                            con.Open();
+                            string tafelreservering = "INSERT INTO Tafel_Reservering (TafelTafelnummer, [TafelRestaurantRestaurant ID], [Reserveringsnummer]) VALUES (@tafelnummer, @restaurant, @reservering)";
+                            adapter.InsertCommand = new SqlCommand(tafelreservering, con);
+                            adapter.InsertCommand.Parameters.AddWithValue("@reservering", Session["Reserveringsnummer"]);
+                            adapter.InsertCommand.Parameters.AddWithValue("@tafelnummer", item);
+                            adapter.InsertCommand.Parameters.AddWithValue("@restaurant", 1);
+                            try
+                            {
+                                int tafeltjes = adapter.InsertCommand.ExecuteNonQuery();
+                            }
+                            finally
+                            {
+                                con.Close();
+                            }
+                            
+                        }
+
+                        Response.Redirect("~/overview.aspx");
+                    }
                 }
             }
-            
         }
 
 
@@ -333,6 +367,74 @@ namespace ProjectBedrijfApp
         protected void Button1_Click1(object sender, EventArgs e)
         {
             Response.Redirect("~/overview.aspx");
+        }
+
+        protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            try
+            {
+                teller = tafelID.Count();
+                int aantalkids = int.Parse(TxtKind.Text);
+                int aantalvows = int.Parse(TxtVolw.Text);
+                int totje = aantalkids + aantalvows;
+                Session["totje"] = totje;
+                if (teller * 2 < totje || totje == 0)
+                {
+                    args.IsValid = false;
+                }
+            }
+            catch
+            {
+                args.IsValid = true;
+            }
+            finally
+            {
+
+            }
+
+        }
+
+        protected void CustomValidator1_ServerValidate1(object source, ServerValidateEventArgs args)
+        {
+            try
+            {
+                if (cbAlles.Checked == true)
+                {
+                    int veld = int.Parse(txtRondes.Text);
+                    if (veld > (int)Session["totje"])
+                    {
+                        args.IsValid = false;
+                        CustomValidator1.ErrorMessage = "Het aantal arregementen mag niet groter zijn dan het aantal personen.";
+                    }
+                }
+
+            }
+            catch
+
+            {
+                args.IsValid = true;
+            }
+            finally
+            {
+
+            }
+        }
+
+        protected void Txttelefoon_TextChanged1(object sender, EventArgs e)
+        {
+            RegularExpressionValidator3.Enabled = true;
+        }
+
+        protected void Selecteereenklant_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if (Session["klantid"] != null)
+            {
+                args.IsValid = true;
+            }
+            else
+            {
+                args.IsValid = false;
+            }
         }
     }
 }
