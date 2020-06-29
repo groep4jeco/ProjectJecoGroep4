@@ -160,13 +160,13 @@ namespace ProjectBedrijfApp
                         string invoegen = "Begin transaction; Insert into in_restaurant([All you can eat], [Aantal arregementen], [ReserveringsstatusStatus ID], TijdvakNummer, [Aantal kinderen], [Aantal Volwassenen], Reserveringsnummer)  values(@allin, @aantalrondes, 2, (select Tijdvak.Nummer from Tijdvak where Begintijd = @tijd AND Dag = @dagprobeer), @kind, @volw, @reserveringsnummers); commit;";
                         //command = new SqlCommand(invoegen, connnection);
                         //
-                        con.Open();
-                        adapter2.InsertCommand = new SqlCommand(reservering, con);
-                        adapter2.InsertCommand.Parameters.AddWithValue("@datum", test);
-                        adapter2.InsertCommand.Parameters.AddWithValue("@klant", Session["klantid"]);
-                        adapter2.InsertCommand.Parameters.AddWithValue("@restaurant", 1);
                         try
                         {
+                            con.Open();
+                            adapter2.InsertCommand = new SqlCommand(reservering, con);
+                            adapter2.InsertCommand.Parameters.AddWithValue("@datum", test);
+                            adapter2.InsertCommand.Parameters.AddWithValue("@klant", Session["klantid"]);
+                            adapter2.InsertCommand.Parameters.AddWithValue("@restaurant", 1);
                             int probeer1 = adapter2.InsertCommand.ExecuteNonQuery();
                         }
                         finally
@@ -174,15 +174,13 @@ namespace ProjectBedrijfApp
                             con.Close();
                         }
 
-                        
-
-                        con.Open();
-                        SqlCommand cmdklant = new SqlCommand(reserveringsnummer, con);
-                        cmdklant.Parameters.AddWithValue("@datum", test);
-                        cmdklant.Parameters.AddWithValue("@klant", Session["klantid"]);
-                        cmdklant.Parameters.AddWithValue("@restaurant", 1);
                         try
                         {
+                            con.Open();
+                            SqlCommand cmdklant = new SqlCommand(reserveringsnummer, con);
+                            cmdklant.Parameters.AddWithValue("@datum", test);
+                            cmdklant.Parameters.AddWithValue("@klant", Session["klantid"]);
+                            cmdklant.Parameters.AddWithValue("@restaurant", 1);
                             SqlDataReader drklant = cmdklant.ExecuteReader();
                             string resultaatklant2 = drklant.Read().ToString();
                             Session["Reserveringsnummer"] = drklant["Reserveringsnummer"];
@@ -197,7 +195,9 @@ namespace ProjectBedrijfApp
 
 
 
-                        con.Open();
+                       
+                        try
+                        { con.Open();
                         //command.CommandType = CommandType.StoredProcedure;
                         adapter.InsertCommand = new SqlCommand(invoegen, con);
                         adapter.InsertCommand.Parameters.AddWithValue("@reserveringsnummers", Session["Reserveringsnummer"]);
@@ -207,8 +207,6 @@ namespace ProjectBedrijfApp
                         adapter.InsertCommand.Parameters.AddWithValue("@volw", volwassenen);
                         adapter.InsertCommand.Parameters.AddWithValue("@kind", kinderen);
                         adapter.InsertCommand.Parameters.AddWithValue("@aantalrondes", aantalrondes);
-                        try
-                        {
                             int probeer = adapter.InsertCommand.ExecuteNonQuery();
                         }
                         finally
