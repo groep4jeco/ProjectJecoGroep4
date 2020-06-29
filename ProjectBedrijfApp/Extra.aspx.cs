@@ -14,6 +14,8 @@ namespace ProjectBedrijfApp
     public partial class Extra : System.Web.UI.Page
     {
         int menuutjes;
+        string aantal;
+        string nummer;
         protected void Page_Load(object sender, EventArgs e)
         {
             btnDoorgaan.Enabled = false;
@@ -82,25 +84,21 @@ namespace ProjectBedrijfApp
 
             SqlConnection con = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
 
-
-
-
             int extrarondes = 1;
             int maxrondes = (int)Session["maxronde"];
 
-
-
-
-
             if (btnExtraRondes.Enabled == false)
             {
-                Session["extraatjes"] = ddlfruit.SelectedValue.ToString();
-                int rondetjes = int.Parse(Session["ronde"].ToString()) + 1;
-                Session["ronde"] = rondetjes;
-                maxrondes += extrarondes;
-                Session["maxronde"] = maxrondes;
-                string aantal = Session["extraatjes"].ToString();
-                string nummer = Session["reservering"].ToString();
+                if (Session["extraatjes"] != null && Session["ronde"] != null && Session["maxronde"] != null && Session["reservering"] != null)
+                {
+                    Session["extraatjes"] = ddlfruit.SelectedValue.ToString();
+                    int rondetjes = int.Parse(Session["ronde"].ToString()) + 1;
+                    Session["ronde"] = rondetjes;
+                    maxrondes += extrarondes;
+                    Session["maxronde"] = maxrondes;
+                    aantal = Session["extraatjes"].ToString();
+                    nummer = Session["reservering"].ToString();
+                }    
 
                 con.Open();
                 string rondestoevoegen = "Update in_restaurant set [Extra rondes] = isnull([Extra rondes], 0) + @aantal where reserveringsnummer = @reserveringsnummero";

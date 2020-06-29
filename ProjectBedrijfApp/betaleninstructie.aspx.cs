@@ -69,7 +69,7 @@ namespace ProjectBedrijfApp
                 lblTotKind.Visible = false;
                 LblAantalKind.Visible = false;
                 lblTotVolw.Visible = false;
-                
+
             }
         }
 
@@ -94,7 +94,10 @@ namespace ProjectBedrijfApp
         protected void btnzoekfactuur_Click(object sender, EventArgs e)
         {
             tellertje = 0;
-            Session["tellertje"] = tellertje;
+            if (Session["tellertje"] != null)
+            {
+                Session["tellertje"] = tellertje;
+            }
 
             if (Page.IsValid == true)
             {
@@ -151,7 +154,10 @@ namespace ProjectBedrijfApp
             {
                 resultaattotaal = (int)GridView1.DataKeys[gvr.RowIndex].Values["Factuurnummer"];
             }
-            Session["factuurnummer"] = resultaattotaal;
+            if (Session["factuurnummer"] != null)
+            {
+                Session["factuurnummer"] = resultaattotaal;
+            }
             foreach (GridViewRow gvr in GridView1.Rows)
 
             {
@@ -200,7 +206,7 @@ namespace ProjectBedrijfApp
             {
                 con.Close();
             }
-            
+
             try
             {
 
@@ -217,7 +223,7 @@ namespace ProjectBedrijfApp
             catch
             {
                 Label9.Visible = false;
-                Label10.Visible = false; 
+                Label10.Visible = false;
                 Label11.Visible = false;
 
             }
@@ -341,7 +347,7 @@ namespace ProjectBedrijfApp
                             {
                                 con.Close();
                             }
-                           
+
                             bijwerken();
                         }
 
@@ -389,7 +395,7 @@ namespace ProjectBedrijfApp
                             {
                                 con.Close();
                             }
-                            
+
                             bijwerken();
 
                         }
@@ -513,7 +519,7 @@ namespace ProjectBedrijfApp
             {
                 con.Close();
             }
-            
+
 
             try
             {
@@ -584,7 +590,10 @@ namespace ProjectBedrijfApp
                 object tijd2 = cmdtijdvak.ExecuteScalar();
                 tijden = tijd2.ToString();
                 tijdvaknummer = int.Parse(tijden);
-                Session["tijdvaknummer"] = tijdvaknummer;
+                if (Session["tijdvaknummer"] != null)
+                {
+                    Session["tijdvaknummer"] = tijdvaknummer;
+                }
             }
             catch
             {
@@ -594,7 +603,7 @@ namespace ProjectBedrijfApp
             {
                 con.Close();
             }
-            
+
             con.Open();
             try
             {
@@ -630,7 +639,7 @@ namespace ProjectBedrijfApp
                 con.Close();
             }
 
-            
+
             string prijskin = prijsk.ToString();
             prijskids = double.Parse(prijskin) * kinderenmetallin;
 
@@ -667,7 +676,7 @@ namespace ProjectBedrijfApp
             {
                 con.Close();
             }
-            
+
 
             lblextrarondes.Text = vraagoprondes.ToString();
 
@@ -694,7 +703,7 @@ namespace ProjectBedrijfApp
                 string stringreservering = objreservering.ToString();
                 reserveringsnummer = int.Parse(stringreservering);
                 Session["tafel"] = reserveringsnummer;
-                if(Session["tafel"] != null && (int)Session["tafel"] != 0)
+                if (Session["tafel"] != null && (int)Session["tafel"] != 0)
                 {
                     args.IsValid = true;
                 }
@@ -712,7 +721,7 @@ namespace ProjectBedrijfApp
             {
                 con.Close();
             }
-            
+
         }
 
         protected void TextBox1_TextChanged(object sender, EventArgs e)
@@ -755,7 +764,7 @@ namespace ProjectBedrijfApp
             {
                 juistonjuist = 0;
             }
-            finally 
+            finally
             {
                 con.Close();
             }
@@ -778,7 +787,7 @@ namespace ProjectBedrijfApp
                         args.IsValid = true;
                         Session["tellertje"] = (int)Session["tellertje"] + 1;
                     }
-                    
+
                 }
             }
 
