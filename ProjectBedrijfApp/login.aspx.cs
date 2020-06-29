@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace ProjectBedrijfApp
 {
-    
+
     public partial class overview : System.Web.UI.Page
     {
         string connetionString;
@@ -44,8 +44,8 @@ namespace ProjectBedrijfApp
 
 
 
-                string Id = TextBox1.Text;
-                string password = TextBox2.Text;
+                string Id = IdLogin.Text;
+                string password = Wachtwoord.Text;
 
                 SqlCommand cmdSchedule = new SqlCommand(query, cnn);
 
@@ -65,7 +65,7 @@ namespace ProjectBedrijfApp
                         Session["Id"] = dr["Personeelsnummer"];
                         Session["Naam"] = dr["Voornaam"];
                         Session["Functie"] = ismanager;
-                        Response.Redirect("tabletkeuze.aspx");
+                        Response.Redirect("tabletkeuze.aspx?Voornaam=" + dr["Voornaam"] + "&functie=" +  dr["Personeelsnummer"]);
                     }
                     else
                     {
@@ -73,7 +73,7 @@ namespace ProjectBedrijfApp
                         Session["Naam"] = dr["Voornaam"];
                         Response.Redirect("tabletkeuze.aspx");
                     }
-                        
+
                 }
                 dr.Close();
             }
@@ -87,5 +87,5 @@ namespace ProjectBedrijfApp
                 cnn.Close();
             }
         }
-        }
     }
+}

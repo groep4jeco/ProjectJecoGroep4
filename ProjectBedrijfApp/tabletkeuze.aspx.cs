@@ -14,16 +14,31 @@ namespace ProjectBedrijfApp
         private string isManager;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Id = Session["Id"].ToString();
-            voornaam = (string)Session["Naam"];
-            isManager = (string)Session["Functie"];
-
-            VrmNaam.Text = voornaam;
-            IdLabel.Text = Id;
-
-            if (isManager == "Manager")
+            if (Session["Naam"] != null && Session["Functie"] != null)
             {
-                Button3.Visible = true;
+                voornaam = (string)Session["Naam"];
+                isManager = (string)Session["Functie"];
+
+                VrmNaam.Text = voornaam;
+                IdLabel.Text = Id;
+
+                if (isManager == "Manager")
+                {
+                    Button3.Visible = true;
+                }
+            }
+            else if (Request.QueryString["Voornaam"] != null && Request.QueryString["Functie"] != null)
+            {
+                voornaam = Request.QueryString["Voornaam"];
+                isManager = Request.QueryString["Functie"];
+
+                VrmNaam.Text = voornaam;
+                IdLabel.Text = Id;
+
+                if (isManager == "Manager")
+                {
+                    Button3.Visible = true;
+                }
             }
         }
 
