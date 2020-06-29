@@ -11,14 +11,17 @@ namespace ProjectBedrijfApp
 {
     public partial class ApartBestellen : System.Web.UI.Page
     {
+        DataTable dt = new DataTable();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             lblDatum.Text = DateTime.Now.ToString("D");
 
+            if (Session["bestelapart"] != null)
+            {
+                dt = (DataTable)Session["bestelapart"];
+            }
 
-            DataTable dt = new DataTable();
-            dt = (DataTable)Session["bestelapart"];
 
             if (dt != null)
             {

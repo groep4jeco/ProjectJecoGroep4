@@ -54,18 +54,24 @@ namespace ProjectBedrijfApp
         protected void Page_Load(object sender, EventArgs e)
         {
             // Reserveringsnummer = (int)Session["Reserveringsnummer"];
-            tafelID = (List<string>)Session["TafelId"];
-            teller = tafelID.Count();
+            if ((List<string>)Session["TafelId"] != null)
+            {
+                tafelID = (List<string>)Session["TafelId"];
+                teller = tafelID.Count();
+            }
         }
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((int)GridView1.DataKeys[GridView1.SelectedIndex]["KlantID"] != null)
+            if (Session["klantid"] != null)
             {
-                Session["klantid"] = (int)GridView1.DataKeys[GridView1.SelectedIndex]["KlantID"];
-            }
+                if ((int)GridView1.DataKeys[GridView1.SelectedIndex]["KlantID"] != null)
+                {
+                    Session["klantid"] = (int)GridView1.DataKeys[GridView1.SelectedIndex]["KlantID"];
+                }
 
-            lbldatum.Text = Session["klantid"].ToString();
+                lbldatum.Text = Session["klantid"].ToString();
+            }
 
         }
 
@@ -192,21 +198,18 @@ namespace ProjectBedrijfApp
                             con.Close();
                             drklant.Close();
                         }
-
-
-
-                       
                         try
-                        { con.Open();
-                        //command.CommandType = CommandType.StoredProcedure;
-                        adapter.InsertCommand = new SqlCommand(invoegen, con);
-                        adapter.InsertCommand.Parameters.AddWithValue("@reserveringsnummers", Session["Reserveringsnummer"]);
-                        adapter.InsertCommand.Parameters.AddWithValue("@dagprobeer", dagen2);
-                        adapter.InsertCommand.Parameters.AddWithValue("@tijd", time);
-                        adapter.InsertCommand.Parameters.AddWithValue("@allin", allin);
-                        adapter.InsertCommand.Parameters.AddWithValue("@volw", volwassenen);
-                        adapter.InsertCommand.Parameters.AddWithValue("@kind", kinderen);
-                        adapter.InsertCommand.Parameters.AddWithValue("@aantalrondes", aantalrondes);
+                        {
+                            con.Open();
+                            //command.CommandType = CommandType.StoredProcedure;
+                            adapter.InsertCommand = new SqlCommand(invoegen, con);
+                            adapter.InsertCommand.Parameters.AddWithValue("@reserveringsnummers", Session["Reserveringsnummer"]);
+                            adapter.InsertCommand.Parameters.AddWithValue("@dagprobeer", dagen2);
+                            adapter.InsertCommand.Parameters.AddWithValue("@tijd", time);
+                            adapter.InsertCommand.Parameters.AddWithValue("@allin", allin);
+                            adapter.InsertCommand.Parameters.AddWithValue("@volw", volwassenen);
+                            adapter.InsertCommand.Parameters.AddWithValue("@kind", kinderen);
+                            adapter.InsertCommand.Parameters.AddWithValue("@aantalrondes", aantalrondes);
                             int probeer = adapter.InsertCommand.ExecuteNonQuery();
                         }
                         finally
@@ -214,7 +217,7 @@ namespace ProjectBedrijfApp
                             con.Close();
                         }
 
-                        
+
 
                         foreach (var item in tafelID)
                         {
@@ -232,7 +235,7 @@ namespace ProjectBedrijfApp
                             {
                                 con.Close();
                             }
-                            
+
                         }
 
                         Response.Redirect("~/overview.aspx");

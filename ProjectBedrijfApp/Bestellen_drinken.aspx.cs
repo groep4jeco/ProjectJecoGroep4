@@ -18,8 +18,10 @@ namespace ProjectBedrijfApp
 
 
             DataTable dt = new DataTable();
-            dt = (DataTable)Session["koopdrinken"];
-
+            if (Session["koopdrinken"] != null)
+            {
+                dt = (DataTable)Session["koopdrinken"];
+            }
             if (dt != null)
             {
 
@@ -125,7 +127,7 @@ namespace ProjectBedrijfApp
                 {
                     dt2 = (DataTable)Session["koopdrinken"];
                     GridView2.DataSource = dt2;
-                    GridView2.DataBind();                   
+                    GridView2.DataBind();
 
                 }
 
@@ -133,7 +135,7 @@ namespace ProjectBedrijfApp
 
         }
 
-        
+
 
 
         protected void DataList1_ItemCommand(object source, DataListCommandEventArgs e)
@@ -155,7 +157,11 @@ namespace ProjectBedrijfApp
         protected void GridView2_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             DataTable dt2 = new DataTable();
-            dt2 = (DataTable)Session["koopdrinken"];
+            if (Session["koopdrinken"] != null)
+            {
+                dt2 = (DataTable)Session["koopdrinken"];
+            }
+          
 
 
             for (int i = 0; i <= dt2.Rows.Count - 1; i++)

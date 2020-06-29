@@ -16,6 +16,7 @@ namespace ProjectBedrijfApp
         int nrow;
         int i;
         int toevoegen;
+        int ronde;
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -83,14 +84,15 @@ namespace ProjectBedrijfApp
                 con2.Close();
             }
 
-            
+            if (Session["ronde"] != null)
+            {
+                lblRonde.Text = Session["ronde"].ToString();
+                Session["ronde"] = lblRonde.Text;
+                ronde = int.Parse(lblRonde.Text);
+                Session["ronde"] = ronde;
+            }
 
-            lblRonde.Text = Session["ronde"].ToString();
-            Session["ronde"] = lblRonde.Text;
-            int ronde = int.Parse(lblRonde.Text);
-            Session["ronde"] = ronde;
-
-            /*
+           /*
             con.Open();
             string maxrondes = ("select [Aantal rondes] from in_restaurant where Reserveringsnummer = @reservering");
             SqlCommand rondesaanvraag = new SqlCommand(maxrondes, con);
@@ -109,7 +111,10 @@ namespace ProjectBedrijfApp
 
 
             DataTable dt = new DataTable();
-            dt = (DataTable)Session["buyitems"];
+            if (Session["buyitems"] != null)
+            {
+                dt = (DataTable)Session["buyitems"];
+            }
 
             if (dt != null)
             {
@@ -140,7 +145,7 @@ namespace ProjectBedrijfApp
 
                 if (Request.QueryString["id"] != null)
                 {
-                    if (Session["Buyitems"] == null)
+                    if (Session["buyitems"] == null)
                     {
                         dr = dt2.NewRow();
                         String mycon = "Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;Persist Security Info=True;User ID=BIM01A2019;Password=BIM01A2019";

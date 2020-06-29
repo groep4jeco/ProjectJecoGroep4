@@ -12,7 +12,11 @@ namespace ProjectBedrijfApp
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblRonde.Text = Session["ronde"].ToString();
+            if (Session["ronde"] != null)
+            {
+                lblRonde.Text = Session["ronde"].ToString();
+            }
+
             Button1.Enabled = false;
         }
 
