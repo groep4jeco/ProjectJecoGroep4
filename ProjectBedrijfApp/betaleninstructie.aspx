@@ -246,6 +246,7 @@
                 <tr>
                     <td>
                         <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Betalen" BackColor="#669999" BorderColor="#006666" BorderStyle="Outset" Width="246px" />
+                        <asp:Button ID="Terug" runat="server" OnClick="Terug_Click" Text="Terug" />
                     </td>
                 </tr>
             </table>

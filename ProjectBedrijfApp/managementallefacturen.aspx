@@ -283,7 +283,7 @@ COMMIT;">
                         <td>
                             <asp:Label ID="lblExtrarondes" runat="server"></asp:Label>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <asp:Label ID="LblExtraRondesPrijs" runat="server" Text="LblExtraRondesPrijs"></asp:Label>
+                            <asp:Label ID="LblExtraRondesPrijs" runat="server"></asp:Label>
                         </td>
                     </tr>
                 </table>
