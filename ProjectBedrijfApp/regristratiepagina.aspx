@@ -44,11 +44,12 @@
             <br />
                 <asp:Label ID="Label3" runat="server" Text="Voer het tafelnummer in:" Font-Size="Large"></asp:Label>
             <br />
+                <asp:CustomValidator ID="CustomValidator1" runat="server" ErrorMessage="Geen reservering gevonden" OnServerValidate="CustomValidator1_ServerValidate"></asp:CustomValidator>
             <br />
           
                 <asp:TextBox ID="TextBox1" runat="server" Height="16px" Width="185px" Font-Size="Large"></asp:TextBox>
                 <br />
-                <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="TextBox1" ErrorMessage="RangeValidator" Font-Size="Large" ForeColor="Red" MaximumValue="9999" MinimumValue="1">Reserveringsnummers beginnen vanaf 1!</asp:RangeValidator>
+                <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="TextBox1" ErrorMessage="RangeValidator" Font-Size="Large" ForeColor="Red" MaximumValue="9999" MinimumValue="1">Tafelnummers beginnen vanaf 1!</asp:RangeValidator>
                 <br />
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBox1" ErrorMessage="RequiredFieldValidator" Font-Size="Large" ForeColor="Red">Je moet iets invullen!</asp:RequiredFieldValidator>
                 <br />

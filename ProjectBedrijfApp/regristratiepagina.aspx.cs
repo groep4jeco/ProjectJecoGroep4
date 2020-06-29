@@ -21,7 +21,18 @@ namespace ProjectBedrijfApp
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            if (TextBox1.Text != "")
+            if (Page.IsValid == true)
+            {
+                if (TextBox1.Text != "")
+                {
+                    Response.Redirect("~/Bestellen.aspx");
+                }
+            }
+        }
+
+        protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            try
             {
                 int tafelnummer = int.Parse(TextBox1.Text);
                 con.Open();
@@ -33,10 +44,22 @@ namespace ProjectBedrijfApp
                 int reserveringsnummer = int.Parse(stringreservering);
                 Session["reservering"] = reserveringsnummer;
                 con.Close();
-
-                Response.Redirect("~/Bestellen.aspx");
+                if (Session["reservering"] != null || (int)Session["reservering"] == 0)
+                {
+                    args.IsValid = true;
+                }
+                else
+                {
+                    args.IsValid = false;
+                }
+                
             }
 
+            catch
+            {
+                args.IsValid = false;
+            }
+            finally { }
         }
     }
 }

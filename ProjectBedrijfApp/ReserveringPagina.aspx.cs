@@ -165,20 +165,35 @@ namespace ProjectBedrijfApp
                         adapter2.InsertCommand.Parameters.AddWithValue("@datum", test);
                         adapter2.InsertCommand.Parameters.AddWithValue("@klant", Session["klantid"]);
                         adapter2.InsertCommand.Parameters.AddWithValue("@restaurant", 1);
-                        int probeer1 = adapter2.InsertCommand.ExecuteNonQuery();
+                        try
+                        {
+                            int probeer1 = adapter2.InsertCommand.ExecuteNonQuery();
+                        }
+                        finally
+                        {
+                            con.Close();
+                        }
 
-                        con.Close();
+                        
 
                         con.Open();
                         SqlCommand cmdklant = new SqlCommand(reserveringsnummer, con);
                         cmdklant.Parameters.AddWithValue("@datum", test);
                         cmdklant.Parameters.AddWithValue("@klant", Session["klantid"]);
                         cmdklant.Parameters.AddWithValue("@restaurant", 1);
-                        SqlDataReader drklant = cmdklant.ExecuteReader();
-                        string resultaatklant2 = drklant.Read().ToString();
-                        Session["Reserveringsnummer"] = drklant["Reserveringsnummer"];
-                        drklant.Close();
-                        con.Close();
+                        try
+                        {
+                            SqlDataReader drklant = cmdklant.ExecuteReader();
+                            string resultaatklant2 = drklant.Read().ToString();
+                            Session["Reserveringsnummer"] = drklant["Reserveringsnummer"];
+                            drklant.Close();
+                            con.Close();
+                        }
+                        finally
+                        {
+                            con.Close();
+                            drklant.Close();
+                        }
 
 
 
@@ -192,9 +207,16 @@ namespace ProjectBedrijfApp
                         adapter.InsertCommand.Parameters.AddWithValue("@volw", volwassenen);
                         adapter.InsertCommand.Parameters.AddWithValue("@kind", kinderen);
                         adapter.InsertCommand.Parameters.AddWithValue("@aantalrondes", aantalrondes);
-                        int probeer = adapter.InsertCommand.ExecuteNonQuery();
+                        try
+                        {
+                            int probeer = adapter.InsertCommand.ExecuteNonQuery();
+                        }
+                        finally
+                        {
+                            con.Close();
+                        }
 
-                        con.Close();
+                        
 
                         foreach (var item in tafelID)
                         {
@@ -204,8 +226,15 @@ namespace ProjectBedrijfApp
                             adapter.InsertCommand.Parameters.AddWithValue("@reservering", Session["Reserveringsnummer"]);
                             adapter.InsertCommand.Parameters.AddWithValue("@tafelnummer", item);
                             adapter.InsertCommand.Parameters.AddWithValue("@restaurant", 1);
-                            int tafeltjes = adapter.InsertCommand.ExecuteNonQuery();
-                            con.Close();
+                            try
+                            {
+                                int tafeltjes = adapter.InsertCommand.ExecuteNonQuery();
+                            }
+                            finally
+                            {
+                                con.Close();
+                            }
+                            
                         }
 
                         Response.Redirect("~/overview.aspx");
