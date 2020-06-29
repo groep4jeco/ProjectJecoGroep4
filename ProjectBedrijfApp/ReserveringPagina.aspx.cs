@@ -326,13 +326,21 @@ namespace ProjectBedrijfApp
                 System.Diagnostics.Debug.WriteLine(clicked);
                 string nieuwe_klant = "Insert into Klant (Voornaam, Achternaam, Email, Telefoonnummer) VALUES (@voornaam, @achternaam, @email, @telefoon)";
                 con.Open();
-                adapter.InsertCommand = new SqlCommand(nieuwe_klant, con);
-                adapter.InsertCommand.Parameters.AddWithValue("@voornaam", txtVoornaam.Text);
-                adapter.InsertCommand.Parameters.AddWithValue("@achternaam", txtAchternaam.Text);
-                adapter.InsertCommand.Parameters.AddWithValue("@email", txtEmail.Text);
-                adapter.InsertCommand.Parameters.AddWithValue("@telefoon", Txttelefoon.Text);
-                int probeer = adapter.InsertCommand.ExecuteNonQuery();
-                con.Close();
+                try
+                {
+                    adapter.InsertCommand = new SqlCommand(nieuwe_klant, con);
+                    adapter.InsertCommand.Parameters.AddWithValue("@voornaam", txtVoornaam.Text);
+                    adapter.InsertCommand.Parameters.AddWithValue("@achternaam", txtAchternaam.Text);
+                    adapter.InsertCommand.Parameters.AddWithValue("@email", txtEmail.Text);
+                    adapter.InsertCommand.Parameters.AddWithValue("@telefoon", Txttelefoon.Text);
+                    int probeer = adapter.InsertCommand.ExecuteNonQuery();
+                }
+                finally
+                {
+                    con.Close();
+                }
+
+               
                 GridView1.DataBind();
 
 
@@ -433,6 +441,19 @@ namespace ProjectBedrijfApp
             {
                 args.IsValid = false;
             }
+        }
+
+        protected void CustomValidator2_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            if(RadioButton1.Checked == false && RadioButton2.Checked == false)
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = true;
+            }
+                
         }
     }
 }

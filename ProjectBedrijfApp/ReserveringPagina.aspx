@@ -45,6 +45,7 @@
            
             <br />
             <br />
+            <asp:CustomValidator ID="CustomValidator2" runat="server" ErrorMessage="selecteer een tijdvak" OnServerValidate="CustomValidator2_ServerValidate"></asp:CustomValidator>
             <br />
             &nbsp;<asp:Label ID="Label1" runat="server" Text="Tijd vak"></asp:Label>
             <asp:RadioButton ID="RadioButton1" runat="server" GroupName="Tijdvak" OnCheckedChanged="RadioButton1_CheckedChanged" Text="17:00-19:30" />
@@ -66,6 +67,7 @@
 
             <asp:TextBox ID="TxtVolw" runat="server" OnTextChanged="TxtVolw_TextChanged" TextMode="Number"></asp:TextBox>
             <br />
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="TxtVolw" ErrorMessage="Allen getallen toegestaan" ValidationExpression="^[1-9]\d?$"></asp:RegularExpressionValidator>
             <br />
             <br />
             <asp:Label ID="lblKind" runat="server" Text="Aantal kinderen"></asp:Label>
@@ -74,6 +76,7 @@
             <br />
             <asp:TextBox ID="TxtKind" runat="server" TextMode="Number"></asp:TextBox>
             <br />
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="TxtKind" ErrorMessage="Alleen getallen toegestaan" ValidationExpression="^[1-9]\d?$"></asp:RegularExpressionValidator>
             <br />
             <asp:CustomValidator ID="perosnenteveel" runat="server" ErrorMessage="Maximaal twee personen per tafel toegestaan. Selecteer meer tafels of minder personen" OnServerValidate="CustomValidator1_ServerValidate"></asp:CustomValidator>
             <br />
@@ -87,6 +90,7 @@
             <asp:CustomValidator ID="CustomValidator1" runat="server" ErrorMessage="Aantal arregementen kan niet meer zijn dan aantal personen" OnServerValidate="CustomValidator1_ServerValidate1"></asp:CustomValidator>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br />
+             <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ControlToValidate="txtRondes" ErrorMessage="Alleen getallen toegestaan." ValidationExpression="^[1-9]\d?$"></asp:RegularExpressionValidator>
              <br />
             <br />
             <br />
@@ -129,6 +133,7 @@
             <asp:Label ID="lblVoornaam" runat="server" Text="Voornaam*"></asp:Label>
             <br />
             <asp:TextBox ID="txtVoornaam" runat="server" OnTextChanged="txtVoornaam_TextChanged"></asp:TextBox>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" ControlToValidate="txtVoornaam" ErrorMessage="Alleen letters toegestaan." ValidationExpression="^[A-Z]*[a-z]*$"></asp:RegularExpressionValidator>
             <br />
             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtAchternaam" ErrorMessage="Dit is een verplicht veld."></asp:RequiredFieldValidator>
 
@@ -136,6 +141,7 @@
             <asp:Label ID="lblAchternaam" runat="server" Text="Achternaam*"></asp:Label>
             <br />
             <asp:TextBox ID="txtAchternaam" runat="server"></asp:TextBox>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator8" runat="server" ControlToValidate="txtAchternaam" ErrorMessage="Alleen letters toegestaan" ValidationExpression="^[A-Z][a-z]$"></asp:RegularExpressionValidator>
             <br />
             <br />
             <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="Txttelefoon" Enabled="False" ErrorMessage="Invoer is onjuist." ValidationExpression="(0( \d|\d ))?\d\d \d\d(\d \d| \d\d )\d\d"></asp:RegularExpressionValidator>

@@ -41,6 +41,7 @@
                 <br />
             <br />
             <br />
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="TextBox1" ErrorMessage="Het ingevoerde getal moet een geldig getal zijn." ValidationExpression="^[1-9]\d?$"></asp:RegularExpressionValidator>
             <br />
                 <asp:Label ID="Label3" runat="server" Text="Voer het tafelnummer in:" Font-Size="Large"></asp:Label>
             <br />
