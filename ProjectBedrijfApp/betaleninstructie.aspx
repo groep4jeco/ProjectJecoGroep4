@@ -235,12 +235,13 @@
                                 <asp:SessionParameter Name="Reserveringsnummer" SessionField="Tafel" Type="Int32" />
                             </SelectParameters>
                         </asp:SqlDataSource>
+                        <asp:CustomValidator ID="maximaalkortingscodes" runat="server" ErrorMessage="Er kan slechts een kortingscode per bestelling worden gebruikt" OnServerValidate="maximaalkortingscodes_ServerValidate"></asp:CustomValidator>
                     </td>
                        
                 </tr>
                 <tr>
                     <td role="article">Korting:<br />
-                        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="TextBox1" runat="server" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
                         <br />
                         <asp:Button ID="btnkorting" runat="server" OnClick="Button3_Click" Text="Kortings code toevoegen" BackColor="#669999" />
                         <br />

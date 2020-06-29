@@ -27,12 +27,22 @@ namespace ProjectBedrijfApp
         int volmetallin;
         int kinderenmetallin;
         int AantalExtraRondes;
+        SqlDataReader drklant;
+        SqlDataReader dradres;
+        SqlDataReader drfactuur;
+        int volw;
+        int kind;
+        double prijsvolwassenen;
+        double prijskids;
 
         int menuutjes;
         protected void Page_Load(object sender, EventArgs e)
         {
             kalender = calendarTest.SelectedDate;
-            Panel2.Visible = false;
+            if (!this.IsPostBack)
+            {
+                Panel2.Visible = false;
+            }
         }
         [System.ComponentModel.Browsable(false)]
         protected void DataList1_SelectedIndexChanged(object sender, EventArgs e)
@@ -41,16 +51,18 @@ namespace ProjectBedrijfApp
 
         protected void BtnZoek_Click(object sender, EventArgs e)
         {
-            string datum = calendarTest.SelectedDate.ToString("yyyy-MM-dd");
-            DateTime test = DateTime.Parse(datum);
+            if (Page.IsValid == true)
+            {
+                string datum = calendarTest.SelectedDate.ToString("yyyy-MM-dd");
+                DateTime test = DateTime.Parse(datum);
 
-            CultureInfo dutch = new CultureInfo("nl-NL");
-            DateTime dagvandaag = DateTime.Now;
-            string dagen = dutch.DateTimeFormat.GetDayName(dagvandaag.DayOfWeek).ToString();
-            string dagen2 = dagen.ToString();
-            Label1.Text = dagen2;
+                CultureInfo dutch = new CultureInfo("nl-NL");
+                DateTime dagvandaag = DateTime.Now;
+                string dagen = dutch.DateTimeFormat.GetDayName(dagvandaag.DayOfWeek).ToString();
+                string dagen2 = dagen.ToString();
+                Label1.Text = dagen2;
 
-
+            }
 
 
         }
@@ -71,32 +83,68 @@ namespace ProjectBedrijfApp
             int resultaat = (int)GridView1.DataKeys[GridView1.SelectedIndex]["Restaurant ID"];
             SqlConnection con = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
             con.Open();
-            string querie = "SELECT[Naam], [Adres], [Plaats] FROM[Restaurant] WHERE [Restaurant ID] = @ID";
-            SqlCommand cmd = new SqlCommand(querie, con);
-            cmd.Parameters.AddWithValue("@ID", resultaat);
-            SqlDataReader dr = cmd.ExecuteReader();
-            string resultaat2 = dr.Read().ToString();
-            Label3.Text = dr["Naam"].ToString();
-            Label4.Text = dr["Adres"].ToString();
-            Label5.Text = dr["Plaats"].ToString();
-            dr.Close();
+            try
+            {
+                string querie = "SELECT[Naam], [Adres], [Plaats] FROM[Restaurant] WHERE [Restaurant ID] = @ID";
+                SqlCommand cmd = new SqlCommand(querie, con);
+                cmd.Parameters.AddWithValue("@ID", resultaat);
+                SqlDataReader dr = cmd.ExecuteReader();
+                string resultaat2 = dr.Read().ToString();
+                Label3.Text = dr["Naam"].ToString();
+                Label4.Text = dr["Adres"].ToString();
+                Label5.Text = dr["Plaats"].ToString();
+                dr.Close();
+            }
+            catch
+            {
+                Label13.Visible = false;
+                Label14.Visible = false;
+                Label5.Visible = false;
+            }
+            finally
+            {
+                con.Close();
+            }
             int resultaatklant = (int)GridView1.DataKeys[GridView1.SelectedIndex]["KlantKlantID"];
-            string querieklant = "SELECT [Voornaam], [Achternaam], [Email], [Telefoonnummer] FROM [Klant] WHERE [Klantid] = @IDKLANT";
-            SqlCommand cmdklant = new SqlCommand(querieklant, con);
-            cmdklant.Parameters.AddWithValue("@IDKLANT", resultaatklant);
-            SqlDataReader drklant = cmdklant.ExecuteReader();
-            string resultaatklant2 = drklant.Read().ToString();
-            Label6.Text = drklant["Voornaam"].ToString() + ' ' + drklant["Achternaam"].ToString();
-            Label7.Text = drklant["Email"].ToString();
-            Label8.Text = drklant["Telefoonnummer"].ToString();
+            con.Open();
+            try
+            {
+                string querieklant = "SELECT [Voornaam], [Achternaam], [Email], [Telefoonnummer] FROM [Klant] WHERE [Klantid] = @IDKLANT";
+                SqlCommand cmdklant = new SqlCommand(querieklant, con);
+                cmdklant.Parameters.AddWithValue("@IDKLANT", resultaatklant);
+                drklant = cmdklant.ExecuteReader();
+                string resultaatklant2 = drklant.Read().ToString();
+                Label6.Text = drklant["Voornaam"].ToString() + ' ' + drklant["Achternaam"].ToString();
+                Label7.Text = drklant["Email"].ToString();
+                Label8.Text = drklant["Telefoonnummer"].ToString();
+                drklant.Close();
+            }
+            catch
+            {
+                Label6.Visible = false;
+                Label7.Visible = false;
+                Label8.Visible = false;
 
-            drklant.Close();
+            }
+            finally
+            {
+                drklant.Close();
+                con.Close();
+            }
 
-            int resultaatadres = (int)GridView1.DataKeys[GridView1.SelectedIndex]["KlantKlantID"];
-            string querieadres = "SELECT Online_bestellen.AdresHuisnummer, Online_bestellen.AdresPostcode, adres.Straatnaam, adres.Plaats FROM [Klant] INNER JOIN Adres on adres.KlantKlantID = klant.KlantID inner join Online_bestellen on Adres.Postcode = Online_bestellen.AdresPostcode  WHERE [KlantKlantID] = @IDKLANT";
-            SqlCommand cmdadres = new SqlCommand(querieadres, con);
-            cmdadres.Parameters.AddWithValue("@IDKLANT", resultaatadres);
-            SqlDataReader dradres = cmdadres.ExecuteReader();
+            con.Open();
+            try
+            {
+                int resultaatadres = (int)GridView1.DataKeys[GridView1.SelectedIndex]["KlantKlantID"];
+                string querieadres = "SELECT Online_bestellen.AdresHuisnummer, Online_bestellen.AdresPostcode, adres.Straatnaam, adres.Plaats FROM [Klant] INNER JOIN Adres on adres.KlantKlantID = klant.KlantID inner join Online_bestellen on Adres.Postcode = Online_bestellen.AdresPostcode  WHERE [KlantKlantID] = @IDKLANT";
+                SqlCommand cmdadres = new SqlCommand(querieadres, con);
+                cmdadres.Parameters.AddWithValue("@IDKLANT", resultaatadres);
+                dradres = cmdadres.ExecuteReader();
+            }
+            finally
+            {
+                con.Close();
+            }
 
             try
             {
@@ -120,42 +168,79 @@ namespace ProjectBedrijfApp
             }
             finally
             {
-
+                dradres.Close();
             }
-            dradres.Close();
-            int resultaattotaal = (int)GridView1.DataKeys[GridView1.SelectedIndex]["Factuurnummer"];
-            string queriefactuur = "SELECT [Totaalbedrag] FROM [Factuur] WHERE [Factuurnummer] = @Factuurnummer";
-            SqlCommand cmdfactuur = new SqlCommand(queriefactuur, con);
-            cmdfactuur.Parameters.AddWithValue("@Factuurnummer", resultaattotaal);
-            SqlDataReader drfactuur = cmdfactuur.ExecuteReader();
-            string resultaatfactuur = drfactuur.Read().ToString();
-            string factuurtotaal = drfactuur["Totaalbedrag"].ToString();
-            double probeer = double.Parse(factuurtotaal);
-            double label12 = probeer / 1.09;
-            double label13 = probeer / 109 * 9;
-            Label14.Text = drfactuur["Totaalbedrag"].ToString();
-            Label12.Text = label12.ToString("0.00");
-            Label13.Text = label13.ToString("0.00");
+            try
+            {
+                con.Open();
+                int resultaattotaal = (int)GridView1.DataKeys[GridView1.SelectedIndex]["Factuurnummer"];
+                string queriefactuur = "SELECT [Totaalbedrag] FROM [Factuur] WHERE [Factuurnummer] = @Factuurnummer";
+                SqlCommand cmdfactuur = new SqlCommand(queriefactuur, con);
+                cmdfactuur.Parameters.AddWithValue("@Factuurnummer", resultaattotaal);
+                drfactuur = cmdfactuur.ExecuteReader();
+                string resultaatfactuur = drfactuur.Read().ToString();
+                string factuurtotaal = drfactuur["Totaalbedrag"].ToString();
+                double probeer = double.Parse(factuurtotaal);
+                double label12 = probeer / 1.09;
+                double label13 = probeer / 109 * 9;
+                Label14.Text = drfactuur["Totaalbedrag"].ToString();
+                Label12.Text = label12.ToString("0.00");
+                Label13.Text = label13.ToString("0.00");
+                
+            }
+            catch
+            {
+                Label14.Text = "opvragen mislukt";
+                Label12.Text = "opvragen mislukt";
+                Label13.Text = "opvragen mislukt";
+            }
+            finally
+            {
+                drfactuur.Close();
+                con.Close();
+            }
 
-            drfactuur.Close();
-            con.Close();
+
+            
 
             string eerstekind = "select [Aantal kinderen] from in_restaurant where Reserveringsnummer = @reservering";
             string eerstevol = "select [Aantal Volwassenen] from in_restaurant where Reserveringsnummer = @reservering";
 
             con.Open();
-            SqlCommand cmdvol = new SqlCommand(eerstevol, con);
-            cmdvol.Parameters.AddWithValue("@reservering", reserveringsnummer);
-            object volwassenen = cmdvol.ExecuteScalar();
-            string aantalv = volwassenen.ToString();
-            int volw = int.Parse(aantalv);
-
-            SqlCommand cmdkind = new SqlCommand(eerstekind, con);
-            cmdkind.Parameters.AddWithValue("@reservering", reserveringsnummer);
-            object kinderen1 = cmdkind.ExecuteScalar();
-            string kinderen = kinderen1.ToString();
-            int kind = int.Parse(kinderen);
-            con.Close();
+            try
+            {
+                SqlCommand cmdvol = new SqlCommand(eerstevol, con);
+                cmdvol.Parameters.AddWithValue("@reservering", reserveringsnummer);
+                object volwassenen = cmdvol.ExecuteScalar();
+                string aantalv = volwassenen.ToString();
+                volw = int.Parse(aantalv);
+            }
+            catch
+            {
+                volw = 0;
+            }
+            finally
+            {
+                con.Close();
+            }
+            try
+            {
+                SqlCommand cmdkind = new SqlCommand(eerstekind, con);
+                cmdkind.Parameters.AddWithValue("@reservering", reserveringsnummer);
+                object kinderen1 = cmdkind.ExecuteScalar();
+                string kinderen = kinderen1.ToString();
+                kind = int.Parse(kinderen);
+                con.Close();
+            }
+            catch
+            {
+                kind = 0;
+            }
+            finally
+            {
+                con.Close();
+            }
+         
 
             try
             {
@@ -217,33 +302,70 @@ namespace ProjectBedrijfApp
             }
 
             con.Open();
-            string prequerie = "select Tijdvak.Nummer from Tijdvak where Begintijd = @tijd AND Dag = @dag";
-            SqlCommand cmdtijdvak = new SqlCommand(prequerie, con);
-            cmdtijdvak.Parameters.AddWithValue("@dag", dagen);
-            cmdtijdvak.Parameters.AddWithValue("@tijd", time);
-            object tijd2 = cmdtijdvak.ExecuteScalar();
-            tijden = tijd2.ToString();
-            tijdvaknummer = int.Parse(tijden);
-            Session["tijdvaknummer"] = tijdvaknummer;
-            con.Close();
-            con.Open();
-            string zoekprijsvolw = "select [prijs volwassenen] from tijdvak where Nummer = @tijdvak";
-            SqlCommand cmdprijsv = new SqlCommand(zoekprijsvolw, con);
-            cmdprijsv.Parameters.AddWithValue("@tijdvak", Session["tijdvaknummer"]);
-            object prijsv = cmdprijsv.ExecuteScalar();
-            string prijsvol = prijsv.ToString();
-            double prijsvolwassenen = double.Parse(prijsvol) * volmetallin;
+            try
+            {
+                string prequerie = "select Tijdvak.Nummer from Tijdvak where Begintijd = @tijd AND Dag = @dag";
+                SqlCommand cmdtijdvak = new SqlCommand(prequerie, con);
+                cmdtijdvak.Parameters.AddWithValue("@dag", dagen);
+                cmdtijdvak.Parameters.AddWithValue("@tijd", time);
+                object tijd2 = cmdtijdvak.ExecuteScalar();
+                tijden = tijd2.ToString();
+                tijdvaknummer = int.Parse(tijden);
+                Session["tijdvaknummer"] = tijdvaknummer;
+            }
+            catch
+            {
 
-            string zoekprijsvolkind = "select [prijs kinderen] from tijdvak where Nummer = @tijdvak";
-            SqlCommand cmdprijsk = new SqlCommand(zoekprijsvolkind, con);
-            cmdprijsk.Parameters.AddWithValue("@tijdvak", Session["tijdvaknummer"]);
-            object prijsk = cmdprijsk.ExecuteScalar();
-            string prijskin = prijsk.ToString();
-            double prijskids = double.Parse(prijskin) * kinderenmetallin;
+            }
+            finally
+            {
+                con.Close();
+            }
+            
+            con.Open();
+            try
+            {
+                string zoekprijsvolw = "select [prijs volwassenen] from tijdvak where Nummer = @tijdvak";
+                SqlCommand cmdprijsv = new SqlCommand(zoekprijsvolw, con);
+                cmdprijsv.Parameters.AddWithValue("@tijdvak", Session["tijdvaknummer"]);
+                object prijsv = cmdprijsv.ExecuteScalar();
+                string prijsvol = prijsv.ToString();
+                prijsvolwassenen = double.Parse(prijsvol) * volmetallin;
+            }
+            catch
+            {
+                prijsvolwassenen = 0.00;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            con.Open();
+            try
+            {
+                string zoekprijsvolkind = "select [prijs kinderen] from tijdvak where Nummer = @tijdvak";
+                SqlCommand cmdprijsk = new SqlCommand(zoekprijsvolkind, con);
+                cmdprijsk.Parameters.AddWithValue("@tijdvak", Session["tijdvaknummer"]);
+                object prijsk = cmdprijsk.ExecuteScalar();
+                string prijskin = prijsk.ToString();
+                prijskids = double.Parse(prijskin) * kinderenmetallin;
+            }
+
+            catch
+            {
+                prijskids = 0.00;
+            }
+            finally
+            {
+                con.Close();
+            }
+
 
             lblTotKind.Text = prijskids.ToString();
             lblTotVolw.Text = prijsvolwassenen.ToString();
-
+            btnPrint.Visible = true;
+            btnSluit.Visible = true;
         }
 
         protected void GridView1_Load(object sender, EventArgs e)
@@ -319,6 +441,19 @@ namespace ProjectBedrijfApp
             }
 
 
+        }
+
+        protected void checkdatum_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            kalender = calendarTest.SelectedDate;
+            if (kalender.ToString() == "1-1-0001 00:00:00")
+            {
+                args.IsValid = false;
+            }
+           else
+            {
+                args.IsValid = true;
+            }
         }
     }
 }
