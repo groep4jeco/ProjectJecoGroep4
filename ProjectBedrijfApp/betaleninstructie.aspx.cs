@@ -73,73 +73,51 @@ namespace ProjectBedrijfApp
 
         protected void btnzoekfactuur_Click(object sender, EventArgs e)
         {
-            int tafelnummer = int.Parse(txttafelnummer.Text);
-            con.Open();
 
-            string reserveringophalen = "select Reserveringsnummer from tafelbezetting where TafelTafelnummer = @tafel";
-            SqlCommand cmdtafel = new SqlCommand(reserveringophalen, con);
-            cmdtafel.Parameters.AddWithValue("@tafel", tafelnummer);
-            object objreservering = cmdtafel.ExecuteScalar();
-
-
-            if (objreservering == null)
-
-            {
-                lblValidator.Visible = true;
-
-
-            }
-
-            else
-
-            {
-                lblValidator.Visible = false;
-                string stringreservering = objreservering.ToString();
-                reserveringsnummer = int.Parse(stringreservering);
-                Session["tafel"] = reserveringsnummer;
-            }
-            con.Close();
-
-
-            con.Open();
-            string querie = "SELECT[Naam], [Adres], [Plaats] FROM[Restaurant] WHERE [Restaurant ID] = @ID";
-            SqlCommand cmd = new SqlCommand(querie, con);
-
-            if (querie == null)
-
+            if (Page.IsValid == true)
             {
 
-                Label3.Visible = true;
-                Label4.Visible = true;
-                Label5.Visible = true;
-
-                Label6.Visible = true;
-                Label7.Visible = true;
-                Label8.Visible = true;
-                Label9.Visible = true;
-                Label10.Visible = true;
-                Label11.Visible = true;
 
 
+                con.Open();
+                string querie = "SELECT[Naam], [Adres], [Plaats] FROM[Restaurant] WHERE [Restaurant ID] = @ID";
+                SqlCommand cmd = new SqlCommand(querie, con);
 
+                if (querie == null)
+
+                {
+
+                    Label3.Visible = true;
+                    Label4.Visible = true;
+                    Label5.Visible = true;
+
+                    Label6.Visible = true;
+                    Label7.Visible = true;
+                    Label8.Visible = true;
+                    Label9.Visible = true;
+                    Label10.Visible = true;
+                    Label11.Visible = true;
+
+
+
+                }
+
+                else
+
+                {
+
+                    cmd.Parameters.AddWithValue("@ID", 1);
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    string resultaat2 = dr.Read().ToString();
+                    Label3.Text = dr["Naam"].ToString();
+                    Label4.Text = dr["Adres"].ToString();
+                    Label5.Text = dr["Plaats"].ToString();
+                    dr.Close();
+                }
+
+                Button2.Enabled = true;
             }
-
-            else
-
-            {
-
-                cmd.Parameters.AddWithValue("@ID", 1);
-                SqlDataReader dr = cmd.ExecuteReader();
-                string resultaat2 = dr.Read().ToString();
-                Label3.Text = dr["Naam"].ToString();
-                Label4.Text = dr["Adres"].ToString();
-                Label5.Text = dr["Plaats"].ToString();
-                dr.Close();
-            }
-
-            Button2.Enabled = true;
         }
-
 
         protected void Button2_Click(object sender, EventArgs e)
 
@@ -541,6 +519,40 @@ namespace ProjectBedrijfApp
         protected void Terug_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/overview,aspx");
+        }
+
+        protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            try
+            {
+                int tafelnummer = int.Parse(txttafelnummer.Text);
+                con.Open();
+                string reserveringophalen = "select Reserveringsnummer from tafelbezetting where TafelTafelnummer = @tafel";
+                SqlCommand cmdtafel = new SqlCommand(reserveringophalen, con);
+                cmdtafel.Parameters.AddWithValue("@tafel", tafelnummer);
+                object objreservering = cmdtafel.ExecuteScalar();
+                string stringreservering = objreservering.ToString();
+                reserveringsnummer = int.Parse(stringreservering);
+                Session["tafel"] = reserveringsnummer;
+                if(Session["tafel"] != null && (int)Session["tafel"] != 0)
+                {
+                    args.IsValid = true;
+                }
+                else
+                {
+                    args.IsValid = false;
+                }
+            }
+
+            catch
+            {
+                args.IsValid = false;
+            }
+            finally
+            {
+                con.Close();
+            }
+            
         }
     }
 }

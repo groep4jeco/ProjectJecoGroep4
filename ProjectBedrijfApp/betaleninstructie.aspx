@@ -68,16 +68,19 @@
                         tafelnummer:
                         <asp:TextBox ID="txttafelnummer" runat="server" CssClass="auto-style4" OnTextChanged="txttafelnummer_TextChanged"></asp:TextBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txttafelnummer" ErrorMessage="Vul een geldig tafelnummer in"></asp:RequiredFieldValidator>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txttafelnummer" ErrorMessage="Voer een tafelnummer in"></asp:RequiredFieldValidator>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:CustomValidator ID="CustomValidator1" runat="server" ErrorMessage="Voer een gereserveerde tafel in" OnServerValidate="CustomValidator1_ServerValidate"></asp:CustomValidator>
+                        <br />
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <asp:Label ID="lblValidator" runat="server" Enabled="False" Text="Deze tafel is niet gereserveerd" Visible="False"></asp:Label>
                         <br />
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txttafelnummer" ErrorMessage="Het getal mag niet te groot zijn" ValidationExpression="^[1-9]\d?$"></asp:RegularExpressionValidator>
                         <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <asp:Button ID="btnzoekfactuur" runat="server" Text="zoek factuur" OnClick="btnzoekfactuur_Click" BackColor="#FFCCCC" />
                         &nbsp;&nbsp;&nbsp;
                         <br />
+                        <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="txttafelnummer" ErrorMessage="Het tafelnummer moet tussen de 1 en de 80 zitten" MaximumValue="80" MinimumValue="1" Type="Integer"></asp:RangeValidator>
                         <br />
                         <br />
 &nbsp;&nbsp;&nbsp;&nbsp;
