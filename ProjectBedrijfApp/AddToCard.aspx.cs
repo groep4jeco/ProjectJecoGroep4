@@ -48,7 +48,7 @@ namespace ProjectBedrijfApp
 
                 if (Request.QueryString["id"] != null)
                 {
-                    if (Session["Buyitems"] == null)
+                    if (Session["buyitems"] == null)
                     {
 
                         dr = dt.NewRow();
@@ -157,7 +157,7 @@ namespace ProjectBedrijfApp
             {
                 gtotal = gtotal + Convert.ToDouble(dt.Rows[i]["totalprice"].ToString());
 
-                i = i + 1;
+                i++;
             }
             return gtotal;
         }
@@ -173,7 +173,7 @@ namespace ProjectBedrijfApp
             {
                 htotaal = htotaal + Convert.ToInt32(dt.Rows[i]["Hoeveelheid"].ToString());
 
-                i = i + 1;
+                i++;
             }
             return htotaal;
 
@@ -223,7 +223,7 @@ namespace ProjectBedrijfApp
 
         protected void btnBevestig_Click(object sender, EventArgs e)
         {
-            
+
             SqlConnection con = new SqlConnection("Data Source=SQL.BIM.OSOX.NL;Initial Catalog=2020-BIM01A-P4-Sushi;User ID=BIM01A2019;Password=BIM01A2019");
             int ronde = (int)Session["ronde"];
 
@@ -276,22 +276,22 @@ namespace ProjectBedrijfApp
 
             string tijd = DateTime.Now.ToString("HH:mm:ss tt");
 
-           
-                
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
 
-                    string prequerie = "select MAX(Bestelregel.Bestelregelcode) from Bestelregel";
-                    con.Open();
-                    SqlCommand cmdcode = new SqlCommand(prequerie, con);
-                    object bestelregel = cmdcode.ExecuteScalar();
-                    string code = bestelregel.ToString();
-                    int bestelregelcode = int.Parse(code);
 
-                    string hoeveelheid = GridView1.DataKeys[i]["Hoeveelheid"].ToString();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+
+                string prequerie = "select MAX(Bestelregel.Bestelregelcode) from Bestelregel";
+                con.Open();
+                SqlCommand cmdcode = new SqlCommand(prequerie, con);
+                object bestelregel = cmdcode.ExecuteScalar();
+                string code = bestelregel.ToString();
+                int bestelregelcode = int.Parse(code);
+
+                string hoeveelheid = GridView1.DataKeys[i]["Hoeveelheid"].ToString();
                 int hoeveelheid2 = int.Parse(hoeveelheid);
 
-                    string Gerechtnummer = GridView1.DataKeys[i]["Gerechtnummer"].ToString();
+                string Gerechtnummer = GridView1.DataKeys[i]["Gerechtnummer"].ToString();
                 if (gerechtjes <= 0)
                 {
                     string prijsperproduct = GridView1.DataKeys[i]["Prijs"].ToString();
@@ -331,74 +331,74 @@ namespace ProjectBedrijfApp
                 }
 
 
-                    string querie = "SET IDENTITY_INSERT Bestelregel ON Insert into Bestelregel([Bestelregelcode], [Hoeveelheid] ,[Besteltijd] ,[Reserveringsnummer] ,[menugerechtnummer],[RondeNummer],[bestelstatusID]) values(@code, @hoeveelheid, @Tijd, @reservering, @gerecht, @ronde, 1); SET IDENTITY_INSERT Bestelregel OFF";
-                    SqlDataAdapter adapter = new SqlDataAdapter();
-                    adapter.InsertCommand = new SqlCommand(querie, con);
-                    adapter.InsertCommand.Parameters.AddWithValue("@code", bestelregelcode + 1);
-                    adapter.InsertCommand.Parameters.AddWithValue("@hoeveelheid", hoeveelheid);
-                    adapter.InsertCommand.Parameters.AddWithValue("@tijd", tijd);
-                    adapter.InsertCommand.Parameters.AddWithValue("@reservering", Session["reservering"]);
-                    adapter.InsertCommand.Parameters.AddWithValue("@gerecht", Gerechtnummer);
-                    adapter.InsertCommand.Parameters.AddWithValue("@ronde", Session["ronde"]);
-                    int probeer = adapter.InsertCommand.ExecuteNonQuery();
+                string querie = "SET IDENTITY_INSERT Bestelregel ON Insert into Bestelregel([Bestelregelcode], [Hoeveelheid] ,[Besteltijd] ,[Reserveringsnummer] ,[menugerechtnummer],[RondeNummer],[bestelstatusID]) values(@code, @hoeveelheid, @Tijd, @reservering, @gerecht, @ronde, 1); SET IDENTITY_INSERT Bestelregel OFF";
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.InsertCommand = new SqlCommand(querie, con);
+                adapter.InsertCommand.Parameters.AddWithValue("@code", bestelregelcode + 1);
+                adapter.InsertCommand.Parameters.AddWithValue("@hoeveelheid", hoeveelheid);
+                adapter.InsertCommand.Parameters.AddWithValue("@tijd", tijd);
+                adapter.InsertCommand.Parameters.AddWithValue("@reservering", Session["reservering"]);
+                adapter.InsertCommand.Parameters.AddWithValue("@gerecht", Gerechtnummer);
+                adapter.InsertCommand.Parameters.AddWithValue("@ronde", Session["ronde"]);
+                int probeer = adapter.InsertCommand.ExecuteNonQuery();
+                con.Close();
+
+                string controlebestaan = "select factuurnummer from factuur where reserveringsnummer = @reservering";
+                SqlCommand cmdfactuur = new SqlCommand(controlebestaan, con);
+                cmdfactuur.Parameters.AddWithValue("@reservering", Session["reservering"]);
+                SqlDataReader drklant;
+
+                con.Open();
+                drklant = cmdfactuur.ExecuteReader();
+
+                try
+                {
+
+                    string factuur = drklant.Read().ToString();
+                    string factuurtje = drklant["Factuurnummer"].ToString();
+                    int factuurnummer = int.Parse(factuurtje);
+                    Session["factuur"] = factuurnummer;
+                    drklant.Close();
+                    string optellen = "Update factuur set Totaalbedrag += @prijs where Factuurnummer = @factuur";
+                    SqlDataAdapter adapter3 = new SqlDataAdapter();
+                    adapter3.UpdateCommand = new SqlCommand(optellen, con);
+                    adapter3.UpdateCommand.Parameters.AddWithValue("@factuur", Session["factuur"]);
+                    adapter3.UpdateCommand.Parameters.AddWithValue("@prijs", double.Parse(prijs.ToString()));
+                    int doehet = adapter3.UpdateCommand.ExecuteNonQuery();
                     con.Close();
+                }
+                catch
+                {
+                    drklant.Close();
 
-                    string controlebestaan = "select factuurnummer from factuur where reserveringsnummer = @reservering";
-                    SqlCommand cmdfactuur = new SqlCommand(controlebestaan, con);
-                    cmdfactuur.Parameters.AddWithValue("@reservering", Session["reservering"]);
-                    SqlDataReader drklant;
-
-                    con.Open();
-                    drklant = cmdfactuur.ExecuteReader();
-
-                    try
-                    {
-
-                        string factuur = drklant.Read().ToString();
-                        string factuurtje = drklant["Factuurnummer"].ToString();
-                        int factuurnummer = int.Parse(factuurtje);
-                        Session["factuur"] = factuurnummer; 
-                        drklant.Close();
-                        string optellen = "Update factuur set Totaalbedrag += @prijs where Factuurnummer = @factuur";
-                        SqlDataAdapter adapter3 = new SqlDataAdapter();
-                        adapter3.UpdateCommand = new SqlCommand(optellen, con);
-                        adapter3.UpdateCommand.Parameters.AddWithValue("@factuur", Session["factuur"]);
-                        adapter3.UpdateCommand.Parameters.AddWithValue("@prijs", double.Parse(prijs.ToString()));
-                        int doehet = adapter3.UpdateCommand.ExecuteNonQuery();
-                        con.Close();
-                    }
-                    catch
-                    {
-                        drklant.Close();
-
-                        string factuurmaken = "insert into Factuur (KlantenpasEmail, Factuurdatum, Totaalbedrag, Reserveringsnummer, KlantKlantID) values ((select Klant.Email from Reservering inner join klant on Klant.KlantID = Reservering.KlantKlantID where Reserveringsnummer = @reservering), (SELECT CONVERT (date, GETDATE())), @prijs, @reservering, (select Reservering.KlantKlantID from Reservering where Reservering.Reserveringsnummer = @reservering))";
-                        SqlDataAdapter adapter2 = new SqlDataAdapter();
-                        adapter2.InsertCommand = new SqlCommand(factuurmaken, con);
-                        adapter2.InsertCommand.Parameters.AddWithValue("@reservering", Session["reservering"]);
-                        adapter2.InsertCommand.Parameters.AddWithValue("@prijs", double.Parse(prijs));
-                        adapter2.InsertCommand.Parameters.AddWithValue("@volw", volw);
-                        adapter2.InsertCommand.Parameters.AddWithValue("@kind", kind);
-                        int doehet2 = adapter2.InsertCommand.ExecuteNonQuery();
-                        string prequerie2 = "select Factuurnummer from Factuur where Reserveringsnummer = @reservering";
-                                            SqlCommand cmdcode2 = new SqlCommand(prequerie2, con);
-                        cmdcode2.Parameters.AddWithValue("@reservering", Session["reservering"]);
-                        object bestelregel2 = cmdcode2.ExecuteScalar();
-                        string code2 = bestelregel2.ToString();
-                        int bestelregelcode2 = int.Parse(code2);
-                        Session["factuur"] = bestelregelcode2;
+                    string factuurmaken = "insert into Factuur (KlantenpasEmail, Factuurdatum, Totaalbedrag, Reserveringsnummer, KlantKlantID) values ((select Klant.Email from Reservering inner join klant on Klant.KlantID = Reservering.KlantKlantID where Reserveringsnummer = @reservering), (SELECT CONVERT (date, GETDATE())), @prijs, @reservering, (select Reservering.KlantKlantID from Reservering where Reservering.Reserveringsnummer = @reservering))";
+                    SqlDataAdapter adapter2 = new SqlDataAdapter();
+                    adapter2.InsertCommand = new SqlCommand(factuurmaken, con);
+                    adapter2.InsertCommand.Parameters.AddWithValue("@reservering", Session["reservering"]);
+                    adapter2.InsertCommand.Parameters.AddWithValue("@prijs", double.Parse(prijs));
+                    adapter2.InsertCommand.Parameters.AddWithValue("@volw", volw);
+                    adapter2.InsertCommand.Parameters.AddWithValue("@kind", kind);
+                    int doehet2 = adapter2.InsertCommand.ExecuteNonQuery();
+                    string prequerie2 = "select Factuurnummer from Factuur where Reserveringsnummer = @reservering";
+                    SqlCommand cmdcode2 = new SqlCommand(prequerie2, con);
+                    cmdcode2.Parameters.AddWithValue("@reservering", Session["reservering"]);
+                    object bestelregel2 = cmdcode2.ExecuteScalar();
+                    string code2 = bestelregel2.ToString();
+                    int bestelregelcode2 = int.Parse(code2);
+                    Session["factuur"] = bestelregelcode2;
 
                 }
 
-                    finally
-                    {
-                        con.Close();
-                    }
-                
-                    
+                finally
+                {
+                    con.Close();
                 }
 
 
-        dt.Rows.Clear();
+            }
+
+
+            dt.Rows.Clear();
 
             if ((int)Session["ronde"] == 1)
             {
@@ -408,10 +408,10 @@ namespace ProjectBedrijfApp
                 SqlDataReader drklant;
                 con.Open();
                 drklant = cmdfactuur.ExecuteReader();
-                    string factuur = drklant.Read().ToString();
-                    string factuurtje = drklant["Factuurnummer"].ToString();
-                    factuurnummer = int.Parse(factuurtje);
-                    drklant.Close();
+                string factuur = drklant.Read().ToString();
+                string factuurtje = drklant["Factuurnummer"].ToString();
+                factuurnummer = int.Parse(factuurtje);
+                drklant.Close();
                 con.Close();
 
                 // dag bepalen en prijs per dag
@@ -503,7 +503,7 @@ namespace ProjectBedrijfApp
 
 
             if (ronde < maxronde)
-            { 
+            {
                 ronde++;
                 Session["ronde"] = ronde;
                 Response.Redirect("~/Timer.aspx");
