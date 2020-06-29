@@ -60,6 +60,8 @@
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TxtVolw" ErrorMessage="Dit is een verplicht veld." Visible="False"></asp:RequiredFieldValidator>
 
             <br />
+            <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="TxtVolw" ErrorMessage="De invoer is onjuist." MaximumValue="159" MinimumValue="1" Type="Integer"></asp:RangeValidator>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="TxtVolw" Enabled="False" ErrorMessage="Voer hier een getal in." ValidationExpression="^e[0-9]"></asp:RegularExpressionValidator>
             <br />
 
             <asp:TextBox ID="TxtVolw" runat="server" OnTextChanged="TxtVolw_TextChanged" TextMode="Number"></asp:TextBox>
@@ -68,11 +70,12 @@
             <br />
             <asp:Label ID="lblKind" runat="server" Text="Aantal kinderen"></asp:Label>
             <br />
+            <asp:RangeValidator ID="RangeValidator2" runat="server" ControlToValidate="TxtKind" ErrorMessage="De invoer is onuist." MaximumValue="157" MinimumValue="0" Type="Integer"></asp:RangeValidator>
             <br />
             <asp:TextBox ID="TxtKind" runat="server" TextMode="Number"></asp:TextBox>
             <br />
             <br />
-            <br />
+            <asp:CustomValidator ID="perosnenteveel" runat="server" ErrorMessage="Maximaal twee personen per tafel toegestaan. Selecteer meer tafels of minder personen" OnServerValidate="CustomValidator1_ServerValidate"></asp:CustomValidator>
             <br />
             <asp:CheckBox ID="cbAlles" runat="server" Text="All you can Eat arrangementen" OnCheckedChanged="cbAlles_CheckedChanged" AutoPostBack="True" />
             <br />
@@ -80,7 +83,9 @@
             <asp:Label ID="lblRondes" runat="server" Text="Aantal arrangement" Visible="False"></asp:Label>
             <br />
             <asp:TextBox ID="txtRondes" runat="server" Visible="False" Height="30px" OnTextChanged="txtRondes_TextChanged" TextMode="Number" ToolTip="Voer hier het aantal rondes in"></asp:TextBox>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:RangeValidator ID="rangearrangement" runat="server" ControlToValidate="txtRondes" ErrorMessage="Arregementen kunnen niet lager zijn dan 0" MaximumValue="159" MinimumValue="0" Type="Integer"></asp:RangeValidator>
+            <asp:CustomValidator ID="CustomValidator1" runat="server" ErrorMessage="Aantal arregementen kan niet meer zijn dan aantal personen" OnServerValidate="CustomValidator1_ServerValidate1"></asp:CustomValidator>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br />
              <br />
             <br />
@@ -112,12 +117,14 @@
             <div class="img1">
                 &nbsp;
             </div>
+            <asp:CustomValidator ID="Selecteereenklant" runat="server" ErrorMessage="Selecteer een klant" OnServerValidate="Selecteereenklant_ServerValidate"></asp:CustomValidator>
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br />
             <asp:Label ID="lbldatum" runat="server" Text="Label" Visible="False"></asp:Label>
             <br />
             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtVoornaam" ErrorMessage="Dit is een verplicht veld."></asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtVoornaam" Enabled="False" ErrorMessage="Gebruik enkel letters" ValidationExpression="[a-z][A-Z]"></asp:RegularExpressionValidator>
             <br />
             <asp:Label ID="lblVoornaam" runat="server" Text="Voornaam*"></asp:Label>
             <br />
@@ -131,9 +138,10 @@
             <asp:TextBox ID="txtAchternaam" runat="server"></asp:TextBox>
             <br />
             <br />
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="Txttelefoon" Enabled="False" ErrorMessage="Invoer is onjuist." ValidationExpression="(0( \d|\d ))?\d\d \d\d(\d \d| \d\d )\d\d"></asp:RegularExpressionValidator>
             <asp:Label ID="lbltelefoon" runat="server" Text="Telefoonnummer" Visible="False"></asp:Label>
             <br />
-            &nbsp;<asp:TextBox ID="Txttelefoon" runat="server" Visible="False"></asp:TextBox>
+            &nbsp;<asp:TextBox ID="Txttelefoon" runat="server" Visible="False" OnTextChanged="Txttelefoon_TextChanged1"></asp:TextBox>
             <br />
             <asp:Label ID="lblEmail" runat="server" Text="Emailadres" Visible="False"></asp:Label>
             <br />
