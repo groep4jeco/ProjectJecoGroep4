@@ -6,8 +6,8 @@
 <head runat="server">
     <title></title>
     <style>
-          body {
-            background-color:lightslategray;
+        body {
+            background-color: lightslategray;
         }
 
         #form1 {
@@ -33,27 +33,31 @@
     <form id="form1" runat="server">
         <div class="logo">
             <img src="images/loginlogo%202.png" style="height: 156px" />
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [Personeelsnummer], [Wachtwoord], [Voornaam], [Functie] FROM [Personeel]">
-            </asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:2020-BIM01A-P4-SushiConnectionString %>" SelectCommand="SELECT [Personeelsnummer], [Wachtwoord], [Voornaam], [Functie] FROM [Personeel]"></asp:SqlDataSource>
         </div>
         <div class="container">
             <div style="text-align: center;">
                 <asp:Label ID="Label1" runat="server" Text="PERSONEELS ID" Width="393px" Font-Bold="True"></asp:Label>
             </div>
             <br />
-            <asp:TextBox ID="TextBox1" runat="server" OnTextChanged="TextBox1_TextChanged" Height="36px" Width="391px" BorderColor="Blue"></asp:TextBox>
+            <asp:TextBox ID="IdLogin" runat="server" OnTextChanged="TextBox1_TextChanged" Height="36px" Width="391px" BorderColor="Blue"></asp:TextBox>
+            <asp:CompareValidator runat="server" Operator="DataTypeCheck" Type="Integer"
+                ControlToValidate="IdLogin" ErrorMessage="Value must be a whole number" />
+             <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="IdLogin" ErrorMessage="Please enter your Password!" />
+
             <br />
-             <div style="text-align: center;">
+            <div style="text-align: center;">
                 <br />
                 <br />
                 <asp:Label ID="Label2" runat="server" Text="WACHTWOORD" Font-Bold="True"></asp:Label>
             </div>
             <br />
-            <asp:TextBox ID="TextBox2" runat="server" OnTextChanged="TextBox2_TextChanged" Height="36px" Width="391px" BorderColor="#0033CC" TextMode="Password"></asp:TextBox>
+            <asp:TextBox ID="Wachtwoord" runat="server" OnTextChanged="TextBox2_TextChanged" Height="36px" Width="391px" BorderColor="#0033CC" TextMode="Password"></asp:TextBox>
+            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="Wachtwoord" ErrorMessage="Please enter your Password!" />
             <br />
             <br />
             <br />
-             <asp:Button ID="Button1" runat="server" Text="INLOGGEN" Width="397px" BackColor="#669999" BorderColor="#003366" BorderStyle="Outset" Font-Bold="True" Font-Size="Larger" Height="35px" OnClick="Button1_Click" />
+            <asp:Button ID="Button1" runat="server" Text="INLOGGEN" Width="397px" BackColor="#669999" BorderColor="#003366" BorderStyle="Outset" Font-Bold="True" Font-Size="Larger" Height="35px" OnClick="Button1_Click" />
 
             <br />
             <asp:Label ID="Label3" runat="server" Text=" "></asp:Label>
