@@ -20,7 +20,11 @@ namespace ProjectBedrijfApp
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            tafelID = (List<string>)Session["TafelId"];
+            if ((List<string>)Session["TafelId"] != null)
+            {
+                tafelID = (List<string>)Session["TafelId"];
+            }
+         
             if (!IsPostBack)
             {
                 DataTable dt2 = new DataTable();
